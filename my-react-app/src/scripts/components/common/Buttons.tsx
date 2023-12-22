@@ -1,3 +1,4 @@
+
 const BUTTON = {
   LIGHT: 'hover:border-secondary border-2 border-light',
   DEFAULT: 'rounded text-white text-xl font-semibold justify-center',
@@ -63,10 +64,12 @@ const Button = ({
   ].join(' ');
 
   return (
-    <button type={type} className={buttonClasses} color="red" onClick={handleButtonClick} {...restProps}>
+    <button type={type} className={buttonClasses} onClick={handleButtonClick} {...restProps}>
       {children}
     </button>
   );
 };
+
+
 
 export default Button;

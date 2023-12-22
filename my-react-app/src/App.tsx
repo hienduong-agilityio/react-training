@@ -3,8 +3,10 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Button from './scripts/components/common/Buttons'
 import "./main.css"
+import TodoList from './scripts/test'
 
 function App() {
+  console.log(TodoList)
 
   return (
     <>
@@ -17,10 +19,12 @@ function App() {
         </a>
       </div>
       <Button
-        children={"hello"}
         variant=''
         className = "bg-red-500"
-      />
+      >
+        {"hello"}
+      </Button>
+      <TodoList/>
     </>
   )
 }
