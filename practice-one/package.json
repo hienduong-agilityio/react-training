@@ -12,14 +12,16 @@
     "prepare": "cd .. && husky install"
   },
   "repository": {
-    "type": "github",
-    "url": "https://github.com/Agility-Internship/Duong-The-Hien-ReactJS"
+    "type": "gitlab",
+    "url": ""
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
