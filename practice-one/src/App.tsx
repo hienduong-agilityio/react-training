@@ -1,7 +1,11 @@
-import './App.css';
-
+import Typography from './components/common/Typography';
 function App() {
-	return <></>;
+	return (
+		<>
+			<Typography content='hi'/>
+			<Typography content='hii'/>
+		</>
+	);
 }
 
 export default App;
