@@ -22,10 +22,7 @@
     "prettier"
   ],
   "rules": {
-    "indent": [
-      "error",
-      "tab"
-    ],
+    "indent": 0,
     "linebreak-style": 0,
     "quotes": [
       "error",

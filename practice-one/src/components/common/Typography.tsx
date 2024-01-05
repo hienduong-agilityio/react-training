@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const Text = ({ children, fontSize = '', fontWeight = '', color = '' }: Props) => {
-	return <p className={`font-size-${fontSize} font-weight-${fontWeight} color-${color}`}>{children}</p>;
+  return <p className={`font-size-${fontSize} font-weight-${fontWeight} color-${color}`}>{children}</p>;
 };
 
 export default Text;
