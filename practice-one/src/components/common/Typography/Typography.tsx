@@ -1,14 +1,14 @@
-import { TEXT_VARIANT } from '../../../types/common';
+import { TEXT_SIZE } from '../../../types/common';
 import style from './index.module.css';
 
 export interface Props {
   children: string;
-  variant?: TEXT_VARIANT;
+  size?: TEXT_SIZE;
   className: string;
 }
 
-const Text = ({ children, variant = TEXT_VARIANT.NORMAL, className }: Props) => {
-  return <p className={`${style.text} ${style[variant]} ${style[className]}`}>{children}</p>;
+const Text = ({ children, size = TEXT_SIZE.NORMAL, className }: Props) => {
+  return <p className={`${style.text} ${style[size]} ${style[className]}`}>{children}</p>;
 };
 
 export default Text;

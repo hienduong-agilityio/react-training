@@ -1,4 +1,4 @@
-export enum TEXT_VARIANT {
+export enum TEXT_SIZE {
   NORMAL = 'normal',
   LARGE = 'large',
 }
