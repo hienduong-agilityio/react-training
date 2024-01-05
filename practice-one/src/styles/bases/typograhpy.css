@@ -12,15 +12,3 @@ body {
   font-size: var(--font-size-base);
 }
 
-/******heading******/
-/* font weight normal */
-.fw-1 {
-  font-weight: var(--font-weight-small);
-  line-height: var(--line-height-small);
-}
-
-/* font weight bold */
-.fw-2 {
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-medium);
-}
