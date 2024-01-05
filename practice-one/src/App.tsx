@@ -1,8 +1,10 @@
-import Typography from './components/common/Typography';
+import Typography from './components/common/Typography/Typography';
+import './styles/index.css';
+
 function App() {
   return (
     <>
-      <Typography>Text</Typography>
+      <Typography className="">Text</Typography>
     </>
   );
 }
