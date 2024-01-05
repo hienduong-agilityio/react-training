@@ -1,17 +1,41 @@
-import { Story, Meta } from '@storybook/react';
-import Text, { Props } from './Typography'; // Assuming 'Text.tsx' is in the same directory
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
-	title: 'Typography/Text',
+import  Text  from './Typography';
+
+const meta = {
+	title: 'Typography',
 	component: Text,
-} as Meta;
+	parameters: {
+		layout: 'centered',
+	},
+	tags: ['autodocs'],
+} satisfies Meta<typeof Text>;
 
-const Template: Story<Props> = (args) => <Text {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
+	args: {
+		content : 'Default',
+		fontSize: 'medium',
+		fontWeight: 'normal',
+		color: 'defalut'
+	},
+};
 
-export const Default = Template.bind({});
-Default.args = {
-	content: 'Sample Text',
-	fontSize: 'medium',
-	fontWeight: 'normal',
-	color: 'black',
+export const SmallText: Story = {
+	args: {
+		content : 'SmallText',
+		fontSize: 'small',
+		fontWeight: 'normal',
+		color: 'primary'
+	},
+};
+
+export const LargeText: Story = {
+	args: {
+		content : 'LargeText',
+		fontSize: 'large',
+		fontWeight: 'bold',
+		color: 'default'
+	},
 };
