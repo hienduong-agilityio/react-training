@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	args: {
-		content : 'Default',
+		children : 'Default',
 		fontSize: 'medium',
 		fontWeight: 'normal',
 		color: 'defalut'
@@ -24,7 +24,7 @@ export const Default: Story = {
 
 export const SmallText: Story = {
 	args: {
-		content : 'SmallText',
+		children : 'SmallText',
 		fontSize: 'small',
 		fontWeight: 'normal',
 		color: 'primary'
@@ -33,7 +33,7 @@ export const SmallText: Story = {
 
 export const LargeText: Story = {
 	args: {
-		content : 'LargeText',
+		children : 'LargeText',
 		fontSize: 'large',
 		fontWeight: 'bold',
 		color: 'default'

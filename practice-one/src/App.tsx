@@ -2,8 +2,7 @@ import Typography from './components/common/Typography';
 function App() {
 	return (
 		<>
-			<Typography content='hi'/>
-			<Typography content='hii'/>
+			<Typography>Text</Typography>
 		</>
 	);
 }
