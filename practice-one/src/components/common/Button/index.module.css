@@ -1,0 +1,22 @@
+.btn {
+  background-color: var(--primary-button-color);
+  border-radius: 0.25rem;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.secondary {
+  background-color: var(--active-gray-color);
+}
+
+.outline {
+  border: none;
+}
+
+.icon {
+  background-color: var(--icon-color);
+}
+
