@@ -1,0 +1,41 @@
+.messageContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.messageBox {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--white-color);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.content {
+  color: var(--white-color);
+  margin-bottom: 16px;
+}
+
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--active-color);
+}
