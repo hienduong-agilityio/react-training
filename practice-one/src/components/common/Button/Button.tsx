@@ -2,7 +2,7 @@ import { BUTTON_VARIANT } from '../../../types/common';
 import style from './index.module.css';
 
 export interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   variant?: BUTTON_VARIANT;
   className: string;
   onClick?: () => void;
