@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { LINK_TYPE } from '../../../types/common';
 import styles from './index.module.css';
 
@@ -9,8 +10,10 @@ export interface Props {
 }
 
 const Link = ({ children, href = '#', type = LINK_TYPE.UNDERLINE, className }: Props) => {
+  const linkClasses = classNames(styles[type], styles[className], className);
+
   return (
-    <a href={href} className={`${styles[type]} ${styles[className]} ${className}`}>
+    <a href={href} className={linkClasses}>
       {children}
     </a>
   );
