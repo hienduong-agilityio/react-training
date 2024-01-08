@@ -17,5 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onClose: () => {},
+    title: 'Success',
+    text: 'Your products is created'
   },
 };

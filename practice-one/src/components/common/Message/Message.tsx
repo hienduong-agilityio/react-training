@@ -5,9 +5,11 @@ import { BUTTON_VARIANT } from '../../../types/common';
 
 interface MessageProps {
   onClose?: () => void;
+  text?: string;
+  title?: string;
 }
 
-const Message = ({ onClose = () => {} }: MessageProps) => {
+const Message = ({ onClose = () => {}, title, text }: MessageProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -24,10 +26,10 @@ const Message = ({ onClose = () => {} }: MessageProps) => {
   return isVisible ? (
     <div className={styles.messageContainer}>
       <div className={styles.messageBox}>
-        <h2 className={styles.title}>Product Added to Cart</h2>
-        <p className={styles.content}>The selected product has been added to your cart.</p>
-        <Button className={styles.button} variant={BUTTON_VARIANT.PRIMARY}>
-          Continue Shopping
+        <h2 className={styles.title}>{title}</h2>
+        <p className={styles.content}>{text}</p>
+        <Button className={styles.button} variant={BUTTON_VARIANT.PRIMARY} onClick={onClose}>
+          Close message
         </Button>
       </div>
     </div>
