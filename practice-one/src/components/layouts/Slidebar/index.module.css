@@ -1,0 +1,67 @@
+/*------------------------------------*\
+  .sidebar
+\*------------------------------------*/
+.sidebar {
+  display: none;
+  background-color: var(--sidebar-background);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 249.6px;
+  height: 100%;
+  padding: 6rem 1.25rem;
+}
+
+.sidebar__title {
+  text-transform: uppercase;
+  margin-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar__item {
+  border-radius: 3.2px;
+  padding: 0.75rem 1.25rem;
+}
+
+.sidebar__item:hover,
+.sidebar__item--active {
+  background-color: var(--active-gray-color);
+}
+
+.sidebar__item:hover .link__text,
+.sidebar__item--active .link__text {
+  color: var(--active-color);
+}
+
+.sidebar__item:hover .chart,
+.sidebar__item--active .sidebar__link .chart {
+  fill: var(--primary-color);
+}
+
+.sidebar__link {
+  display: flex;
+  gap: 0.875rem;
+}
+
+.sidebar__item:first-child .sidebar__link {
+  cursor: not-allowed;
+}
+
+.sidebar__link .chart {
+  fill: var(--icon-color);
+}
+
+.sidebar--show {
+  display: block;
+}
+
+@media screen and (min-width: 920px) {
+  .sidebar {
+    display: block;
+    position: unset;
+    padding-top: 2.5rem;
+    height: auto;
+    width: 25%;
+  }
+}

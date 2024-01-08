@@ -19,7 +19,7 @@ export const Primary: Story = {
   args: {
     children: 'Button primary',
     variant: BUTTON_VARIANT.PRIMARY,
-    className: 'outline',
+    className: 'primary',
     onClick: () => {
       alert('Button component');
     },
@@ -30,7 +30,7 @@ export const Secondary: Story = {
   args: {
     children: 'Button secondary',
     variant: BUTTON_VARIANT.SECONDARY,
-    className: '',
+    className: 'outline',
     onClick: () => {
       alert('Button component');
     },
@@ -41,7 +41,7 @@ export const Outline: Story = {
   args: {
     children: 'Button outline',
     variant: BUTTON_VARIANT.OUTLINE,
-    className: '',
+    className: 'primary',
     onClick: () => {
       alert('Button component');
     },
