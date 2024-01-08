@@ -28,10 +28,6 @@
   background-color: var(--active-gray-color);
 }
 
-.sidebar__item:hover {
-  color: var(--active-color);
-}
-
 .sidebar__link {
   display: flex;
   gap: 0.875rem;
