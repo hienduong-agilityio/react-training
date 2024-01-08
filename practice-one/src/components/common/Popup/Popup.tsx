@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import React from 'react';
-import style from './index.module.css';
+import styles from './index.module.css';
 import Button from '../Button/Button';
 
 export interface PopupProps {
@@ -10,15 +11,16 @@ export interface PopupProps {
 }
 
 const Popup = ({ isOpen, onClose, children, className }: PopupProps) => {
+  const overlayClasses = classNames(styles.overlay, className);
   if (!isOpen) return null;
 
   return (
-    <div className={`${style.overlay} ${className}`}>
-      <div className={style.popup}>
-        <Button className={style.closeButton} onClick={onClose}>
+    <div className={overlayClasses}>
+      <div className={styles.popup}>
+        <Button className={styles.closeButton} onClick={onClose}>
           Close
         </Button>
-        <div className={style.content}>{children}</div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );
