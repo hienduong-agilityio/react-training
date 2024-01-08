@@ -27,7 +27,7 @@ export const LargeText: Story = {
   args: {
     children: 'LargeText',
     size: TEXT_SIZE.LARGE,
-    className: ''
+    className: '  '
 
   },
 };

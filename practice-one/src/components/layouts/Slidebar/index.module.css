@@ -24,19 +24,12 @@
   padding: 0.75rem 1.25rem;
 }
 
-.sidebar__item:hover,
-.sidebar__item--active {
+.sidebar__item:hover {
   background-color: var(--active-gray-color);
 }
 
-.sidebar__item:hover .link__text,
-.sidebar__item--active .link__text {
+.sidebar__item:hover {
   color: var(--active-color);
-}
-
-.sidebar__item:hover .chart,
-.sidebar__item--active .sidebar__link .chart {
-  fill: var(--primary-color);
 }
 
 .sidebar__link {
@@ -46,14 +39,6 @@
 
 .sidebar__item:first-child .sidebar__link {
   cursor: not-allowed;
-}
-
-.sidebar__link .chart {
-  fill: var(--icon-color);
-}
-
-.sidebar--show {
-  display: block;
 }
 
 @media screen and (min-width: 920px) {
