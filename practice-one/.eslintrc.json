@@ -22,14 +22,8 @@
     "prettier"
   ],
   "rules": {
-    "indent": [
-      "error",
-      "tab"
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "indent": 0,
+    "linebreak-style": 0,
     "quotes": [
       "error",
       "single"

@@ -1,7 +1,12 @@
-import './App.css';
+import Typography from './components/common/Typography/Typography';
+import './styles/index.css';
 
 function App() {
-	return <></>;
+  return (
+    <>
+      <Typography className="">Text</Typography>
+    </>
+  );
 }
 
 export default App;
