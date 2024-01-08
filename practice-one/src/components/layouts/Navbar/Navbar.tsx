@@ -1,3 +1,4 @@
+import { LINK_TYPE } from '../../../types/common';
 import Button from '../../common/Button/Button';
 import Link from '../../common/Link/Link';
 import styles from './index.module.css';
@@ -12,7 +13,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: NavbarProps) => {
     <nav className={styles.navbar}>
       <NavbarButton />
       <div className={styles.navbar__logo}>
-        <Link href="#">
+        <Link type={LINK_TYPE.NONE} href="#">
           <img src={logoSrc} className={styles.logo} alt={altText} />
         </Link>
       </div>
