@@ -8,12 +8,12 @@ export interface Props {
   className: string;
 }
 
-const Text = ({ children, href = '#', type = LINK_TYPE.UNDERLINE, className }: Props) => {
+const Link = ({ children, href = '#', type = LINK_TYPE.UNDERLINE, className }: Props) => {
   return (
-    <a href={href} className={`${styles.text} ${styles[type]} ${styles[className]} ${className}`}>
+    <a href={href} className={`${styles[type]} ${styles[className]} ${className}`}>
       {children}
     </a>
   );
 };
 
-export default Text;
+export default Link;
