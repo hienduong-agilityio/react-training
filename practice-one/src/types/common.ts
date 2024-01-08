@@ -9,3 +9,8 @@ export enum BUTTON_VARIANT {
   OUTLINE = 'outline',
   ICON = 'icon',
 }
+
+export enum LINK_TYPE {
+  UNDERLINE = 'underline',
+  NONE = 'none',
+}
