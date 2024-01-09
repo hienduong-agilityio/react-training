@@ -23,7 +23,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: NavbarProps) => {
 
 const NavbarButton = () => {
   return (
-    <Button variant={BUTTON_VARIANT.PRIMARY} className={styles.navbar__button}>
+    <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbar__button}>
       <div className={styles.icon}>
         <span className={styles.icon__line}></span>
         <span className={styles.icon__line}></span>
