@@ -1,5 +1,37 @@
 .button {
+  display: inline-flex;
+  padding: 0rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  border: none;
   border-radius: 0.25rem;
+}
+
+.text {
+  background-color: var(--white-color);
+}
+
+.text:hover {
+  background-color: var(--shadow-color);
+}
+
+.outline {
+  border: 1px solid var(--primary-color);
+}
+
+.outline:hover {
+  box-shadow: 0px 1.6px 3.6px 0px rgba(0, 0, 0, 0.11);
+}
+
+.filled {
+  background-color: var(--shadow-color);
+}
+
+.filledTonal {
+  background-color: var(--shadow-color);
+  border: 1px solid var(--primary-color);
 }
 
 .primary {
@@ -7,15 +39,22 @@
   color: var(--white-color);
 }
 
-.secondary {
-  background-color: var(--active-gray-color);
+.small {
+  height: 1.5rem;
 }
 
-.outline {
-  border: none;
+.medium {
+  height: 2.5rem;
+}
+
+.large {
+  height: 3.5rem;
+}
+
+.light {
+  background-color: var(--white-color);
 }
 
 .icon {
   background-color: var(--icon-color);
 }
-
