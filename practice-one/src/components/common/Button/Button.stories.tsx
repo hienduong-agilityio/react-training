@@ -18,19 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: 'Button primary',
-    variant: BUTTON_VARIANT.PRIMARY,
-    className: 'outline',
-    onClick: () => {
-      alert('Button component');
-    },
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    children: 'Button secondary',
-    variant: BUTTON_VARIANT.SECONDARY,
-    className: '',
+    variant: BUTTON_VARIANT.TEXT,
     onClick: () => {
       alert('Button component');
     },
@@ -39,9 +27,18 @@ export const Secondary: Story = {
 
 export const Outline: Story = {
   args: {
-    children: 'Button outline',
+    children: 'Button secondary',
     variant: BUTTON_VARIANT.OUTLINE,
-    className: '',
+    onClick: () => {
+      alert('Button component');
+    },
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    children: 'Button outline',
+    variant: BUTTON_VARIANT.FILLED,
     onClick: () => {
       alert('Button component');
     },

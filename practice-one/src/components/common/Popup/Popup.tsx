@@ -17,7 +17,7 @@ const Popup = ({ isOpen, onClose, children, className }: PopupProps) => {
   return (
     <div className={overlayClasses}>
       <div className={styles.popup}>
-        <Button className={styles.closeButton} onClick={onClose}>
+        <Button customClasses={styles.closeButton} onClick={onClose}>
           Close
         </Button>
         <div className={styles.content}>{children}</div>

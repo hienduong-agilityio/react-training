@@ -28,7 +28,7 @@ const Message = ({ onClose = () => {}, title, text }: MessageProps) => {
       <div className={styles.messageBox}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.content}>{text}</p>
-        <Button className={styles.button} variant={BUTTON_VARIANT.PRIMARY} onClick={onClose}>
+        <Button customClasses={styles.button} variant={BUTTON_VARIANT.TEXT} onClick={onClose}>
           Close message
         </Button>
       </div>
