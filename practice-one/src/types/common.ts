@@ -4,8 +4,8 @@ export enum TEXT_SIZE {
 }
 
 export enum BUTTON_VARIANT {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
+  TEXT = 'text',
   OUTLINE = 'outline',
-  ICON = 'icon',
+  FILLED = 'filled',
+  FILLEDTONAL = 'filledTonal',
 }
