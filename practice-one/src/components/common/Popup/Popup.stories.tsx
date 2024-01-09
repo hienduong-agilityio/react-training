@@ -1,12 +1,19 @@
+import { Meta } from '@storybook/react';
 import Popup from './Popup';
 
-export default {
+const meta = {
   title: 'Popup',
   component: Popup,
-};
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof Popup>;
+
+export default meta;
 
 export const Default = () => (
-  <Popup isOpen={true} onClose={() => {}}>
+  <Popup closeButton={true} isOpen={true} onClosePopover={() => {}}>
     <div>
       <h2>Popup Content</h2>
       <p>This is a sample content for the Popup component.</p>
@@ -15,7 +22,7 @@ export const Default = () => (
 );
 
 export const Closed = () => (
-  <Popup isOpen={false} onClose={() => {}}>
+  <Popup isOpen={false} onClosePopover={() => {}}>
     <div>
       <h2>Popup Content</h2>
       <p>This Popup is closed.</p>
