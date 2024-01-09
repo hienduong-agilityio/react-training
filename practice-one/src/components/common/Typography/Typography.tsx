@@ -1,6 +1,5 @@
-import classNames from 'classnames';
 import { TEXT_SIZE } from '../../../types/common';
-import styles from './index.module.css';
+import style from './index.module.css';
 
 export interface Props {
   children: string;
@@ -9,9 +8,7 @@ export interface Props {
 }
 
 const Text = ({ children, size = TEXT_SIZE.NORMAL, className }: Props) => {
-  const textClasses = classNames(styles.text, styles[size], styles[className], [className]);
-
-  return <p className={textClasses}>{children}</p>;
+  return <p className={`${style.text} ${style[size]} ${style[className]}`}>{children}</p>;
 };
 
 export default Text;
