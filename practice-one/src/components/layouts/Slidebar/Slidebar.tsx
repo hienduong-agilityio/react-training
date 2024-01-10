@@ -11,7 +11,7 @@ interface ISidebar {
 
 const Sidebar = ({ children, title = '' }: ISidebar) => {
   return (
-    <aside className={styles.sidebargit}>
+    <aside className={styles.sidebar}>
       <section className={styles.sidebar__menu}>
         <h2 className={styles.sidebar__title}>{title}</h2>
         <ul className={styles.sidebar__list}>{children}</ul>
@@ -34,7 +34,7 @@ const SidebarItem = ({ children, title = '' }: ISidebar) => {
         customClasses={styles.sidebar__link}
         onClick={handleItemClick}
       >
-        <Link type={LINK_TYPE.NONE} href="javascript:void(0)" className="sidebar__link">
+        <Link type={LINK_TYPE.NONE} href="javascript:void(0)" customClasses={styles.sidebar__link}>
           <h3 className={styles.link__text}>{title}</h3>
           {children}
         </Link>
