@@ -7,30 +7,40 @@ interface MessageProps {
   onClose?: () => void;
   text?: string;
   title?: string;
+  closeButtonEnabled?: boolean;
+  timeoutDuration?: number;
 }
 
-const Message = ({ onClose = () => {}, title, text }: MessageProps) => {
+const Message = ({
+  onClose = () => {},
+  title,
+  text,
+  closeButtonEnabled = true,
+  timeoutDuration = 2000,
+}: MessageProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       onClose();
-    }, 2000);
+    }, timeoutDuration);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [onClose]);
+  }, [onClose, timeoutDuration]);
 
   return isVisible ? (
     <div className={styles.messageContainer}>
       <div className={styles.messageBox}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.content}>{text}</p>
-        <Button customClasses={styles.button} variant={BUTTON_VARIANT.TEXT} onClick={onClose}>
-          Close message
-        </Button>
+        {closeButtonEnabled && (
+          <Button customClasses={styles.button} variant={BUTTON_VARIANT.TEXT} onClick={onClose}>
+            Close message
+          </Button>
+        )}
       </div>
     </div>
   ) : null;

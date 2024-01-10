@@ -4,7 +4,8 @@ import './styles/index.css';
 function App() {
   return (
     <>
-      <Typography className="">Text</Typography>
+      <Typography>Text</Typography>
+      <Typography>Text</Typography>
     </>
   );
 }
