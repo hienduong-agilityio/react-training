@@ -1,10 +1,11 @@
 import styles from './index.module.css';
 import { TableHeader } from './TableHeader';
 import { TableBody } from './TableBody';
+import IProductByCategory from '../interfaces/productBYCategory';
 
 interface ITableProps {
   tableHeader: TableHeader[];
-  dataTable?: [];
+  dataTable?: IProductByCategory[];
 }
 
 // TODO: Add comments params for component

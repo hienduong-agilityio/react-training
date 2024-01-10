@@ -1,11 +1,10 @@
-import Typography from './components/common/Typography/Typography';
+import Dashboard from './page/Dashboard';
 import './styles/index.css';
 
 function App() {
   return (
     <>
-      <Typography>Text</Typography>
-      <Typography>Text</Typography>
+      <Dashboard></Dashboard>
     </>
   );
 }
