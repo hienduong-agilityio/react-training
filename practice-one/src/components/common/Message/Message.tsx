@@ -3,7 +3,7 @@ import styles from './index.module.css';
 import Button from '../Button/Button';
 import { BUTTON_VARIANT } from '../../../types/common';
 
-interface MessageProps {
+interface IMessageProps {
   onClose?: () => void;
   text?: string;
   title?: string;
@@ -17,7 +17,7 @@ const Message = ({
   text,
   closeButtonEnabled = true,
   timeoutDuration = 2000,
-}: MessageProps) => {
+}: IMessageProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {

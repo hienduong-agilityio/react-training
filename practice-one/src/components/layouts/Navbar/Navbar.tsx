@@ -3,12 +3,12 @@ import Button from '../../common/Button/Button';
 import Link from '../../common/Link/Link';
 import styles from './index.module.css';
 
-interface NavbarProps {
+interface INavbarProps {
   logoSrc: string;
   altText: string;
 }
 
-const Navbar = ({ logoSrc = '', altText = '' }: NavbarProps) => {
+const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
   return (
     <nav className={styles.navbar}>
       <NavbarButton />

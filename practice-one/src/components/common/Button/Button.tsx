@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import styles from './index.module.css';
 import classNames from 'classnames';
 
-interface ButtonProps {
+interface IButtonProps {
   children: React.ReactNode;
   variant?: 'text' | 'outline' | 'filled' | 'filledTonal';
   size?: 'small' | 'medium' | 'large';
@@ -41,7 +41,7 @@ const Button = ({
   endIcon,
   onClick = () => {},
   ...restProps
-}: ButtonProps): JSX.Element => {
+}: IButtonProps): JSX.Element => {
   const handleButtonClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       onClick(e);
