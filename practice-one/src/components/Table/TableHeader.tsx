@@ -1,4 +1,5 @@
 import styles from './index.module.css';
+
 export interface TableHeader {
   id: number;
   label: string;
