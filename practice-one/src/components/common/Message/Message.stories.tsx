@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Message from './Message';
 
 const meta = {
-  title: 'Message',
+  title: 'Components/common/Message',
   component: Message,
   parameters: {
     layout: 'centered',

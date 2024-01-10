@@ -1,7 +1,7 @@
 /*------------------------------------*\
   .navbar
 \*------------------------------------*/
-.navbar__logo {
+.navbarLogo {
   width: 74.08px;
   height: 24px;
 }
@@ -11,20 +11,20 @@
   height: 100%;
 }
 
-.navbar__button {
+.navbarButton {
   height: 15px;
   width: 20px;
   margin-right: 1.5rem;
 }
 
 .icon,
-.navbar__button {
+.navbarButton {
   display: inline-block;
   vertical-align: middle;
 }
 
 @media screen and (min-width: 920px) {
-  .navbar__button {
+  .navbarButton {
     display: none;
   }
 }

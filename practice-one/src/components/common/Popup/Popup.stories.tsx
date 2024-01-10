@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import Popup from './Popup';
 
 const meta = {
-  title: 'Popup',
+  title: 'Components/common/Popup',
   component: Popup,
   parameters: {
     layout: 'centered',

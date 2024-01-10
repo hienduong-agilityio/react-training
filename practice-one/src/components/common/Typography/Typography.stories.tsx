@@ -3,7 +3,7 @@ import Text from './Typography';
 import { TEXT_SIZE } from '../../../types/common';
 
 const meta = {
-  title: 'Typography',
+  title: 'Components/common/Typography',
   component: Text,
   parameters: {
     layout: 'centered',

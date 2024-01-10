@@ -13,6 +13,7 @@ interface IPopupProps {
   children?: React.ReactNode | string;
 }
 
+// TODO: Add comments params for component
 const Popup = ({
   isOpen = false,
   onClosePopup = () => {},

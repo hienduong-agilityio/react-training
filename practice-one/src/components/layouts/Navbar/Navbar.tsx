@@ -3,16 +3,17 @@ import Button from '../../common/Button/Button';
 import Link from '../../common/Link/Link';
 import styles from './index.module.css';
 
-interface NavbarProps {
+interface INavbarProps {
   logoSrc: string;
   altText: string;
 }
 
-const Navbar = ({ logoSrc = '', altText = '' }: NavbarProps) => {
+// TODO: Add comments params for component
+const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
   return (
     <nav className={styles.navbar}>
       <NavbarButton />
-      <div className={styles.navbar__logo}>
+      <div className={styles.navbarLogo}>
         <Link type={LINK_TYPE.NONE} href="#">
           <img src={logoSrc} className={styles.logo} alt={altText} />
         </Link>
@@ -21,13 +22,14 @@ const Navbar = ({ logoSrc = '', altText = '' }: NavbarProps) => {
   );
 };
 
+// TODO: Add comments params for component
 const NavbarButton = () => {
   return (
-    <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbar__button}>
+    <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbarButton}>
       <div className={styles.icon}>
-        <span className={styles.icon__line}></span>
-        <span className={styles.icon__line}></span>
-        <span className={styles.icon__line}></span>
+        <span className={styles.iconLine}></span>
+        <span className={styles.iconLine}></span>
+        <span className={styles.iconLine}></span>
       </div>
     </Button>
   );

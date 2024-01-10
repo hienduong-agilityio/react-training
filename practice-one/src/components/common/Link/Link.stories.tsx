@@ -3,7 +3,7 @@ import Link from './Link';
 import { LINK_TYPE } from '../../../types/common';
 
 const meta = {
-  title: 'Link',
+  title: 'Components/common/Link',
   component: Link,
   parameters: {
     layout: 'centered',

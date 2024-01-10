@@ -1,0 +1,23 @@
+/*------------------------------------*\
+  .table
+\*------------------------------------*/
+.table {
+  width: 100%;
+}
+
+.tableTitle,
+.tableData {
+  padding: 0.625rem 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--table-col-border-color);
+  min-width: 50px;
+  max-width: 300px;
+}
+
+.tableRow {
+  background-color: var(--table-background-color);
+}
+
+.tableMessage {
+  padding: 0.75rem;
+}

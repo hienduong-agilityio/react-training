@@ -3,7 +3,7 @@ import Button from './Button';
 import { BUTTON_VARIANT } from '../../../types/common';
 
 const meta = {
-  title: 'Button',
+  title: 'Components/common/Button',
   component: Button,
   parameters: {
     layout: 'centered',

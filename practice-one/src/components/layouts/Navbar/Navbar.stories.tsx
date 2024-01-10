@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Navbar from './Navbar';
 
 const meta = {
-  title: 'Navbar',
+  title: 'Components/layouts/Navbar',
   component: Navbar,
   parameters: {
     layout: 'centered',
