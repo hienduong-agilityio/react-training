@@ -10,7 +10,12 @@ export interface ILinkProps {
 }
 
 // TODO: Add comments params for component
-const Link = ({ children, href = '#', type = LINK_TYPE.UNDERLINE, customClasses }: ILinkProps) => {
+const Link = ({
+  children,
+  href = 'javascript:void(0)',
+  type = LINK_TYPE.UNDERLINE,
+  customClasses,
+}: ILinkProps) => {
   const linkClasses = classNames(styles[type], customClasses);
 
   return (
