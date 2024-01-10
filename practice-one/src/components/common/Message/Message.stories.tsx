@@ -18,6 +18,24 @@ export const Default: Story = {
   args: {
     onClose: () => {},
     title: 'Success',
-    text: 'Your products is created'
+    text: 'Your products is created',
+  },
+};
+
+export const MessageNoCloseButton: Story = {
+  args: {
+    onClose: () => {},
+    title: 'Success',
+    text: 'Your products is created',
+    closeButtonEnabled: false,
+  },
+};
+
+export const SetTimeOut: Story = {
+  args: {
+    onClose: () => {},
+    title: 'Success',
+    text: 'Your products is created',
+    timeoutDuration: 10000,
   },
 };
