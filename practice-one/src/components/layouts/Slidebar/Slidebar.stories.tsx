@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 import { Sidebar, SidebarItem } from './Slidebar';
 
 const meta = {
-  title: 'Sidebar',
+  title: 'Components/layouts/Sidebar',
   component: Sidebar,
   parameters: {
     layout: 'centered',
