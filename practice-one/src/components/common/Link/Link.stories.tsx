@@ -20,7 +20,7 @@ export const Underline: Story = {
     href: '#',
     children: 'Underline',
     type: LINK_TYPE.UNDERLINE,
-    className: 'primary',
+    customClasses: 'primary',
   },
 };
 
@@ -29,6 +29,6 @@ export const NoUnderline: Story = {
     href: '#',
     children: 'No Underline',
     type: LINK_TYPE.NONE,
-    className: '',
+    customClasses: '',
   },
 };

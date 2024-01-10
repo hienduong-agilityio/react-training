@@ -18,8 +18,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Default',
-    size: TEXT_SIZE.NORMAL,
-    className: ''
+    variant: 'h6',
+    size: TEXT_SIZE.LARGE,
+    color: 'primary',
   },
 };
 
@@ -27,14 +28,11 @@ export const LargeText: Story = {
   args: {
     children: 'LargeText',
     size: TEXT_SIZE.LARGE,
-    className: '  '
-
   },
 };
 
 export const TextColor: Story = {
   args: {
     children: 'TextColor',
-    className: 'primary',
   },
 };

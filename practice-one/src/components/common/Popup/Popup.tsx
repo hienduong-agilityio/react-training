@@ -1,29 +1,57 @@
-import classNames from 'classnames';
 import React from 'react';
 import styles from './index.module.css';
 import Button from '../Button/Button';
 
-export interface PopupProps {
+interface IPopupProps {
   isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  className?: string;
+  onClosePopup?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  closeButton?: boolean;
+  closeButtonContent?: string;
+  customClasses?: string;
+  arrowPopup?: boolean;
+  isFixed?: boolean;
+  children?: React.ReactNode | string;
 }
 
-const Popup = ({ isOpen, onClose, children, className }: PopupProps) => {
-  const overlayClasses = classNames(styles.overlay, className);
-  if (!isOpen) return null;
+const Popup = ({
+  isOpen = false,
+  onClosePopup = () => {},
+  closeButton = true,
+  closeButtonContent = 'Close',
+  children,
+  customClasses,
+  arrowPopup = true,
+  isFixed = false,
+}: IPopupProps) => {
+  const popupClasses = customClasses ? `${customClasses}` : styles.popup;
 
-  return (
-    <div className={overlayClasses}>
-      <div className={styles.popup}>
-        <Button customClasses={styles.closeButton} onClick={onClose}>
-          Close
+  return isOpen ? (
+    <>
+      {isFixed && (
+        <Button
+          type="button"
+          customClasses={styles.overlay}
+          onClick={onClosePopup}
+          aria-label="Close popup"
+        >
+          {undefined}
         </Button>
-        <div className={styles.content}>{children}</div>
+      )}
+      <div className={styles.container}>
+        <div className={popupClasses}>
+          <div className={styles.flexContainer}>
+            {children}
+            {closeButton && (
+              <div className={styles.closeButton}>
+                <Button onClick={onClosePopup}>{closeButtonContent}</Button>
+              </div>
+            )}
+          </div>
+        </div>
+        {arrowPopup && <div className={styles.arrow} />}
       </div>
-    </div>
-  );
+    </>
+  ) : null;
 };
 
 export default Popup;
