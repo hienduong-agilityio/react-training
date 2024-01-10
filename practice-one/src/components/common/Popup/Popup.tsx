@@ -1,30 +1,29 @@
 import React from 'react';
-import styles from './index.module.css'; // Import module CSS
+import styles from './index.module.css';
 import Button from '../Button/Button';
 
-interface IPopoverProps {
+interface IPopupProps {
   isOpen: boolean;
-  onClosePopover?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClosePopup?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   closeButton?: boolean;
   closeButtonContent?: string;
-  popoverClassName?: string;
-  arrowPopover?: boolean;
+  customClasses?: string;
+  arrowPopup?: boolean;
   isFixed?: boolean;
   children?: React.ReactNode | string;
 }
 
-const Popover = ({
+const Popup = ({
   isOpen = false,
-  onClosePopover = () => {},
+  onClosePopup = () => {},
   closeButton = true,
   closeButtonContent = 'Close',
   children,
-  popoverClassName,
-  arrowPopover = true,
+  customClasses,
+  arrowPopup = true,
   isFixed = false,
-}: IPopoverProps) => {
-  const defaultPopoverClassName = styles.defaultPopoverClassName; // Use styles from module CSS
-  const customPopoverClassName = popoverClassName ? `${popoverClassName}` : defaultPopoverClassName;
+}: IPopupProps) => {
+  const popupClasses = customClasses ? `${customClasses}` : styles.popup;
 
   return isOpen ? (
     <>
@@ -32,27 +31,27 @@ const Popover = ({
         <Button
           type="button"
           customClasses={styles.overlay}
-          onClick={onClosePopover}
-          aria-label="Close popover"
+          onClick={onClosePopup}
+          aria-label="Close popup"
         >
           {undefined}
         </Button>
       )}
       <div className={styles.container}>
-        <div className={customPopoverClassName}>
+        <div className={popupClasses}>
           <div className={styles.flexContainer}>
             {children}
             {closeButton && (
               <div className={styles.closeButton}>
-                <Button onClick={onClosePopover}>{closeButtonContent}</Button>
+                <Button onClick={onClosePopup}>{closeButtonContent}</Button>
               </div>
             )}
           </div>
         </div>
-        {arrowPopover && <div className={styles.arrow} />}
+        {arrowPopup && <div className={styles.arrow} />}
       </div>
     </>
   ) : null;
 };
 
-export default Popover;
+export default Popup;

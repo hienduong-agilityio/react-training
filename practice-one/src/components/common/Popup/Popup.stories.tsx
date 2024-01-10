@@ -13,7 +13,7 @@ const meta = {
 export default meta;
 
 export const Default = () => (
-  <Popup closeButton={true} isOpen={true} onClosePopover={() => {}}>
+  <Popup closeButton={true} isOpen={true} onClosePopup={() => {}}>
     <div>
       <h2>Popup Content</h2>
       <p>This is a sample content for the Popup component.</p>
@@ -22,7 +22,7 @@ export const Default = () => (
 );
 
 export const Closed = () => (
-  <Popup isOpen={false} onClosePopover={() => {}}>
+  <Popup isOpen={false} onClosePopup={() => {}}>
     <div>
       <h2>Popup Content</h2>
       <p>This Popup is closed.</p>
