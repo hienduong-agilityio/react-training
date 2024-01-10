@@ -65,9 +65,9 @@ const Button = ({
       onClick={handleButtonClick}
       {...restProps}
     >
-      {startIcon && <span className="start-icon">{startIcon}</span>}
+      {startIcon && <span className={styles.startIcon}>{startIcon}</span>}
       {children}
-      {endIcon && <span className="end-icon">{endIcon}</span>}
+      {endIcon && <span className={styles.endIcon}>{endIcon}</span>}
     </button>
   );
 };

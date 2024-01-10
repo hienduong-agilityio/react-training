@@ -25,9 +25,9 @@ const NavbarButton = () => {
   return (
     <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbarButton}>
       <div className={styles.icon}>
-        <span className={styles.icon__line}></span>
-        <span className={styles.icon__line}></span>
-        <span className={styles.icon__line}></span>
+        <span className={styles.iconLine}></span>
+        <span className={styles.iconLine}></span>
+        <span className={styles.iconLine}></span>
       </div>
     </Button>
   );

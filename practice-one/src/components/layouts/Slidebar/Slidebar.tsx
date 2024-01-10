@@ -12,9 +12,9 @@ interface ISidebar {
 const Sidebar = ({ children, title = '' }: ISidebar) => {
   return (
     <aside className={styles.sidebar}>
-      <section className={styles.sidebar__menu}>
+      <section className={styles.sidebarMenu}>
         <h2 className={styles.sidebarTitle}>{title}</h2>
-        <ul className={styles.sidebar__list}>{children}</ul>
+        <ul className={styles.sidebarList}>{children}</ul>
       </section>
     </aside>
   );
@@ -35,7 +35,7 @@ const SidebarItem = ({ children, title = '' }: ISidebar) => {
         onClick={handleItemClick}
       >
         <Link type={LINK_TYPE.NONE} href="javascript:void(0)" customClasses={styles.sidebarLink}>
-          <h3 className={styles.link__text}>{title}</h3>
+          <h3 className={styles.linkText}>{title}</h3>
           {children}
         </Link>
       </Button>
