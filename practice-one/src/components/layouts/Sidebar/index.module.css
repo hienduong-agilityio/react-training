@@ -33,6 +33,10 @@
   gap: 0.875rem;
 }
 
+.sidebarLink .chart {
+  fill: var(--icon-color);
+}
+
 @media screen and (min-width: 920px) {
   .sidebar {
     display: block;

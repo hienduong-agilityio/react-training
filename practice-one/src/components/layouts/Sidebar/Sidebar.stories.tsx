@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { Sidebar, SidebarItem } from './Slidebar';
+import { Sidebar, SidebarItem } from './Sidebar';
 
 const meta = {
   title: 'Components/layouts/Sidebar',
