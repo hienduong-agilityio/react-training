@@ -12,7 +12,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
   return (
     <nav className={styles.navbar}>
       <NavbarButton />
-      <div className={styles.navbar__logo}>
+      <div className={styles.navbarLogo}>
         <Link type={LINK_TYPE.NONE} href="#">
           <img src={logoSrc} className={styles.logo} alt={altText} />
         </Link>
@@ -23,7 +23,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
 
 const NavbarButton = () => {
   return (
-    <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbar__button}>
+    <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbarButton}>
       <div className={styles.icon}>
         <span className={styles.icon__line}></span>
         <span className={styles.icon__line}></span>

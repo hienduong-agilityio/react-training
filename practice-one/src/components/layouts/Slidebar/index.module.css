@@ -13,22 +13,22 @@
   padding: 6rem 1.25rem;
 }
 
-.sidebar__title {
+.sidebarTitle {
   text-transform: uppercase;
   margin-left: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
-.sidebar__item {
+.sidebarItem {
   border-radius: 3.2px;
   padding: 0.75rem 1.25rem;
 }
 
-.sidebar__item:hover {
+.sidebarItem:hover {
   background-color: var(--active-gray-color);
 }
 
-.sidebar__link {
+.sidebarLink {
   display: flex;
   gap: 0.875rem;
 }

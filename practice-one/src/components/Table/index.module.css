@@ -5,8 +5,8 @@
   width: 100%;
 }
 
-.table__title,
-.table__data {
+.tableTitle,
+.tableData {
   padding: 0.625rem 0.5rem;
   text-align: left;
   border-bottom: 1px solid var(--table-col-border-color);
@@ -14,10 +14,10 @@
   max-width: 300px;
 }
 
-.table__row {
+.tableRow {
   background-color: var(--table-background-color);
 }
 
-.table__message {
+.tableMessage {
   padding: 0.75rem;
 }

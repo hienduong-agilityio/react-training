@@ -10,9 +10,9 @@ interface IHeaderProps {
 
 export const TableHeader = ({ tableHeader }: IHeaderProps) => (
   <thead className={styles.tableHeader}>
-    <tr className="table__row">
+    <tr className="tableRow">
       {tableHeader.map((title) => (
-        <th key={title.id} className="table__title" data-title={title.label.toLowerCase()}>
+        <th key={title.id} className="tableTitle" data-title={title.label.toLowerCase()}>
           {title.label}
         </th>
       ))}
