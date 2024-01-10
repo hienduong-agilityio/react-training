@@ -1,3 +1,5 @@
+import styles from './inde.module.css';
+
 interface ISearchProps {
   title: string;
   placeholder?: string;
@@ -10,18 +12,16 @@ export const Search = ({ title, placeholder = '', getValue }: ISearchProps) => {
   };
 
   return (
-    <form>
-      <label htmlFor="search" className="form__label">
-        {title}
-      </label>
+    <>
+      <label htmlFor="search">{title}</label>
       <input
         type="text"
-        className="form__input"
+        className={styles.formInput}
         id="search"
         name="search"
         placeholder={placeholder}
         onChange={handleInputChange}
       />
-    </form>
+    </>
   );
 };
