@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
@@ -20,17 +20,20 @@ function App() {
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
-    setSearchedProducts(filteredProducts);
   };
 
-  const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
-    const productName = product.name.toLowerCase();
-    const category = product.categoryName.toLowerCase();
+  useEffect(() => {
+    const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
+      const category = product.categoryName.toLowerCase();
 
-    return (
-      productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
-    );
-  });
+      return (
+        productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
+      );
+    });
+
+    setSearchedProducts(filteredProducts);
+  }, [searchInput, listProducts]);
 
   return (
     <>
