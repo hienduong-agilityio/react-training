@@ -9,3 +9,8 @@ export enum BUTTON_VARIANT {
   FILLED = 'filled',
   FILLEDTONAL = 'filledTonal',
 }
+
+export enum LINK_TYPE {
+  UNDERLINE = 'underline',
+  NONE = 'none',
+}
