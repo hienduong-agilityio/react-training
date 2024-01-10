@@ -9,6 +9,7 @@ interface ISidebar {
   title: string;
 }
 
+// TODO: Add comments params for component
 const Sidebar = ({ children, title = '' }: ISidebar) => {
   return (
     <aside className={styles.sidebar}>
@@ -20,6 +21,7 @@ const Sidebar = ({ children, title = '' }: ISidebar) => {
   );
 };
 
+// TODO: Add comments params for component
 const SidebarItem = ({ children, title = '' }: ISidebar) => {
   const [isActive, setIsActive] = useState(false);
 

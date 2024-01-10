@@ -8,6 +8,7 @@ interface INavbarProps {
   altText: string;
 }
 
+// TODO: Add comments params for component
 const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
   return (
     <nav className={styles.navbar}>
@@ -21,6 +22,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
   );
 };
 
+// TODO: Add comments params for component
 const NavbarButton = () => {
   return (
     <Button variant={BUTTON_VARIANT.TEXT} customClasses={styles.navbarButton}>

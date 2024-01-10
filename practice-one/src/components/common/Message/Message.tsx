@@ -11,6 +11,7 @@ interface IMessageProps {
   timeoutDuration?: number;
 }
 
+// TODO: Add comments params for component
 const Message = ({
   onClose = () => {},
   title,

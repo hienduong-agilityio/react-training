@@ -9,6 +9,7 @@ export interface ILinkProps {
   customClasses?: string;
 }
 
+// TODO: Add comments params for component
 const Link = ({ children, href = '#', type = LINK_TYPE.UNDERLINE, customClasses }: ILinkProps) => {
   const linkClasses = classNames(styles[type], customClasses);
 

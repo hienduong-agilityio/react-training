@@ -7,6 +7,7 @@ interface ITableProps {
   dataTable?: [];
 }
 
+// TODO: Add comments params for component
 export const Table = ({ tableHeader, dataTable }: ITableProps) => (
   <table className={styles.table}>
     <TableHeader tableHeader={tableHeader} />

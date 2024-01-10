@@ -5,6 +5,7 @@ interface ITableBodyProps {
   tableData?: IProductByCategory[];
 }
 
+// TODO: Add comments params for component
 export const TableBody = ({ tableData }: ITableBodyProps) => {
   if (!tableData || tableData.length === 0) {
     return (

@@ -8,6 +8,7 @@ interface IHeaderProps {
   tableHeader: TableHeader[];
 }
 
+// TODO: Add comments params for component
 export const TableHeader = ({ tableHeader }: IHeaderProps) => (
   <thead className={styles.tableHeader}>
     <tr className={styles.tableRow}>
