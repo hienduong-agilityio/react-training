@@ -1,5 +1,5 @@
 import Navbar from './Navbar/Navbar';
 
-import { Sidebar, SidebarItem } from './Slidebar/Slidebar';
+import { Sidebar, SidebarItem } from './Sidebar/Sidebar';
 
 export { Navbar, Sidebar, SidebarItem };
