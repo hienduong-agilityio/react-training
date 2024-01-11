@@ -1,8 +1,8 @@
-interface ISvg {
+interface IChartSvg {
   fillColor: string;
 }
 
-export default function Svg({ fillColor }: ISvg) {
+export default function ChartSvg({ fillColor }: IChartSvg) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill={fillColor} xmlns="http://www.w3.org/2000/svg">
       <g className="chart">

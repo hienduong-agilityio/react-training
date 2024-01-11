@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
@@ -10,10 +10,10 @@ import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
 import { Search } from './components/SearchInput/Search';
 import IProductByCategory from './components/interfaces/productBYCategory';
-import Svg from './components/common/icons/Svg';
+import ChartSvg from './components/common/icons/ChartSvg';
 
 function App() {
-  const listProducts = LIST_PRODUCTS;
+  const listProducts: IProductByCategory[] = LIST_PRODUCTS;
 
   const [searchInput, setSearchInput] = useState('');
 
@@ -21,20 +21,18 @@ function App() {
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
-  };
-
-  useEffect(() => {
-    const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
-      const productName = product.name.toLowerCase();
-      const category = product.categoryName.toLowerCase();
-
-      return (
-        productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
-      );
-    });
 
     setSearchedProducts(filteredProducts);
-  }, [searchInput, listProducts]);
+  };
+
+  const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
+    const productName = product.name.toLowerCase();
+    const category = product.categoryName.toLowerCase();
+
+    return (
+      productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
+    );
+  });
 
   return (
     <>
@@ -45,13 +43,16 @@ function App() {
         <Sidebar title="Menu">
           <SidebarItem title="Products">
             <span className={styles.linkIcon}>
-              <Svg fillColor="gray" />
+              <ChartSvg fillColor="gray" />
             </span>
           </SidebarItem>
         </Sidebar>
         <section className={styles.productContent}>
           <Search title="Search product:" getValue={handleSearchKey} />
-          <Table dataTable={searchedProducts} tableHeader={TABLE_TITLE}></Table>
+          <Table
+            dataTable={!searchInput ? listProducts : searchedProducts}
+            tableHeader={TABLE_TITLE}
+          ></Table>
         </section>
       </main>
     </>
