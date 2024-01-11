@@ -17,12 +17,10 @@ function App() {
 
   const [searchInput, setSearchInput] = useState('');
 
-  const [searchedProducts, setSearchedProducts] = useState<IProductByCategory[]>([]);
-
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
 
-    setSearchedProducts(filteredProducts);
+    filteredProducts;
   };
 
   const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
@@ -50,7 +48,7 @@ function App() {
         <section className={styles.productContent}>
           <Search title="Search product:" getValue={handleSearchKey} />
           <Table
-            dataTable={!searchInput ? listProducts : searchedProducts}
+            dataTable={!searchInput ? listProducts : filteredProducts}
             tableHeader={TABLE_TITLE}
           ></Table>
         </section>
