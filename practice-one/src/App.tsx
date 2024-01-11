@@ -19,11 +19,10 @@ function App() {
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
-
-    filteredProducts;
+    filteredProductsBySearch;
   };
 
-  const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
+  const filteredProductsBySearch: IProductByCategory[] = listProducts.filter((product) => {
     const productName = product.name.toLowerCase();
     const category = product.categoryName.toLowerCase();
 
@@ -48,7 +47,7 @@ function App() {
         <section className={styles.productContent}>
           <Search title="Search product:" getValue={handleSearchKey} />
           <Table
-            dataTable={!searchInput ? listProducts : filteredProducts}
+            dataTable={!searchInput ? listProducts : filteredProductsBySearch}
             tableHeader={TABLE_TITLE}
           />
         </section>
