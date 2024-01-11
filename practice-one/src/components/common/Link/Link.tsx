@@ -5,7 +5,7 @@ import styles from './index.module.css';
 export interface ILinkProps {
   children: React.ReactNode;
   type?: LINK_TYPE;
-  href: string;
+  href?: string;
   customClasses?: string;
 }
 
