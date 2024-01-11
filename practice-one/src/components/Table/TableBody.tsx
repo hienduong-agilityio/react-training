@@ -1,4 +1,4 @@
-import IProductByCategory from '../interfaces/productBYCategory';
+import IProductByCategory from '../interfaces/productByCategory';
 import styles from './index.module.css';
 
 interface ITableBodyProps {

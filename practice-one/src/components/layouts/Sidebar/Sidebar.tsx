@@ -24,7 +24,7 @@ const Sidebar = ({ children, title = '' }: ISidebar) => {
 const SidebarItem = ({ children, title = '' }: ISidebar) => {
   return (
     <li className={styles.sidebarItem}>
-      <Link type={LINK_TYPE.NONE} href="javascript:void(0)" customClasses={styles.sidebarLink}>
+      <Link type={LINK_TYPE.NONE} href="#" customClasses={styles.sidebarLink}>
         {children}
         <h3 className={styles.linkText}>{title}</h3>
       </Link>

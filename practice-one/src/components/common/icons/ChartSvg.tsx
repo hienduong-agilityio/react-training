@@ -2,6 +2,7 @@ interface IChartSvg {
   fillColor: string;
 }
 
+// TODO: Update comments for components
 export default function ChartSvg({ fillColor }: IChartSvg) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill={fillColor} xmlns="http://www.w3.org/2000/svg">
