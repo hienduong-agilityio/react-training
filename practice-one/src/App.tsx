@@ -18,7 +18,7 @@ function App() {
   const [searchInput, setSearchInput] = useState('');
   const [sortField, setSortField] = useState<keyof IProductByCategory>();
   const [sortStatus, setSortStatus] = useState('default');
-  const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<IProductByCategory[]>([]);
+  const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<IProductByCategory[]>(listProducts);
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
