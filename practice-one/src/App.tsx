@@ -16,13 +16,13 @@ function App() {
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
 
   const [searchInput, setSearchInput] = useState('');
+
   const [sortField, setSortField] = useState<keyof IProductByCategory>();
+
   const [sortStatus, setSortStatus] = useState('default');
-  const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<IProductByCategory[]>(listProducts);
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
-    filterAndSortProducts();
   };
 
   const handleSortingChange = (title: string) => {
@@ -32,7 +32,6 @@ function App() {
       title === sortField && sortStatus === 'ascending' ? 'descending' : 'ascending';
 
     setSortStatus(sortOrder);
-    filterAndSortProducts();
   };
 
   const filterAndSortProducts = () => {
@@ -61,8 +60,10 @@ function App() {
         )
       : filteredProducts;
 
-    setFilteredAndSortedProducts(sortedProducts);
+    return sortedProducts;
   };
+
+  const resultProductsOfFilterAndSort = filterAndSortProducts();
 
   return (
     <>
@@ -78,11 +79,11 @@ function App() {
           </SidebarItem>
         </Sidebar>
         <section className={styles.productContent}>
-          <Search title="Search product:" getValue={handleSearchKey} />
+          <Search title="Search product:" onSearchInput={handleSearchKey} />
           <Table
             onToggleSort={handleSortingChange}
             updateSortStatus={sortStatus}
-            dataTable={filteredAndSortedProducts}
+            dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
           />
         </section>

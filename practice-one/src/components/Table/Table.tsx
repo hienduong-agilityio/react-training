@@ -1,10 +1,10 @@
 import styles from './index.module.css';
-import { TableHeader } from './TableHeader';
+import { ITableHeader, TableHeader } from './TableHeader';
 import { TableBody } from './TableBody';
 import { IProductByCategory } from '../interfaces/product';
 
 interface ITableProps {
-  tableHeader: TableHeader[];
+  tableHeader: ITableHeader[];
   dataTable?: IProductByCategory[];
   onToggleSort?: (e: string) => void;
   updateSortStatus?: string;
@@ -19,8 +19,8 @@ export const Table = ({
 }: ITableProps) => (
   <table className={styles.table}>
     <TableHeader
-      updateSortStatus={updateSortStatus}
-      handleSorting={onToggleSort}
+      sortStatus={updateSortStatus}
+      onSortIcon={onToggleSort}
       tableHeader={tableHeader}
     />
     <TableBody tableData={dataTable} />

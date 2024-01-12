@@ -14,3 +14,9 @@ export enum LINK_TYPE {
   UNDERLINE = 'underline',
   NONE = 'none',
 }
+
+export enum SORT_NAMES {
+  Name = 'name',
+  Price = 'price',
+  Category = 'category',
+}
