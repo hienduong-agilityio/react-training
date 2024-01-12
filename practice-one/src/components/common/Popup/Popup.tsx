@@ -8,7 +8,6 @@ interface IPopupProps {
   closeButton?: boolean;
   closeButtonContent?: string;
   customClasses?: string;
-  arrowPopup?: boolean;
   isFixed?: boolean;
   children?: React.ReactNode | string;
 }
@@ -21,7 +20,6 @@ const Popup = ({
   closeButtonContent = 'Close',
   children,
   customClasses,
-  arrowPopup = true,
   isFixed = false,
 }: IPopupProps) => {
   const popupClasses = customClasses ? `${customClasses}` : styles.popup;
@@ -29,14 +27,9 @@ const Popup = ({
   return isOpen ? (
     <>
       {isFixed && (
-        <Button
-          type="button"
-          customClasses={styles.overlay}
-          onClick={onClosePopup}
-          aria-label="Close popup"
-        >
+        <button type="button" className={styles.overlay} onClick={onClosePopup} aria-label="Close popup">
           {undefined}
-        </Button>
+        </button>
       )}
       <div className={styles.container}>
         <div className={popupClasses}>
@@ -49,7 +42,6 @@ const Popup = ({
             )}
           </div>
         </div>
-        {arrowPopup && <div className={styles.arrow} />}
       </div>
     </>
   ) : null;

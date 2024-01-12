@@ -33,3 +33,4 @@ export const TableBody = ({ tableData }: ITableBodyProps) => {
     </tbody>
   );
 };
+  

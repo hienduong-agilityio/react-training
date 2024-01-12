@@ -9,11 +9,16 @@ import styles from './index.module.css';
 import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
 import { Search } from './components/SearchInput/Search';
-import { IProductByCategory } from './components/interfaces/product';
+import { IProductByCategory, IProductWithoutId } from './components/interfaces/product';
 import ChartSvg from './components/common/icons/ChartSvg';
+import Popup from './components/common/Popup/Popup';
+import Form from './components/Form/Form';
+import Button from './components/common/Button/Button';
 
 function App() {
-  const listProducts: IProductByCategory[] = LIST_PRODUCTS;
+  let listProducts: IProductByCategory[] = LIST_PRODUCTS;
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const [searchInput, setSearchInput] = useState('');
 
@@ -21,6 +26,16 @@ function App() {
 
   const [sortStatus, setSortStatus] = useState('default');
 
+  const [formData, setFormData] = useState({ name: '', price: '', description: '', category: '' });
+
+  const handleInputChange = (name: string, value: string) => {
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const handleCreateProductClick = () => {
+    // Toggle the state to open/close the popup
+    setIsPopupOpen(!isPopupOpen);
+  };
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
   };
@@ -65,6 +80,23 @@ function App() {
 
   const resultProductsOfFilterAndSort = filterAndSortProducts();
 
+  const handleFormSubmit = () => {
+    // Create a new product with the form data
+    const newProduct: IProductWithoutId = {
+      name: formData.name,
+      price: formData.price,
+      description: formData.description,
+      categoryName: formData.category,
+    };
+
+    // Add the new product to the list of products
+    listProducts = [...listProducts, newProduct];
+
+
+    // Close the popup
+    setIsPopupOpen(false);
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -80,6 +112,9 @@ function App() {
         </Sidebar>
         <section className={styles.productContent}>
           <Search title="Search product:" onSearchInput={handleSearchKey} />
+          <Button color="primary" onClick={handleCreateProductClick}>
+            Create Product
+          </Button>
           <Table
             onToggleSort={handleSortingChange}
             updateSortStatus={sortStatus}
@@ -87,6 +122,19 @@ function App() {
             tableHeader={TABLE_TITLE}
           />
         </section>
+        <Popup
+          isFixed={true}
+          closeButton={false}
+          isOpen={isPopupOpen}
+          onClosePopup={handleCreateProductClick}
+        >
+          <Form
+            title="Create Products "
+            formData={formData}
+            onInputChange={handleInputChange}
+            onSubmit={handleFormSubmit}
+          />
+        </Popup>
       </main>
     </>
   );
