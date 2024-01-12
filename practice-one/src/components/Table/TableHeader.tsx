@@ -11,19 +11,19 @@ export interface ITableHeader {
 
 interface IHeaderProps {
   tableHeader: ITableHeader[];
-  onSortIcon?: (e: string) => void;
+  onSorting?: (e: string) => void;
   sortStatus?: string;
 }
 
 // TODO: Add comments params for component
-export const TableHeader = ({ tableHeader, onSortIcon = () => {}, sortStatus }: IHeaderProps) => {
+export const TableHeader = ({ tableHeader, onSorting = () => {}, sortStatus }: IHeaderProps) => {
   return (
     <thead className={styles.tableHeader}>
       <tr className={styles.tableRow}>
         {tableHeader.map((header) => {
           const sortButton = Object.keys(SORT_NAMES).includes(header.label);
           const handleSort = () => {
-            onSortIcon(header.title);
+            onSorting(header.title);
           };
 
           return (

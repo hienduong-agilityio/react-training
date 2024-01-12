@@ -20,7 +20,7 @@ export const Table = ({
   <table className={styles.table}>
     <TableHeader
       sortStatus={updateSortStatus}
-      onSortIcon={onToggleSort}
+      onSorting={onToggleSort}
       tableHeader={tableHeader}
     />
     <TableBody tableData={dataTable} />
