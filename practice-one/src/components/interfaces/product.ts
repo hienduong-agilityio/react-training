@@ -1,11 +1,14 @@
-/* eslint-disable semi */
 /**
  * Represents the product data structure.
  */
-export default interface IProduct {
+export interface IProduct {
   id: string;
   name: string;
   price: string;
   description: string;
   categoryId: number;
+}
+
+export interface IProductByCategory extends IProduct {
+  categoryName: string;
 }

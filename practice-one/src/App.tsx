@@ -9,26 +9,60 @@ import styles from './index.module.css';
 import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
 import { Search } from './components/SearchInput/Search';
-import IProductByCategory from './components/interfaces/productByCategory';
+import { IProductByCategory } from './components/interfaces/product';
 import ChartSvg from './components/common/icons/ChartSvg';
 
 function App() {
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
 
   const [searchInput, setSearchInput] = useState('');
+  const [sortField, setSortField] = useState<keyof IProductByCategory>();
+  const [sortStatus, setSortStatus] = useState('default');
+  const [filteredAndSortedProducts, setFilteredAndSortedProducts] = useState<IProductByCategory[]>(listProducts);
 
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
+    filterAndSortProducts();
   };
 
-  const filteredProductsBySearch: IProductByCategory[] = listProducts.filter((product) => {
-    const productName = product.name.toLowerCase();
-    const category = product.categoryName.toLowerCase();
+  const handleSortingChange = (title: string) => {
+    setSortField(title as keyof IProductByCategory);
 
-    return (
-      productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
-    );
-  });
+    const sortOrder: string =
+      title === sortField && sortStatus === 'ascending' ? 'descending' : 'ascending';
+
+    setSortStatus(sortOrder);
+    filterAndSortProducts();
+  };
+
+  const filterAndSortProducts = () => {
+    const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
+      const category = product.categoryName.toLowerCase();
+
+      return (
+        productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
+      );
+    });
+
+    const sorterModifier = sortStatus === 'ascending' ? 1 : -1;
+
+    const sortedProducts = sortField
+      ? [...filteredProducts].sort(
+          (productAfter: IProductByCategory, productBefore: IProductByCategory) => {
+            const tableDataValueAfter: string | number = productAfter[sortField];
+            const tableDataValueBefore: string | number = productBefore[sortField];
+
+            if (tableDataValueAfter < tableDataValueBefore) return -1 * sorterModifier;
+            if (tableDataValueAfter > tableDataValueBefore) return 1 * sorterModifier;
+
+            return 0;
+          },
+        )
+      : filteredProducts;
+
+    setFilteredAndSortedProducts(sortedProducts);
+  };
 
   return (
     <>
@@ -46,7 +80,9 @@ function App() {
         <section className={styles.productContent}>
           <Search title="Search product:" getValue={handleSearchKey} />
           <Table
-            dataTable={searchInput ? filteredProductsBySearch : listProducts}
+            onToggleSort={handleSortingChange}
+            updateSortStatus={sortStatus}
+            dataTable={filteredAndSortedProducts}
             tableHeader={TABLE_TITLE}
           />
         </section>

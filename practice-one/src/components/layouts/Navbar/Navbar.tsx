@@ -14,7 +14,7 @@ const Navbar = ({ logoSrc = '', altText = '' }: INavbarProps) => {
     <nav className={styles.navbar}>
       <NavbarButton />
       <div className={styles.navbarLogo}>
-        <Link type={LINK_TYPE.NONE} href="#">
+        <Link type={LINK_TYPE.NONE}>
           <img src={logoSrc} className={styles.logo} alt={altText} />
         </Link>
       </div>
