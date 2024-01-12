@@ -46,7 +46,7 @@ function App() {
         <section className={styles.productContent}>
           <Search title="Search product:" getValue={handleSearchKey} />
           <Table
-            dataTable={searchInput ? filteredProductsBySearch : listProducts} 
+            dataTable={searchInput ? filteredProductsBySearch : listProducts}
             tableHeader={TABLE_TITLE}
           />
         </section>
