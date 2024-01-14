@@ -39,6 +39,8 @@ function App() {
 
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
+  const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
+
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -183,6 +185,21 @@ function App() {
     }
   };
 
+  const handleDeleteProduct = (id: number) => {
+    setDeleteProductId(id);
+    setIsPopupOpen(true);
+  };
+
+  const confirmDeleteProduct = () => {
+    if (deleteProductId !== null) {
+      const updatedProducts = currentProductList.filter((product) => product.id !== deleteProductId);
+      setCurrentProductList(updatedProducts);
+    }
+
+    setIsPopupOpen(false);
+    setDeleteProductId(null);
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -204,6 +221,7 @@ function App() {
           <Table
             onToggleSort={handleSortingChange}
             onEditProduct={handleEditProduct}
+            onDeleteProduct={handleDeleteProduct}
             updateSortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
@@ -216,15 +234,27 @@ function App() {
           onClosePopup={() => {
             setIsPopupOpen(false);
             setEditingProductId(null);
+            setDeleteProductId(null); // Reset deleteProductId when closing the popup
           }}
         >
-          <Form
-            title={editingProductId ? 'Edit Product' : 'Create Product'}
-            formData={formData}
-            onInputChange={handleInputChange}
-            onSubmit={handleFormSubmit}
-            formErrors={formErrors}
-          />
+          {deleteProductId !== null ? (
+            <>
+              <h2>Confirm Delete</h2>
+              <p>Are you sure you want to delete this product?</p>
+              <Button color="primary" onClick={confirmDeleteProduct}>
+                Confirm Delete
+              </Button>
+              <Button onClick={() => setIsPopupOpen(false)}>Cancel</Button>
+            </>
+          ) : (
+            <Form
+              title={editingProductId ? 'Edit Product' : 'Create Product'}
+              formData={formData}
+              onInputChange={handleInputChange}
+              onSubmit={handleFormSubmit}
+              formErrors={formErrors}
+            />
+          )}
         </Popup>
       </main>
     </>
