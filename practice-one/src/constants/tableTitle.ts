@@ -4,4 +4,5 @@ export const TABLE_TITLE = [
   { id: 3, label: 'Price', title: 'price' },
   { id: 4, label: 'Description', title: 'description' },
   { id: 5, label: 'Category', title: 'categoryName' },
+  { id: 6, label: 'Option', title: 'option' },
 ];

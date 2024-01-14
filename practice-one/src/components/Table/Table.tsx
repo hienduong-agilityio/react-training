@@ -7,6 +7,7 @@ interface ITableProps {
   tableHeader: ITableHeader[];
   dataTable?: IProductByCategory[];
   onToggleSort?: (e: string) => void;
+  onEditProduct?: (id: string) => void;
   updateSortStatus?: string;
 }
 
@@ -15,14 +16,11 @@ export const Table = ({
   tableHeader,
   dataTable,
   onToggleSort = () => {},
+  onEditProduct = () => {},
   updateSortStatus,
 }: ITableProps) => (
   <table className={styles.table}>
-    <TableHeader
-      sortStatus={updateSortStatus}
-      onSorting={onToggleSort}
-      tableHeader={tableHeader}
-    />
-    <TableBody tableData={dataTable} />
+    <TableHeader sortStatus={updateSortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
+    <TableBody tableData={dataTable} onEditing={onEditProduct} />
   </table>
 );

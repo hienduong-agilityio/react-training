@@ -37,6 +37,8 @@ function App() {
 
   const [currentProductList, setCurrentProductList] = useState<IProductByCategory[]>(listProducts);
 
+  const [editingProductId, setEditingProductId] = useState<number | null>(null);
+
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -134,20 +136,50 @@ function App() {
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
+  const updateProduct = (productId: number) => {
+    const updatedProducts = currentProductList.map((product) =>
+      product.id === productId
+        ? {
+            ...product,
+            name: formData.name,
+            price: formData.price,
+            description: formData.description,
+            categoryName: formData.category,
+          }
+        : product,
+    );
+    setCurrentProductList(updatedProducts);
+  };
+
   const handleFormSubmit = () => {
-    // Validate the form before submission
     const isValid = validateForm();
 
     if (isValid) {
-      // If the form is valid, create a new product and update the list
-      createNewProduct();
+      if (editingProductId !== null) {
+        updateProduct(editingProductId);
+      } else {
+        createNewProduct();
+      }
 
-      // Close the popup
+      setEditingProductId(null);
       setIsPopupOpen(false);
-
-      // Clear form data and errors
       setFormData({ name: '', price: '', description: '', category: '' });
       setFormErrors({ name: '', price: '', description: '', category: '' });
+    }
+  };
+
+  const handleEditProduct = (id: number) => {
+    const editingProduct = currentProductList.find((product) => product.id === id);
+
+    if (editingProduct) {
+      setEditingProductId(id);
+      setIsPopupOpen(true);
+      setFormData({
+        name: editingProduct.name,
+        price: editingProduct.price,
+        description: editingProduct.description,
+        category: editingProduct.categoryName,
+      });
     }
   };
 
@@ -171,6 +203,7 @@ function App() {
           </Button>
           <Table
             onToggleSort={handleSortingChange}
+            onEditProduct={handleEditProduct}
             updateSortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
@@ -180,10 +213,13 @@ function App() {
           isFixed={true}
           closeButton={false}
           isOpen={isPopupOpen}
-          onClosePopup={handleCreateProductClick}
+          onClosePopup={() => {
+            setIsPopupOpen(false);
+            setEditingProductId(null);
+          }}
         >
           <Form
-            title="Create Products "
+            title={editingProductId ? 'Edit Product' : 'Create Product'}
             formData={formData}
             onInputChange={handleInputChange}
             onSubmit={handleFormSubmit}
