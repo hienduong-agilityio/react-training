@@ -16,7 +16,7 @@ import Form from './components/Form/Form';
 import Button from './components/common/Button/Button';
 
 function App() {
-  let listProducts: IProductByCategory[] = LIST_PRODUCTS;
+  const listProducts: IProductByCategory[] = LIST_PRODUCTS;
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -27,6 +27,15 @@ function App() {
   const [sortStatus, setSortStatus] = useState('default');
 
   const [formData, setFormData] = useState({ name: '', price: '', description: '', category: '' });
+
+  const [formErrors, setFormErrors] = useState({
+    name: '',
+    price: '',
+    description: '',
+    category: '',
+  });
+
+  const [currentProductList, setCurrentProductList] = useState<IProductByCategory[]>(listProducts);
 
   const handleInputChange = (name: string, value: string) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -50,7 +59,7 @@ function App() {
   };
 
   const filterAndSortProducts = () => {
-    const filteredProducts: IProductByCategory[] = listProducts.filter((product) => {
+    const filteredProducts: IProductByCategory[] = currentProductList.filter((product) => {
       const productName = product.name.toLowerCase();
       const category = product.categoryName.toLowerCase();
 
@@ -80,21 +89,66 @@ function App() {
 
   const resultProductsOfFilterAndSort = filterAndSortProducts();
 
-  const handleFormSubmit = () => {
-    // Create a new product with the form data
-    const newProduct: IProductWithoutId = {
+  const validateForm = () => {
+    const errors: { [key: string]: string } = {};
+
+    console.log(formData);
+
+    // Name validation: Should not contain numbers and must be filled
+    if (!formData.name.trim() || !/^[A-Za-z\s]+$/.test(formData.name)) {
+      errors.name = 'Name should be filled and contain only letters and spaces.';
+    }
+
+    // Price validation: Should be a valid number and must be filled
+    if (!formData.price.trim() || isNaN(Number(formData.price)) || Number(formData.price) <= 0) {
+      errors.price = 'Price should be filled and be a valid number greater than 0.';
+    }
+
+    // Description validation: Should be at least 50 characters long
+    if (formData.description.length < 50) {
+      errors.description = 'Description should be at least 50 characters long.';
+    }
+
+    // Category validation: Should be the same as Name and must be filled
+    if (!formData.category.trim() || !/^[A-Za-z\s]+$/.test(formData.category)) {
+      errors.category = 'Category should be filled and contain only letters and spaces.';
+    }
+
+    setFormErrors(errors);
+
+    // Return true if there are no errors, indicating a valid form
+    return Object.values(errors).every((error) => !error);
+  };
+
+  const createNewProduct = () => {
+    // Create a new product object from form data
+    const newProduct: IProductByCategory = {
+      id: currentProductList.length + 1,
       name: formData.name,
       price: formData.price,
       description: formData.description,
       categoryName: formData.category,
     };
 
-    // Add the new product to the list of products
-    listProducts = [...listProducts, newProduct];
+    // Update the state to include the new product
+    setCurrentProductList((prevList) => [...prevList, newProduct]);
+  };
 
+  const handleFormSubmit = () => {
+    // Validate the form before submission
+    const isValid = validateForm();
 
-    // Close the popup
-    setIsPopupOpen(false);
+    if (isValid) {
+      // If the form is valid, create a new product and update the list
+      createNewProduct();
+
+      // Close the popup
+      setIsPopupOpen(false);
+
+      // Clear form data and errors
+      setFormData({ name: '', price: '', description: '', category: '' });
+      setFormErrors({ name: '', price: '', description: '', category: '' });
+    }
   };
 
   return (
@@ -133,6 +187,7 @@ function App() {
             formData={formData}
             onInputChange={handleInputChange}
             onSubmit={handleFormSubmit}
+            formErrors={formErrors}
           />
         </Popup>
       </main>

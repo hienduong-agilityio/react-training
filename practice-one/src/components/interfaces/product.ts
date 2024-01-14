@@ -13,4 +13,3 @@ export interface IProductByCategory extends IProduct {
 }
 
 export type IProductWithoutId = Omit<IProductByCategory, 'id'>;
- 
