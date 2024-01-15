@@ -38,7 +38,7 @@ function App() {
   const [sortStatus, setSortStatus] = useState('default');
 
   // State to manga form input data
-  const [formInputData, setFormInputData] = useState({
+  const [formValue, setFormValue] = useState({
     name: '',
     price: '',
     description: '',
@@ -46,7 +46,7 @@ function App() {
   });
 
   // State to manage form error message for validate
-  const [formErrorMessages, setFormErrorMessages] = useState({
+  const [validationMessages, setValidationMessages] = useState({
     name: '',
     price: '',
     description: '',
@@ -56,7 +56,7 @@ function App() {
   const [currentProductList, setCurrentProductList] = useState<IProductByCategory[]>(listProducts);
 
   const handleInputChange = (name: string, value: string) => {
-    setFormInputData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleCreateProductClick = (): void => {
@@ -120,30 +120,26 @@ function App() {
     const errors = { name: '', price: '', description: '', category: '' };
 
     // Name validation: Should not contain numbers and must be filled
-    if (!formInputData.name.trim() || !/^[A-Za-z\s]+$/.test(formInputData.name)) {
+    if (!formValue.name.trim() || !/^[A-Za-z\s]+$/.test(formValue.name)) {
       errors.name = 'Name should be filled and contain only letters and spaces.';
     }
 
     // Price validation: Should be a valid number and must be filled
-    if (
-      !formInputData.price.trim() ||
-      isNaN(Number(formInputData.price)) ||
-      Number(formInputData.price) <= 0
-    ) {
+    if (!formValue.price.trim() || isNaN(Number(formValue.price)) || Number(formValue.price) <= 0) {
       errors.price = 'Price should be filled and be a valid number greater than 0.';
     }
 
     // Description validation: Should be at least 50 characters long
-    if (formInputData.description.length < 50) {
+    if (formValue.description.length < 50) {
       errors.description = 'Description should be at least 50 characters long.';
     }
 
     // Category validation: Should be the same as Name and must be filled
-    if (!formInputData.category.trim() || !/^[A-Za-z\s]+$/.test(formInputData.category)) {
+    if (!formValue.category.trim() || !/^[A-Za-z\s]+$/.test(formValue.category)) {
       errors.category = 'Category should be filled and contain only letters and spaces.';
     }
 
-    setFormErrorMessages(errors);
+    setValidationMessages(errors);
 
     // Return true if there are no errors, indicating a valid form
     return Object.values(errors).every((error) => !error);
@@ -153,17 +149,17 @@ function App() {
     // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
-      name: formInputData.name,
-      price: formInputData.price,
-      description: formInputData.description,
-      categoryName: formInputData.category,
+      name: formValue.name,
+      price: formValue.price,
+      description: formValue.description,
+      categoryName: formValue.category,
     };
 
     // Update the state to include the new product
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
-  const handleSubmitForm = (): void => {
+  const handleFormValidation = (): void => {
     // Validate the form before submission
     const isValid: boolean = validateForm();
 
@@ -175,8 +171,8 @@ function App() {
       setIsFormPopupOpen(false);
 
       // Clear form data and errors
-      setFormInputData({ name: '', price: '', description: '', category: '' });
-      setFormErrorMessages({ name: '', price: '', description: '', category: '' });
+      setFormValue({ name: '', price: '', description: '', category: '' });
+      setValidationMessages({ name: '', price: '', description: '', category: '' });
     }
   };
 
@@ -222,10 +218,10 @@ function App() {
             >
               <FormValidate
                 title="Create Products "
-                formInputData={formInputData}
+                formValue={formValue}
                 onInputChange={handleInputChange}
-                onSubmit={handleSubmitForm}
-                formErrorMessages={formErrorMessages}
+                onSubmit={handleFormValidation}
+                validationMessages={validationMessages}
               />
             </Popup>
           </section>
