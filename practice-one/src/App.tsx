@@ -15,6 +15,7 @@ import styles from './index.module.css';
 import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
 import AddSVG from './components/common/icons/AddSVG';
+import FormSubmit from './components/Form/FormSubmit';
 
 function App() {
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
@@ -241,21 +242,19 @@ function App() {
               customClasses={styles.popup}
               isOpen={isPopupOpen}
               onClosePopup={() => {
-            setIsPopupOpen(false);
-            setEditingProductId(null);
-            setDeleteProductId(null); // Reset deleteProductId when closing the popup
-          }}
+                setIsPopupOpen(false);
+                setEditingProductId(null);
+                setDeleteProductId(null);
+              }}
             >
-          {deleteProductId !== null ? (
-            <>
-              <h2>Confirm Delete</h2>
-              <p>Are you sure you want to delete this product?</p>
-              <Button color="primary" onClick={confirmDeleteProduct}>
-                Confirm Delete
-              </Button>
-              <Button onClick={() => setIsPopupOpen(false)}>Cancel</Button>
-            </>
-          ) : (
+              {deleteProductId !== null ? (
+                <FormSubmit
+                  title="Confirm Delete"
+                  text="Are you sure you want to delete this product?"
+                  onConfirm={confirmDeleteProduct}
+                  onCancel={() => setIsPopupOpen(false)}
+                />
+              ) : (
                 <Form
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
                   formData={formData}
@@ -263,7 +262,7 @@ function App() {
                   onSubmit={handleFormSubmit}
                   formErrors={formErrors}
                 />
-          )}
+              )}
             </Popup>
           </section>
         )}

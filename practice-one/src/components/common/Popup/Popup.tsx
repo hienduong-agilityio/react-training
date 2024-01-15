@@ -31,18 +31,20 @@ const Popup = ({
           {undefined}
         </button>
       )}
-      <div className={styles.container}>
+      <section className={styles.container}>
         <div className={popupClasses}>
           <div className={styles.flexContainer}>
             {children}
             {closeButton && (
               <div className={styles.closeButtonContent}>
-                <Button customClasses={styles.closeButton} onClick={onClosePopup}>{closeButtonContent}</Button>
+                <Button customClasses={styles.closeButton} onClick={onClosePopup}>
+                  {closeButtonContent}
+                </Button>
               </div>
             )}
           </div>
         </div>
-      </div>
+      </section>
     </>
   ) : null;
 };
