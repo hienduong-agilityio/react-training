@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Text from './Typography';
-import { TEXT_SIZE } from '../../../types/common';
+import { TEXT_SIZE } from '../../../constants/common';
 
 const meta = {
   title: 'Components/common/Typography',

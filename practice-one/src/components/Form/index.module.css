@@ -40,7 +40,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
   outline: 0;
-  width: 100%;
+  width: 93%;
   background-color: transparent;
 }
 
@@ -83,4 +83,11 @@
 
 .button:hover {
   background-color: var(--active-color);
+}
+
+.messInvalid {
+  display: block;
+  padding-bottom: 9px;
+  margin-top: -10px;
+  color: var(--danger-color);
 }

@@ -9,7 +9,7 @@ interface ITableProps {
   onToggleSort?: (e: string) => void;
   onEditProduct?: (id: number) => void;
   onDeleteProduct?: (id: number) => void;
-  updateSortStatus?: string;
+  sortStatus?: string;
 }
 
 // TODO: Add comments params for component
@@ -19,10 +19,10 @@ export const Table = ({
   onToggleSort = () => {},
   onEditProduct = () => {},
   onDeleteProduct = () => {},
-  updateSortStatus,
+  sortStatus,
 }: ITableProps) => (
   <table className={styles.table}>
-    <TableHeader sortStatus={updateSortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
+    <TableHeader sortStatus={sortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
     <TableBody tableData={dataTable} onEditing={onEditProduct} onDeleting={onDeleteProduct} />
   </table>
 );
