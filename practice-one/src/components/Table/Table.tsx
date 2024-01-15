@@ -1,7 +1,10 @@
-import styles from './index.module.css';
+// Type and components
 import { ITableHeader, TableHeader } from './TableHeader';
 import { TableBody } from './TableBody';
 import { IProductByCategory } from '../interfaces/product';
+
+// Style
+import styles from './index.module.css';
 
 interface ITableProps {
   tableHeader: ITableHeader[];

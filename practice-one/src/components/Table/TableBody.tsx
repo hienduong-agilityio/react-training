@@ -1,5 +1,10 @@
+// Components
 import Button from '../common/Button/Button';
+
+// Type
 import { IProductByCategory } from '../interfaces/product';
+
+// Styles
 import styles from './index.module.css';
 
 interface ITableBodyProps {

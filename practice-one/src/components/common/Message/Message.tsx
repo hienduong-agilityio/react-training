@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import styles from './index.module.css';
+
+// Components
 import Button from '../Button/Button';
 import { BUTTON_VARIANT } from '../../../constants/common';
+
+// Style
+import styles from './index.module.css';
 
 interface IMessageProps {
   onClose?: () => void;
