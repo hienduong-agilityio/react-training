@@ -1,12 +1,15 @@
-import { SORT_NAMES } from '../../constants/common';
+// Components
 import Button from '../common/Button/Button';
 import SortSvg from '../common/icons/SortSvg';
+
+// Styles
 import styles from './index.module.css';
 
 export interface ITableHeader {
   id: number;
   label: string;
   title: string;
+  sortable: boolean;
 }
 
 interface IHeaderProps {
@@ -15,13 +18,13 @@ interface IHeaderProps {
   sortStatus?: string;
 }
 
-// TODO: Add comments params for component
 export const TableHeader = ({ tableHeader, onSorting = () => {}, sortStatus }: IHeaderProps) => {
   return (
     <thead className={styles.tableHeader}>
       <tr className={styles.tableRow}>
         {tableHeader.map((header) => {
-          const sortButton = Object.keys(SORT_NAMES).includes(header.label);
+          const sortButton = header.sortable;
+
           const handleSort = () => {
             onSorting(header.title);
           };

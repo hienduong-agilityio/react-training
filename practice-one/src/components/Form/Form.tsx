@@ -2,7 +2,7 @@ import styles from './index.module.css';
 
 interface IForm {
   title?: string;
-  formData: {
+  formInputData: {
     name: string;
     price: string;
     description: string;
@@ -10,7 +10,7 @@ interface IForm {
   };
   onInputChange: (name: string, value: string) => void;
   onSubmit: () => void;
-  formErrors: {
+  formErrorMessages: {
     name: string;
     price: string;
     description: string;
@@ -18,12 +18,12 @@ interface IForm {
   };
 }
 
-const Form = ({
+const FormValidate = ({
   title,
-  formData = { name: '', price: '', description: '', category: '' },
+  formInputData = { name: '', price: '', description: '', category: '' },
   onInputChange = () => {},
   onSubmit,
-  formErrors,
+  formErrorMessages,
 }: IForm) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -48,13 +48,13 @@ const Form = ({
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={formInputData.name}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="name">
             Name
           </label>
-          <span className={styles.messInvalid}>{formErrors.name}</span>
+          <span className={styles.messInvalid}>{formErrorMessages.name}</span>
         </div>
 
         <div className={styles.group}>
@@ -64,13 +64,13 @@ const Form = ({
             type="number"
             id="price"
             name="price"
-            value={formData.price}
+            value={formInputData.price}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="price">
             Price
           </label>
-          <span className={styles.messInvalid}>{formErrors.price}</span>
+          <span className={styles.messInvalid}>{formErrorMessages.price}</span>
         </div>
 
         <div className={styles.group}>
@@ -80,13 +80,13 @@ const Form = ({
             placeholder=""
             id="description"
             name="description"
-            value={formData.description}
+            value={formInputData.description}
             onChange={handleChange}
           ></textarea>
           <label className={styles.label} htmlFor="description">
             Description
           </label>
-          <span className={styles.messInvalid}>{formErrors.description}</span>
+          <span className={styles.messInvalid}>{formErrorMessages.description}</span>
         </div>
 
         <div className={styles.group}>
@@ -96,13 +96,13 @@ const Form = ({
             type="text"
             id="category"
             name="category"
-            value={formData.category}
+            value={formInputData.category}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="category">
             Category
           </label>
-          <span className={styles.messInvalid}>{formErrors.category}</span>
+          <span className={styles.messInvalid}>{formErrorMessages.category}</span>
         </div>
 
         <button className={styles.button} type="submit">
@@ -113,4 +113,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default FormValidate;

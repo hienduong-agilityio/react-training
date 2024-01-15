@@ -1,6 +1,12 @@
 import React from 'react';
+
+// Component
 import Link from '../../common/Link/Link';
+
+// Style
 import styles from './index.module.css';
+
+// Constant
 import { LINK_TYPE } from '../../../constants/common';
 
 interface ISidebar {
