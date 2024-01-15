@@ -7,7 +7,7 @@ import { SearchInput } from './components/SearchInput/SearchInput';
 import { IProductByCategory } from './components/interfaces/product';
 import ChartSvg from './components/common/icons/ChartSvg';
 import Popup from './components/common/Popup/Popup';
-import FormValidate from './components/FormValidate/FormValidate';
+import FormValidate from './components/Form/FormValidate';
 import Button from './components/common/Button/Button';
 import AddSVG from './components/common/icons/AddSVG';
 
