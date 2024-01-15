@@ -1,28 +1,22 @@
-import styles from './index.module.css';
-import { TableHeader } from './TableHeader';
+// Type and components
+import { ITableHeader, TableHeader } from './TableHeader';
 import { TableBody } from './TableBody';
 import { IProductByCategory } from '../interfaces/product';
 
+// Style
+import styles from './index.module.css';
+
 interface ITableProps {
-  tableHeader: TableHeader[];
+  tableHeader: ITableHeader[];
   dataTable?: IProductByCategory[];
   onToggleSort?: (e: string) => void;
-  updateSortStatus?: string;
+  sortStatus?: string;
 }
 
 // TODO: Add comments params for component
-export const Table = ({
-  tableHeader,
-  dataTable,
-  onToggleSort = () => {},
-  updateSortStatus,
-}: ITableProps) => (
+export const Table = ({ tableHeader, dataTable, onToggleSort = () => {}, sortStatus }: ITableProps) => (
   <table className={styles.table}>
-    <TableHeader
-      updateSortStatus={updateSortStatus}
-      handleSorting={onToggleSort}
-      tableHeader={tableHeader}
-    />
+    <TableHeader sortStatus={sortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
     <TableBody tableData={dataTable} />
   </table>
 );

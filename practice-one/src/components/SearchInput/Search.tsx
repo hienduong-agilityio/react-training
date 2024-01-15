@@ -1,14 +1,15 @@
+// Style
 import styles from './inde.module.css';
 
 interface ISearchProps {
   title: string;
   placeholder?: string;
-  getValue: (value: string) => void;
+  onSearchInput: (value: string) => void;
 }
 
-export const Search = ({ title, placeholder = '', getValue }: ISearchProps) => {
+export const Search = ({ title, placeholder = '', onSearchInput }: ISearchProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    getValue(event.target.value);
+    onSearchInput(event.target.value);
   };
 
   return (

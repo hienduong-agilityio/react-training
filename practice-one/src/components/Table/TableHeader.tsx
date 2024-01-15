@@ -1,33 +1,32 @@
-import { SORT_NAMES } from '../../constants/productSortSetting';
+// Components
 import Button from '../common/Button/Button';
 import SortSvg from '../common/icons/SortSvg';
+
+// Styles
 import styles from './index.module.css';
 
-export interface TableHeader {
+export interface ITableHeader {
   id: number;
   label: string;
   title: string;
+  sortable: boolean;
 }
 
 interface IHeaderProps {
-  tableHeader: TableHeader[];
-  handleSorting?: (e: string) => void;
-  updateSortStatus?: string;
+  tableHeader: ITableHeader[];
+  onSorting?: (e: string) => void;
+  sortStatus?: string;
 }
 
-// TODO: Add comments params for component
-export const TableHeader = ({
-  tableHeader,
-  handleSorting = () => {},
-  updateSortStatus,
-}: IHeaderProps) => {
+export const TableHeader = ({ tableHeader, onSorting = () => {}, sortStatus }: IHeaderProps) => {
   return (
     <thead className={styles.tableHeader}>
       <tr className={styles.tableRow}>
         {tableHeader.map((header) => {
-          const sortButton = SORT_NAMES.includes(header.label.toLowerCase());
+          const sortButton = header.sortable;
+
           const handleSort = () => {
-            handleSorting(header.title);
+            onSorting(header.title);
           };
 
           return (
@@ -35,7 +34,7 @@ export const TableHeader = ({
               {sortButton ? (
                 <Button
                   customClasses={styles.tableIcon}
-                  endIcon={<SortSvg status={updateSortStatus} fillColor="gray" />}
+                  endIcon={<SortSvg status={sortStatus} fillColor="gray" />}
                   onClick={handleSort}
                 >
                   {header.label}

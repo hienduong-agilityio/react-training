@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react';
+
+// Styles
 import styles from './index.module.css';
 import classNames from 'classnames';
 

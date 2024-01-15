@@ -1,5 +1,8 @@
+// Const
+import { LINK_TYPE } from '../../../constants/common';
+
+// Styles
 import classNames from 'classnames';
-import { LINK_TYPE } from '../../../types/common';
 import styles from './index.module.css';
 
 export interface ILinkProps {

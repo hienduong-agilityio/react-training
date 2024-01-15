@@ -1,6 +1,9 @@
-import { BUTTON_VARIANT, LINK_TYPE } from '../../../types/common';
+// Components
+import { BUTTON_VARIANT, LINK_TYPE } from '../../../constants/common';
 import Button from '../../common/Button/Button';
 import Link from '../../common/Link/Link';
+
+// Style
 import styles from './index.module.css';
 
 interface INavbarProps {
