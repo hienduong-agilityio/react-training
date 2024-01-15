@@ -7,7 +7,7 @@ interface ITableProps {
   tableHeader: ITableHeader[];
   dataTable?: IProductByCategory[];
   onToggleSort?: (e: string) => void;
-  updateSortStatus?: string;
+  sortStatus?: string;
 }
 
 // TODO: Add comments params for component
@@ -15,11 +15,11 @@ export const Table = ({
   tableHeader,
   dataTable,
   onToggleSort = () => {},
-  updateSortStatus,
+  sortStatus,
 }: ITableProps) => (
   <table className={styles.table}>
     <TableHeader
-      sortStatus={updateSortStatus}
+      sortStatus={sortStatus}
       onSorting={onToggleSort}
       tableHeader={tableHeader}
     />

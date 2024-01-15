@@ -169,7 +169,7 @@ function App() {
           </Button>
           <Table
             onToggleSort={handleSortingChange}
-            updateSortStatus={sortStatus}
+            sortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
           />
