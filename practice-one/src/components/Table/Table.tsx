@@ -10,13 +10,20 @@ interface ITableProps {
   tableHeader: ITableHeader[];
   dataTable?: IProductByCategory[];
   onToggleSort?: (e: string) => void;
+  onEditProduct?: (id: number) => void;
   sortStatus?: string;
 }
 
 // TODO: Add comments params for component
-export const Table = ({ tableHeader, dataTable, onToggleSort = () => {}, sortStatus }: ITableProps) => (
+export const Table = ({
+  tableHeader,
+  dataTable,
+  onToggleSort = () => {},
+  onEditProduct = () => {},
+  sortStatus,
+}: ITableProps) => (
   <table className={styles.table}>
     <TableHeader sortStatus={sortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
-    <TableBody tableData={dataTable} />
+    <TableBody tableData={dataTable} onEditing={onEditProduct} />
   </table>
 );

@@ -9,7 +9,7 @@ export interface ITableHeader {
   id: number;
   label: string;
   title: string;
-  sortable: boolean;
+  sortable?: boolean;
 }
 
 interface IHeaderProps {

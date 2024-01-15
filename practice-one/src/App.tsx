@@ -55,6 +55,8 @@ function App() {
 
   const [currentProductList, setCurrentProductList] = useState<IProductByCategory[]>(listProducts);
 
+  const [editingProductId, setEditingProductId] = useState<number | null>(null);
+
   const handleInputChange = (name: string, value: string) => {
     setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -159,13 +161,35 @@ function App() {
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
+  const updateProduct = (productId: number) => {
+    const updatedProducts = currentProductList.map((product) =>
+      product.id === productId
+        ? {
+            ...product,
+            name: formValue.name,
+            price: formValue.price,
+            description: formValue.description,
+            categoryName: formValue.category,
+          }
+        : product,
+    );
+    setCurrentProductList(updatedProducts);
+  };
+
   const handleFormValidation = (): void => {
     // Validate the form before submission
     const isValid: boolean = validateForm();
 
     if (isValid) {
-      // If the form is valid, create a new product and update the list
-      createNewProduct();
+      if (editingProductId !== null) {
+        updateProduct(editingProductId);
+      } else {
+        createNewProduct();
+      }
+
+      setEditingProductId(null);
+      setFormValue({ name: '', price: '', description: '', category: '' });
+      setValidationMessages({ name: '', price: '', description: '', category: '' });
 
       // Close the popup
       setIsFormPopupOpen(false);
@@ -174,6 +198,26 @@ function App() {
       setFormValue({ name: '', price: '', description: '', category: '' });
       setValidationMessages({ name: '', price: '', description: '', category: '' });
     }
+  };
+
+  const handleEditProduct = (id: number) => {
+    const editingProduct = currentProductList.find((product) => product.id === id);
+
+    if (editingProduct) {
+      setEditingProductId(id);
+      setIsFormPopupOpen(true);
+      setFormValue({
+        name: editingProduct.name,
+        price: editingProduct.price,
+        description: editingProduct.description,
+        category: editingProduct.categoryName,
+      });
+    }
+  };
+
+  const handleCloseFormPopup = (): void => {
+    setIsFormPopupOpen(false);
+    setEditingProductId(null);
   };
 
   return (
@@ -202,6 +246,7 @@ function App() {
           </div>
           <Table
             onToggleSort={handleSortingChange}
+            onEditProduct={handleEditProduct}
             sortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
@@ -214,10 +259,10 @@ function App() {
               closeButton={false}
               customClasses={styles.popup}
               isOpen={isFormPopupOpen}
-              onClosePopup={handleCreateProductClick}
+              onClosePopup={handleCloseFormPopup}
             >
               <FormValidate
-                title="Create Products "
+                title={editingProductId ? 'Edit Product' : 'Create Product'}
                 formValue={formValue}
                 onInputChange={handleInputChange}
                 onSubmit={handleFormValidation}
@@ -230,5 +275,4 @@ function App() {
     </>
   );
 }
-
 export default App;
