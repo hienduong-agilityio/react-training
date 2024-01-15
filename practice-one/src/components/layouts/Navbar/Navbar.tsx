@@ -1,4 +1,4 @@
-import { BUTTON_VARIANT, LINK_TYPE } from '../../../types/common';
+import { BUTTON_VARIANT, LINK_TYPE } from '../../../constants/common';
 import Button from '../../common/Button/Button';
 import Link from '../../common/Link/Link';
 import styles from './index.module.css';

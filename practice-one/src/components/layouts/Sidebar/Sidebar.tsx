@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '../../common/Link/Link';
 import styles from './index.module.css';
-import { LINK_TYPE } from '../../../types/common';
+import { LINK_TYPE } from '../../../constants/common';
 
 interface ISidebar {
   children: React.ReactNode;

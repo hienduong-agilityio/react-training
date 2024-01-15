@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Link from './Link';
-import { LINK_TYPE } from '../../../types/common';
+import { LINK_TYPE } from '../../../constants/common';
 
 const meta = {
   title: 'Components/common/Link',
