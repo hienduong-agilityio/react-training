@@ -12,7 +12,6 @@ interface IPopupProps {
   closeButton?: boolean;
   closeButtonContent?: string;
   customClasses?: string;
-  arrowPopup?: boolean;
   isFixed?: boolean;
   children?: React.ReactNode | string;
 }
@@ -22,38 +21,31 @@ const Popup = ({
   isOpen = false,
   onClosePopup = () => {},
   closeButton = true,
-  closeButtonContent = 'Close',
+  closeButtonContent = 'X',
   children,
   customClasses,
-  arrowPopup = true,
   isFixed = false,
 }: IPopupProps) => {
-  const popupClasses = customClasses ? `${customClasses}` : styles.popup;
+  const popupClasses = customClasses ? `${customClasses}` : styles.popupDefault;
 
   return isOpen ? (
     <>
       {isFixed && (
-        <Button
-          type="button"
-          customClasses={styles.overlay}
-          onClick={onClosePopup}
-          aria-label="Close popup"
-        >
+        <button type="button" className={styles.overlay} onClick={onClosePopup} aria-label="Close popup">
           {undefined}
-        </Button>
+        </button>
       )}
       <div className={styles.container}>
         <div className={popupClasses}>
           <div className={styles.flexContainer}>
             {children}
             {closeButton && (
-              <div className={styles.closeButton}>
-                <Button onClick={onClosePopup}>{closeButtonContent}</Button>
+              <div className={styles.closeButtonContent}>
+                <Button customClasses={styles.closeButton} onClick={onClosePopup}>{closeButtonContent}</Button>
               </div>
             )}
           </div>
         </div>
-        {arrowPopup && <div className={styles.arrow} />}
       </div>
     </>
   ) : null;
