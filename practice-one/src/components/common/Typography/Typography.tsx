@@ -1,6 +1,9 @@
-import classNames from 'classnames';
+// Constant
 import { TEXT_SIZE } from '../../../constants/common';
+
+// Style
 import styles from './index.module.css';
+import classNames from 'classnames';
 
 export interface ITypographyProps {
   children: string;

@@ -1,6 +1,10 @@
 import React from 'react';
-import styles from './index.module.css';
+
+// Component
 import Button from '../Button/Button';
+
+// Style
+import styles from './index.module.css';
 
 interface IPopupProps {
   isOpen: boolean;

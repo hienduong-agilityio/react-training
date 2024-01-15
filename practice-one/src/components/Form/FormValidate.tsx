@@ -1,29 +1,20 @@
+import { IFormValue } from '../interfaces/form';
 import styles from './index.module.css';
 
 interface IForm {
   title?: string;
-  formData: {
-    name: string;
-    price: string;
-    description: string;
-    category: string;
-  };
+  formValue: IFormValue;
   onInputChange: (name: string, value: string) => void;
   onSubmit: () => void;
-  formErrors: {
-    name: string;
-    price: string;
-    description: string;
-    category: string;
-  };
+  validationMessages: IFormValue;
 }
 
-const Form = ({
+const FormValidate = ({
   title,
-  formData = { name: '', price: '', description: '', category: '' },
+  formValue = { name: '', price: '', description: '', category: '' },
   onInputChange = () => {},
   onSubmit,
-  formErrors,
+  validationMessages,
 }: IForm) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -48,13 +39,13 @@ const Form = ({
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={formValue.name}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="name">
             Name
           </label>
-          <span className={styles.messInvalid}>{formErrors.name}</span>
+          <span className={styles.messInvalid}>{validationMessages.name}</span>
         </div>
 
         <div className={styles.group}>
@@ -64,13 +55,13 @@ const Form = ({
             type="number"
             id="price"
             name="price"
-            value={formData.price}
+            value={formValue.price}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="price">
             Price
           </label>
-          <span className={styles.messInvalid}>{formErrors.price}</span>
+          <span className={styles.messInvalid}>{validationMessages.price}</span>
         </div>
 
         <div className={styles.group}>
@@ -80,13 +71,13 @@ const Form = ({
             placeholder=""
             id="description"
             name="description"
-            value={formData.description}
+            value={formValue.description}
             onChange={handleChange}
           ></textarea>
           <label className={styles.label} htmlFor="description">
             Description
           </label>
-          <span className={styles.messInvalid}>{formErrors.description}</span>
+          <span className={styles.messInvalid}>{validationMessages.description}</span>
         </div>
 
         <div className={styles.group}>
@@ -96,13 +87,13 @@ const Form = ({
             type="text"
             id="category"
             name="category"
-            value={formData.category}
+            value={formValue.category}
             onChange={handleChange}
           />
           <label className={styles.label} htmlFor="category">
             Category
           </label>
-          <span className={styles.messInvalid}>{formErrors.category}</span>
+          <span className={styles.messInvalid}>{validationMessages.category}</span>
         </div>
 
         <button className={styles.button} type="submit">
@@ -113,4 +104,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default FormValidate;

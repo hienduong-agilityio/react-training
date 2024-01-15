@@ -1,36 +1,53 @@
 import { useState } from 'react';
 
+// Components
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
-import { Search } from './components/SearchInput/Search';
+import { SearchInput } from './components/SearchInput/SearchInput';
 import { IProductByCategory } from './components/interfaces/product';
 import ChartSvg from './components/common/icons/ChartSvg';
 import Popup from './components/common/Popup/Popup';
-import Form from './components/Form/Form';
+import FormValidate from './components/Form/FormValidate';
 import Button from './components/common/Button/Button';
+import AddSVG from './components/common/icons/AddSVG';
 
+// Style
 import './styles/index.css';
 import styles from './index.module.css';
 
+// Data
 import LIST_PRODUCTS from '../database/products.json';
+
+// Constants
 import { TABLE_TITLE } from './constants/tableTitle';
-import AddSVG from './components/common/icons/AddSVG';
 import FormSubmit from './components/Form/FormSubmit';
 
 function App() {
+  // Initial list of products from the imported JSON file
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // State to manage form popup action
+  const [isFormPopupOpen, setIsFormPopupOpen] = useState(false);
 
+  // State to manage the search input
   const [searchInput, setSearchInput] = useState('');
 
+  // State to manage sorting field
   const [sortField, setSortField] = useState<keyof IProductByCategory>();
 
+  // State to manage sorting status (ascending or descending)
   const [sortStatus, setSortStatus] = useState('default');
 
-  const [formData, setFormData] = useState({ name: '', price: '', description: '', category: '' });
+  // State to manga form input data
+  const [formValue, setFormValue] = useState({
+    name: '',
+    price: '',
+    description: '',
+    category: '',
+  });
 
-  const [formErrors, setFormErrors] = useState({
+  // State to manage form error message for validate
+  const [validationMessages, setValidationMessages] = useState({
     name: '',
     price: '',
     description: '',
@@ -44,39 +61,46 @@ function App() {
   const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
 
   const handleInputChange = (name: string, value: string) => {
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const handleCreateProductClick = (): void => {
     // Toggle the state to open/close the popup
-    setIsPopupOpen(!isPopupOpen);
+    setIsFormPopupOpen(!isFormPopupOpen);
   };
+  // Handler function for updating search input state
   const handleSearchKey = (text: string) => {
     setSearchInput(text);
   };
 
+  // Handler function for updating sorting state based on table header click
   const handleSortingChange = (title: string) => {
     setSortField(title as keyof IProductByCategory);
 
+    // Toggle sorting order
     const sortOrder: string =
       title === sortField && sortStatus === 'ascending' ? 'descending' : 'ascending';
 
     setSortStatus(sortOrder);
   };
 
+  // Function to filter and sort products based on search input and sorting preferences
   const filterAndSortProducts = () => {
+    // Filter products based on search input
     const filteredProducts: IProductByCategory[] = currentProductList.filter((product) => {
-      const productName: string = product.name.toLowerCase();
-      const category: string = product.categoryName.toLowerCase();
+      const productName = product.name.toLowerCase();
+      const category = product.categoryName.toLowerCase();
 
       return (
         productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
       );
     });
 
-    const sorterModifier: number = sortStatus === 'ascending' ? 1 : -1;
+    // Define sorting modifier based on ascending or descending order
+    const sorterModifier = sortStatus === 'ascending' ? 1 : -1;
 
-    const sortedProducts: IProductByCategory[] = sortField
+    // Sort filtered products based on selected sorting field
+    const sortedProducts = sortField
       ? [...filteredProducts].sort(
           (productAfter: IProductByCategory, productBefore: IProductByCategory) => {
             const tableDataValueAfter: string | number = productAfter[sortField];
@@ -93,32 +117,34 @@ function App() {
     return sortedProducts;
   };
 
+  // Retrieve the result of filtered and sorted products
   const resultProductsOfFilterAndSort = filterAndSortProducts();
 
+  // Function to validate form
   const validateForm = () => {
     const errors = { name: '', price: '', description: '', category: '' };
 
     // Name validation: Should not contain numbers and must be filled
-    if (!formData.name.trim() || !/^[A-Za-z\s]+$/.test(formData.name)) {
+    if (!formValue.name.trim() || !/^[A-Za-z\s]+$/.test(formValue.name)) {
       errors.name = 'Name should be filled and contain only letters and spaces.';
     }
 
     // Price validation: Should be a valid number and must be filled
-    if (!formData.price.trim() || isNaN(Number(formData.price)) || Number(formData.price) <= 0) {
+    if (!formValue.price.trim() || isNaN(Number(formValue.price)) || Number(formValue.price) <= 0) {
       errors.price = 'Price should be filled and be a valid number greater than 0.';
     }
 
     // Description validation: Should be at least 50 characters long
-    if (formData.description.length < 50) {
+    if (formValue.description.length < 50) {
       errors.description = 'Description should be at least 50 characters long.';
     }
 
     // Category validation: Should be the same as Name and must be filled
-    if (!formData.category.trim() || !/^[A-Za-z\s]+$/.test(formData.category)) {
+    if (!formValue.category.trim() || !/^[A-Za-z\s]+$/.test(formValue.category)) {
       errors.category = 'Category should be filled and contain only letters and spaces.';
     }
 
-    setFormErrors(errors);
+    setValidationMessages(errors);
 
     // Return true if there are no errors, indicating a valid form
     return Object.values(errors).every((error) => !error);
@@ -128,10 +154,10 @@ function App() {
     // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
-      name: formData.name,
-      price: formData.price,
-      description: formData.description,
-      categoryName: formData.category,
+      name: formValue.name,
+      price: formValue.price,
+      description: formValue.description,
+      categoryName: formValue.category,
     };
 
     // Update the state to include the new product
@@ -143,17 +169,17 @@ function App() {
       product.id === productId
         ? {
             ...product,
-            name: formData.name,
-            price: formData.price,
-            description: formData.description,
-            categoryName: formData.category,
+            name: formValue.name,
+            price: formValue.price,
+            description: formValue.description,
+            categoryName: formValue.category,
           }
         : product,
     );
     setCurrentProductList(updatedProducts);
   };
 
-  const handleFormSubmit = (): void => {
+  const handleFormValidation = (): void => {
     // Validate the form before submission
     const isValid: boolean = validateForm();
 
@@ -165,9 +191,13 @@ function App() {
       }
 
       setEditingProductId(null);
-      setIsPopupOpen(false);
-      setFormData({ name: '', price: '', description: '', category: '' });
-      setFormErrors({ name: '', price: '', description: '', category: '' });
+
+      // Clear form data and errors
+      setFormValue({ name: '', price: '', description: '', category: '' });
+      setValidationMessages({ name: '', price: '', description: '', category: '' });
+
+      // Close the popup
+      setIsFormPopupOpen(false);
     }
   };
 
@@ -176,8 +206,8 @@ function App() {
 
     if (editingProduct) {
       setEditingProductId(id);
-      setIsPopupOpen(true);
-      setFormData({
+      setIsFormPopupOpen(true);
+      setFormValue({
         name: editingProduct.name,
         price: editingProduct.price,
         description: editingProduct.description,
@@ -188,7 +218,7 @@ function App() {
 
   const handleDeleteProduct = (id: number) => {
     setDeleteProductId(id);
-    setIsPopupOpen(true);
+    setIsFormPopupOpen(true);
   };
 
   const confirmDeleteProduct = () => {
@@ -197,8 +227,18 @@ function App() {
       setCurrentProductList(updatedProducts);
     }
 
-    setIsPopupOpen(false);
+    setIsFormPopupOpen(false);
     setDeleteProductId(null);
+  };
+
+  const handleCloseFormPopup = (): void => {
+    setIsFormPopupOpen(false);
+    setEditingProductId(null);
+    setDeleteProductId(null);
+
+    // Clear form data and errors
+    setFormValue({ name: '', price: '', description: '', category: '' });
+    setValidationMessages({ name: '', price: '', description: '', category: '' });
   };
 
   return (
@@ -222,7 +262,7 @@ function App() {
               </Button>
             </div>
             <div className={styles.searchAction}>
-              <Search title="Search product:" onSearchInput={handleSearchKey} />
+              <SearchInput title="SearchInput product:" onSearchInput={handleSearchKey} />
             </div>
           </div>
           <Table
@@ -234,33 +274,29 @@ function App() {
             tableHeader={TABLE_TITLE}
           />
         </section>
-        {isPopupOpen && (
+        {isFormPopupOpen && (
           <section className={styles.fixed}>
             <Popup
               isFixed={true}
               closeButton={false}
               customClasses={styles.popup}
-              isOpen={isPopupOpen}
-              onClosePopup={() => {
-                setIsPopupOpen(false);
-                setEditingProductId(null);
-                setDeleteProductId(null);
-              }}
+              isOpen={isFormPopupOpen}
+              onClosePopup={handleCloseFormPopup}
             >
               {deleteProductId !== null ? (
                 <FormSubmit
                   title="Confirm Delete"
                   text="Are you sure you want to delete this product?"
                   onConfirm={confirmDeleteProduct}
-                  onCancel={() => setIsPopupOpen(false)}
+                  onCancel={handleCloseFormPopup}
                 />
               ) : (
-                <Form
+                <FormValidate
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
-                  formData={formData}
+                  formValue={formValue}
                   onInputChange={handleInputChange}
-                  onSubmit={handleFormSubmit}
-                  formErrors={formErrors}
+                  onSubmit={handleFormValidation}
+                  validationMessages={validationMessages}
                 />
               )}
             </Popup>
