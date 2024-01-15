@@ -1,7 +1,10 @@
-import styles from './index.module.css';
+// Type and components
 import { ITableHeader, TableHeader } from './TableHeader';
 import { TableBody } from './TableBody';
 import { IProductByCategory } from '../interfaces/product';
+
+// Style
+import styles from './index.module.css';
 
 interface ITableProps {
   tableHeader: ITableHeader[];
@@ -11,18 +14,9 @@ interface ITableProps {
 }
 
 // TODO: Add comments params for component
-export const Table = ({
-  tableHeader,
-  dataTable,
-  onToggleSort = () => {},
-  sortStatus,
-}: ITableProps) => (
+export const Table = ({ tableHeader, dataTable, onToggleSort = () => {}, sortStatus }: ITableProps) => (
   <table className={styles.table}>
-    <TableHeader
-      sortStatus={sortStatus}
-      onSorting={onToggleSort}
-      tableHeader={tableHeader}
-    />
+    <TableHeader sortStatus={sortStatus} onSorting={onToggleSort} tableHeader={tableHeader} />
     <TableBody tableData={dataTable} />
   </table>
 );

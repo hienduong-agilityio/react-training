@@ -1,4 +1,7 @@
+// Type
 import { IProductByCategory } from '../interfaces/product';
+
+// Styles
 import styles from './index.module.css';
 
 interface ITableBodyProps {

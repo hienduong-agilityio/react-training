@@ -1,3 +1,4 @@
+// Style
 import styles from './inde.module.css';
 
 interface ISearchProps {
