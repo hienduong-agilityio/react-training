@@ -14,6 +14,7 @@ import styles from './index.module.css';
 
 import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
+import AddSVG from './components/common/icons/AddSVG';
 
 function App() {
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
@@ -163,10 +164,16 @@ function App() {
           </SidebarItem>
         </Sidebar>
         <section className={styles.productContent}>
-          <Search title="Search product:" onSearchInput={handleSearchKey} />
-          <Button color="primary" onClick={handleCreateProductClick}>
-            Create Product
-          </Button>
+          <div className={styles.productAction}>
+            <div className={styles.createAction}>
+              <Button color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
+                Create Product
+              </Button>
+            </div>
+            <div className={styles.searchAction}>
+              <Search title="Search product:" onSearchInput={handleSearchKey} />
+            </div>
+          </div>
           <Table
             onToggleSort={handleSortingChange}
             sortStatus={sortStatus}
@@ -174,20 +181,25 @@ function App() {
             tableHeader={TABLE_TITLE}
           />
         </section>
-        <Popup
-          isFixed={true}
-          closeButton={false}
-          isOpen={isPopupOpen}
-          onClosePopup={handleCreateProductClick}
-        >
-          <Form
-            title="Create Products "
-            formData={formData}
-            onInputChange={handleInputChange}
-            onSubmit={handleFormSubmit}
-            formErrors={formErrors}
-          />
-        </Popup>
+        {isPopupOpen && (
+          <section className={styles.fixed}>
+            <Popup
+              isFixed={true}
+              closeButton={false}
+              customClasses={styles.popup}
+              isOpen={isPopupOpen}
+              onClosePopup={handleCreateProductClick}
+            >
+              <Form
+                title="Create Products "
+                formData={formData}
+                onInputChange={handleInputChange}
+                onSubmit={handleFormSubmit}
+                formErrors={formErrors}
+              />
+            </Popup>
+          </section>
+        )}
       </main>
     </>
   );

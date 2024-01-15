@@ -54,7 +54,7 @@ const Form = ({
           <label className={styles.label} htmlFor="name">
             Name
           </label>
-          <p className={styles.error}>{formErrors.name}</p>
+          <span className={styles.messInvalid}>{formErrors.name}</span>
         </div>
 
         <div className={styles.group}>
@@ -70,7 +70,7 @@ const Form = ({
           <label className={styles.label} htmlFor="price">
             Price
           </label>
-          <p className={styles.error}>{formErrors.price}</p>
+          <span className={styles.messInvalid}>{formErrors.price}</span>
         </div>
 
         <div className={styles.group}>
@@ -86,7 +86,7 @@ const Form = ({
           <label className={styles.label} htmlFor="description">
             Description
           </label>
-          <p className={styles.error}>{formErrors.description}</p>
+          <span className={styles.messInvalid}>{formErrors.description}</span>
         </div>
 
         <div className={styles.group}>
@@ -102,7 +102,7 @@ const Form = ({
           <label className={styles.label} htmlFor="category">
             Category
           </label>
-          <p className={styles.error}>{formErrors.category}</p>
+          <span className={styles.messInvalid}>{formErrors.category}</span>
         </div>
 
         <button className={styles.button} type="submit">

@@ -17,12 +17,12 @@ const Popup = ({
   isOpen = false,
   onClosePopup = () => {},
   closeButton = true,
-  closeButtonContent = 'Close',
+  closeButtonContent = 'X',
   children,
   customClasses,
   isFixed = false,
 }: IPopupProps) => {
-  const popupClasses = customClasses ? `${customClasses}` : styles.popup;
+  const popupClasses = customClasses ? `${customClasses}` : styles.popupDefault;
 
   return isOpen ? (
     <>
@@ -36,8 +36,8 @@ const Popup = ({
           <div className={styles.flexContainer}>
             {children}
             {closeButton && (
-              <div className={styles.closeButton}>
-                <Button onClick={onClosePopup}>{closeButtonContent}</Button>
+              <div className={styles.closeButtonContent}>
+                <Button customClasses={styles.closeButton} onClick={onClosePopup}>{closeButtonContent}</Button>
               </div>
             )}
           </div>
