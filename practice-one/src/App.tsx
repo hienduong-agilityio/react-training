@@ -82,7 +82,7 @@ function App() {
           <Search title="Search product:" onSearchInput={handleSearchKey} />
           <Table
             onToggleSort={handleSortingChange}
-            updateSortStatus={sortStatus}
+            sortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
           />
