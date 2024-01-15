@@ -36,8 +36,7 @@ export const TableBody = ({ tableData, onEditing = () => {} }: ITableBodyProps) 
           <td className={styles.tableData}>{product.categoryName}</td>
           <td className={styles.tableData}>
             <Button variant="text" onClick={() => handleEdit(product.id)}>
-              {' '}
-              Edit{' '}
+              Edit
             </Button>
           </td>
         </tr>

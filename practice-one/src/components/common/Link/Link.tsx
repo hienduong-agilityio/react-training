@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { LINK_TYPE } from '../../../types/common';
+import { LINK_TYPE } from '../../../constants/common';
 import styles from './index.module.css';
 
 export interface ILinkProps {

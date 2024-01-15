@@ -1,4 +1,4 @@
-import { SORT_NAMES } from '../../types/common';
+import { SORT_NAMES } from '../../constants/common';
 import Button from '../common/Button/Button';
 import SortSvg from '../common/icons/SortSvg';
 import styles from './index.module.css';
