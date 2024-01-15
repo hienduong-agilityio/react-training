@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { TEXT_SIZE } from '../../../types/common';
+import { TEXT_SIZE } from '../../../constants/common';
 import styles from './index.module.css';
 
 export interface ITypographyProps {
