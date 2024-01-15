@@ -2,18 +2,18 @@ import { useState } from 'react';
 
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
+import { Search } from './components/SearchInput/Search';
+import { IProductByCategory } from './components/interfaces/product';
+import ChartSvg from './components/common/icons/ChartSvg';
+import Popup from './components/common/Popup/Popup';
+import Form from './components/Form/Form';
+import Button from './components/common/Button/Button';
 
 import './styles/index.css';
 import styles from './index.module.css';
 
 import LIST_PRODUCTS from '../database/products.json';
 import { TABLE_TITLE } from './constants/tableTitle';
-import { Search } from './components/SearchInput/Search';
-import { IProductByCategory, IProductWithoutId } from './components/interfaces/product';
-import ChartSvg from './components/common/icons/ChartSvg';
-import Popup from './components/common/Popup/Popup';
-import Form from './components/Form/Form';
-import Button from './components/common/Button/Button';
 
 function App() {
   const listProducts: IProductByCategory[] = LIST_PRODUCTS;
@@ -41,7 +41,7 @@ function App() {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleCreateProductClick = () => {
+  const handleCreateProductClick = (): void => {
     // Toggle the state to open/close the popup
     setIsPopupOpen(!isPopupOpen);
   };
@@ -60,17 +60,17 @@ function App() {
 
   const filterAndSortProducts = () => {
     const filteredProducts: IProductByCategory[] = currentProductList.filter((product) => {
-      const productName = product.name.toLowerCase();
-      const category = product.categoryName.toLowerCase();
+      const productName: string = product.name.toLowerCase();
+      const category: string = product.categoryName.toLowerCase();
 
       return (
         productName.includes(searchInput.toLowerCase()) || category.includes(searchInput.toLowerCase())
       );
     });
 
-    const sorterModifier = sortStatus === 'ascending' ? 1 : -1;
+    const sorterModifier: number = sortStatus === 'ascending' ? 1 : -1;
 
-    const sortedProducts = sortField
+    const sortedProducts: IProductByCategory[] = sortField
       ? [...filteredProducts].sort(
           (productAfter: IProductByCategory, productBefore: IProductByCategory) => {
             const tableDataValueAfter: string | number = productAfter[sortField];
@@ -90,9 +90,7 @@ function App() {
   const resultProductsOfFilterAndSort = filterAndSortProducts();
 
   const validateForm = () => {
-    const errors: { [key: string]: string } = {};
-
-    console.log(formData);
+    const errors = { name: '', price: '', description: '', category: '' };
 
     // Name validation: Should not contain numbers and must be filled
     if (!formData.name.trim() || !/^[A-Za-z\s]+$/.test(formData.name)) {
@@ -134,9 +132,9 @@ function App() {
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (): void => {
     // Validate the form before submission
-    const isValid = validateForm();
+    const isValid: boolean = validateForm();
 
     if (isValid) {
       // If the form is valid, create a new product and update the list
