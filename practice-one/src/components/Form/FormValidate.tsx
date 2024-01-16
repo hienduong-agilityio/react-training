@@ -1,4 +1,4 @@
-import { IFormValue } from '../interfaces/form';
+import { IFormValue, IValidationMessages } from '../../interfaces/form';
 import styles from './index.module.css';
 
 interface IForm {
@@ -6,12 +6,12 @@ interface IForm {
   formValue: IFormValue;
   onInputChange: (name: string, value: string) => void;
   onSubmit: () => void;
-  validationMessages: IFormValue;
+  validationMessages: IValidationMessages;
 }
 
 const FormValidate = ({
   title,
-  formValue = { name: '', price: '', description: '', category: '' },
+  formValue = { name: '', price: 0, description: '', category: '' },
   onInputChange = () => {},
   onSubmit,
   validationMessages,

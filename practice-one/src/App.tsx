@@ -7,7 +7,7 @@ import logo from './assets/image/Logo.png';
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
 import { SearchInput } from './components/SearchInput/SearchInput';
-import { IProductByCategory } from './components/interfaces/product';
+import { IProductByCategory } from './interfaces/product';
 import ChartSvg from './components/common/icons/ChartSvg';
 import Popup from './components/common/Popup/Popup';
 import FormValidate from './components/Form/FormValidate';
@@ -44,7 +44,7 @@ function App() {
   // State to manga form input data
   const [formValue, setFormValue] = useState({
     name: '',
-    price: '',
+    price: 0,
     description: '',
     category: '',
   });
@@ -133,7 +133,7 @@ function App() {
     }
 
     // Price validation: Should be a valid number and must be filled
-    if (!formValue.price.trim() || isNaN(Number(formValue.price)) || Number(formValue.price) <= 0) {
+    if (!formValue.price || isNaN(Number(formValue.price)) || Number(formValue.price) <= 0) {
       errors.price = 'Price should be filled and be a valid number greater than 0.';
     }
 
@@ -196,7 +196,7 @@ function App() {
       setEditingProductId(null);
 
       // Clear form data and errors
-      setFormValue({ name: '', price: '', description: '', category: '' });
+      setFormValue({ name: '', price: 0, description: '', category: '' });
       setValidationMessages({ name: '', price: '', description: '', category: '' });
 
       // Close the popup
@@ -240,7 +240,7 @@ function App() {
     setDeleteProductId(null);
 
     // Clear form data and errors
-    setFormValue({ name: '', price: '', description: '', category: '' });
+    setFormValue({ name: '', price: 0, description: '', category: '' });
     setValidationMessages({ name: '', price: '', description: '', category: '' });
   };
 
@@ -260,12 +260,12 @@ function App() {
         <section className={styles.productContent}>
           <div className={styles.productAction}>
             <div className={styles.createAction}>
-              <Button color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
+              <Button  color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
                 Create Product
               </Button>
             </div>
             <div className={styles.searchAction}>
-              <SearchInput title="SearchInput product:" onSearchInput={handleSearchKey} />
+              <SearchInput title="Search Input:" onSearchInput={handleSearchKey} />
             </div>
           </div>
           <Table

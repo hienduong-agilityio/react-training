@@ -2,7 +2,7 @@
 import Button from '../common/Button/Button';
 
 // Type
-import { IProductByCategory } from '../interfaces/product';
+import { IProductByCategory } from '../../interfaces/product';
 
 // Styles
 import styles from './index.module.css';
