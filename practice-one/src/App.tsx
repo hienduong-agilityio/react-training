@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// Logo
+import logo from './assets/image/Logo.png';
+
 // Components
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
@@ -244,7 +247,7 @@ function App() {
   return (
     <>
       <header className={styles.header}>
-        <Navbar logoSrc="./assets/image/Logo.png" altText="Loogo Logo" />
+        <Navbar logoSrc={logo} altText="Loogo Logo" />
       </header>
       <main className={styles.mainContent}>
         <Sidebar title="Menu">
