@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// Logo
+import logo from './assets/image/Logo.png';
+
 // Components
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
@@ -20,6 +23,7 @@ import LIST_PRODUCTS from '../database/products.json';
 
 // Constants
 import { TABLE_TITLE } from './constants/tableTitle';
+import FormSubmit from './components/Form/FormSubmit';
 
 function App() {
   // Initial list of products from the imported JSON file
@@ -56,6 +60,8 @@ function App() {
   const [currentProductList, setCurrentProductList] = useState<IProductByCategory[]>(listProducts);
 
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
+
+  const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
 
   const handleInputChange = (name: string, value: string) => {
     setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -188,15 +194,13 @@ function App() {
       }
 
       setEditingProductId(null);
+
+      // Clear form data and errors
       setFormValue({ name: '', price: '', description: '', category: '' });
       setValidationMessages({ name: '', price: '', description: '', category: '' });
 
       // Close the popup
       setIsFormPopupOpen(false);
-
-      // Clear form data and errors
-      setFormValue({ name: '', price: '', description: '', category: '' });
-      setValidationMessages({ name: '', price: '', description: '', category: '' });
     }
   };
 
@@ -215,15 +219,35 @@ function App() {
     }
   };
 
+  const handleDeleteProduct = (id: number) => {
+    setDeleteProductId(id);
+    setIsFormPopupOpen(true);
+  };
+
+  const confirmDeleteProduct = () => {
+    if (deleteProductId !== null) {
+      const updatedProducts = currentProductList.filter((product) => product.id !== deleteProductId);
+      setCurrentProductList(updatedProducts);
+    }
+
+    setIsFormPopupOpen(false);
+    setDeleteProductId(null);
+  };
+
   const handleCloseFormPopup = (): void => {
     setIsFormPopupOpen(false);
     setEditingProductId(null);
+    setDeleteProductId(null);
+
+    // Clear form data and errors
+    setFormValue({ name: '', price: '', description: '', category: '' });
+    setValidationMessages({ name: '', price: '', description: '', category: '' });
   };
 
   return (
     <>
       <header className={styles.header}>
-        <Navbar logoSrc="./assets/image/Logo.png" altText="Loogo Logo" />
+        <Navbar logoSrc={logo} altText="Loogo Logo" />
       </header>
       <main className={styles.mainContent}>
         <Sidebar title="Menu">
@@ -247,6 +271,7 @@ function App() {
           <Table
             onToggleSort={handleSortingChange}
             onEditProduct={handleEditProduct}
+            onDeleteProduct={handleDeleteProduct}
             sortStatus={sortStatus}
             dataTable={resultProductsOfFilterAndSort}
             tableHeader={TABLE_TITLE}
@@ -261,13 +286,22 @@ function App() {
               isOpen={isFormPopupOpen}
               onClosePopup={handleCloseFormPopup}
             >
-              <FormValidate
-                title={editingProductId ? 'Edit Product' : 'Create Product'}
-                formValue={formValue}
-                onInputChange={handleInputChange}
-                onSubmit={handleFormValidation}
-                validationMessages={validationMessages}
-              />
+              {deleteProductId !== null ? (
+                <FormSubmit
+                  title="Confirm Delete"
+                  text="Are you sure you want to delete this product?"
+                  onConfirm={confirmDeleteProduct}
+                  onCancel={handleCloseFormPopup}
+                />
+              ) : (
+                <FormValidate
+                  title={editingProductId ? 'Edit Product' : 'Create Product'}
+                  formValue={formValue}
+                  onInputChange={handleInputChange}
+                  onSubmit={handleFormValidation}
+                  validationMessages={validationMessages}
+                />
+              )}
             </Popup>
           </section>
         )}
@@ -275,4 +309,5 @@ function App() {
     </>
   );
 }
+
 export default App;

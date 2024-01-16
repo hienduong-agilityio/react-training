@@ -27,7 +27,7 @@ const FormValidate = ({
   };
 
   return (
-    <div className={styles.card}>
+    <section className={styles.card}>
       <span className={styles.title}>{title}</span>
       <form className={styles.form} onSubmit={handleSubmit}>
         {/* ... Existing code ... */}
@@ -100,7 +100,7 @@ const FormValidate = ({
           Submit
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

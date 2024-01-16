@@ -10,12 +10,21 @@ import styles from './index.module.css';
 interface ITableBodyProps {
   tableData?: IProductByCategory[];
   onEditing?: (id: number) => void;
+  onDeleting?: (id: number) => void;
 }
 
 // TODO: Add comments params for component
-export const TableBody = ({ tableData, onEditing = () => {} }: ITableBodyProps) => {
+export const TableBody = ({
+  tableData,
+  onEditing = () => {},
+  onDeleting = () => {},
+}: ITableBodyProps) => {
   const handleEdit = (id: number) => {
     onEditing(id);
+  };
+
+  const handleDelete = (id: number) => {
+    onDeleting(id);
   };
 
   if (!tableData || tableData.length === 0) {
@@ -42,6 +51,9 @@ export const TableBody = ({ tableData, onEditing = () => {} }: ITableBodyProps) 
           <td className={styles.tableData}>
             <Button variant="text" onClick={() => handleEdit(product.id)}>
               Edit
+            </Button>
+            <Button variant="text" onClick={() => handleDelete(product.id)}>
+              Delete
             </Button>
           </td>
         </tr>
