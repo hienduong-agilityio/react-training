@@ -8,11 +8,8 @@ import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { Table } from './components/Table/Table';
 import { SearchInput } from './components/SearchInput/SearchInput';
 import { IProductByCategory } from './interfaces/product';
-import ChartSvg from './components/common/icons/ChartSvg';
-import Popup from './components/common/Popup/Popup';
+import { ChartSvg, Popup, Button, AddSVG } from './components/common/index';
 import FormValidate from './components/Form/FormValidate';
-import Button from './components/common/Button/Button';
-import AddSVG from './components/common/icons/AddSVG';
 
 // Style
 import './styles/index.css';
@@ -260,7 +257,12 @@ function App() {
         <section className={styles.productContent}>
           <div className={styles.productAction}>
             <div className={styles.createAction}>
-              <Button  color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
+              <Button
+                customClasses={styles.button}
+                color="primary"
+                onClick={handleCreateProductClick}
+                startIcon={<AddSVG />}
+              >
                 Create Product
               </Button>
             </div>
