@@ -12,7 +12,7 @@ interface IForm {
 const FormValidate = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
-  onInputChange = () => {},
+  onInputChange,
   onSubmit,
   validationMessages,
 }: IForm) => {
@@ -66,6 +66,7 @@ const FormValidate = ({
 
         <div className={styles.group}>
           {/* ... Existing code ... */}
+
           <textarea
             className={styles.textarea}
             placeholder=""

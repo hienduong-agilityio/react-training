@@ -154,7 +154,7 @@ function App() {
   };
 
   const createNewProduct = () => {
-    // Create a new product object from form data
+      // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
       name: formValue.name,
@@ -260,7 +260,7 @@ function App() {
         <section className={styles.productContent}>
           <div className={styles.productAction}>
             <div className={styles.createAction}>
-              <Button  color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
+              <Button customClasses={styles.button} color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
                 Create Product
               </Button>
             </div>
