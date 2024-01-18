@@ -12,18 +12,15 @@ interface IForm {
 const FormValidate = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
-  onInputChange = () => {},
   onSubmit,
   validationMessages,
 }: IForm) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    onInputChange(name, value);
-  };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
+    const data = new FormData(event.target as HTMLFormElement);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const formData = Object.fromEntries(data.entries());
   };
 
   return (
@@ -40,7 +37,6 @@ const FormValidate = ({
             id="name"
             name="name"
             value={formValue.name}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="name">
             Name
@@ -56,7 +52,6 @@ const FormValidate = ({
             id="price"
             name="price"
             value={formValue.price}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="price">
             Price
@@ -72,7 +67,6 @@ const FormValidate = ({
             id="description"
             name="description"
             value={formValue.description}
-            onChange={handleChange}
           ></textarea>
           <label className={styles.label} htmlFor="description">
             Description
@@ -88,7 +82,6 @@ const FormValidate = ({
             id="category"
             name="category"
             value={formValue.category}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="category">
             Category
