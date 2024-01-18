@@ -4,12 +4,9 @@ import { useState } from 'react';
 import logo from './assets/image/Logo.png';
 
 // Components
+import { Table, SearchInput, FormSubmit, FormValidate } from './components';
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
-import { Table } from './components/Table/Table';
-import { SearchInput } from './components/SearchInput/SearchInput';
-import { IProductByCategory } from './interfaces/product';
-import { ChartSvg, Popup, Button, AddSVG } from './components/common/index';
-import FormValidate from './components/Form/FormValidate';
+import { ChartSvg, Popup, Button, AddSVG } from './components/common';
 
 // Style
 import './styles/index.css';
@@ -20,7 +17,9 @@ import LIST_PRODUCTS from '../database/products.json';
 
 // Constants
 import { TABLE_TITLE } from './constants/tableTitle';
-import FormSubmit from './components/Form/FormSubmit';
+
+// Type
+import { IProductByCategory } from './interfaces/product';
 
 function App() {
   // Initial list of products from the imported JSON file
