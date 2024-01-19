@@ -4,7 +4,7 @@ import { useState } from 'react';
 import logo from './assets/image/Logo.png';
 
 // Components
-import { Table, SearchInput, FormSubmit, FormValidate } from './components';
+import { Table, SearchInput, ProductDeleteForm, ProductUpdateForm } from './components';
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
 import { ChartSvg, Popup, Button, AddSVG } from './components/common';
 
@@ -147,7 +147,7 @@ function App() {
   };
 
   const createNewProduct = () => {
-    // Create a new product object from form data
+      // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
       name: formValue.name,
@@ -291,14 +291,14 @@ function App() {
               onClosePopup={handleCloseFormPopup}
             >
               {deleteProductId !== null ? (
-                <FormSubmit
+                <ProductDeleteForm
                   title="Confirm Delete"
                   text="Are you sure you want to delete this product?"
                   onConfirm={confirmDeleteProduct}
                   onCancel={handleCloseFormPopup}
                 />
               ) : (
-                <FormValidate
+                <ProductUpdateForm
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
                   formValue={formValue}
                   onSubmit={hanldeValueSubmit}

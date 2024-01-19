@@ -1,7 +1,7 @@
 import { Table, TableBody, TableHeader } from './ProductTable';
 
-import { FormValidate, FormSubmit } from './FormPopup';
+import { ProductUpdateForm, ProductDeleteForm } from './ProductModulForm';
 
 import { SearchInput } from './SearchInput/SearchInput';
 
-export { Table, TableBody, TableHeader, FormSubmit, FormValidate, SearchInput };
+export { Table, TableBody, TableHeader, ProductDeleteForm, ProductUpdateForm, SearchInput };

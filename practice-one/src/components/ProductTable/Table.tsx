@@ -1,6 +1,6 @@
 // Type and components
-import { ITableHeader, TableHeader } from './TableHeader';
-import { TableBody } from './TableBody';
+import { ITableHeader, TableHeader } from './ProductTableHeader';
+import { TableBody } from './ProductTableBody';
 import { IProductByCategory } from '../../interfaces/product';
 
 // Style

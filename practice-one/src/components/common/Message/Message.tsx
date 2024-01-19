@@ -8,7 +8,7 @@ import { BUTTON_VARIANT } from '../../../constants/common';
 import styles from './index.module.css';
 
 interface IMessageProps {
-  onClose?: () => void;
+  onClose: () => void;
   text?: string;
   title?: string;
   closeButtonEnabled?: boolean;
@@ -17,7 +17,7 @@ interface IMessageProps {
 
 // TODO: Add comments params for component
 const Message = ({
-  onClose = () => {},
+  onClose,
   title,
   text,
   closeButtonEnabled = true,

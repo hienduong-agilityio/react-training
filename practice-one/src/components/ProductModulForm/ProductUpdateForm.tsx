@@ -8,7 +8,7 @@ interface IForm {
   validationMessages: IValidationMessages;
 }
 
-const FormValidate = ({
+const ProductUpdateForm = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
   onSubmit,
@@ -66,6 +66,7 @@ const FormValidate = ({
 
         <div className={styles.group}>
           {/* ... Existing code ... */}
+
           <textarea
             defaultValue={formValue.description}
             className={styles.textarea}
@@ -102,4 +103,4 @@ const FormValidate = ({
   );
 };
 
-export default FormValidate;
+export default ProductUpdateForm;
