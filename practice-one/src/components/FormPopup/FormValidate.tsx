@@ -4,8 +4,7 @@ import styles from './index.module.css';
 interface IForm {
   title?: string;
   formValue: IFormValue;
-  onInputChange: (name: string, value: string) => void;
-  onSubmit: () => void;
+  onSubmit: (data: IFormValue) => void;
   validationMessages: IValidationMessages;
 }
 
@@ -17,10 +16,16 @@ const FormValidate = ({
 }: IForm) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit();
     const data = new FormData(event.target as HTMLFormElement);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const formData = Object.fromEntries(data.entries());
+
+    const formData: IFormValue = {
+      name: data.get('name') as string,
+      price: parseFloat(data.get('price') as string),
+      description: data.get('description') as string,
+      category: data.get('category') as string,
+    };
+
+    onSubmit(formData);
   };
 
   return (
@@ -32,11 +37,11 @@ const FormValidate = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.name}
             placeholder=""
             type="text"
             id="name"
             name="name"
-            value={formValue.name}
           />
           <label className={styles.label} htmlFor="name">
             Name
@@ -47,11 +52,11 @@ const FormValidate = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.price}
             placeholder=""
             type="number"
             id="price"
             name="price"
-            value={formValue.price}
           />
           <label className={styles.label} htmlFor="price">
             Price
@@ -62,11 +67,11 @@ const FormValidate = ({
         <div className={styles.group}>
           {/* ... Existing code ... */}
           <textarea
+            defaultValue={formValue.description}
             className={styles.textarea}
             placeholder=""
             id="description"
             name="description"
-            value={formValue.description}
           ></textarea>
           <label className={styles.label} htmlFor="description">
             Description
@@ -77,11 +82,11 @@ const FormValidate = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.category}
             placeholder=""
             type="text"
             id="category"
             name="category"
-            value={formValue.category}
           />
           <label className={styles.label} htmlFor="category">
             Category

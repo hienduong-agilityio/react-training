@@ -20,6 +20,7 @@ import { TABLE_TITLE } from './constants/tableTitle';
 
 // Type
 import { IProductByCategory } from './interfaces/product';
+import { IFormValue } from './interfaces/form';
 
 function App() {
   // Initial list of products from the imported JSON file
@@ -45,6 +46,13 @@ function App() {
     category: '',
   });
 
+  const [editFormValue, setEditFormValue] = useState({
+    name: '',
+    price: 0,
+    description: '',
+    category: '',
+  });
+
   // State to manage form error message for validate
   const [validationMessages, setValidationMessages] = useState({
     name: '',
@@ -58,10 +66,6 @@ function App() {
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
   const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
-
-  const handleInputChange = (name: string, value: string) => {
-    setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
 
   const handleCreateProductClick = (): void => {
     // Toggle the state to open/close the popup
@@ -168,8 +172,7 @@ function App() {
       product.id === productId
         ? {
             ...product,
-            name: formValue.name,
-            price: formValue.price,
+            name: editFormValue.name,
             description: formValue.description,
             categoryName: formValue.category,
           }
@@ -240,6 +243,13 @@ function App() {
     setValidationMessages({ name: '', price: '', description: '', category: '' });
   };
 
+  const hanldeValueSubmit = (data: IFormValue) => {
+    editingProductId ? setEditFormValue(data) : setFormValue(data);
+
+    // Perform form validation and handle submission
+    handleFormValidation();
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -298,8 +308,7 @@ function App() {
                 <FormValidate
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
                   formValue={formValue}
-                  onInputChange={handleInputChange}
-                  onSubmit={handleFormValidation}
+                  onSubmit={hanldeValueSubmit}
                   validationMessages={validationMessages}
                 />
               )}
