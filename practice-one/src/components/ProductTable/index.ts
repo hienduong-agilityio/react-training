@@ -1,7 +1,7 @@
 import { Table } from './Table';
 
-import { TableBody } from './TableBody';
+import { TableBody } from './ProductTableBody';
 
-import { TableHeader } from './TableHeader';
+import { TableHeader } from './ProductTableHeader';
 
 export { Table, TableBody, TableHeader };
