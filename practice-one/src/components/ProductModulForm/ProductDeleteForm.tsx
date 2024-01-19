@@ -4,14 +4,14 @@ import Typography from '../common/Typography/Typography';
 import { TEXT_SIZE } from '../../constants/common';
 import Button from '../common/Button/Button';
 
-interface IFormSubmit {
+interface IProductDeleteForm {
   title: string;
   text: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const FormSubmit = ({ title, text, onConfirm, onCancel }: IFormSubmit) => {
+const ProductDeleteForm = ({ title, text, onConfirm, onCancel }: IProductDeleteForm) => {
   return (
     <section>
       <Typography customClasses={styles.title} size={TEXT_SIZE.LARGE}>
@@ -30,4 +30,4 @@ const FormSubmit = ({ title, text, onConfirm, onCancel }: IFormSubmit) => {
   );
 };
 
-export default FormSubmit;
+export default ProductDeleteForm;
