@@ -46,13 +46,6 @@ function App() {
     category: '',
   });
 
-  const [editFormValue, setEditFormValue] = useState({
-    name: '',
-    price: 0,
-    description: '',
-    category: '',
-  });
-
   // State to manage form error message for validate
   const [validationMessages, setValidationMessages] = useState({
     name: '',
@@ -167,27 +160,27 @@ function App() {
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
-  const updateProduct = (productId: number) => {
+  const updateProduct = (productId: number, data: IFormValue) => {
     const updatedProducts = currentProductList.map((product) =>
       product.id === productId
         ? {
             ...product,
-            name: editFormValue.name,
-            description: formValue.description,
-            categoryName: formValue.category,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            categoryName: data.category,
           }
         : product,
     );
     setCurrentProductList(updatedProducts);
   };
 
-  const handleFormValidation = (): void => {
+  const handleFormValidation = (data: IFormValue): void => {
     // Validate the form before submission
     const isValid: boolean = validateForm();
-
     if (isValid) {
       if (editingProductId !== null) {
-        updateProduct(editingProductId);
+        updateProduct(editingProductId, data);
       } else {
         createNewProduct();
       }
@@ -244,10 +237,10 @@ function App() {
   };
 
   const hanldeValueSubmit = (data: IFormValue) => {
-    editingProductId ? setEditFormValue(data) : setFormValue(data);
+    setFormValue(data);
 
     // Perform form validation and handle submission
-    handleFormValidation();
+    handleFormValidation(data);
   };
 
   return (
