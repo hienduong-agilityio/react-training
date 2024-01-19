@@ -4,15 +4,9 @@ import { useState } from 'react';
 import logo from './assets/image/Logo.png';
 
 // Components
+import { Table, SearchInput, ProductDeleteForm, ProductUpdateForm } from './components';
 import { Navbar, Sidebar, SidebarItem } from './components/layouts';
-import { Table } from './components/Table/Table';
-import { SearchInput } from './components/SearchInput/SearchInput';
-import { IProductByCategory } from './interfaces/product';
-import ChartSvg from './components/common/icons/ChartSvg';
-import Popup from './components/common/Popup/Popup';
-import FormValidate from './components/Form/FormValidate';
-import Button from './components/common/Button/Button';
-import AddSVG from './components/common/icons/AddSVG';
+import { ChartSvg, Popup, Button, AddSVG } from './components/common';
 
 // Style
 import './styles/index.css';
@@ -23,7 +17,9 @@ import LIST_PRODUCTS from '../database/products.json';
 
 // Constants
 import { TABLE_TITLE } from './constants/tableTitle';
-import FormSubmit from './components/Form/FormSubmit';
+
+// Type
+import { IProductByCategory } from './interfaces/product';
 
 function App() {
   // Initial list of products from the imported JSON file
@@ -260,7 +256,12 @@ function App() {
         <section className={styles.productContent}>
           <div className={styles.productAction}>
             <div className={styles.createAction}>
-              <Button  color="primary" onClick={handleCreateProductClick} startIcon={<AddSVG />}>
+              <Button
+                customClasses={styles.button}
+                color="primary"
+                onClick={handleCreateProductClick}
+                startIcon={<AddSVG />}
+              >
                 Create Product
               </Button>
             </div>
@@ -287,14 +288,14 @@ function App() {
               onClosePopup={handleCloseFormPopup}
             >
               {deleteProductId !== null ? (
-                <FormSubmit
+                <ProductDeleteForm
                   title="Confirm Delete"
                   text="Are you sure you want to delete this product?"
                   onConfirm={confirmDeleteProduct}
                   onCancel={handleCloseFormPopup}
                 />
               ) : (
-                <FormValidate
+                <ProductUpdateForm
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
                   formValue={formValue}
                   onInputChange={handleInputChange}

@@ -9,7 +9,7 @@ interface IForm {
   validationMessages: IValidationMessages;
 }
 
-const FormValidate = ({
+const ProductUpdateForm = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
   onInputChange = () => {},
@@ -104,4 +104,4 @@ const FormValidate = ({
   );
 };
 
-export default FormValidate;
+export default ProductUpdateForm;
