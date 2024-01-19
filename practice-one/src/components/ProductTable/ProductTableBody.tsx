@@ -31,7 +31,7 @@ export const TableBody = ({
     return (
       <tbody className={styles.tableContent}>
         <tr className={styles.tableRow}>
-          <td className={(styles.tableData, styles.tableMessage)} colSpan={5}>
+          <td className={(styles.tableData, styles.tableMessage)} colSpan={6}>
             No data available
           </td>
         </tr>
