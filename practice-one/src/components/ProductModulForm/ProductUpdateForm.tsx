@@ -4,26 +4,39 @@ import styles from './index.module.css';
 interface IForm {
   title?: string;
   formValue: IFormValue;
-  onInputChange: (name: string, value: string) => void;
-  onSubmit: () => void;
+  onSubmit: (data: IFormValue) => void;
   validationMessages: IValidationMessages;
+}
+
+interface IFormElement extends HTMLFormControlsCollection {
+  name: HTMLInputElement;
+  price: HTMLInputElement;
+  description: HTMLInputElement;
+  confirmPassword: HTMLInputElement;
+  category: HTMLInputElement;
+}
+
+interface IFormData extends HTMLFormElement {
+  readonly elements: IFormElement;
 }
 
 const ProductUpdateForm = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
-  onInputChange,
   onSubmit,
   validationMessages,
 }: IForm) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    onInputChange(name, value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
-    onSubmit();
+    const formEvent = event.currentTarget.elements;
+
+    const formData: IFormValue = {
+      name: formEvent.name.value,
+      price: parseFloat(formEvent.price.value),
+      description: formEvent.description.value,
+      category: formEvent.category.value,
+    };
+    onSubmit(formData);
   };
 
   return (
@@ -35,12 +48,11 @@ const ProductUpdateForm = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.name}
             placeholder=""
             type="text"
             id="name"
             name="name"
-            value={formValue.name}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="name">
             Name
@@ -51,12 +63,11 @@ const ProductUpdateForm = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.price}
             placeholder=""
             type="number"
             id="price"
             name="price"
-            value={formValue.price}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="price">
             Price
@@ -68,12 +79,11 @@ const ProductUpdateForm = ({
           {/* ... Existing code ... */}
 
           <textarea
+            defaultValue={formValue.description}
             className={styles.textarea}
             placeholder=""
             id="description"
             name="description"
-            value={formValue.description}
-            onChange={handleChange}
           ></textarea>
           <label className={styles.label} htmlFor="description">
             Description
@@ -84,12 +94,11 @@ const ProductUpdateForm = ({
         <div className={styles.group}>
           <input
             className={styles.input}
+            defaultValue={formValue.category}
             placeholder=""
             type="text"
             id="category"
             name="category"
-            value={formValue.category}
-            onChange={handleChange}
           />
           <label className={styles.label} htmlFor="category">
             Category

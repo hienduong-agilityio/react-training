@@ -20,6 +20,7 @@ import { TABLE_TITLE } from './constants/tableTitle';
 
 // Type
 import { IProductByCategory } from './interfaces/product';
+import { IFormValue } from './interfaces/form';
 
 function App() {
   // Initial list of products from the imported JSON file
@@ -58,10 +59,6 @@ function App() {
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
   const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
-
-  const handleInputChange = (name: string, value: string) => {
-    setFormValue((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
 
   const handleCreateProductClick = (): void => {
     // Toggle the state to open/close the popup
@@ -150,7 +147,7 @@ function App() {
   };
 
   const createNewProduct = () => {
-      // Create a new product object from form data
+    // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
       name: formValue.name,
@@ -163,28 +160,27 @@ function App() {
     setCurrentProductList((prevList) => [...prevList, newProduct]);
   };
 
-  const updateProduct = (productId: number) => {
+  const updateProduct = (productId: number, data: IFormValue) => {
     const updatedProducts = currentProductList.map((product) =>
       product.id === productId
         ? {
             ...product,
-            name: formValue.name,
-            price: formValue.price,
-            description: formValue.description,
-            categoryName: formValue.category,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            categoryName: data.category,
           }
         : product,
     );
     setCurrentProductList(updatedProducts);
   };
 
-  const handleFormValidation = (): void => {
+  const handleFormValidation = (data: IFormValue): void => {
     // Validate the form before submission
     const isValid: boolean = validateForm();
-
     if (isValid) {
       if (editingProductId !== null) {
-        updateProduct(editingProductId);
+        updateProduct(editingProductId, data);
       } else {
         createNewProduct();
       }
@@ -238,6 +234,13 @@ function App() {
     // Clear form data and errors
     setFormValue({ name: '', price: 0, description: '', category: '' });
     setValidationMessages({ name: '', price: '', description: '', category: '' });
+  };
+
+  const hanldeValueSubmit = (data: IFormValue) => {
+    setFormValue(data);
+
+    // Perform form validation and handle submission
+    handleFormValidation(data);
   };
 
   return (
@@ -298,8 +301,7 @@ function App() {
                 <ProductUpdateForm
                   title={editingProductId ? 'Edit Product' : 'Create Product'}
                   formValue={formValue}
-                  onInputChange={handleInputChange}
-                  onSubmit={handleFormValidation}
+                  onSubmit={hanldeValueSubmit}
                   validationMessages={validationMessages}
                 />
               )}
