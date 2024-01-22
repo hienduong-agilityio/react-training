@@ -147,7 +147,7 @@ function App() {
   };
 
   const createNewProduct = () => {
-      // Create a new product object from form data
+    // Create a new product object from form data
     const newProduct: IProductByCategory = {
       id: currentProductList.length + 1,
       name: formValue.name,

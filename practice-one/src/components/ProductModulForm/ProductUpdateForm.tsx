@@ -8,23 +8,34 @@ interface IForm {
   validationMessages: IValidationMessages;
 }
 
+interface CustomElements extends HTMLFormControlsCollection {
+  name: HTMLInputElement;
+  price: HTMLInputElement;
+  description: HTMLInputElement;
+  confirmPassword: HTMLInputElement;
+  category: HTMLInputElement;
+}
+
+interface CustomForm extends HTMLFormElement {
+  readonly elements: CustomElements;
+}
+
 const ProductUpdateForm = ({
   title,
   formValue = { name: '', price: 0, description: '', category: '' },
   onSubmit,
   validationMessages,
 }: IForm) => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<CustomForm>) => {
     event.preventDefault();
-    const data = new FormData(event.target as HTMLFormElement);
+    const formEvent = event.currentTarget.elements;
 
     const formData: IFormValue = {
-      name: data.get('name') as string,
-      price: parseFloat(data.get('price') as string),
-      description: data.get('description') as string,
-      category: data.get('category') as string,
+      name: formEvent.name.value,
+      price: parseFloat(formEvent.price.value),
+      description: formEvent.description.value,
+      category: formEvent.category.value,
     };
-
     onSubmit(formData);
   };
 
