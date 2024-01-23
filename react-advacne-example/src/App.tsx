@@ -3,8 +3,9 @@ import {
   CallBackTutorial,
   ParentComponent,
 } from "./hooks/DemoUseCallBack/DemoUseCallBack";
-import MyComponent from "./hooks/DemoUseContext/MyContextComponent";
-import MyContextProvider from "./hooks/DemoUseContext/MyContextProvider";
+import LearnCallBack from "./hooks/LearnReactHookUseCallBack";
+// import MyComponent from "./hooks/DemoUseContext/MyContextComponent";
+// import MyContextProvider from "./hooks/DemoUseContext/MyContextProvider";
 
 function App() {
   return (
@@ -13,10 +14,11 @@ function App() {
       <CallBackTutorial />
       <ParentComponent />
 
-      {/* Context */}
+      {/* Context
       <MyContextProvider>
         <MyComponent />
-      </MyContextProvider>
+      </MyContextProvider> */}
+      <LearnCallBack />
     </div>
   );
 }

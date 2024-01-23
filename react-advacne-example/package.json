@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "just-shuffle": "^4.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "utile": "^0.3.0",
+    "utils": "^0.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
