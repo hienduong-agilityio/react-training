@@ -10,6 +10,7 @@ import { Content, Header, Sidebar } from "./hooks/LearnReactHookUseContext";
 // import MyComponent from "./hooks/DemoUseContext/MyContextComponent";
 // import MyContextProvider from "./hooks/DemoUseContext/MyContextProvider";
 import { AppProvider } from "./hooks/Context/AppContext";
+import ReducerTutorial from "./hooks/DemoUseReduces/ReducerTutorial ";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,8 @@ function App() {
           {isOpen && <Sidebar />}
         </>
       </AppProvider>
+
+      <ReducerTutorial />
     </div>
   );
 }
