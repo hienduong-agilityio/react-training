@@ -15,6 +15,11 @@ import {
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiLike, BiChat, BiShare } from "react-icons/bi";
+import { ErrorBoundary } from "react-error-boundary";
+
+const ErrorComponent = () => {
+  return <div> Something went wrong with this component</div>;
+};
 
 const DemoSuspenseCard = () => {
   return (
@@ -73,4 +78,6 @@ const DemoSuspenseCard = () => {
   );
 };
 
-export default DemoSuspenseCard;
+export default ErrorBoundary(DemoSuspenseCard, {
+  ErrorComponent: ErrorComponent(),
+});
