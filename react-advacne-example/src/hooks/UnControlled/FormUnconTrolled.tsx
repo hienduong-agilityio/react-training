@@ -1,9 +1,5 @@
-// Components
-
-// Type
-
 // Styles
-import styles from './index.module.css';
+import styles from "./index.module.css";
 
 interface ITableBodyProps {
   tableData?: IProductByCategory[];
@@ -47,12 +43,8 @@ export const TableBody = ({
           <td className={styles.tableData}>{product.description}</td>
           <td className={styles.tableData}>{product.categoryName}</td>
           <td className={styles.tableData}>
-            <button onClick={() => handleEdit(product.id)}>
-              Edit
-            </button>
-            <button  onClick={() => handleDelete(product.id)}>
-              Delete
-            </button>
+            <button onClick={() => handleEdit(product.id)}>Edit</button>
+            <button onClick={() => handleDelete(product.id)}>Delete</button>
           </td>
         </tr>
       ))}
