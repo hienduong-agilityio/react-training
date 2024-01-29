@@ -1,0 +1,23 @@
+/*------------------------------------*\
+  .form
+\*------------------------------------*/
+.formInput {
+  width: 300px;
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--table-border-color);
+  border-radius: 0.375rem;
+}
+
+.formInput:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--shadow-color);
+  border-color: var(--input-border-color);
+}
+
+@media screen and (min-width: 920px) {
+  .formInput {
+    margin-left: 1.5rem;
+    margin-top: 0rem;
+  }
+}
