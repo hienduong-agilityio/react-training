@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import "./App.css";
+import "./styles/index.css";
 // import {
 //   CallBackTutorial,
 //   ParentComponent,
@@ -16,6 +17,7 @@ import "./App.css";
 // import DemoSuspenseCard from "./hooks/DemoSuspense/DemoSuspenseCard";
 import { Suspense, lazy } from "react";
 import DemoSuspenseCardSkeleton from "./hooks/DemoSuspense/DemoSuspenseSkeleton";
+import Button from "./components/Button";
 
 function App() {
   // const [isOpen, setIsOpen] = useState(false);
@@ -43,13 +45,14 @@ function App() {
           {isOpen && <Sidebar />} */}
       {/* </>
       </AppProvider> */}
-{/* 
+      {/* 
       <ReducerTutorial />
       <MemoTutorial />
       <RefTutorial /> */}
       <Suspense fallback={<DemoSuspenseCardSkeleton />}>
         <Card />
       </Suspense>
+      <Button color="icon"> hello</Button>
     </div>
   );
 }
