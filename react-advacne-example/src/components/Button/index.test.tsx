@@ -1,7 +1,7 @@
 // Import the required libraries
 import { render, screen, fireEvent } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import Button from "./Button";
+import Button from "../Button";
 
 // Test the props of the Button component
 describe("Button props", () => {

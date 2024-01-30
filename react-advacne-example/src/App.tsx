@@ -17,7 +17,7 @@ import "./styles/index.css";
 // import DemoSuspenseCard from "./hooks/DemoSuspense/DemoSuspenseCard";
 import { Suspense, lazy } from "react";
 import DemoSuspenseCardSkeleton from "./hooks/DemoSuspense/DemoSuspenseSkeleton";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
 
 function App() {
   // const [isOpen, setIsOpen] = useState(false);
