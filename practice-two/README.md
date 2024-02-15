@@ -39,6 +39,8 @@ This document is related to React Practice Two. Build a website about this Poké
   * Jest is a popular JavaScript testing framework specifically designed for unit testing React applications. It simplifies the testing process with built-in functionalities for writing and running tests, assertions, and mocks. Jest supports snapshot testing and handles asynchronous testing seamlessly. Often used with Enzyme or React Testing Library, Jest is a key tool for ensuring the reliability of React components
 * [React-Testing-Library](https://github.com/testing-library/react-testing-library)
   * React Testing Library is a user-centric testing utility for React. It emphasizes testing user behavior rather than implementation details, promoting robust and maintainable tests. Compatible with Jest and other testing frameworks, it simplifies the process of writing effective tests for React components
+* [Tailwind](https://tailwindui.com/documentation)
+  * Tailwind CSS is a utility-first CSS framework designed to help you build responsive web interfaces quickly and easily. When used in React development, Tailwind CSS allows you to leverage pre-defined CSS utility classes to create and customize interfaces flexibly and efficiently.
 
 ## Author
 
