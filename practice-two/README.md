@@ -10,17 +10,20 @@ This document is related to React Practice Two. Build a website about this Poké
 
 ## TIMELINE
 
+* Estimate time ([link](https://docs.google.com/document/d/1As_O0q9EB18ZCJigGJOKZBXhNXgbZHnmvTyPs4vYvHA/edit#heading=h.2plc81jtb936)): 10 dayse of working
 * **Start date**: 02/02/2024
-* **Total days**: 10 days
-* **End date**: 02/21/2023
+* **End date**: 02/22/2024
 
 ## TARGETS
 
-* Apply knowledge of Typescript to React
-* Apply knowledge of React Advanced
+* Apply knowledge of React Advanced:
+  * Passing data deeply with context
+  * Error Boundaries
+  * Optimizing Performance
+  * Uncontrolled Components
+  * Building own hooks
 * Apply Unit testing (coverage greater than 90%)
 * Manager local state and global state
-* Keep moving with Storybook which will assist to manage components in the development environment
 * Use Code-Splitting to improve the performance of the application
 * Improve PageSpeed scores at minimum 98 points.
 
@@ -36,10 +39,6 @@ This document is related to React Practice Two. Build a website about this Poké
   * Jest is a popular JavaScript testing framework specifically designed for unit testing React applications. It simplifies the testing process with built-in functionalities for writing and running tests, assertions, and mocks. Jest supports snapshot testing and handles asynchronous testing seamlessly. Often used with Enzyme or React Testing Library, Jest is a key tool for ensuring the reliability of React components
 * [React-Testing-Library](https://github.com/testing-library/react-testing-library)
   * React Testing Library is a user-centric testing utility for React. It emphasizes testing user behavior rather than implementation details, promoting robust and maintainable tests. Compatible with Jest and other testing frameworks, it simplifies the process of writing effective tests for React components
-
-## Editor
-
-* Visual Studio Code
 
 ## Author
 
