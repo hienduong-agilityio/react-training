@@ -10,8 +10,8 @@ This document is related to React Practice Two. Build a website about this Poké
 
 ## TIMELINE
 
-* Estimate time ([link](https://docs.google.com/document/d/1As_O0q9EB18ZCJigGJOKZBXhNXgbZHnmvTyPs4vYvHA/edit#heading=h.2plc81jtb936)): 6 dayse of working
-* **Start date**: 02/15/2024
+* Estimate time ([link](https://docs.google.com/document/d/1As_O0q9EB18ZCJigGJOKZBXhNXgbZHnmvTyPs4vYvHA/edit#heading=h.2plc81jtb936)): 10 dayse of working
+* **Start date**: 02/02/2024
 * **End date**: 02/22/2024
 
 ## TARGETS
