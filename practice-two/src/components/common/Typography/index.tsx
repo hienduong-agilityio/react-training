@@ -1,5 +1,5 @@
 // Constant
-import { COLOR, TEXT_SIZE } from '../../../constants/common';
+import { COLOR, TEXT_SIZE } from '@/constants/common';
 
 //  Styles
 import classNames from 'classnames';
@@ -18,6 +18,7 @@ const colorClass: { [key in COLOR]: string } = {
 };
 
 const sizeClass: { [key in TEXT_SIZE]: string } = {
+  default: '',
   small: 'font-normal text-sm',
   normal: 'font-normal text-base',
   medium: 'font-normal text-xl',
@@ -37,7 +38,7 @@ const sizeClass: { [key in TEXT_SIZE]: string } = {
 const Typography = ({
   children,
   color = 'default',
-  size = TEXT_SIZE.NORMAL,
+  size = TEXT_SIZE.DEFAULT,
   variant = 'p',
   customClasses = '',
   ...restProps

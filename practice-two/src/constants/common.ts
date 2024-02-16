@@ -6,6 +6,7 @@ export enum BUTTON_VARIANT {
 }
 
 export enum TEXT_SIZE {
+  DEFAULT = 'default',
   NORMAL = 'normal',
   SMALL = 'small',
   MEDIUM = 'medium',
