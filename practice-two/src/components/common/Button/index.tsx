@@ -1,17 +1,20 @@
-import { useCallback, ButtonHTMLAttributes } from 'react';
-
-// Styles
+// Library
+import { ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
-
-// Constants
-import { BUTTON_VARIANT } from '@/constants/common';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'text' | 'outline' | 'filled' | 'filledTonal';
   size?: 'small' | 'medium' | 'large';
-  type?: 'button' | 'submit' | 'reset';
+  btnType?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'default';
   customClasses?: string;
+}
+
+export enum BUTTON_VARIANT {
+  TEXT = 'text',
+  OUTLINE = 'outline',
+  FILLED = 'filled',
+  FILLED_TONAL = 'filledTonal'
 }
 
 const buttonDefault: string =
@@ -59,13 +62,9 @@ const Button = ({
   onClick = () => {},
   ...restProps
 }: IButtonProps): JSX.Element => {
-  const handleButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void =
-    useCallback(
-      (e: React.MouseEvent<HTMLButtonElement>) => {
-        onClick(e);
-      },
-      [onClick]
-    );
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    onClick(event);
+  };
 
   const buttonClasses: string = classNames([
     buttonDefault,
@@ -76,15 +75,7 @@ const Button = ({
   ]);
 
   return (
-    <button
-      type={
-        type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'
-      }
-      className={buttonClasses}
-      disabled={disabled}
-      onClick={handleButtonClick}
-      {...restProps}
-    >
+    <button type={type} className={buttonClasses} disabled={disabled} onClick={handleButtonClick} {...restProps}>
       {children}
     </button>
   );

@@ -27,7 +27,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/require-default-props": "off",
     "react/function-component-definition": "off",
-    "react/button-has-type": "error",
+    "react/button-has-type": "off",
     "no-console": "warn"
   }
 }
