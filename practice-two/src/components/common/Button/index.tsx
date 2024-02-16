@@ -4,7 +4,7 @@ import { useCallback, ReactNode, ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 // Constants
-import { BUTTON_VARIANT } from '../../../constants/common';
+import { BUTTON_VARIANT } from '@/constants/common';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'text' | 'outline' | 'filled' | 'filledTonal';
@@ -83,9 +83,7 @@ const Button = ({
 
   return (
     <button
-      type={
-        type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'
-      }
+      type={type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'}
       className={buttonClasses}
       disabled={disabled}
       onClick={handleButtonClick}

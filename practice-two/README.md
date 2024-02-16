@@ -40,7 +40,7 @@ This document is related to React Practice Two. Build a website about this Poké
 * [React-Testing-Library](https://github.com/testing-library/react-testing-library)
   * React Testing Library is a user-centric testing utility for React. It emphasizes testing user behavior rather than implementation details, promoting robust and maintainable tests. Compatible with Jest and other testing frameworks, it simplifies the process of writing effective tests for React components
 * [Tailwind](https://tailwindui.com/documentation)
-  * Tailwind CSS is a utility-first CSS framework designed to help you build responsive web interfaces quickly and easily. When used in React development, Tailwind CSS allows you to leverage pre-defined CSS utility classes to create and customize interfaces flexibly and efficiently
+  * Tailwind CSS is a utility-first CSS framework designed to help you build responsive web interfaces quickly and easily. When used in React development, Tailwind CSS allows you to leverage pre-defined CSS utility classes to create and customize interfaces flexibly and efficiently.
 
 ## Author
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from './index';
 
-import { BUTTON_VARIANT } from '../../../constants/common';
+import { BUTTON_VARIANT } from '@/constants/common';
 
 const meta = {
   title: 'Components/common/Button',
