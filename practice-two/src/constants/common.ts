@@ -4,3 +4,15 @@ export enum BUTTON_VARIANT {
   FILLED = 'filled',
   FILLEDTONAL = 'filledTonal'
 }
+
+export enum TEXT_SIZE {
+  NORMAL = 'normal',
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large'
+}
+
+export enum COLOR {
+  DEFAULT = 'default',
+  WHITE = 'white'
+}
