@@ -5,20 +5,9 @@ exports[`Button Component renders correctly with custom props 1`] = `
   class="inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60 bg-primary text-white rounded-lg px-6 py-3 text-lg bg-primary extra-class"
   type="button"
 >
-  <span
-    class="inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60 bg-primary text-white rounded-lg px-6 py-3 text-lg bg-primary extra-class"
-  >
-    <span>
-      Left Icon
-    </span>
-  </span>
   Click me
-  <span
-    class="inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60 bg-primary text-white rounded-lg px-6 py-3 text-lg bg-primary extra-class"
-  >
-    <span>
-      Right Icon
-    </span>
+  <span>
+    Left Icon
   </span>
 </button>
 `;

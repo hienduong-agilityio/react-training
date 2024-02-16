@@ -80,7 +80,9 @@ const Button = ({
 
   return (
     <button
-      type={type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'}
+      type={
+        type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'
+      }
       className={buttonClasses}
       disabled={disabled}
       onClick={handleButtonClick}
