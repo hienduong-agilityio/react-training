@@ -2,7 +2,7 @@ export enum BUTTON_VARIANT {
   TEXT = 'text',
   OUTLINE = 'outline',
   FILLED = 'filled',
-  FILLEDTONAL = 'filledTonal'
+  FILLED_TONAL = 'filledTonal'
 }
 
 export enum TEXT_SIZE {
