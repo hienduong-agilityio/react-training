@@ -1,4 +1,4 @@
-import { useCallback, ReactNode, ButtonHTMLAttributes } from 'react';
+import { useCallback, ButtonHTMLAttributes } from 'react';
 
 // Styles
 import classNames from 'classnames';
@@ -12,7 +12,6 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'default';
   customClasses?: string;
-  icon?: ReactNode;
 }
 
 const buttonDefault: string =
@@ -46,7 +45,6 @@ const colorClasses: { [key in 'default' | 'primary' | 'secondary']: string } = {
  * @param color Color of the button. Can be one of 'primary', 'secondary', 'light'.
  * @param disable Disable of the button. Can be one of 'true' to disable or 'false' to none disable.
  * @param customClasses Custom variant class for the button.
- * @param icon To add icon content in button.
  * @param onClick Click event handler function for the button.
  * @returns {JSX.Element} - Button element.
  */
@@ -58,7 +56,6 @@ const Button = ({
   color = 'default',
   disabled = false,
   customClasses = '',
-  icon,
   onClick = () => {},
   ...restProps
 }: IButtonProps): JSX.Element => {
@@ -89,7 +86,6 @@ const Button = ({
       {...restProps}
     >
       {children}
-      {icon}
     </button>
   );
 };
