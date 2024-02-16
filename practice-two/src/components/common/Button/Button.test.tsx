@@ -14,7 +14,7 @@ describe('Button Component', () => {
         variant="filled"
         size="large"
         color="primary"
-        disable={false}
+        disabled={false}
         customClasses="extra-class"
         leftIcon={<span>Left Icon</span>}
         rightIcon={<span>Right Icon</span>}
@@ -38,7 +38,7 @@ describe('Button Component', () => {
   it('disables button when disable prop is true', () => {
     const handleClick = jest.fn();
     const { getByText } = render(
-      <Button disable={true} onClick={handleClick}>
+      <Button disabled={true} onClick={handleClick}>
         Click me
       </Button>
     );
