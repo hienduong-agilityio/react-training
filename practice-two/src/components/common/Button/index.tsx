@@ -1,21 +1,41 @@
 import React, { useCallback } from 'react';
 
 // Styles
-import styles from './index.module.css';
 import classNames from 'classnames';
-
 interface IButtonProps {
   children: React.ReactNode;
   variant?: 'text' | 'outline' | 'filled' | 'filledTonal';
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'icon' | 'light';
+  color?: 'primary' | 'secondary' | 'default';
   disable?: boolean;
   customClasses?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
+
+const buttonDefault =
+  'inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
+
+const variantClasses = {
+  text: ' bg-blue-600 hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
+  outline: 'border border-primary',
+  filled: 'bg-shadow-color rounded-lg',
+  filledTonal: 'bg-shadow-color border border-primary'
+};
+
+const sizeClasses = {
+  small: 'px-3 py-1 text-sm',
+  medium: 'px-4 py-2 text-base',
+  large: 'px-6 py-3 text-lg'
+};
+
+const colorClasses = {
+  default: '',
+  primary: 'bg-primary',
+  secondary: 'bg-secondary'
+};
 
 /**
  * Button component
@@ -36,7 +56,7 @@ const Button = ({
   variant = 'text',
   size = 'medium',
   type = 'button',
-  color = 'light',
+  color = 'default',
   disable = false,
   customClasses = '',
   leftIcon,
@@ -52,10 +72,10 @@ const Button = ({
   );
 
   const buttonClasses = classNames([
-    styles.button,
-    styles[size],
-    styles[variant],
-    styles[color],
+    buttonDefault,
+    variantClasses[variant],
+    sizeClasses[size],
+    colorClasses[color],
     customClasses
   ]);
 
@@ -69,9 +89,9 @@ const Button = ({
       onClick={handleButtonClick}
       {...restProps}
     >
-      {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
+      {leftIcon && <span className={buttonClasses}>{leftIcon}</span>}
       {children}
-      {rightIcon && <span className={styles.rightIcon}>{rightIcon}</span>}
+      {rightIcon && <span className={buttonClasses}>{rightIcon}</span>}
     </button>
   );
 };

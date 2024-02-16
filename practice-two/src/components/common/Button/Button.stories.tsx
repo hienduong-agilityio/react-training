@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from './index';
+
 import { BUTTON_VARIANT } from '../../../constants/common';
 
 const meta = {
@@ -18,7 +19,9 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: 'Button primary',
-    variant: BUTTON_VARIANT.TEXT,
+    variant: 'text',
+    customClasses: 'bg-blue-400',
+    disable : true,
     onClick: () => {
       alert('Button component');
     }
