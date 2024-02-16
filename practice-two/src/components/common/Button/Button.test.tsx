@@ -16,7 +16,6 @@ describe('Button Component', () => {
         color="primary"
         disabled={false}
         customClasses="extra-class"
-        icon={<span>Left Icon</span>}
         onClick={() => {}}
       >
         Click me

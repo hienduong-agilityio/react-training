@@ -6,9 +6,6 @@ exports[`Button Component renders correctly with custom props 1`] = `
   type="button"
 >
   Click me
-  <span>
-    Left Icon
-  </span>
 </button>
 `;
 
