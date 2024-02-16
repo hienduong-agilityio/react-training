@@ -55,9 +55,7 @@ const Button = ({
   children,
   variant = 'text',
   size = 'medium',
-  type = 'button',
   color = 'default',
-  disabled = false,
   customClasses = '',
   onClick = () => {},
   ...restProps
@@ -75,7 +73,7 @@ const Button = ({
   ]);
 
   return (
-    <button type={type} className={buttonClasses} disabled={disabled} onClick={handleButtonClick} {...restProps}>
+    <button className={buttonClasses} onClick={handleButtonClick} {...restProps}>
       {children}
     </button>
   );
