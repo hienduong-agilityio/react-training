@@ -21,7 +21,7 @@ export const Primary: Story = {
     children: 'Button primary',
     variant: 'text',
     customClasses: 'bg-blue-400',
-    disable : true,
+    disable: true,
     onClick: () => {
       alert('Button component');
     }
