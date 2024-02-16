@@ -12,8 +12,7 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'default';
   customClasses?: string;
-  leftIcon?: ReactNode;
-  rightIcon?: ReactNode;
+  icon?: ReactNode;
 }
 
 const buttonDefault: string =
@@ -47,8 +46,7 @@ const colorClasses: { [key in 'default' | 'primary' | 'secondary']: string } = {
  * @param color Color of the button. Can be one of 'primary', 'secondary', 'light'.
  * @param disable Disable of the button. Can be one of 'true' to disable or 'false' to none disable.
  * @param customClasses Custom variant class for the button.
- * @param leftIcon To add icon before content button.
- * @param rightIcon To add icon after content button.
+ * @param icon To add icon content in button.
  * @param onClick Click event handler function for the button.
  * @returns {JSX.Element} - Button element.
  */
@@ -60,8 +58,7 @@ const Button = ({
   color = 'default',
   disabled = false,
   customClasses = '',
-  leftIcon,
-  rightIcon,
+  icon,
   onClick = () => {},
   ...restProps
 }: IButtonProps): JSX.Element => {
@@ -89,9 +86,8 @@ const Button = ({
       onClick={handleButtonClick}
       {...restProps}
     >
-      {leftIcon && <span className={buttonClasses}>{leftIcon}</span>}
       {children}
-      {rightIcon && <span className={buttonClasses}>{rightIcon}</span>}
+      {icon}
     </button>
   );
 };
