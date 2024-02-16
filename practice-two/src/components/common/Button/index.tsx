@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback, ReactNode, ButtonHTMLAttributes } from 'react';
 
 // Styles
 import classNames from 'classnames';
@@ -6,24 +6,21 @@ import classNames from 'classnames';
 // Constants
 import { BUTTON_VARIANT } from '../../../constants/common';
 
-interface IButtonProps {
-  children: React.ReactNode;
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'text' | 'outline' | 'filled' | 'filledTonal';
   size?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'default';
-  disable?: boolean;
   customClasses?: string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
 const buttonDefault: string =
   'inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
 
 const variantClasses: { [key in BUTTON_VARIANT]: string } = {
-  text: ' bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
+  text: 'bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
   outline: 'border border-primary',
   filled: 'bg-primary text-white rounded-lg',
   filledTonal: 'bg-primary text-white border border-primary'
@@ -44,12 +41,12 @@ const colorClasses: { [key in 'default' | 'primary' | 'secondary']: string } = {
 /**
  * Button component
  * @param children Text for the button.
- * @param variant Variant of the button. Can be one of 'text', 'outline', 'filled', or 'filledTonal.
+ * @param variant Variant of the button. Can be one of 'text', 'outline', 'filled', or 'filledTonal'.
  * @param size Size of the button. Can be one of 'small', 'medium', or 'large'.
  * @param type Type of the button. Can be one of 'button', 'submit', or 'reset'.
  * @param color Color of the button. Can be one of 'primary', 'secondary', 'light'.
  * @param disable Disable of the button. Can be one of 'true' to disable or 'false' to none disable.
- * @param customClasses  Custom variant class for the button.
+ * @param customClasses Custom variant class for the button.
  * @param leftIcon To add icon before content button.
  * @param rightIcon To add icon after content button.
  * @param onClick Click event handler function for the button.
@@ -61,7 +58,7 @@ const Button = ({
   size = 'medium',
   type = 'button',
   color = 'default',
-  disable = false,
+  disabled = false,
   customClasses = '',
   leftIcon,
   rightIcon,
@@ -90,7 +87,7 @@ const Button = ({
         type === 'submit' ? 'submit' : type === 'reset' ? 'reset' : 'button'
       }
       className={buttonClasses}
-      disabled={disable}
+      disabled={disabled}
       onClick={handleButtonClick}
       {...restProps}
     >
