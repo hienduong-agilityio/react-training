@@ -19,10 +19,10 @@ const buttonDefault =
   'inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
 
 const variantClasses = {
-  text: ' bg-blue-600 hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
+  text: ' bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
   outline: 'border border-primary',
-  filled: 'bg-shadow-color rounded-lg',
-  filledTonal: 'bg-shadow-color border border-primary'
+  filled: 'bg-primary text-white rounded-lg',
+  filledTonal: 'bg-primary text-white border border-primary'
 };
 
 const sizeClasses = {

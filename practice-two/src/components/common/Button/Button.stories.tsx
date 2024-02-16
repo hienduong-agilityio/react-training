@@ -40,7 +40,7 @@ export const Outline: Story = {
 
 export const Filled: Story = {
   args: {
-    children: 'Button outline',
+    children: 'Button filled',
     variant: BUTTON_VARIANT.FILLED,
     onClick: () => {
       alert('Button component');
