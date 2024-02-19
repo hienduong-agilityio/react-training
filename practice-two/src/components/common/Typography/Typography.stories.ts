@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Text from './index';
-import { TEXT_SIZE } from '@/constants/common';
+import Text, { TEXT_SIZE } from './index';
 
 const meta = {
   title: 'Components/common/Typography',
@@ -18,14 +17,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Default',
-    size: TEXT_SIZE.SMALL
+    size: TEXT_SIZE.NORMAL
   }
 };
 
 export const TextVariant: Story = {
   args: {
     children: 'Heading 1',
-  },
+    variant: 'h1'
+  }
 };
 
 export const LargeText: Story = {
