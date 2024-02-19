@@ -58,11 +58,17 @@ describe('Typography Component', () => {
     expect(getByText('Paragraph').tagName).toBe('P');
   });
 
-  it('renders correctly with default props', () => {
-    const { container } = render(
-      <Typography> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, possimus!</Typography>
+  it('matches snapshot with default props', () => {
+    const { asFragment } = render(<Typography>Hello World</Typography>);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('matches snapshot with custom props', () => {
+    const { asFragment } = render(
+      <Typography color="white" size={TEXT_SIZE.LARGE} variant="h1" customClasses="custom-class">
+        Hello World
+      </Typography>
     );
-    expect(container.firstChild).toBeTruthy();
-    expect(container.firstChild).toMatchSnapshot();
+    expect(asFragment()).toMatchSnapshot();
   });
 });
