@@ -41,31 +41,22 @@ const colorClasses: { [key in 'default' | 'primary' | 'secondary']: string } = {
 
 /**
  * Button component
- * @param children Text for the button.
  * @param variant Variant of the button. Can be one of 'text', 'outline', 'filled', or 'filledTonal'.
  * @param size Size of the button. Can be one of 'small', 'medium', or 'large'.
- * @param type Type of the button. Can be one of 'button', 'submit', or 'reset'.
  * @param color Color of the button. Can be one of 'primary', 'secondary', 'light'.
- * @param disable Disable of the button. Can be one of 'true' to disable or 'false' to none disable.
  * @param customClasses Custom variant class for the button.
- * @param onClick Click event handler function for the button.
+ *
  * @returns {JSX.Element} - Button element.
  */
+
 const Button = ({
   children,
   variant = 'text',
   size = 'medium',
-  type = 'button',
   color = 'default',
-  disabled = false,
   customClasses = '',
-  onClick = () => {},
   ...restProps
 }: IButtonProps): JSX.Element => {
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    onClick(event);
-  };
-
   const buttonClasses: string = classNames([
     buttonDefault,
     variantClasses[variant],
@@ -75,7 +66,7 @@ const Button = ({
   ]);
 
   return (
-    <button type={type} className={buttonClasses} disabled={disabled} onClick={handleButtonClick} {...restProps}>
+    <button className={buttonClasses} {...restProps}>
       {children}
     </button>
   );
