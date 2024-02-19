@@ -1,8 +1,17 @@
-// Constant
-import { COLOR, TEXT_SIZE } from '@/constants/common';
-
-//  Styles
+//  Library
 import classNames from 'classnames';
+
+export enum TEXT_SIZE {
+  NORMAL = 'normal',
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large'
+}
+
+export enum TEXT_COLOR {
+  DEFAULT = 'default',
+  WHITE = 'white'
+}
 
 export interface ITypographyProps {
   children: string;
@@ -12,13 +21,12 @@ export interface ITypographyProps {
   customClasses?: string;
 }
 
-const colorClass: { [key in COLOR]: string } = {
+const colorClass: { [key in TEXT_COLOR]: string } = {
   default: 'text-black',
   white: 'text-white'
 };
 
 const sizeClass: { [key in TEXT_SIZE]: string } = {
-  default: '',
   small: 'font-normal text-sm',
   normal: 'font-normal text-base',
   medium: 'font-normal text-xl',
@@ -38,16 +46,12 @@ const sizeClass: { [key in TEXT_SIZE]: string } = {
 const Typography = ({
   children,
   color = 'default',
-  size = TEXT_SIZE.DEFAULT,
+  size = TEXT_SIZE.NORMAL,
   variant = 'p',
   customClasses = '',
   ...restProps
 }: ITypographyProps): JSX.Element => {
-  const typographyClasses = classNames([
-    colorClass[color],
-    sizeClass[size],
-    customClasses
-  ]);
+  const typographyClasses = classNames([colorClass[color], sizeClass[size], customClasses]);
 
   const TypographyType = variant;
 
