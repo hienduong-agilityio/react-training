@@ -21,7 +21,7 @@ export const Default: Story = {
   }
 };
 
-export const Typographytag: Story = {
+export const TypographyTag: Story = {
   args: {
     children: 'Heading 1',
     tag: 'h1'
