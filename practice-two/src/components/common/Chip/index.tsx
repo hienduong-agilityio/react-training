@@ -30,7 +30,7 @@ export enum CHIP_COLOR {
   GRASS = 'grass'
 }
 
-const chipDefault: string = 'inline-block rounded-full py-1 px- capitalize';
+const chipDefault: string = 'inline-block rounded-full py-1 px-4 capitalize';
 
 const colorClasses: { [key in CHIP_COLOR]: string } = {
   fire: 'bg-fire',
