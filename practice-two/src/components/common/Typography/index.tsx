@@ -37,12 +37,12 @@ const sizeClass: { [key in TEXT_SIZE]: string } = {
  * Typography Component
  * @param color - The color of the text.
  * @param size - The size of the text's font values: 'xl', 'lg', 'md'.
- * @param variant - The variant of the text values: 'solid', 'soft', 'outlined', 'plain'.
- * @param level - The level of the heading (1 to 6), or 0 for a paragraph.
- * @param className - Additional custom CSS classes to be applied to the Typography component.
- * @param children - The content to be displayed inside the Typography component.
+ * @param variant - The variant of the html tag.
+ * @param customClasses - Additional custom CSS classes to be applied to the Typography component.
+ *
  * @returns {JSX.Element} - The Typography component.
  */
+
 const Typography = ({
   children,
   color = 'default',
