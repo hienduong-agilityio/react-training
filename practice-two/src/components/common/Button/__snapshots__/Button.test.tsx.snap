@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component renders correctly with custom props 1`] = `
+<button
+  class="inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60 bg-primary text-white rounded-lg px-6 py-3 text-lg bg-primary extra-class"
+>
+  Click me
+</button>
+`;
+
+exports[`Button Component renders correctly with default props 1`] = `
+<button
+  class="inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60 bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700 px-4 py-2 text-base"
+>
+  Click me
+</button>
+`;
