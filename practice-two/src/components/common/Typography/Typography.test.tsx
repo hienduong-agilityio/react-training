@@ -36,15 +36,15 @@ describe('Typography Component', () => {
     expect(typographyElement).toHaveClass('text-black text-base extra-class');
   });
 
-  it('renders different variants', () => {
+  it('renders different tags', () => {
     const { getByText } = render(
       <>
-        <Typography variant="h1">Heading 1</Typography>
-        <Typography variant="h2">Heading 2</Typography>
-        <Typography variant="h3">Heading 3</Typography>
-        <Typography variant="h4">Heading 4</Typography>
-        <Typography variant="h5">Heading 5</Typography>
-        <Typography variant="h6">Heading 6</Typography>
+        <Typography tag="h1">Heading 1</Typography>
+        <Typography tag="h2">Heading 2</Typography>
+        <Typography tag="h3">Heading 3</Typography>
+        <Typography tag="h4">Heading 4</Typography>
+        <Typography tag="h5">Heading 5</Typography>
+        <Typography tag="h6">Heading 6</Typography>
         <Typography>Paragraph</Typography>
       </>
     );
@@ -65,7 +65,7 @@ describe('Typography Component', () => {
 
   it('matches snapshot with custom props', () => {
     const { asFragment } = render(
-      <Typography color="white" size={TEXT_SIZE.LARGE} variant="h1" customClasses="custom-class">
+      <Typography color="white" size={TEXT_SIZE.LARGE} tag="h1" customClasses="custom-class">
         Hello World
       </Typography>
     );

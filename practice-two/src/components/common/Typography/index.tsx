@@ -17,7 +17,7 @@ export interface ITypographyProps {
   children: string;
   color?: 'default' | 'white';
   size?: TEXT_SIZE;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   customClasses?: string;
 }
 
@@ -37,7 +37,7 @@ const sizeClass: { [key in TEXT_SIZE]: string } = {
  * Typography Component
  * @param color - The color of the text.
  * @param size - The size of the text's font values: 'xl', 'lg', 'md'.
- * @param variant - The variant of the html tag.
+ * @param tag - The tag of the html tag.
  * @param customClasses - Additional custom CSS classes to be applied to the Typography component.
  *
  * @returns {JSX.Element} - The Typography component.
@@ -47,13 +47,13 @@ const Typography = ({
   children,
   color = 'default',
   size = TEXT_SIZE.NORMAL,
-  variant = 'p',
+  tag = 'p',
   customClasses = '',
   ...restProps
 }: ITypographyProps): JSX.Element => {
   const typographyClasses = classNames([colorClass[color], sizeClass[size], customClasses]);
 
-  const TypographyType = variant;
+  const TypographyType = tag;
 
   return (
     <TypographyType className={typographyClasses} {...restProps}>

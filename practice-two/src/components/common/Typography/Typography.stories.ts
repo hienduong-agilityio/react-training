@@ -21,10 +21,10 @@ export const Default: Story = {
   }
 };
 
-export const TypographyVariant: Story = {
+export const TypographyTag: Story = {
   args: {
     children: 'Heading 1',
-    variant: 'h1'
+    tag: 'h1'
   }
 };
 
