@@ -12,28 +12,28 @@ describe('Typography Component', () => {
     const { getByText } = render(<Typography>Hello World</Typography>);
     const typographyElement = getByText('Hello World');
     expect(typographyElement).toBeInTheDocument();
-    expect(typographyElement).toHaveClass('text-black font-normal text-base');
+    expect(typographyElement).toHaveClass('text-black text-base');
   });
 
   it('renders with custom color', () => {
     const { getByText } = render(<Typography color="white">Hello World</Typography>);
     const typographyElement = getByText('Hello World');
     expect(typographyElement).toBeInTheDocument();
-    expect(typographyElement).toHaveClass('text-white font-normal text-base');
+    expect(typographyElement).toHaveClass('text-white text-base');
   });
 
   it('renders with custom size', () => {
     const { getByText } = render(<Typography size={TEXT_SIZE.LARGE}>Hello World</Typography>);
     const typographyElement = getByText('Hello World');
     expect(typographyElement).toBeInTheDocument();
-    expect(typographyElement).toHaveClass('text-black font-normal text-5xl');
+    expect(typographyElement).toHaveClass('text-black text-5xl');
   });
 
   it('renders with custom classes', () => {
     const { getByText } = render(<Typography customClasses="extra-class">Hello World</Typography>);
     const typographyElement = getByText('Hello World');
     expect(typographyElement).toBeInTheDocument();
-    expect(typographyElement).toHaveClass('text-black font-normal text-base extra-class');
+    expect(typographyElement).toHaveClass('text-black text-base extra-class');
   });
 
   it('renders different variants', () => {
