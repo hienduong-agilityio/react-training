@@ -27,10 +27,10 @@ const colorClass: { [key in TEXT_COLOR]: string } = {
 };
 
 const sizeClass: { [key in TEXT_SIZE]: string } = {
-  small: 'font-normal text-sm',
-  normal: 'font-normal text-base',
-  medium: 'font-normal text-xl',
-  large: 'font-normal text-5xl'
+  small: 'text-sm',
+  normal: 'text-base',
+  medium: 'text-xl',
+  large: 'text-5xl'
 };
 
 /**
