@@ -59,17 +59,17 @@ This document is related to React Practice Two. Build a website about this Poké
 
 | Command                                                                           | Action                        |
 | :-------------------------------------------------------------------------------- | :---------------------------- |
-| `$ git clone git@gihttps://gitlab.asoft-python.com/hien.duong/react-training.git` | Clone Repository with HTTPS   |
-| `$ git@gitlab.asoft-python.com:hien.duong/react-training.git`                     | Clone Repository with SSH     |
-| `$ cd react-training`                                                             | Redirect to folder            |
-| `$ git checkout feature/practice-two`                                             | Checkout branch               |
+| `git clone git@gitlab.asoft-python.com:hien.duong/react-training.git`             | Clone Repository with SSH     |
+| `cd react-training`                                                               | Redirect to training folder   |
+| `git checkout feature/practice-two`                                               | Checkout branch               |
+| `cd .\practice-two\`                                                              | Redirect to practices folder  |
 
 ### Build and Run app
 
-| Command                                                              | Action                        | Port                    |
-| :------------------------------------------------------------------- | :---------------------------- | :---------------------- |
-| `$ pnpm i`                                                           | Install packages dependencies | N/A                     |
-| `$ pnpm run build`                                                   | Run build project             | N/A                     |
-| `$ pnpm run storybook`                                               | Run Storybook                 | <http://localhost:6006> |
-| `$ pnpm run test`                                                    | Run Unit test                 | N/A                     |
-| `$ pnpm run dev`                                                     | Run webpage                   | <http://localhost:5173> |
+| Command                                                            | Action                        | Port                    |
+| :------------------------------------------------------------------| :---------------------------- | :---------------------- |
+| `pnpm i`                                                           | Install packages dependencies | N/A                     |
+| `pnpm run build`                                                   | Run build project             | N/A                     |
+| `pnpm run storybook`                                               | Run Storybook                 | <http://localhost:6006> |
+| `pnpm run test`                                                    | Run Unit test                 | N/A                     |
+| `pnpm run dev`                                                     | Run webpage                   | <http://localhost:5173> |
