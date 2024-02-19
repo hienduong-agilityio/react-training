@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography Component renders correctly with default props 1`] = `
+<p
+  class="text-black font-normal text-base"
+>
+   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, possimus!
+</p>
+`;
