@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Text, { TEXT_SIZE } from './index';
+import Typography, { TEXT_SIZE } from './index';
 
 const meta = {
   title: 'Components/common/Typography',
-  component: Text,
+  component: Typography,
   parameters: {
     layout: 'centered'
   },
   tags: ['autodocs']
-} satisfies Meta<typeof Text>;
+} satisfies Meta<typeof Typography>;
 
 export default meta;
 
@@ -21,21 +21,21 @@ export const Default: Story = {
   }
 };
 
-export const TextVariant: Story = {
+export const TypographyVariant: Story = {
   args: {
     children: 'Heading 1',
     variant: 'h1'
   }
 };
 
-export const LargeText: Story = {
+export const TypographySize: Story = {
   args: {
     children: 'LargeText',
     size: TEXT_SIZE.LARGE
   }
 };
 
-export const TextColor: Story = {
+export const TypographyColor: Story = {
   args: {
     children: 'TextColor',
     customClasses: 'text-primary'
