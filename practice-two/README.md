@@ -46,44 +46,30 @@ This document is related to React Practice Two. Build a website about this Poké
 
 * hien.duong <[hien.duong@asnet.com.vn](hien.duong@asnet.com.vn)>
 
-## Getting started
+## How to run
 
-Step by step to get started this app at your location
+### Prerequisites
 
-### Clone repository with SSH
+* Node: version 18.18.0
+* pnpm: version 8.12.1
+* Prettier: version 3.1.0
+* Eslint: version 8.54.0
 
-```bash
-git clone git@gitlab.asoft-python.com:hien.duong/react-training.git
-```
+### Get source code
 
-### Move to folder which just cloned in your computer
+| Command                                                                           | Action                        |
+| :-------------------------------------------------------------------------------- | :---------------------------- |
+| `$ git clone git@gihttps://gitlab.asoft-python.com/hien.duong/react-training.git` | Clone Repository with HTTPS   |
+| `$ git@gitlab.asoft-python.com:hien.duong/react-training.git`                     | Clone Repository with SSH     |
+| `$ cd react-training`                                                             | Redirect to folder            |
+| `$ git checkout feature/practice-two`                                             | Checkout branch               |
 
-```bash
-cd react-training
-```
+### Build and Run app
 
-### Checkout into practice-two branch
-
-```bash
-git checkout feature/practice-two
-```
-
-### Move to practice-two
-
-```bash
-cd practice-two
-```
-
-### Install necessary packages
-
-```bash
-pnpm install
-```
-
-### Start the web server
-
-```bash
-pnpm run dev
-```
-
-Open the web server <http://localhost:5173/>
+| Command                                                              | Action                        | Port                    |
+| :------------------------------------------------------------------- | :---------------------------- | :---------------------- |
+| `$ pnpm i`                                                           | Install packages dependencies | N/A                     |
+| `$ pnpm run build`                                                   | Run build project             | N/A                     |
+| `$ pnpm run storybook`                                               | Run Storybook                 | <http://localhost:6006> |
+| `$ pnpm run test`                                                    | Run Unit test                 | N/A                     |
+| `$ pnpm run dev`                                                     | Run webpage                   | <http://localhost:5173> |
