@@ -45,3 +45,24 @@ export const Filled: Story = {
     }
   }
 };
+
+export const ButtonWithDifferentSize: Story = {
+  args: {
+    variant: 'text',
+    color: 'secondary'
+  },
+
+  render: (args) => (
+    <>
+      <Button size="small" {...args}>
+        Small
+      </Button>
+      <Button size="medium" {...args}>
+        Medium
+      </Button>
+      <Button size="large" {...args}>
+        Large
+      </Button>
+    </>
+  )
+};

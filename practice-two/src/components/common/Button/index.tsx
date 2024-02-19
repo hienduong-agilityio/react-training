@@ -44,9 +44,7 @@ const colorClasses: { [key in 'default' | 'primary' | 'secondary']: string } = {
  * @param children Text for the button.
  * @param variant Variant of the button. Can be one of 'text', 'outline', 'filled', or 'filledTonal'.
  * @param size Size of the button. Can be one of 'small', 'medium', or 'large'.
- * @param type Type of the button. Can be one of 'button', 'submit', or 'reset'.
  * @param color Color of the button. Can be one of 'primary', 'secondary', 'light'.
- * @param disable Disable of the button. Can be one of 'true' to disable or 'false' to none disable.
  * @param customClasses Custom variant class for the button.
  * @param onClick Click event handler function for the button.
  * @returns {JSX.Element} - Button element.
