@@ -18,6 +18,7 @@ export const Default: Story = {
   args: {
     placeholder: 'Enter your pokename',
     type: 'number',
+    customClasses: 'h-10',
     onChange: (e) => {
       console.log(e.target.value);
     }
@@ -27,7 +28,7 @@ export const Default: Story = {
 export const Primary: Story = {
   args: {
     placeholder: 'Enter your pokename',
-    customClasses: 'text-primary placeholder-primary pl-5 ',
+    customClasses: 'text-primary placeholder-primary pl-5 h-10',
     type: 'text',
     onChange: (e) => {
       console.log(e.target.value);
@@ -39,7 +40,7 @@ export const Disable: Story = {
   args: {
     placeholder: 'disable',
     disabled: true,
-    customClasses: 'cursor-not-allowed',
+    customClasses: 'cursor-not-allowed h-10',
     onClick: () => {
       alert('Button component');
     }

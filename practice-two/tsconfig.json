@@ -6,13 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    "paths": {
-      "@": ["./src"],
-      "@/*": ["./src/*"],
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
-    },
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -25,8 +18,28 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@constants": ["./src/constants"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@types": ["./src/types"],
+      "@utils": ["./src/utils"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@interfaces": ["./src/interfaces"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@mocks": ["./src/mocks"]
+    },
+    "esModuleInterop": true
   },
-  "include": ["src", "./jest-setup.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["src/**/*.stories.tsx"]
 }

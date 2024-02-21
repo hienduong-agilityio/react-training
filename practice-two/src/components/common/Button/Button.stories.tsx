@@ -49,7 +49,8 @@ export const Filled: Story = {
 export const ButtonWithDifferentSize: Story = {
   args: {
     variant: 'text',
-    color: 'secondary'
+    color: 'secondary',
+    customClasses: 'inline-flex'
   },
 
   render: (args) => (

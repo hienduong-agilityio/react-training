@@ -5,8 +5,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   customClasses?: string;
 }
 
-const inputDefaultClasses: string =
-  'w-full h-10 border pl-5 rounded-lg transition focus:border-primary focus:outline-none';
+const inputDefaultClasses: string = 'border pl-5 rounded-lg transition focus:border-primary focus:outline-none';
 
 /**
  * InputField component

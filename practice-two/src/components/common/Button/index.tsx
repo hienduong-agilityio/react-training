@@ -18,10 +18,10 @@ export enum BUTTON_VARIANT {
 }
 
 const buttonDefault: string =
-  'inline-flex rounded-xl font-medium uppercase flex gap-2 w-max items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
+  'flex gap-2 items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
 
 const variantClasses: { [key in BUTTON_VARIANT]: string } = {
-  text: 'bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700',
+  text: 'bg-primary hover:bg-blue-700 border-blue-600 border hover:border-blue-700 hover:text-white',
   outline: 'border border-primary',
   filled: 'bg-primary text-white rounded-lg',
   filledTonal: 'bg-primary text-white border border-primary'
