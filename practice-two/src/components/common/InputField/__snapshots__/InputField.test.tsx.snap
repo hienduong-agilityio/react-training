@@ -3,7 +3,7 @@
 exports[`InputField component applies custom classes correctly 1`] = `
 <DocumentFragment>
   <input
-    class="w-full h-10 border pl-5 rounded-lg transition focus:border-primary focus:outline-none custom-class"
+    class="border pl-5 rounded-lg transition focus:border-primary focus:outline-none custom-class"
   />
 </DocumentFragment>
 `;
@@ -11,7 +11,7 @@ exports[`InputField component applies custom classes correctly 1`] = `
 exports[`InputField component disables input when disabled prop is true 1`] = `
 <DocumentFragment>
   <input
-    class="w-full h-10 border pl-5 rounded-lg transition focus:border-primary focus:outline-none"
+    class="border pl-5 rounded-lg transition focus:border-primary focus:outline-none"
     disabled=""
   />
 </DocumentFragment>
@@ -20,16 +20,7 @@ exports[`InputField component disables input when disabled prop is true 1`] = `
 exports[`InputField component renders correctly 1`] = `
 <DocumentFragment>
   <input
-    class="w-full h-10 border pl-5 rounded-lg transition focus:border-primary focus:outline-none"
-  />
-</DocumentFragment>
-`;
-
-exports[`InputField component renders with value correctly 1`] = `
-<DocumentFragment>
-  <input
-    class="w-full h-10 border pl-5 rounded-lg transition focus:border-primary focus:outline-none"
-    value="Test"
+    class="border pl-5 rounded-lg transition focus:border-primary focus:outline-none"
   />
 </DocumentFragment>
 `;

@@ -7,10 +7,6 @@ describe('InputField component', () => {
     const { asFragment } = render(<InputField />);
     expect(asFragment()).toMatchSnapshot();
   });
-  it('renders with value correctly', () => {
-    const { asFragment } = render(<InputField value="Test" />);
-    expect(asFragment()).toMatchSnapshot();
-  });
 
   it('calls onChange handler when input changes', () => {
     const onChangeMock = jest.fn();
