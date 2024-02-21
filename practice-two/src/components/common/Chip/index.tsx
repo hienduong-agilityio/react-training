@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ReactNode } from 'react';
 
 export interface IChipProps {
-  color: CHIP_COLOR;
+  color?: CHIP_COLOR;
   icon?: ReactNode;
   label: string;
   customClasses?: string;

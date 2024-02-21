@@ -28,7 +28,25 @@ export default {
         fairy: '#ffa2e3',
         electric: '#fffa86',
         steel: '#a4ffe9',
-        grass: '#80e177'
+        grass: '#80e177',
+        'fire-400': '#EB6C6C',
+        'bug-400': '#91AC22',
+        'water-400': '#009ACB',
+        'flying-400': '#2299EE',
+        'poison-400': '#7E00CB',
+        'normal-400': '#B6B6B6',
+        'rock-400': '#857D57',
+        'ground-400': '#A77437',
+        'fighting-400': '#BA114E',
+        'ghost-400': '#6B2BF1',
+        'psychic-400': '#C4484A',
+        'ice-400': '#3A9D90',
+        'dragon-400': '#1268B8',
+        'dark-400': '#373737',
+        'fairy-400': '#C01A8D',
+        'electric-400': '#B7B117',
+        'steel-400': '#448F85',
+        'grass-400': '#1EBA11'
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif']
