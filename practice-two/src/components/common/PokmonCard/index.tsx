@@ -30,7 +30,7 @@ const PokemonCard = ({ pokemonID = '', pokemonName = '', pokemonType, pokemonImg
   return (
     <div className={pokemonCardClasses}>
       <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
-        <div className={`${overlayClasses} bg-${pokemonType[0]}-400 bg-bug-400 `}></div>
+        <div className={`${overlayClasses} bg-${pokemonType[0]}-400 `}></div>
       </div>
       <div className="absolute -top-12 transform -translate-y-10">
         <img src={pokemonImg} alt={pokemonName + ' img'} className="w-40 h-40" />
