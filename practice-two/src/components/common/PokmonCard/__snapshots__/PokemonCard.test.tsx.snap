@@ -16,7 +16,7 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
       class="absolute -top-12 transform -translate-y-10"
     >
       <img
-        alt="The pokemon images"
+        alt="Bulbasaur"
         class="w-40 h-40"
         src="https://example.com/bulbasaur.png"
       />
