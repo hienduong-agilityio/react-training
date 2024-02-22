@@ -15,7 +15,7 @@ export interface IPokemonCardProps {
 const pokemonCardClasses: string = 'w-80 h-56 flex flex-col items-center rounded-lg pt-24 relative';
 
 const overlayClasses: string =
-  'w-full h-full  absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500';
+  'w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500';
 
 /**
  * @param {IPokemonCardProps} pokemonID - ID of the Pokemon
