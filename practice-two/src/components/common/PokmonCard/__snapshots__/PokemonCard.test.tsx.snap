@@ -9,7 +9,7 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
       class="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden"
     >
       <div
-        class="w-full h-full  absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-grass-400 bg-bug-400 "
+        class="w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-grass-400 "
       />
     </div>
     <div
