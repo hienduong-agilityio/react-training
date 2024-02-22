@@ -68,7 +68,7 @@ const PokemonCard = ({
       </div>
 
       <div className="absolute -top-12 transform -translate-y-10">
-        <img src={pokemonImg} alt="The pokemon images" className="w-40 h-40" />
+        <img src={pokemonImg} alt={pokemonImg} className="w-40 h-40" />
       </div>
 
       <div className="z-10 w-full px-5">
