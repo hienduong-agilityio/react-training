@@ -37,7 +37,7 @@ const PokemonCard = ({ pokemonID = '', pokemonName = '', pokemonType, pokemonImg
       </div>
       <div className="z-10 w-full px-5">
         <span className="text-2xl font-bold capitalize block my-2">{pokemonName}</span>
-        <Typography>{`# ${pokemonID}`}</Typography>
+        <Typography>{`#${pokemonID}`}</Typography>
         {pokemonType.map((type, index) => {
           return <Chip customClasses="mr-2" key={index} label={type} color={type} />;
         })}

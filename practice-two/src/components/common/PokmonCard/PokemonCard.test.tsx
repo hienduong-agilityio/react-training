@@ -8,7 +8,7 @@ describe('PokemonCard component', () => {
     pokemonID: '001',
     pokemonName: 'Bulbasaur',
     pokemonType: [CHIP_COLOR.GRASS, CHIP_COLOR.POISON],
-    pokemonImg: 'bulbasaur.jpg'
+    pokemonImg: 'https://example.com/bulbasaur.png'
   };
 
   it('renders correctly with given props', () => {
@@ -21,7 +21,8 @@ describe('PokemonCard component', () => {
     expect(getByText('#001')).toBeInTheDocument();
 
     // Check if the image is rendered
-    expect(getByAltText('Bulbasaur img')).toBeInTheDocument();
+    const pokemonImg = getByAltText('The pokemon images');
+    expect(pokemonImg).toBeInTheDocument();
 
     // Check if the chips for types are rendered
     expect(getByText('grass')).toBeInTheDocument();

@@ -9,16 +9,16 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
       class="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden"
     >
       <div
-        class="w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-grass-400 "
+        class="w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-grass-400"
       />
     </div>
     <div
       class="absolute -top-12 transform -translate-y-10"
     >
       <img
-        alt="Bulbasaur img"
+        alt="The pokemon images"
         class="w-40 h-40"
-        src="bulbasaur.jpg"
+        src="https://example.com/bulbasaur.png"
       />
     </div>
     <div
@@ -35,7 +35,7 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
         #001
       </p>
       <div
-        class="inline-block rounded-full py-1 px-4 capitalize bg-grass mr-2"
+        class="inline-block rounded-full py-1 px-4 capitalize bg-grass-300 mr-2"
       >
         <span
           class="chip-label"
@@ -44,7 +44,7 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
         </span>
       </div>
       <div
-        class="inline-block rounded-full py-1 px-4 capitalize bg-poison mr-2"
+        class="inline-block rounded-full py-1 px-4 capitalize bg-poison-300 mr-2"
       >
         <span
           class="chip-label"
