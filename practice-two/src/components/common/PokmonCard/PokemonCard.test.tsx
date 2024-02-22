@@ -21,8 +21,7 @@ describe('PokemonCard component', () => {
     expect(getByText('#001')).toBeInTheDocument();
 
     // Check if the image is rendered
-    const pokemonImg = getByAltText('The pokemon images');
-    expect(pokemonImg).toBeInTheDocument();
+    expect(getByAltText('Bulbasaur')).toBeInTheDocument();
 
     // Check if the chips for types are rendered
     expect(getByText('grass')).toBeInTheDocument();
