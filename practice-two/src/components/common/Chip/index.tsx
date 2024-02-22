@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ReactNode } from 'react';
 
 export interface IChipProps {
-  color: CHIP_COLOR;
+  color?: CHIP_COLOR;
   icon?: ReactNode;
   label: string;
   customClasses?: string;
@@ -30,28 +30,28 @@ export enum CHIP_COLOR {
   GRASS = 'grass'
 }
 
-const chipDefault: string = 'inline-block rounded-full py-1 px-4 capitalize';
-
-const colorClasses: { [key in CHIP_COLOR]: string } = {
-  fire: 'bg-fire',
-  bug: 'bg-bug',
-  water: 'bg-water',
-  flying: 'bg-flying',
-  poison: 'bg-poison',
-  normal: 'bg-normal',
-  rock: 'bg-rock',
-  ground: 'bg-ground',
-  fighting: 'bg-fighting',
-  ghost: 'bg-ghost',
-  psychic: 'bg-psychic',
-  ice: 'bg-ice',
-  dragon: 'bg-dragon',
-  dark: 'bg-dark',
-  fairy: 'bg-fairy',
-  electric: 'bg-electric',
-  steel: 'bg-steel',
-  grass: 'bg-grass'
+const chipBackground: { [key in CHIP_COLOR]: string } = {
+  fire: 'bg-fire-300',
+  bug: 'bg-bug-300',
+  water: 'bg-water-300',
+  flying: 'bg-flying-300',
+  poison: 'bg-poison-300',
+  normal: 'bg-normal-300',
+  rock: 'bg-rock-300',
+  ground: 'bg-ground-300',
+  fighting: 'bg-fighting-300',
+  ghost: 'bg-ghost-300',
+  psychic: 'bg-psychic-300',
+  ice: 'bg-ice-300',
+  dragon: 'bg-dragon-300',
+  dark: 'bg-dark-300',
+  fairy: 'bg-fairy-300',
+  electric: 'bg-electric-300',
+  steel: 'bg-steel-300',
+  grass: 'bg-grass-300'
 };
+
+const chipDefault: string = 'inline-block rounded-full py-1 px-4 capitalize';
 
 /**
  * Chip Component
@@ -63,7 +63,7 @@ const colorClasses: { [key in CHIP_COLOR]: string } = {
  */
 
 const Chip = ({ color = CHIP_COLOR.NORMAL, icon, label = '', customClasses = '' }: IChipProps): JSX.Element => {
-  const chipClasses: string = classNames([chipDefault, colorClasses[color], customClasses]);
+  const chipClasses: string = classNames([chipDefault, chipBackground[color], customClasses]);
 
   return (
     <div className={chipClasses}>
