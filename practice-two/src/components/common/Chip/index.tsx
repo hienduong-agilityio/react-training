@@ -32,27 +32,6 @@ export enum CHIP_COLOR {
 
 const chipDefault: string = 'inline-block rounded-full py-1 px-4 capitalize';
 
-const colorClasses: { [key in CHIP_COLOR]: string } = {
-  fire: 'bg-fire',
-  bug: 'bg-bug',
-  water: 'bg-water',
-  flying: 'bg-flying',
-  poison: 'bg-poison',
-  normal: 'bg-normal',
-  rock: 'bg-rock',
-  ground: 'bg-ground',
-  fighting: 'bg-fighting',
-  ghost: 'bg-ghost',
-  psychic: 'bg-psychic',
-  ice: 'bg-ice',
-  dragon: 'bg-dragon',
-  dark: 'bg-dark',
-  fairy: 'bg-fairy',
-  electric: 'bg-electric',
-  steel: 'bg-steel',
-  grass: 'bg-grass'
-};
-
 /**
  * Chip Component
  * @param color - The background color of the chip.
@@ -63,7 +42,7 @@ const colorClasses: { [key in CHIP_COLOR]: string } = {
  */
 
 const Chip = ({ color = CHIP_COLOR.NORMAL, icon, label = '', customClasses = '' }: IChipProps): JSX.Element => {
-  const chipClasses: string = classNames([chipDefault, colorClasses[color], customClasses]);
+  const chipClasses: string = classNames([chipDefault, `bg-${color}-300`, customClasses]);
 
   return (
     <div className={chipClasses}>

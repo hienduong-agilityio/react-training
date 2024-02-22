@@ -30,17 +30,17 @@ const PokemonCard = ({ pokemonID = '', pokemonName = '', pokemonType, pokemonImg
   return (
     <div className={pokemonCardClasses}>
       <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
-        <div className={`${overlayClasses} bg-${pokemonType[0]}-400 `}></div>
+        <div className={`${overlayClasses} bg-${pokemonType[0]}-400`}></div>
       </div>
       <div className="absolute -top-12 transform -translate-y-10">
-        <img src={pokemonImg} alt={pokemonName + ' img'} className="w-40 h-40" />
+        <img src={pokemonImg} alt="The pokemon images" className="w-40 h-40" />
       </div>
       <div className="z-10 w-full px-5">
         <span className="text-2xl font-bold capitalize block my-2">{pokemonName}</span>
-        <Typography>{'#' + pokemonID}</Typography>
-        {pokemonType.map((type, index) => (
-          <Chip customClasses="mr-2" key={index} label={type} color={type} />
-        ))}
+        <Typography>{`# ${pokemonID}`}</Typography>
+        {pokemonType.map((type, index) => {
+          return <Chip customClasses="mr-2" key={index} label={type} color={type} />;
+        })}
       </div>
     </div>
   );
