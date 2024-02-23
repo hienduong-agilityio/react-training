@@ -8,11 +8,11 @@ import Typography from '../Typography';
 // Library
 import classNames from 'classnames';
 
-export interface IPokemonData {
+export interface IPokemonCardProps {
   pokemonID: string;
   pokemonName: string;
-  pokemonType?: CHIP_COLOR[];
   pokemonImg: string;
+  pokemonType?: CHIP_COLOR[];
 }
 
 const pokemonCardClasses: string = 'w-full h-full flex flex-col items-center rounded-lg pt-16 relative';
@@ -42,10 +42,10 @@ const cardBackground: { [key in CHIP_COLOR]: string } = {
 };
 
 /**
- * @param {IPokemonData} pokemonID - ID of the Pokemon
- * @param {IPokemonData} pokemonName - Name of the Pokemon
- * @param {IPokemonData} pokemonType - Array of types of the Pokemon
- * @param {IPokemonData} pokemonImg - URL of the Pokemon image
+ * @param pokemonID - ID of the Pokemon
+ * @param pokemonName - Name of the Pokemon
+ * @param pokemonType - Array of types of the Pokemon
+ * @param pokemonImg - URL of the Pokemon image
  *
  * @returns {JSX.Element} - The PokemonCard element.
  */
@@ -55,7 +55,7 @@ const PokemonCard = ({
   pokemonName = '',
   pokemonType = [CHIP_COLOR.NORMAL],
   pokemonImg
-}: IPokemonData): JSX.Element => {
+}: IPokemonCardProps): JSX.Element => {
   const type = pokemonType.length > 0 ? pokemonType[0] : undefined;
   // Default background if type is undefined
   const defaultBackground = CHIP_COLOR.NORMAL;
