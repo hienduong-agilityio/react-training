@@ -29,6 +29,9 @@ export default {
         steel: { 300: '#a4ffe9', 400: '#448F85' },
         grass: { 300: '#80e177', 400: '#1EBA11' }
       },
+      backgroundImage: {
+        'pokemon-card': 'url(https://relaxed-jang-821b42.netlify.app/static/media/watermark-pokeball.8f7e353c.svg)'
+      },
       fontFamily: {
         sans: ['Roboto', 'sans-serif']
       }
