@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
 
 // Components
-import Modal from './index';
+import Popup from './index';
 import Button from '../Button';
 
 // Meta information for Storybook
 export default {
-  title: 'Components/Modal',
-  component: Modal,
+  title: 'Components/Popup',
+  component: Popup,
   parameters: {
     layout: 'centered'
   },
@@ -26,8 +26,8 @@ const Template: Story<ModalProps> = (args) => {
 
   return (
     <div>
-      <Button onClick={() => setIsOpen(true)}>Show Modal</Button>
-      <Modal
+      <Button onClick={() => setIsOpen(true)}>Show Popup</Button>
+      <Popup
         isOpen={isOpen}
         onClosePopup={() => setIsOpen(false)}
         closeButtonContent={args.closeButtonContent}
@@ -45,7 +45,7 @@ const Template: Story<ModalProps> = (args) => {
             <Button customClasses="bg-primary">Cancel</Button>
           </div>
         </div>
-      </Modal>
+      </Popup>
     </div>
   );
 };

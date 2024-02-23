@@ -1,39 +1,39 @@
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import Modal from './index';
+import Popup from './index';
 
-describe('Modal Component', () => {
+describe('Popup Component', () => {
   it('renders correctly when isOpen is true', () => {
     const onClosePopup = jest.fn();
     const { container, getByText } = render(
-      <Modal isOpen={true} onClosePopup={onClosePopup}>
-        <div>Modal Content</div>
-      </Modal>
+      <Popup isOpen={true} onClosePopup={onClosePopup}>
+        <div>Popup Content</div>
+      </Popup>
     );
 
     expect(container.firstChild).toHaveClass('visible');
-    expect(getByText('Modal Content')).toBeInTheDocument();
+    expect(getByText('Popup Content')).toBeInTheDocument();
   });
 
   it('renders correctly when isOpen is false', () => {
     const onClosePopup = jest.fn();
     const { container, queryByText } = render(
-      <Modal isOpen={false} onClosePopup={onClosePopup}>
-        <div>Modal Content</div>
-      </Modal>
+      <Popup isOpen={false} onClosePopup={onClosePopup}>
+        <div>Popup Content</div>
+      </Popup>
     );
 
     expect(container.firstChild).toHaveClass('invisible');
-    expect(queryByText('Modal Content')).toBeInTheDocument();
+    expect(queryByText('Popup Content')).toBeInTheDocument();
   });
 
   it('calls onClosePopup when clicking on close button', () => {
     const onClosePopup = jest.fn();
     const { getByText } = render(
-      <Modal isOpen={true} onClosePopup={onClosePopup} closeButton={true}>
-        <div>Modal Content</div>
-      </Modal>
+      <Popup isOpen={true} onClosePopup={onClosePopup} closeButton={true}>
+        <div>Popup Content</div>
+      </Popup>
     );
 
     fireEvent.click(getByText('Closes'));
@@ -43,9 +43,9 @@ describe('Modal Component', () => {
   it('matches snapshot', () => {
     const onClosePopup = jest.fn();
     const { asFragment } = render(
-      <Modal isOpen={true} onClosePopup={onClosePopup}>
-        <div>Modal Content</div>
-      </Modal>
+      <Popup isOpen={true} onClosePopup={onClosePopup}>
+        <div>Popup Content</div>
+      </Popup>
     );
 
     expect(asFragment()).toMatchSnapshot();

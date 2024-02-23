@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal Component matches snapshot 1`] = `
+exports[`Popup Component matches snapshot 1`] = `
 <DocumentFragment>
   <section
     class="
@@ -15,7 +15,7 @@ exports[`Modal Component matches snapshot 1`] = `
           "
     >
       <div>
-        Modal Content
+        Popup Content
       </div>
     </div>
   </section>

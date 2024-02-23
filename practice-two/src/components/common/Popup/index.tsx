@@ -8,7 +8,7 @@ interface IPopupProps {
   onClosePopup?: () => void;
 }
 
-export default function Modal({
+export default function Popup({
   isOpen = false,
   children,
   closeButton,
@@ -23,7 +23,7 @@ export default function Modal({
           ${isOpen ? 'visible bg-black/20' : 'invisible'}
         `}
     >
-      {/* modal */}
+      {/* popup */}
       <div
         onClick={(e) => e.stopPropagation()}
         className={`
