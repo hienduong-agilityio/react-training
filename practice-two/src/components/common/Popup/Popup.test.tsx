@@ -31,7 +31,7 @@ describe('Popup Component', () => {
   it('calls onClosePopup when clicking on close button', () => {
     const onClosePopup = jest.fn();
     const { getByText } = render(
-      <Popup isOpen={true} onClosePopup={onClosePopup} closeButton={true}>
+      <Popup isOpen={true} onClosePopup={onClosePopup} buttonClosesPopup={true}>
         <div>Popup Content</div>
       </Popup>
     );

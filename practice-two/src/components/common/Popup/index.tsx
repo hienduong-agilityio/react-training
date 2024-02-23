@@ -3,7 +3,7 @@ import Button from '../Button';
 interface IPopupProps {
   isOpen: boolean;
   children?: React.ReactNode | string;
-  closeButton?: boolean;
+  buttonClosesPopup?: boolean;
   closeButtonContent?: React.ReactNode | string;
   onClosePopup?: () => void;
 }
@@ -11,12 +11,12 @@ interface IPopupProps {
 export default function Popup({
   isOpen = false,
   children,
-  closeButton,
+  buttonClosesPopup,
   closeButtonContent = 'Closes',
   onClosePopup
 }: IPopupProps) {
   return (
-    <section
+    <div
       onClick={onClosePopup}
       className={`
           fixed inset-0 flex justify-center items-center transition-colors
@@ -31,7 +31,7 @@ export default function Popup({
             ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}
           `}
       >
-        {closeButton && (
+        {buttonClosesPopup && (
           <Button
             onClick={onClosePopup}
             className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
@@ -41,6 +41,6 @@ export default function Popup({
         )}
         {children}
       </div>
-    </section>
+    </div>
   );
 }

@@ -2,7 +2,7 @@
 
 exports[`Popup Component matches snapshot 1`] = `
 <DocumentFragment>
-  <section
+  <div
     class="
           fixed inset-0 flex justify-center items-center transition-colors
           visible bg-black/20
@@ -18,6 +18,6 @@ exports[`Popup Component matches snapshot 1`] = `
         Popup Content
       </div>
     </div>
-  </section>
+  </div>
 </DocumentFragment>
 `;

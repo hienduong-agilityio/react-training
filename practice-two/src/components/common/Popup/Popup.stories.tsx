@@ -31,7 +31,7 @@ const Template: Story<ModalProps> = (args) => {
         isOpen={isOpen}
         onClosePopup={() => setIsOpen(false)}
         closeButtonContent={args.closeButtonContent}
-        closeButton
+        buttonClosesPopup
       >
         <div className="text-center w-56">
           <div className="mx-auto my-4 w-48">
