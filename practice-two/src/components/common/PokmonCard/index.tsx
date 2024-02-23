@@ -18,7 +18,7 @@ export interface IPokemonCardProps {
 const pokemonCardClasses: string = 'w-full h-full flex flex-col items-center rounded-lg pt-16 relative';
 
 const overlayClasses: string =
-  'w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-no-repeat bg-right-top	 bg-pokemon-card';
+  'w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-no-repeat bg-right-top	bg-pokemon-card';
 
 const cardBackground: { [key in CHIP_COLOR]: string } = {
   fire: 'bg-fire-400',
