@@ -6,6 +6,7 @@ import logo from './assets/images/Pokedex-logo.svg';
 
 // Styles
 import './index.css';
+import Pokedex from '@components/layouts/Pokedex';
 
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
@@ -17,6 +18,7 @@ const App = () => {
       </header>
       <main className={`${containerClasses} pt-5`}>
         <SearchBar />
+        <Pokedex />
       </main>
     </>
   );
