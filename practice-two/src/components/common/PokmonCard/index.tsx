@@ -75,8 +75,8 @@ const PokemonCard = ({
         <span className="text-2xl font-bold capitalize block my-2">{pokemonName}</span>
 
         <Typography>{`#${pokemonID}`}</Typography>
-        {pokemonType.map((type, index) => {
-          return <Chip customClasses="mr-2" key={index} label={type} color={type} />;
+        {pokemonType.map((type) => {
+          return <Chip customClasses="mr-2" key={type} label={type} color={type} />;
         })}
       </div>
     </div>
