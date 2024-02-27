@@ -6,7 +6,7 @@ exports[`Popup Component matches snapshot 1`] = `
     class="fixed inset-0 flex justify-center items-center transition-colors block bg-black/20"
   >
     <div
-      class="bg-white rounded-xl shadow p-6 transition-all z-50 scale-100 opacity-100 z-50"
+      class="bg-white rounded-xl p-6 z-50 scale-100 opacity-100 z-50"
     >
       <div>
         Popup Content

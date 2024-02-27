@@ -18,14 +18,18 @@ export default function Popup({
   children,
   onClosePopup = () => {}
 }: Readonly<IPopupProps>): JSX.Element {
+  const handleClosePopup = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (e.target === e.currentTarget) {
+      onClosePopup();
+    }
+  };
   return (
     <div
-      onClick={onClosePopup}
+      onClick={handleClosePopup}
       className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? 'block bg-black/20' : 'hidden'}`}
     >
       {/* popup */}
       <div
-        onClick={(e) => e.stopPropagation()}
         className={`bg-white rounded-xl p-6 z-50 ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}`}
       >
         {children}
