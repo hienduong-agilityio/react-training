@@ -23,6 +23,7 @@ export default function Popup({
       onClosePopup();
     }
   };
+
   return (
     <div
       onClick={handleClosePopup}
