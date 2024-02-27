@@ -11,25 +11,19 @@ interface IPopupProps {
 export default function Popup({
   isOpen = false,
   children,
-  buttonClosesPopup,
+  buttonClosesPopup = true,
   closeButtonContent = 'Closes',
-  onClosePopup
-}: IPopupProps) {
+  onClosePopup = () => {}
+}: Readonly<IPopupProps>): JSX.Element {
   return (
     <div
       onClick={onClosePopup}
-      className={`
-          fixed inset-0 flex justify-center items-center transition-colors
-          ${isOpen ? 'visible bg-black/20' : 'invisible'}
-        `}
+      className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? 'visible bg-black/20' : 'invisible'}`}
     >
       {/* popup */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`
-            bg-white rounded-xl shadow p-6 transition-all z-50
-            ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}
-          `}
+        className={`bg-white rounded-xl shadow p-6 transition-all z-50 ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}`}
       >
         {buttonClosesPopup && (
           <Button
