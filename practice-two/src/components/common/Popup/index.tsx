@@ -1,3 +1,4 @@
+// Component
 import Button from '../Button';
 
 interface IPopupProps {
@@ -7,6 +8,17 @@ interface IPopupProps {
   closeButtonContent?: React.ReactNode | string;
   onClosePopup?: () => void;
 }
+
+/**
+ * Popup component to display content in a modal-like dialog
+ *
+ * @param isOpen - Indicates whether the popup is open or closed
+ * @param children - Content to be displayed inside the popup
+ * @param buttonClosesPopup - Indicates whether clicking a button should close the popup
+ * @param closeButtonContent - Content for the close button
+ * @param onClosePopup - Callback function to handle popup close event
+ * @returns {JSX.Element} Popup component
+ */
 
 export default function Popup({
   isOpen = false,
