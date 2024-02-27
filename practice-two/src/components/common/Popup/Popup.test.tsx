@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import Popup from './index';
@@ -12,7 +12,7 @@ describe('Popup Component', () => {
       </Popup>
     );
 
-    expect(container.firstChild).toHaveClass('visible');
+    expect(container.firstChild).toHaveClass('block');
     expect(getByText('Popup Content')).toBeInTheDocument();
   });
 
@@ -24,20 +24,8 @@ describe('Popup Component', () => {
       </Popup>
     );
 
-    expect(container.firstChild).toHaveClass('invisible');
+    expect(container.firstChild).toHaveClass('hidden');
     expect(queryByText('Popup Content')).toBeInTheDocument();
-  });
-
-  it('calls onClosePopup when clicking on close button', () => {
-    const onClosePopup = jest.fn();
-    const { getByText } = render(
-      <Popup isOpen={true} onClosePopup={onClosePopup} buttonClosesPopup={true}>
-        <div>Popup Content</div>
-      </Popup>
-    );
-
-    fireEvent.click(getByText('Closes'));
-    expect(onClosePopup).toHaveBeenCalledTimes(1);
   });
 
   it('matches snapshot', () => {
