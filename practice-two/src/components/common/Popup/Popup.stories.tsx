@@ -38,11 +38,11 @@ const Template: Story<ModalProps> = (args) => {
             <h3 className="text-lg font-black text-gray-800">Confirm Delete</h3>
             <p className="text-sm text-gray-500">Are you sure you want to delete this item?</p>
           </div>
-          <div className="flex gap-4">
-            <Button customClasses="bg-danger" onClick={() => setIsOpen(false)}>
-              confirm
+          <div className="flex gap-4 justify-between">
+            <Button onClick={() => setIsOpen(false)}>Confirm</Button>
+            <Button variant="filled" color="danger">
+              Cancel
             </Button>
-            <Button customClasses="bg-primary">Cancel</Button>
           </div>
         </div>
       </Popup>

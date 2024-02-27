@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button, { BUTTON_VARIANT } from './index';
+import React from 'react';
 
 const meta = {
   title: 'Components/common/Button',
@@ -18,8 +19,6 @@ export const Primary: Story = {
   args: {
     children: 'Button primary',
     variant: 'text',
-    customClasses: 'bg-blue-400',
-    disabled: true,
     onClick: () => {
       alert('Button component');
     }
@@ -40,6 +39,18 @@ export const Filled: Story = {
   args: {
     children: 'Button filled',
     variant: BUTTON_VARIANT.FILLED,
+    color: 'danger',
+    onClick: () => {
+      alert('Button component');
+    }
+  }
+};
+
+export const FilledTonal: Story = {
+  args: {
+    children: 'Button filled',
+    variant: BUTTON_VARIANT.FILLED_TONAL,
+    color: 'danger',
     onClick: () => {
       alert('Button component');
     }
