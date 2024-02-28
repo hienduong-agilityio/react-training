@@ -4,8 +4,8 @@ import { CHIP_COLOR } from '@components/common/Chip';
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 
-// Hook
-import usePokemonData from '@hooks/usePokemonData/useReducerPokemonData';
+// Library
+import { ReactNode } from 'react';
 
 export interface IPokemonData {
   id: string;
@@ -14,17 +14,21 @@ export interface IPokemonData {
   type: CHIP_COLOR[];
 }
 
-const Pokedex = () => {
-  const URL = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
-  const { data, loading, error } = usePokemonData(URL);
+interface PokedexProps {
+  pokedexData: IPokemonData[];
+  pokedexLoading: ReactNode;
+  pokedexError: ReactNode;
+}
 
-  if (loading) return <span>Loading...</span>;
-  if (error) return <span>Error: {error}</span>;
+// TODO: Update comments for component lates
+const Pokedex = ({ pokedexData, pokedexLoading, pokedexError }: PokedexProps) => {
+  if (pokedexLoading) return <span>Loading...</span>;
+  if (pokedexError) return <span>Error: {pokedexError}</span>;
 
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
-        {data.map((pokemon: IPokemonData) => (
+        {pokedexData.map((pokemon: IPokemonData) => (
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}

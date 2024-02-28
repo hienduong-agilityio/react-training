@@ -4,8 +4,23 @@ import iconSearch from '@assets/images/mingcute_search-line.svg';
 // Components
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
+import { useState } from 'react';
 
-const SearchField = (): JSX.Element => {
+interface SearchFieldProps {
+  onSearch: (value: string) => void;
+}
+
+const SearchField = ({ onSearch }: SearchFieldProps): JSX.Element => {
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    onSearch(searchInput);
+  };
+
   return (
     <section className="relative h-14 ">
       <img src={iconSearch} alt="search-icon" className="pl-4 p-2 top-2 left-0 absolute" />
@@ -15,6 +30,7 @@ const SearchField = (): JSX.Element => {
           color="secondary"
           customClasses="border-none rounded-xl capitalize w-full font-bold text-primary flex-col "
           size="medium"
+          onClick={handleSubmit}
         >
           search
         </Button>
@@ -22,6 +38,8 @@ const SearchField = (): JSX.Element => {
       <InputField
         placeholder="Pokemon name, number or type"
         customClasses="text-primary font-bold placeholder-primary h-full w-full pl-12 border-white focus:border-primary focus:outline-none rounded-2xl shadow-2xl "
+        value={searchInput}
+        onChange={handleChange}
       />
     </section>
   );
