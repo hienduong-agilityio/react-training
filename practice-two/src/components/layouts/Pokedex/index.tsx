@@ -1,10 +1,8 @@
-// Type
-import { CHIP_COLOR } from '@components/common/Chip';
-
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 
 // Type
+import { CHIP_COLOR } from '@components/common/Chip';
 import { ReactNode } from 'react';
 
 export interface IPokemonData {
