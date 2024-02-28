@@ -5,7 +5,7 @@ import iconSearch from '@assets/images/mingcute_search-line.svg';
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
 
-// Hook
+// Types && Hook
 import { RefObject, useRef } from 'react';
 
 interface SearchFieldProps {

@@ -1,17 +1,15 @@
 // Components
 import SearchBar from './components/layouts/SearchBar';
+import Pokedex, { IPokemonData } from '@components/layouts/Pokedex';
 
 // Logo
 import logo from './assets/images/Pokedex-logo.svg';
 
 // Styles
 import './index.css';
-import Pokedex, { IPokemonData } from '@components/layouts/Pokedex';
-
-// Library
-import { useEffect, useState } from 'react';
 
 // Hook
+import { useEffect, useState } from 'react';
 import usePokemonData from '@hooks/usePokemonData/useReducerPokemonData';
 
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
