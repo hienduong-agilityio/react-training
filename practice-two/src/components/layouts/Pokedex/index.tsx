@@ -21,7 +21,7 @@ export interface IPokemonData {
  * @returns {JSX.Element} - Returns the JSX element representing the Pokedex
  */
 
-const Pokedex = () => {
+const Pokedex = (): JSX.Element => {
   const { filteredData, loading, error } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched

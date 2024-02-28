@@ -38,7 +38,7 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
   const { data, loading, error }: IPokemonDataState = usePokemonData(URL);
 
   // Filter data based on search term
-  const filteredData = useMemo(() => {
+  const filteredData: IPokemonData[] = useMemo(() => {
     if (!data) return [];
 
     return data.filter((pokemon) => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -48,7 +48,7 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
    * Function handle get value to  search
    * @param value - Value string from input search
    */
-  const handleSearch = (value: string) => {
+  const handleSearch = (value: string): void => {
     setSearchTerm(value);
   };
 
