@@ -34,8 +34,16 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // FetchAPI
-  const URL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
-  const { data, loading, error }: IPokemonDataState = usePokemonData(URL);
+  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+  const urlWithSearchParams = useMemo(() => {
+    const url = new URL(baseURL);
+
+    url.searchParams.append('search', searchTerm);
+
+    return url.toString();
+  }, [baseURL, searchTerm]);
+
+  const { data, loading, error }: IPokemonDataState = usePokemonData(urlWithSearchParams);
 
   // Filter data based on search term
   const filteredData: IPokemonData[] = useMemo(() => {
