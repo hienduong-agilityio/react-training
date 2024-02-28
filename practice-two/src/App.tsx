@@ -8,14 +8,9 @@ import logo from '@assets/images/Pokedex-logo.svg';
 // Styles
 import './index.css';
 
-// Context
-import { usePokemonContext } from '@stores/PokemonProvider';
-
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  const { filteredData, loading, error } = usePokemonContext();
-
   return (
     <>
       <header className={containerClasses}>
@@ -23,7 +18,7 @@ const App = () => {
       </header>
       <main className={`${containerClasses} pt-5`}>
         <SearchBar />
-        <Pokedex pokedexData={filteredData} pokedexLoading={loading} pokedexError={error} />
+        <Pokedex />
       </main>
     </>
   );

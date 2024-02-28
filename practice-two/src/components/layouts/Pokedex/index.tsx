@@ -3,19 +3,13 @@ import PokemonCard from '@components/common/PokmonCard';
 
 // Type
 import { CHIP_COLOR } from '@components/common/Chip';
-import { ReactNode } from 'react';
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonData {
   id: string;
   name: string;
   image: string;
   type: CHIP_COLOR[];
-}
-
-interface PokedexProps {
-  pokedexData: IPokemonData[];
-  pokedexLoading: ReactNode;
-  pokedexError: ReactNode;
 }
 
 /**
@@ -27,21 +21,23 @@ interface PokedexProps {
  * @returns {JSX.Element} - Returns the JSX element representing the Pokedex
  */
 
-const Pokedex = ({ pokedexData, pokedexLoading, pokedexError }: PokedexProps) => {
+const Pokedex = () => {
+  const { filteredData, loading, error } = usePokemonContext();
+
   // Display loading indicator if data is still being fetched
-  if (pokedexLoading) {
+  if (loading) {
     return <span>Loading...</span>;
   }
 
   // Display error message if there was an issue fetching data
-  if (pokedexError) {
-    return <span>Error: {pokedexError}</span>;
+  if (error) {
+    return <span>Error: {error}</span>;
   }
 
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
-        {pokedexData.map((pokemon: IPokemonData) => (
+        {filteredData.map((pokemon: IPokemonData) => (
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
