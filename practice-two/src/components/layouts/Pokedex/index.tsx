@@ -22,7 +22,7 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const { filteredData, loading, error } = usePokemonContext();
+  const { data, loading, error } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched
   if (loading) {
@@ -37,7 +37,7 @@ const Pokedex = (): JSX.Element => {
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
-        {filteredData.map((pokemon: IPokemonData) => (
+        {data.map((pokemon: IPokemonData) => (
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}

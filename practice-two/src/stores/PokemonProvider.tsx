@@ -7,7 +7,7 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps {
   searchTerm: string;
-  filteredData: IPokemonData[];
+  data: IPokemonData[];
   loading: boolean;
   error: string | null;
   handleSearch: (value: string) => void;
@@ -33,8 +33,10 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
   // Management input value state to search
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // FetchAPI
+  // API
   const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+
+  // Filter API
   const urlWithSearchParams = useMemo(() => {
     const url = new URL(baseURL);
 
@@ -44,13 +46,6 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
   }, [baseURL, searchTerm]);
 
   const { data, loading, error }: IPokemonDataState = usePokemonData(urlWithSearchParams);
-
-  // Filter data based on search term
-  const filteredData: IPokemonData[] = useMemo(() => {
-    if (!data) return [];
-
-    return data.filter((pokemon) => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  }, [data, searchTerm]);
 
   /**
    * Function handle get value to  search
@@ -63,12 +58,12 @@ export const AppProvider = ({ children }: ContextProviderProps) => {
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
       searchTerm,
-      filteredData,
+      data,
       loading,
       error,
       handleSearch
     }),
-    [error, filteredData, loading, searchTerm]
+    [error, data, loading, searchTerm]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;
