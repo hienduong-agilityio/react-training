@@ -1,8 +1,12 @@
+// Library
 import classNames from 'classnames';
-import { InputHTMLAttributes } from 'react';
+
+// Types
+import { InputHTMLAttributes, LegacyRef } from 'react';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   customClasses?: string;
+  inputRef: LegacyRef<HTMLInputElement>;
 }
 
 const inputDefaultClasses: string = 'border pl-5 rounded-lg transition focus:border-primary focus:outline-none';
@@ -14,10 +18,10 @@ const inputDefaultClasses: string = 'border pl-5 rounded-lg transition focus:bor
  * @returns {JSX.Element} - The InputField element.
  */
 
-const InputField = ({ customClasses = '', ...restProps }: IInputProps): JSX.Element => {
+const InputField = ({ customClasses = '', inputRef, ...restProps }: IInputProps): JSX.Element => {
   const inputFiledClasses: string = classNames(inputDefaultClasses, [customClasses]);
 
-  return <input className={inputFiledClasses} {...restProps}></input>;
+  return <input ref={inputRef} className={inputFiledClasses} {...restProps}></input>;
 };
 
 export default InputField;

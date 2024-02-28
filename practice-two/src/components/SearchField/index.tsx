@@ -4,21 +4,29 @@ import iconSearch from '@assets/images/mingcute_search-line.svg';
 // Components
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
-import { useState } from 'react';
+
+// Hook
+import { RefObject, useRef } from 'react';
 
 interface SearchFieldProps {
   onSearch: (value: string) => void;
 }
 
+/**
+ * Component for a search field to search for Pokémon
+ * @param onSearch - Function triggered when search is performed
+ *
+ * @returns {JSX.Element} - JSX element representing the search field
+ */
+
 const SearchField = ({ onSearch }: SearchFieldProps): JSX.Element => {
-  const [searchInput, setSearchInput] = useState('');
+  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    onSearch(searchInput);
+  // Function to handle button submit to get input value
+  const handleBtnClick = () => {
+    if (inputRef.current) {
+      onSearch(inputRef.current.value);
+    }
   };
 
   return (
@@ -30,16 +38,15 @@ const SearchField = ({ onSearch }: SearchFieldProps): JSX.Element => {
           color="secondary"
           customClasses="border-none rounded-xl capitalize w-full font-bold text-primary flex-col "
           size="medium"
-          onClick={handleSubmit}
+          onClick={handleBtnClick}
         >
           search
         </Button>
       </div>
       <InputField
+        inputRef={inputRef}
         placeholder="Pokemon name, number or type"
         customClasses="text-primary font-bold placeholder-primary h-full w-full pl-12 border-white focus:border-primary focus:outline-none rounded-2xl shadow-2xl "
-        value={searchInput}
-        onChange={handleChange}
       />
     </section>
   );

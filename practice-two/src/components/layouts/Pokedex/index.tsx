@@ -4,7 +4,7 @@ import { CHIP_COLOR } from '@components/common/Chip';
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 
-// Library
+// Type
 import { ReactNode } from 'react';
 
 export interface IPokemonData {
@@ -20,10 +20,25 @@ interface PokedexProps {
   pokedexError: ReactNode;
 }
 
-// TODO: Update comments for component lates
+/**
+ * Component to display a Pokedex containing Pokemon cards
+ * @param pokedexData - Array containing data for Pokémon to be displayed
+ * @param pokedexLoading - Loading indicator displayed when data is being fetched
+ * @param pokedexError - Error message to be displayed if there is an issue fetching data
+ *
+ * @returns {JSX.Element} - Returns the JSX element representing the Pokedex
+ */
+
 const Pokedex = ({ pokedexData, pokedexLoading, pokedexError }: PokedexProps) => {
-  if (pokedexLoading) return <span>Loading...</span>;
-  if (pokedexError) return <span>Error: {pokedexError}</span>;
+  // Display loading indicator if data is still being fetched
+  if (pokedexLoading) {
+    return <span>Loading...</span>;
+  }
+
+  // Display error message if there was an issue fetching data
+  if (pokedexError) {
+    return <span>Error: {pokedexError}</span>;
+  }
 
   return (
     <section className="pt-24">
