@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 
 // Context
-import { AppProvider } from './context/PokemonProvider.tsx';
+import { AppProvider } from '@stores/PokemonProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
