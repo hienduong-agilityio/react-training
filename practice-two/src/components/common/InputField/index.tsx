@@ -6,7 +6,7 @@ import { InputHTMLAttributes, LegacyRef } from 'react';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   customClasses?: string;
-  inputRef: LegacyRef<HTMLInputElement>;
+  inputRef?: LegacyRef<HTMLInputElement>;
 }
 
 const inputDefaultClasses: string = 'border pl-5 rounded-lg transition focus:border-primary focus:outline-none';
