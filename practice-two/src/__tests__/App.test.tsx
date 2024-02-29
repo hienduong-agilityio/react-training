@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import App from '../App';
-import { AppProvider } from '@stores/PokemonProvider';
+import { PokemonProvider } from '@stores/PokemonProvider';
 
 test('demo', () => {
   expect(true).toBe(true);
@@ -8,9 +8,9 @@ test('demo', () => {
 
 test('Renders the main page', () => {
   render(
-    <AppProvider>
+    <PokemonProvider>
       <App />
-    </AppProvider>
+    </PokemonProvider>
   );
   expect(true).toBeTruthy();
 });
