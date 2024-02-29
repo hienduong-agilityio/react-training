@@ -7,7 +7,7 @@ import InputField from '@components/common/InputField';
 
 // Types && Hook
 import { RefObject, useRef } from 'react';
-import { usePokemonContext } from '@stores/PokemonProvider';
+import { usePokemonDispatch } from '@stores/PokemonProvider';
 
 /**
  * Component for a search field to search for Pokémon
@@ -17,7 +17,7 @@ import { usePokemonContext } from '@stores/PokemonProvider';
  */
 
 const SearchField = (): JSX.Element => {
-  const { handleSearch } = usePokemonContext();
+  const { handleSearch } = usePokemonDispatch();
 
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
