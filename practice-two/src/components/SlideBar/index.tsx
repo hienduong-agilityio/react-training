@@ -30,13 +30,13 @@ export default function SideBar({
       className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? 'block bg-black/20 z-50' : 'hidden'}`}
     >
       {/* SideBar */}
-      <div
+      <aside
         className={
-          'fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl dark:text-black md:w-[50%] lg:w-[25%] translate-x-0'
+          'fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 text-black backdrop-blur-xl dark:text-black md:w-[50%] lg:w-[25%] translate-x-0'
         }
       >
         {children}
-      </div>
+      </aside>
     </div>
   );
 }
