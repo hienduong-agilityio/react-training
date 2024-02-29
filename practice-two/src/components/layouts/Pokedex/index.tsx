@@ -3,6 +3,8 @@ import PokemonCard from '@components/common/PokmonCard';
 
 // Type
 import { CHIP_COLOR } from '@components/common/Chip';
+
+// Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonData {
