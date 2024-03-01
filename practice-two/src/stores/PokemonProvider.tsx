@@ -1,32 +1,18 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer } from 'react';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
 import usePokemonData, { IPokemonDataState } from '@hooks/usePokemonData';
 
-// Types
-import { IPokemonData } from '@components/layouts/Pokedex';
-
-interface IPokemonContextProps {
+interface IPokemonContextProps extends IPokemonDataState {
   searchTerm: string;
-  data: IPokemonData[];
-  loading: boolean;
-  error: string | null;
-}
-
-interface IPokemonDispatchContextProps {
-  handleSearch: (value: string) => void;
 }
 
 interface ContextProviderProps {
   children: ReactNode;
 }
 
-enum ActionType {
-  SET_SEARCH_TERM = 'SET_SEARCH_TERM'
-}
-
 interface Action {
-  type: ActionType;
-  payload: string;
+  type: string;
+  inputValue: string;
 }
 
 const initialState: IPokemonContextProps = {
@@ -36,20 +22,29 @@ const initialState: IPokemonContextProps = {
   error: null
 };
 
-const reducer = (state: IPokemonContextProps, action: Action): IPokemonContextProps => {
+/**
+ * Reducer function to update Pokemon context state with types
+ * @param state - Current state of the Pokemon context
+ * @param action - Action dispatched to update state
+ *
+ * @returns Updated state based on the dispatched action
+ */
+
+const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonContextProps => {
   switch (action.type) {
-    case ActionType.SET_SEARCH_TERM:
+    case 'search':
       return {
         ...state,
-        searchTerm: action.payload
+        searchTerm: action.inputValue
       };
     default:
       return state;
   }
 };
 
+// Create context
 export const PokemonContext = createContext<IPokemonContextProps | undefined>(undefined);
-export const PokemonDispatchContext = createContext<IPokemonDispatchContextProps | undefined>(undefined);
+export const PokemonDispatchContext = createContext<Dispatch<Action> | undefined>(undefined);
 
 export const usePokemonContext = () => {
   const context = useContext(PokemonContext);
@@ -71,33 +66,36 @@ export const usePokemonDispatch = () => {
   return dispatch;
 };
 
+/**
+ * Provider component to wrap the application and provide Pokemon context
+ * @param children - The children components to be wrapped by the provider
+ *
+ * @returns JSX element containing the provided context
+ */
+
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // Use reducer to manage state and dispatch actions
+  const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
   const { searchTerm } = state;
 
-  // API
+  // Base url API
   const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
 
-  // Filter API
+  // Construct URL with search parameters
   const urlWithSearchParams = useMemo(() => {
     const url = new URL(baseURL);
 
+    // Append search term to the URL
     url.searchParams.append('search', searchTerm);
 
     return url.toString();
   }, [baseURL, searchTerm]);
 
+  // Fetch Pokemon data using custom hook
   const { data, loading, error }: IPokemonDataState = usePokemonData(urlWithSearchParams);
 
-  /**
-   * Function handle get value to  search
-   * @param value - Value string from input search
-   */
-  const handleSearch = (value: string): void => {
-    dispatch({ type: ActionType.SET_SEARCH_TERM, payload: value });
-  };
-
+  // Create context value with memoization
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
       searchTerm,
@@ -108,11 +106,9 @@ export const PokemonProvider = ({ children }: ContextProviderProps) => {
     [error, data, loading, searchTerm]
   );
 
-  const dispatchValue: IPokemonDispatchContextProps = { handleSearch };
-
   return (
     <PokemonContext.Provider value={contextValue}>
-      <PokemonDispatchContext.Provider value={dispatchValue}>{children}</PokemonDispatchContext.Provider>
+      <PokemonDispatchContext.Provider value={dispatch}>{children}</PokemonDispatchContext.Provider>
     </PokemonContext.Provider>
   );
 };

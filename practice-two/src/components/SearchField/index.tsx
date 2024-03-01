@@ -17,14 +17,22 @@ import { usePokemonDispatch } from '@stores/PokemonProvider';
  */
 
 const SearchField = (): JSX.Element => {
-  const { handleSearch } = usePokemonDispatch();
+  // The dispatcher function sends an action to the reducer function
+  const dispatch = usePokemonDispatch();
 
+  // Uncontrolled Input on Button click
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
   // Function to handle button submit to get input value
   const handleBtnClick = () => {
     if (inputRef.current) {
-      handleSearch(inputRef.current.value);
+      const searchTerm = inputRef.current.value;
+
+      // Send inputValue into search action
+      dispatch({
+        type: 'search',
+        inputValue: searchTerm
+      });
     }
   };
 
