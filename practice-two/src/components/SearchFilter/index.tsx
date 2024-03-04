@@ -9,16 +9,34 @@ import Typography, { TEXT_SIZE } from '@components/common/Typography';
 import SideBar from '@components/SlideBar';
 
 // Hook
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 // Constant
 import POKEMON_TYPES from '../../constants/pokemonTypes';
 
 const SearchFilter = (): JSX.Element => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  let selectedTypes: string[] = [];
 
   const handleClick = (): void => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const formSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+    // Stop app reload
+    event.preventDefault();
+
+    alert(`Selected types: ${selectedTypes}`);
+  };
+
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
+    if (event.target.checked) {
+      // Add type to the array
+      selectedTypes = [...selectedTypes, type];
+    } else {
+      // Remove type from the array
+      selectedTypes = selectedTypes.filter((selectedType) => selectedType !== type);
+    }
   };
 
   return (
@@ -39,16 +57,22 @@ const SearchFilter = (): JSX.Element => {
         </div>
 
         {/* Filter */}
-        <form className="flex flex-col h-full">
+        <form className="flex flex-col h-full" onSubmit={formSubmitHandler}>
           <div className="h-full">
             <div className="flex flex-col justify-between overflow-hidden p-6 pb-10 ">
               <Typography customClasses="text-gray-500">Type</Typography>
 
               <ul className="grid grid-cols-2 py-4">
                 {POKEMON_TYPES.map((pokemonType) => (
-                  <li className="flex gap-3" key={pokemonType.type}>
-                    <InputField type="checkbox" id={pokemonType.type} defaultChecked={pokemonType.checked} />
-                    <label htmlFor={pokemonType.type}>{pokemonType.type}</label>
+                  <li className="flex gap-4" key={pokemonType.type}>
+                    <InputField
+                      type="checkbox"
+                      id={pokemonType.type}
+                      onChange={(event) => handleCheckboxChange(event, pokemonType.type)}
+                    />
+                    <label className="capitalize" htmlFor={pokemonType.type}>
+                      {pokemonType.type}
+                    </label>
                   </li>
                 ))}
               </ul>
