@@ -32,7 +32,7 @@ export default function SideBar({
       {/* SideBar */}
       <aside
         className={
-          'fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 text-black backdrop-blur-xl dark:text-black md:w-[50%] lg:w-[25%] translate-x-0'
+          'fixed bottom-0 right-0 top-0 flex h-full flex-col border-l border-neutral-200 bg-white/80 text-black backdrop-blur-xl dark:text-black w-[336px] translate-x-0'
         }
       >
         {children}

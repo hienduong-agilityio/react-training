@@ -4,17 +4,21 @@ import closeIconFilter from '@assets/images/vector_filter.svg';
 
 // Components
 import Button from '@components/common/Button';
+import InputField from '@components/common/InputField';
 import Typography, { TEXT_SIZE } from '@components/common/Typography';
 import SideBar from '@components/SlideBar';
 
 // Hook
 import { useState } from 'react';
 
+// Constant
+import POKEMON_TYPES from '../../constants/pokemonTypes';
+
 const SearchFilter = (): JSX.Element => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   const handleClick = (): void => {
-    isSidebarOpen ? setIsSidebarOpen(false) : setIsSidebarOpen(true);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
@@ -35,21 +39,36 @@ const SearchFilter = (): JSX.Element => {
         </div>
 
         {/* Filter */}
-        <div className="w-full h-full">
-          <div className="flex h-full w-full flex-col justify-between overflow-hidden p-1 pb-10">
-            <ul className="flex-grow overflow-auto py-4"></ul>
-          </div>
-        </div>
+        <form className="flex flex-col h-full">
+          <div className="h-full">
+            <div className="flex flex-col justify-between overflow-hidden p-6 pb-10 ">
+              <Typography customClasses="text-gray-500">Type</Typography>
 
-        {/* Button */}
-        <div className="flex gap-5 p-6">
-          <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold ">
-            Reset filters
-          </Button>
-          <Button variant="text" customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200">
-            Apply filters
-          </Button>
-        </div>
+              <ul className="grid grid-cols-2 py-4">
+                {POKEMON_TYPES.map((pokemonType) => (
+                  <li className="flex gap-3" key={pokemonType.type}>
+                    <InputField type="checkbox" id={pokemonType.type} defaultChecked={pokemonType.checked} />
+                    <label htmlFor={pokemonType.type}>{pokemonType.type}</label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Button */}
+          <div className="flex gap-5 p-6">
+            <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold ">
+              Reset filters
+            </Button>
+            <Button
+              type={'submit'}
+              variant="text"
+              customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200"
+            >
+              Apply filters
+            </Button>
+          </div>
+        </form>
       </SideBar>
     </section>
   );
