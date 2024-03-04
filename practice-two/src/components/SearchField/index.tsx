@@ -34,7 +34,8 @@ const SearchField = (): JSX.Element => {
         inputValue: searchTerm,
         data: [],
         loading: false,
-        error: null
+        error: null,
+        checkedValue: []
       });
     }
   };

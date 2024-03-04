@@ -5,6 +5,7 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps extends IPokemonDataState {
   searchTerm: string;
+  filterTerm: string[];
   dispatch: Dispatch<Action>;
 }
 
@@ -13,6 +14,7 @@ interface ContextProviderProps {
 }
 
 interface Action {
+  checkedValue: string[];
   type: string;
   inputValue: string;
   data: IPokemonData[];
@@ -21,6 +23,7 @@ interface Action {
 }
 
 const initialState: IPokemonContextProps = {
+  filterTerm: [],
   searchTerm: '',
   data: [],
   loading: false,
@@ -42,6 +45,11 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
       return {
         ...state,
         searchTerm: action.inputValue
+      };
+    case 'filter':
+      return {
+        ...state,
+        filterTerm: action.checkedValue
       };
     case 'getData':
       return {
@@ -79,18 +87,19 @@ export const PokemonProvider = ({ children }: ContextProviderProps) => {
   // Use reducer to manage state and dispatch actions
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { searchTerm, data, loading, error } = state;
+  const { filterTerm, searchTerm, data, loading, error } = state;
 
   // Create context value with memoization
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
+      filterTerm,
       searchTerm,
       data,
       loading,
       error,
       dispatch
     }),
-    [error, data, loading, searchTerm, dispatch]
+    [filterTerm, error, data, loading, searchTerm, dispatch]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;

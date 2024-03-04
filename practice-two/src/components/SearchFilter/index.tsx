@@ -13,9 +13,12 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 // Constant
 import POKEMON_TYPES from '../../constants/pokemonTypes';
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 const SearchFilter = (): JSX.Element => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const { dispatch } = usePokemonContext();
+
   let selectedTypes: string[] = [];
 
   const handleClick = (): void => {
@@ -26,7 +29,14 @@ const SearchFilter = (): JSX.Element => {
     // Stop app reload
     event.preventDefault();
 
-    alert(`Selected types: ${selectedTypes}`);
+    dispatch({
+      type: 'filter',
+      checkedValue: selectedTypes,
+      inputValue: '',
+      data: [],
+      loading: false,
+      error: null
+    });
   };
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {

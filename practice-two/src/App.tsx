@@ -20,7 +20,7 @@ import usePokemonData, { IPokemonDataState } from '@hooks/usePokemonData';
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  const { searchTerm, dispatch } = usePokemonContext();
+  const { filterTerm, searchTerm, dispatch } = usePokemonContext();
 
   // Base url API
   const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
@@ -30,10 +30,19 @@ const App = () => {
     const url = new URL(baseURL);
 
     // Append search term to the URL
-    url.searchParams.append('search', searchTerm);
+    if (searchTerm) {
+      url.searchParams.append('name', searchTerm);
+    }
+
+    // Append filter terms to the URL
+    if (filterTerm.length > 0) {
+      filterTerm.forEach((term: string) => {
+        url.searchParams.append('type', term);
+      });
+    }
 
     return url.toString();
-  }, [searchTerm]);
+  }, [searchTerm, filterTerm]);
 
   // Fetch Pokemon data using custom hook
   const { data, loading, error }: IPokemonDataState = usePokemonData(urlWithSearchParams);
@@ -43,7 +52,8 @@ const App = () => {
     data: data,
     loading: loading,
     error: error,
-    inputValue: ''
+    inputValue: '',
+    checkedValue: []
   });
 
   return (
