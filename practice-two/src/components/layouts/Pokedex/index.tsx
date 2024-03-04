@@ -1,11 +1,11 @@
-// Type
-import { CHIP_COLOR } from '@components/common/Chip';
-
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 
-// Hook
-import usePokemonData from '@hooks/usePokemonData/useReducerPokemonData';
+// Type
+import { CHIP_COLOR } from '@components/common/Chip';
+
+// Stores
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonData {
   id: string;
@@ -14,12 +14,27 @@ export interface IPokemonData {
   type: CHIP_COLOR[];
 }
 
-const Pokedex = () => {
-  const URL = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
-  const { data, loading, error } = usePokemonData(URL);
+/**
+ * Component to display a Pokedex containing Pokemon cards
+ * @param pokedexData - Array containing data for Pokémon to be displayed
+ * @param pokedexLoading - Loading indicator displayed when data is being fetched
+ * @param pokedexError - Error message to be displayed if there is an issue fetching data
+ *
+ * @returns {JSX.Element} - Returns the JSX element representing the Pokedex
+ */
 
-  if (loading) return <span>Loading...</span>;
-  if (error) return <span>Error: {error}</span>;
+const Pokedex = (): JSX.Element => {
+  const { data, loading, error } = usePokemonContext();
+
+  // Display loading indicator if data is still being fetched
+  if (loading) {
+    return <span>Loading...</span>;
+  }
+
+  // Display error message if there was an issue fetching data
+  if (error) {
+    return <span>Error: {error}</span>;
+  }
 
   return (
     <section className="pt-24">
