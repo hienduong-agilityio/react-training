@@ -4,7 +4,7 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 // Hooks
 import { useEffect, useReducer } from 'react';
 
-interface IPokemonDataState {
+export interface IPokemonDataState {
   data: IPokemonData[];
   loading: boolean;
   error: string | null;
