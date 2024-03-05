@@ -1,6 +1,8 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
-import usePokemonData, { IPokemonDataState } from '@hooks/usePokemonData';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, useEffect } from 'react';
+
+// Types
+import { IPokemonDataState } from '@hooks/usePokemonData';
 import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps extends IPokemonDataState {
@@ -65,37 +67,49 @@ export const usePokemonContext = () => {
 };
 
 /**
- * Provider component to wrap the application and provide Pokemon context
- * @param children - The children components to be wrapped by the provider
+ * Function to filter on API
+ * @param searchTerm Search key value
  *
- * @returns JSX element containing the provided context
+ * @returns
  */
+const generateUrl = (searchTerm: string): string => {
+  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+  const url = new URL(baseURL);
+
+  if (searchTerm) {
+    url.searchParams.append('name', searchTerm);
+  }
+
+  return url.toString();
+};
+
+// Get Data by fetch API
+const fetchData = (url: string, dispatch: Dispatch<Action>) => {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      dispatch({ type: 'GET', data, loading: false, error: null });
+    })
+    .catch((error) => {
+      dispatch({ type: 'GET', data: [], loading: false, error: error.message });
+    });
+};
 
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
-  // Use reducer to manage state and dispatch actions
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { searchTerm } = state;
+  useEffect(() => {
+    const urlWithSearchParams = generateUrl(state.searchTerm);
+    fetchData(urlWithSearchParams, dispatch);
+  }, [state.searchTerm]);
 
-  // Base url API
-  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+  const { searchTerm, data, loading, error } = state;
 
-  // Construct URL with search parameters
-  const urlWithSearchParams = useMemo(() => {
-    const url = new URL(baseURL);
-
-    // Append search term to the URL
-    if (searchTerm) {
-      url.searchParams.append('search', searchTerm);
-    }
-
-    return url.toString();
-  }, [searchTerm]);
-
-  // Fetch Pokemon data using custom hook
-  const { data, loading, error } = usePokemonData(urlWithSearchParams);
-
-  // Create context value with memoization
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
       searchTerm,
