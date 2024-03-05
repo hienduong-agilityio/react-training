@@ -16,7 +16,9 @@ interface ContextProviderProps {
 
 type Action =
   | { type: 'search'; inputValue: string }
-  | { type: 'GET'; data: IPokemonData[]; loading: boolean; error: string | null };
+  | { type: 'FETCH_API_REQUEST' }
+  | { type: 'FETCH_API_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'FETCH_API_ERROR'; payload: string };
 
 const initialState: IPokemonContextProps = {
   searchTerm: '',
@@ -41,13 +43,12 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
         ...state,
         searchTerm: action.inputValue
       };
-    case 'GET':
-      return {
-        ...state,
-        data: action.data,
-        loading: action.loading,
-        error: action.error
-      };
+    case 'FETCH_API_REQUEST':
+      return { ...state, loading: true, error: null };
+    case 'FETCH_API_SUCCESS':
+      return { ...state, loading: false, data: action.payload };
+    case 'FETCH_API_ERROR':
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
@@ -83,30 +84,29 @@ const generateUrl = (searchTerm: string): string => {
   return url.toString();
 };
 
-// Get Data by fetch API
-const fetchData = (url: string, dispatch: Dispatch<Action>) => {
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      dispatch({ type: 'GET', data, loading: false, error: null });
-    })
-    .catch((error) => {
-      dispatch({ type: 'GET', data: [], loading: false, error: error.message });
-    });
-};
-
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
+  const urlWithSearchParams = generateUrl(state.searchTerm);
 
   useEffect(() => {
-    const urlWithSearchParams = generateUrl(state.searchTerm);
-    fetchData(urlWithSearchParams, dispatch);
-  }, [state.searchTerm]);
+    const fetchData = async () => {
+      dispatch({ type: 'FETCH_API_REQUEST' });
+
+      try {
+        const response = await fetch(urlWithSearchParams);
+        if (!response.ok) {
+          throw new Error('Error encountered while fetching');
+        } else {
+          const data = await response.json();
+          dispatch({ type: 'FETCH_API_SUCCESS', payload: data });
+        }
+      } catch (error) {
+        dispatch({ type: 'FETCH_API_ERROR', payload: (error as Error).message });
+      }
+    };
+
+    fetchData();
+  }, [urlWithSearchParams]);
 
   const { searchTerm, data, loading, error } = state;
 
