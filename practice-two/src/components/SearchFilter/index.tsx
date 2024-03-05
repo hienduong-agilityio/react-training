@@ -9,7 +9,7 @@ import Typography, { TEXT_SIZE } from '@components/common/Typography';
 import SideBar from '@components/SlideBar';
 
 // Hook
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 // Constant
 import POKEMON_TYPES from '../../constants/pokemonTypes';
@@ -18,6 +18,8 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 const SearchFilter = (): JSX.Element => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const { dispatch } = usePokemonContext();
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   let selectedTypes: string[] = [];
 
@@ -45,6 +47,13 @@ const SearchFilter = (): JSX.Element => {
     }
   };
 
+  const handleResetFilters = () => {
+    // Reset the form using the ref
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+  };
+
   return (
     <section className="pt-10 flex justify-end">
       <div className="relative">
@@ -63,7 +72,7 @@ const SearchFilter = (): JSX.Element => {
         </div>
 
         {/* Filter */}
-        <form className="flex flex-col h-full" onSubmit={formSubmitHandler}>
+        <form ref={formRef} className="flex flex-col h-full" onSubmit={formSubmitHandler}>
           <div className="h-full">
             <div className="flex flex-col justify-between overflow-hidden p-6 pb-10 ">
               <Typography customClasses="text-gray-500">Type</Typography>
@@ -87,7 +96,11 @@ const SearchFilter = (): JSX.Element => {
 
           {/* Button */}
           <div className="flex gap-5 p-6">
-            <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold ">
+            <Button
+              onClick={handleResetFilters}
+              variant="outline"
+              customClasses="rounded-xl w-1/2 justify-center font-semibold "
+            >
               Reset filters
             </Button>
             <Button

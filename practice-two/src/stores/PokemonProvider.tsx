@@ -94,7 +94,7 @@ export const PokemonProvider = ({ children }: ContextProviderProps) => {
 
     // Append search term to the URL
     if (searchTerm) {
-      url.searchParams.append('search', searchTerm);
+      url.searchParams.append('name', searchTerm);
     }
 
     // Append filter terms to the URL
