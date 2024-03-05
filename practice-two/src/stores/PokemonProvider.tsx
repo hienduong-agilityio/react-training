@@ -1,5 +1,5 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, useEffect } from 'react';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
 
 // Types
 import { IPokemonDataState } from '@hooks/usePokemonData';
@@ -67,46 +67,8 @@ export const usePokemonContext = () => {
   return context;
 };
 
-/**
- * Function to filter on API
- * @param searchTerm Search key value
- *
- * @returns
- */
-const generateUrl = (searchTerm: string): string => {
-  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
-  const url = new URL(baseURL);
-
-  if (searchTerm) {
-    url.searchParams.append('name', searchTerm);
-  }
-
-  return url.toString();
-};
-
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
-  const urlWithSearchParams = generateUrl(state.searchTerm);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: 'FETCH_API_REQUEST' });
-
-      try {
-        const response = await fetch(urlWithSearchParams);
-        if (!response.ok) {
-          throw new Error('Error encountered while fetching');
-        } else {
-          const data = await response.json();
-          dispatch({ type: 'FETCH_API_SUCCESS', payload: data });
-        }
-      } catch (error) {
-        dispatch({ type: 'FETCH_API_ERROR', payload: (error as Error).message });
-      }
-    };
-
-    fetchData();
-  }, [urlWithSearchParams]);
 
   const { searchTerm, data, loading, error } = state;
 
