@@ -1,10 +1,10 @@
 // Hook
 import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
-import { IPokemonDataState } from '@hooks/usePokemonData';
+import usePokemonData, { IPokemonDataState } from '@hooks/usePokemonData';
 import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps extends IPokemonDataState {
-  searchTerm: string;
+  searchTerm?: string;
   dispatch: Dispatch<Action>;
 }
 
@@ -12,13 +12,9 @@ interface ContextProviderProps {
   children: ReactNode;
 }
 
-interface Action {
-  type: string;
-  inputValue: string;
-  data: IPokemonData[];
-  loading: boolean;
-  error: string | null;
-}
+type Action =
+  | { type: 'search'; inputValue: string }
+  | { type: 'GET'; data: IPokemonData[]; loading: boolean; error: string | null };
 
 const initialState: IPokemonContextProps = {
   searchTerm: '',
@@ -43,7 +39,7 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
         ...state,
         searchTerm: action.inputValue
       };
-    case 'getData':
+    case 'GET':
       return {
         ...state,
         data: action.data,
@@ -79,7 +75,25 @@ export const PokemonProvider = ({ children }: ContextProviderProps) => {
   // Use reducer to manage state and dispatch actions
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { searchTerm, data, loading, error } = state;
+  const { searchTerm } = state;
+
+  // Base url API
+  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+
+  // Construct URL with search parameters
+  const urlWithSearchParams = useMemo(() => {
+    const url = new URL(baseURL);
+
+    // Append search term to the URL
+    if (searchTerm) {
+      url.searchParams.append('search', searchTerm);
+    }
+
+    return url.toString();
+  }, [searchTerm]);
+
+  // Fetch Pokemon data using custom hook
+  const { data, loading, error } = usePokemonData(urlWithSearchParams);
 
   // Create context value with memoization
   const contextValue: IPokemonContextProps = useMemo(
