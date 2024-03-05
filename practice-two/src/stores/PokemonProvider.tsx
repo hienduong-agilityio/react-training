@@ -4,7 +4,7 @@ import usePokemonData, { IPokemonDataState } from '@hooks/usePokemonData';
 import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps extends IPokemonDataState {
-  searchTerm?: string;
+  searchTerm: string;
   dispatch: Dispatch<Action>;
 }
 
