@@ -20,11 +20,25 @@ const App = () => {
   const { dispatch } = usePokemonContext();
 
   useEffect(() => {
-    dispatch({
-      type: 'FETCH_API_REQUEST',
-      url: 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon'
-    });
-  }, [dispatch]);
+    const url = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error('Error encountered while fetching');
+        } else {
+          const data = await response.json();
+          console.log('fetch data', data);
+          dispatch({ type: 'FETCH_POKEMON_SUCCESS', payload: data });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
