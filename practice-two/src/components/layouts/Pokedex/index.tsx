@@ -24,17 +24,17 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const { data } = usePokemonContext();
+  const { data, loading, error } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched
-  // if (state.loading) {
-  //   return <span>Loading...</span>;
-  // }
+  if (loading) {
+    return <span>Loading...</span>;
+  }
 
   // Display error message if there was an issue fetching data
-  // if (state.error) {
-  //   return <span>Error: {state.error}</span>;
-  // }
+  if (error) {
+    return <span>Error: {error}</span>;
+  }
 
   return (
     <section className="pt-24">

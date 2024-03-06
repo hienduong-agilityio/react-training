@@ -2,11 +2,13 @@
 import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
 
 // Types
-import { IPokemonDataState } from '@hooks/usePokemonData';
 import { IPokemonData } from '@components/layouts/Pokedex';
 
-interface IPokemonContextProps extends IPokemonDataState {
+interface IPokemonContextProps {
   searchTerm: string;
+  data: IPokemonData[];
+  loading: boolean;
+  error: string | null;
   dispatch: Dispatch<Action>;
 }
 
@@ -14,7 +16,11 @@ interface ContextProviderProps {
   children: ReactNode;
 }
 
-type Action = { type: 'search'; inputValue: string } | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] };
+type Action =
+  | { type: 'SEARCH_INPUT'; inputValue: string }
+  | { type: 'FETCH_POKEMON_REQUEST' }
+  | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
 const initialState: IPokemonContextProps = {
   searchTerm: '',
@@ -34,13 +40,17 @@ const initialState: IPokemonContextProps = {
 
 const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonContextProps => {
   switch (action.type) {
-    case 'search':
+    case 'SEARCH_INPUT':
       return {
         ...state,
         searchTerm: action.inputValue
       };
+    case 'FETCH_POKEMON_REQUEST':
+      return { ...state, loading: true, error: null };
     case 'FETCH_POKEMON_SUCCESS':
-      return { ...state, data: action.payload };
+      return { ...state, loading: false, data: action.payload };
+    case 'FETCH_POKEMON_ERROR':
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return state;

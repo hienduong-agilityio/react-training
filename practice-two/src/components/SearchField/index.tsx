@@ -30,7 +30,7 @@ const SearchField = (): JSX.Element => {
 
       // Send inputValue into search action
       dispatch({
-        type: 'search',
+        type: 'SEARCH_INPUT',
         inputValue: searchTerm
       });
     }
