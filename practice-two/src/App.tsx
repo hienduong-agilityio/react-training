@@ -7,16 +7,20 @@ import logo from '@assets/images/Pokedex-logo.svg';
 
 // Styles
 import './index.css';
+
+// Hook
 import { useEffect } from 'react';
+
+// Store
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  const { searchTerm, dispatch } = usePokemonContext();
+  const { dispatch, searchTerm } = usePokemonContext();
 
-  const generateUrl = (searchTerm: string): string => {
-    const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+  const generateUrl = (searchTerm: string) => {
+    const baseURL = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
     const url = new URL(baseURL);
 
     if (searchTerm) {
@@ -46,13 +50,17 @@ const App = () => {
     fetchData();
   }, [dispatch, urlWithSearchParams]);
 
+  const handleSearch = (searchTerm: string) => {
+    dispatch({ type: 'search', inputValue: searchTerm });
+  };
+
   return (
     <>
       <header className={containerClasses}>
         <img src={logo} alt="pokedex-logo" />
       </header>
       <main className={`${containerClasses} pt-5`}>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <Pokedex />
       </main>
     </>

@@ -1,11 +1,11 @@
 // Components
-import SearchField from '@components/SearchField';
+import SearchField, { ISearchFieldProps } from '@components/SearchField';
 import SearchFilter from '@components/SearchFilter';
 
-const SearchBar = (): JSX.Element => {
+const SearchBar = ({ onSearch }: ISearchFieldProps): JSX.Element => {
   return (
     <>
-      <SearchField />
+      <SearchField onSearch={onSearch} />
       <SearchFilter />
     </>
   );
