@@ -7,9 +7,7 @@ import InputField from '@components/common/InputField';
 
 // Types && Hook
 import { RefObject, useRef } from 'react';
-export interface ISearchFieldProps {
-  onSearch: (searchTerm: string) => void;
-}
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 /**
  * Component for a search field to search for Pokémon
@@ -18,7 +16,10 @@ export interface ISearchFieldProps {
  * @returns {JSX.Element} - JSX element representing the search field
  */
 
-const SearchField = ({ onSearch }: ISearchFieldProps): JSX.Element => {
+const SearchField = (): JSX.Element => {
+  // The dispatcher function sends an action to the reducer function
+  const { dispatch } = usePokemonContext();
+
   // Uncontrolled Input on Button click
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
@@ -27,7 +28,11 @@ const SearchField = ({ onSearch }: ISearchFieldProps): JSX.Element => {
     if (inputRef.current) {
       const searchTerm = inputRef.current.value;
 
-      onSearch(searchTerm);
+      // Send inputValue into search action
+      dispatch({
+        type: 'search',
+        inputValue: searchTerm
+      });
     }
   };
 

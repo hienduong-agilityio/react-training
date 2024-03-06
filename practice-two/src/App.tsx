@@ -32,6 +32,7 @@ const App = () => {
 
   const urlWithSearchParams = generateUrl(searchTerm);
 
+  // TODO: Update the logic to manager state
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,17 +51,13 @@ const App = () => {
     fetchData();
   }, [dispatch, urlWithSearchParams]);
 
-  const handleSearch = (searchTerm: string) => {
-    dispatch({ type: 'search', inputValue: searchTerm });
-  };
-
   return (
     <>
       <header className={containerClasses}>
         <img src={logo} alt="pokedex-logo" />
       </header>
       <main className={`${containerClasses} pt-5`}>
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar />
         <Pokedex />
       </main>
     </>
