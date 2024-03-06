@@ -1,5 +1,5 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, useEffect } from 'react';
 
 // Types
 import { IPokemonDataState } from '@hooks/usePokemonData';
@@ -7,6 +7,7 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps extends IPokemonDataState {
   searchTerm: string;
+  url: string;
   dispatch: Dispatch<Action>;
 }
 
@@ -16,12 +17,13 @@ interface ContextProviderProps {
 
 type Action =
   | { type: 'search'; inputValue: string }
-  | { type: 'FETCH_API_REQUEST' }
+  | { type: 'FETCH_API_REQUEST'; url: string }
   | { type: 'FETCH_API_SUCCESS'; payload: IPokemonData[] }
   | { type: 'FETCH_API_ERROR'; payload: string };
 
 const initialState: IPokemonContextProps = {
   searchTerm: '',
+  url: '',
   data: [],
   loading: false,
   error: null,
@@ -44,7 +46,7 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
         searchTerm: action.inputValue
       };
     case 'FETCH_API_REQUEST':
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, error: null, url: action.url };
     case 'FETCH_API_SUCCESS':
       return { ...state, loading: false, data: action.payload };
     case 'FETCH_API_ERROR':
@@ -70,17 +72,39 @@ export const usePokemonContext = () => {
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { searchTerm, data, loading, error } = state;
+  const { url, searchTerm, data, loading, error } = state;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (url) {
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            throw new Error('Error encountered while fetching');
+          } else {
+            const data = await response.json();
+            dispatch({ type: 'FETCH_API_SUCCESS', payload: data });
+          }
+        }
+      } catch (error) {
+        dispatch({ type: 'FETCH_API_ERROR', payload: (error as Error).message });
+      }
+    };
+
+    fetchData();
+  }, [dispatch, url]);
 
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
       searchTerm,
+      url,
       data,
       loading,
       error,
       dispatch
     }),
-    [error, data, loading, searchTerm, dispatch]
+    [url, error, data, loading, searchTerm, dispatch]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;

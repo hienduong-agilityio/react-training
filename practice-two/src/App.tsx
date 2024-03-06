@@ -17,39 +17,14 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  const { dispatch, searchTerm } = usePokemonContext();
+  const { dispatch } = usePokemonContext();
 
-  const generateUrl = (searchTerm: string) => {
-    const baseURL = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
-    const url = new URL(baseURL);
-
-    if (searchTerm) {
-      url.searchParams.append('name', searchTerm);
-    }
-
-    return url.toString();
-  };
-
-  const urlWithSearchParams = generateUrl(searchTerm);
-
-  // TODO: Update the logic to manager state
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(urlWithSearchParams);
-        if (!response.ok) {
-          throw new Error('Error encountered while fetching');
-        } else {
-          const data = await response.json();
-          dispatch({ type: 'FETCH_API_SUCCESS', payload: data });
-        }
-      } catch (error) {
-        dispatch({ type: 'FETCH_API_ERROR', payload: (error as Error).message });
-      }
-    };
-
-    fetchData();
-  }, [dispatch, urlWithSearchParams]);
+    dispatch({
+      type: 'FETCH_API_REQUEST',
+      url: 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon'
+    });
+  }, [dispatch]);
 
   return (
     <>
