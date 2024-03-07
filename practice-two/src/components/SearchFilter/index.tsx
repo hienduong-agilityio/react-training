@@ -12,7 +12,7 @@ import SideBar from '@components/SlideBar';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 // Types
-import POKEMON_TYPES from '../../constants/pokemonTypes';
+import {POKEMON_TYPES} from '@constants/index';
 
 // Hook
 import { usePokemonContext } from '@stores/PokemonProvider';

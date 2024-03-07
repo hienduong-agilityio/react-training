@@ -19,4 +19,4 @@ const POKEMON_TYPES = [
   { type: 'grass', checked: false }
 ];
 
-export default POKEMON_TYPES;
+export { POKEMON_TYPES };
