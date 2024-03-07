@@ -23,8 +23,15 @@ const usePokemonData = () => {
       url.searchParams.append('name', state.searchTerm);
     }
 
+    // Append filter terms to the URL
+    if (state.filterTerm) {
+      state.filterTerm.forEach((term: string) => {
+        url.searchParams.append('type', term);
+      });
+    }
+
     return url.toString();
-  }, [state.searchTerm]);
+  }, [state.filterTerm, state.searchTerm]);
 
   useEffect(() => {
     const fetchData = async () => {

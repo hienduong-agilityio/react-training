@@ -7,6 +7,7 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 interface IPokemonContextProps {
   state: {
     searchTerm?: string;
+    filterTerm?: string[];
     data?: IPokemonData[];
     loading?: boolean;
     error?: string | null;
@@ -20,6 +21,7 @@ interface ContextProviderProps {
 
 type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
+  | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'FETCH_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
@@ -27,6 +29,7 @@ type Action =
 const initialState: IPokemonContextProps = {
   state: {
     searchTerm: '',
+    filterTerm: [],
     data: [],
     loading: false,
     error: null
@@ -48,6 +51,11 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
       return {
         ...state,
         state: { searchTerm: action.inputValue }
+      };
+    case 'FILTER_TYPE':
+      return {
+        ...state,
+        state: { filterTerm: action.checkedValue }
       };
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, state: { loading: true, error: null } };
