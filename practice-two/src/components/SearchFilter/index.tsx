@@ -32,7 +32,7 @@ const SearchFilter = (): JSX.Element => {
     event.preventDefault();
 
     dispatch({
-      type: 'filter',
+      type: 'FILTER_TYPE',
       checkedValue: selectedTypes
     });
   };
