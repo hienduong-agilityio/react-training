@@ -60,14 +60,18 @@ const SearchFilter = (): JSX.Element => {
     <section className="pt-10 flex justify-end">
       <div className="relative">
         <img src={iconFilter} alt="icon-filter" className="pl-4 p-2 top-1 left-0 absolute" />
+
         <Button onClick={handleClick} customClasses="border-4 border-gray-500 rounded-3xl w-25 pl-10" variant="outline">
           Filter
         </Button>
       </div>
+
+      {/* Sidebar */}
       <SideBar isOpen={isSidebarOpen} onCloseSideBar={handleClick}>
         {/* Title */}
         <div className="flex items-center gap-4 justify-between border-b-2 p-6">
           <Typography size={TEXT_SIZE.MEDIUM}>Filter</Typography>
+
           <Button onClick={handleClick} variant="filled">
             <img src={closeIconFilter} alt="Icon closes filter" />
           </Button>
@@ -105,6 +109,7 @@ const SearchFilter = (): JSX.Element => {
             >
               Reset filters
             </Button>
+
             <Button
               type={'submit'}
               variant="text"
