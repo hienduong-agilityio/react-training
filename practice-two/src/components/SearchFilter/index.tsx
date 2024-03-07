@@ -12,7 +12,7 @@ import SideBar from '@components/SlideBar';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 // Types
-import { POKEMON_TYPES } from '@constants/index';
+import { POKEMON_TYPES } from '@constants/pokemonTypes';
 
 // Hook
 import { usePokemonContext } from '@stores/PokemonProvider';
@@ -110,10 +110,7 @@ const SearchFilter = (): JSX.Element => {
               Reset filters
             </Button>
 
-            <Button
-              variant="text"
-              customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200"
-            >
+            <Button variant="text" customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200">
               Apply filters
             </Button>
           </div>
