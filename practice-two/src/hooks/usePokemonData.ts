@@ -1,6 +1,10 @@
 // Component
 import { IPokemonData } from '@components/layouts/Pokedex';
+
+// Store
 import { usePokemonContext } from '@stores/PokemonProvider';
+
+// Hooks
 import { useEffect, useMemo, useState } from 'react';
 
 const usePokemonData = () => {
