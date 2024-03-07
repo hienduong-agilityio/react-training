@@ -11,8 +11,10 @@ import SideBar from '@components/SlideBar';
 // Hook
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
-// Constant
+// Types
 import POKEMON_TYPES from '../../constants/pokemonTypes';
+
+// Hook
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 const SearchFilter = (): JSX.Element => {
