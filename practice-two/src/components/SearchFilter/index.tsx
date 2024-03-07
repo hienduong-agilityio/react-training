@@ -12,7 +12,7 @@ import SideBar from '@components/SlideBar';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 // Types
-import { POKEMON_TYPES } from '@constants/pokemonTypes';
+import { POKEMON_TYPES } from '@constants/index';
 
 // Hook
 import { usePokemonContext } from '@stores/PokemonProvider';
@@ -80,7 +80,7 @@ const SearchFilter = (): JSX.Element => {
         {/* Filter */}
         <form ref={formRef} className="flex flex-col h-full" onSubmit={formSubmitHandler}>
           <div className="h-full">
-            <div className="flex flex-col justify-between overflow-hidden p-6 pb-10 ">
+            <div className="flex flex-col justify-between overflow-hidden p-6 pb-10">
               <Typography customClasses="text-gray-500">Type</Typography>
 
               <ul className="grid grid-cols-2 py-4">
@@ -105,7 +105,7 @@ const SearchFilter = (): JSX.Element => {
             <Button
               onClick={handleResetFilters}
               variant="outline"
-              customClasses="rounded-xl w-1/2 justify-center font-semibold "
+              customClasses="rounded-xl w-1/2 justify-center font-semibold"
             >
               Reset filters
             </Button>
