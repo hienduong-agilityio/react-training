@@ -31,7 +31,7 @@ const usePokemonData = () => {
     }
 
     return url.toString();
-  }, [state.searchTerm]);
+  }, [state.filterTerm, state.searchTerm]);
 
   useEffect(() => {
     const fetchData = async () => {
