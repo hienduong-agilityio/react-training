@@ -1,10 +1,16 @@
 // Hook
 import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
-import { IPokemonDataState } from '@hooks/usePokemonData';
+
+// Types
 import { IPokemonData } from '@components/layouts/Pokedex';
 
-interface IPokemonContextProps extends IPokemonDataState {
-  searchTerm: string;
+interface IPokemonContextProps {
+  state: {
+    searchTerm?: string;
+    data?: IPokemonData[];
+    loading?: boolean;
+    error?: string | null;
+  };
   dispatch: Dispatch<Action>;
 }
 
@@ -12,19 +18,19 @@ interface ContextProviderProps {
   children: ReactNode;
 }
 
-interface Action {
-  type: string;
-  inputValue: string;
-  data: IPokemonData[];
-  loading: boolean;
-  error: string | null;
-}
+type Action =
+  | { type: 'SEARCH_INPUT'; inputValue: string }
+  | { type: 'FETCH_POKEMON_REQUEST' }
+  | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
 const initialState: IPokemonContextProps = {
-  searchTerm: '',
-  data: [],
-  loading: false,
-  error: null,
+  state: {
+    searchTerm: '',
+    data: [],
+    loading: false,
+    error: null
+  },
   dispatch: () => {}
 };
 
@@ -38,18 +44,18 @@ const initialState: IPokemonContextProps = {
 
 const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonContextProps => {
   switch (action.type) {
-    case 'search':
+    case 'SEARCH_INPUT':
       return {
         ...state,
-        searchTerm: action.inputValue
+        state: { searchTerm: action.inputValue }
       };
-    case 'getData':
-      return {
-        ...state,
-        data: action.data,
-        loading: action.loading,
-        error: action.error
-      };
+    case 'FETCH_POKEMON_REQUEST':
+      return { ...state, state: { loading: true, error: null } };
+    case 'FETCH_POKEMON_SUCCESS':
+      return { ...state, state: { loading: false, data: action.payload } };
+    case 'FETCH_POKEMON_ERROR':
+      return { ...state, state: { loading: false, error: action.payload } };
+
     default:
       return state;
   }
@@ -68,29 +74,15 @@ export const usePokemonContext = () => {
   return context;
 };
 
-/**
- * Provider component to wrap the application and provide Pokemon context
- * @param children - The children components to be wrapped by the provider
- *
- * @returns JSX element containing the provided context
- */
-
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
-  // Use reducer to manage state and dispatch actions
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { searchTerm, data, loading, error } = state;
-
-  // Create context value with memoization
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
-      searchTerm,
-      data,
-      loading,
-      error,
+      ...state,
       dispatch
     }),
-    [error, data, loading, searchTerm, dispatch]
+    [state, dispatch]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;
