@@ -9,7 +9,7 @@ import logo from '@assets/images/Pokedex-logo.svg';
 import './index.css';
 
 // Store
-import usePokemonData from '@hooks/fetchData';
+import usePokemonData from '@hooks/usePokemonData';
 
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
