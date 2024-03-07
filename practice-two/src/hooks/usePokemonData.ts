@@ -1,11 +1,13 @@
 // Component
+import { IPokemonData } from '@components/layouts/Pokedex';
 import { usePokemonContext } from '@stores/PokemonProvider';
-
-// Hook
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const usePokemonData = () => {
-  const { state, dispatch } = usePokemonContext();
+  const { state } = usePokemonContext();
+
+  const [data, setData] = useState<IPokemonData[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
 
@@ -22,23 +24,23 @@ const usePokemonData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_POKEMON_REQUEST' });
-
       try {
         const response = await fetch(urlWithSearchParams);
         if (!response.ok) {
           throw new Error('Error encountered while fetching');
         } else {
           const data = await response.json();
-          dispatch({ type: 'FETCH_POKEMON_SUCCESS', payload: data });
+          setData(data);
         }
       } catch (error) {
-        dispatch({ type: 'FETCH_POKEMON_ERROR', payload: (error as Error).message });
+        setError((error as Error).message);
       }
     };
 
     fetchData();
-  }, [dispatch, state.searchTerm, urlWithSearchParams]);
+  }, [state.searchTerm, urlWithSearchParams]);
+
+  return { data, error };
 };
 
 export default usePokemonData;

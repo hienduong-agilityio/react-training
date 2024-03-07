@@ -10,11 +10,23 @@ import './index.css';
 
 // Store
 import usePokemonData from '@hooks/usePokemonData';
+import { usePokemonContext } from '@stores/PokemonProvider';
+import { useEffect } from 'react';
 
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  usePokemonData();
+  const { dispatch } = usePokemonContext();
+  const { data, error } = usePokemonData();
+
+  useEffect(() => {
+    if (data) {
+      dispatch({ type: 'FETCH_POKEMON_SUCCESS', payload: data });
+    }
+    if (error) {
+      dispatch({ type: 'FETCH_POKEMON_ERROR', payload: error });
+    }
+  }, [data, error, dispatch]);
 
   return (
     <>
