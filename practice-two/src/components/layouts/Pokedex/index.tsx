@@ -6,9 +6,6 @@ import { CHIP_COLOR } from '@components/common/Chip';
 
 // Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
-import { useState } from 'react';
-import Popup from '@components/common/Popup';
-import PokemonDetails from '@components/PokemonDetails';
 
 export interface IPokemonData {
   id: string;
@@ -27,7 +24,7 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const { state, dispatch } = usePokemonContext();
   // Display loading indicator if data is still being fetched
