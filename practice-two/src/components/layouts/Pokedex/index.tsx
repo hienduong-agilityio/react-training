@@ -6,6 +6,9 @@ import { CHIP_COLOR } from '@components/common/Chip';
 
 // Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
+import { useState } from 'react';
+import Popup from '@components/common/Popup';
+import PokemonDetails from '@components/PokemonDetails';
 
 export interface IPokemonData {
   id: string;
@@ -24,7 +27,9 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const { state } = usePokemonContext();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const { state, dispatch } = usePokemonContext();
   // Display loading indicator if data is still being fetched
   if (state.loading) {
     return <span>Loading...</span>;
@@ -35,6 +40,17 @@ const Pokedex = (): JSX.Element => {
     return <span>Error: {state.error}</span>;
   }
 
+  const handlePopup = (value: string) => {
+    // setIsPopupOpen(!isPopupOpen);
+
+    dispatch({
+      type: 'POKEMON_DETAILS',
+      getPokemonID: value
+    });
+  };
+
+  console.log(state.pokemonID);
+
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
@@ -42,12 +58,26 @@ const Pokedex = (): JSX.Element => {
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
+            onPokemonDetails={() => handlePopup(pokemon.id)}
             pokemonName={pokemon.name}
             pokemonImg={pokemon.image}
             pokemonType={pokemon.type}
           />
         ))}
       </div>
+      {/* {isPopupOpen && (
+        <div>
+          <Popup key={state.data[1].id} isOpen onClosePopup={handlePopup}>
+            <PokemonDetails
+              pokemonID={state.data[1].id}
+              onPokemonDetails={handlePopup}
+              pokemonName={state.data[1].name}
+              pokemonImg={state.data[1].image}
+              pokemonType={state.data[1].type}
+            />
+          </Popup>
+        </div>
+      )} */}
     </section>
   );
 };

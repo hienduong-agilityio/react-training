@@ -27,11 +27,11 @@ export default function Popup({
   return (
     <div
       onClick={handleClosePopup}
-      className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? 'block bg-black/20' : 'hidden'}`}
+      className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? 'block bg-black/20 z-50' : 'hidden'}`}
     >
       {/* popup */}
       <div
-        className={`bg-white rounded-xl p-6 z-50 ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}`}
+        className={`bg-white rounded-3xl z-50 ${isOpen ? 'scale-100 opacity-100 z-50' : 'scale-125 opacity-0 z-50'}`}
       >
         {children}
       </div>

@@ -1,9 +1,9 @@
 // Types
-import { CHIP_COLOR } from '../Chip/index';
+import Chip, { CHIP_COLOR } from '@components/common/Chip';
+import { cardBackground } from '@components/common/PokmonCard';
+import Typography from '@components/common/Typography';
 
 // Components
-import Chip from '../Chip';
-import Typography from '../Typography';
 
 // Library
 import classNames from 'classnames';
@@ -21,27 +21,6 @@ const pokemonCardClasses: string = 'w-full h-full flex flex-col items-center rou
 const overlayClasses: string =
   'w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-no-repeat bg-right-top	bg-pokemon-card';
 
-export const cardBackground: { [key in CHIP_COLOR]: string } = {
-  fire: 'bg-fire-400',
-  bug: 'bg-bug-400',
-  water: 'bg-water-400',
-  flying: 'bg-flying-400',
-  poison: 'bg-poison-400',
-  normal: 'bg-normal-400',
-  rock: 'bg-rock-400',
-  ground: 'bg-ground-400',
-  fighting: 'bg-fighting-400',
-  ghost: 'bg-ghost-400',
-  psychic: 'bg-psychic-400',
-  ice: 'bg-ice-400',
-  dragon: 'bg-dragon-400',
-  dark: 'bg-dark-400',
-  fairy: 'bg-fairy-400',
-  electric: 'bg-electric-400',
-  steel: 'bg-steel-400',
-  grass: 'bg-grass-400'
-};
-
 /**
  * @param pokemonID - ID of the Pokemon
  * @param pokemonName - Name of the Pokemon
@@ -51,7 +30,7 @@ export const cardBackground: { [key in CHIP_COLOR]: string } = {
  * @returns {JSX.Element} - The PokemonCard element.
  */
 
-const PokemonCard = ({
+const PokemonDetails = ({
   pokemonID = '',
   pokemonName = '',
   pokemonType = [CHIP_COLOR.NORMAL],
@@ -85,4 +64,4 @@ const PokemonCard = ({
   );
 };
 
-export default PokemonCard;
+export default PokemonDetails;
