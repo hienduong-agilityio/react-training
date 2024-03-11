@@ -8,7 +8,7 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 import { useEffect, useMemo, useState } from 'react';
 
 const usePokemonData = () => {
-  const { searchTerm, filterTerm } = usePokemonContext();
+  const { state } = usePokemonContext();
 
   const [data, setData] = useState<IPokemonData[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -19,19 +19,19 @@ const usePokemonData = () => {
     const url = new URL(baseURL);
 
     // Append search term to the URL
-    if (searchTerm) {
-      url.searchParams.append('name', searchTerm);
+    if (state.searchTerm) {
+      url.searchParams.append('name', state.searchTerm);
     }
 
     // Append filter terms to the URL
-    if (filterTerm) {
-      filterTerm.forEach((term: string) => {
+    if (state.filterTerm) {
+      state.filterTerm.forEach((term: string) => {
         url.searchParams.append('type', term);
       });
     }
 
     return url.toString();
-  }, [searchTerm, filterTerm]);
+  }, [state.searchTerm, state.filterTerm]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +49,7 @@ const usePokemonData = () => {
     };
 
     fetchData();
-  }, [searchTerm, urlWithSearchParams]);
+  }, [state.searchTerm, urlWithSearchParams]);
 
   return { data, error };
 };
