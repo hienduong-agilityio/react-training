@@ -25,7 +25,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Pokemon Name"
             name="name"
-            id="name"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -40,7 +39,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Pokemon Number"
             name="number"
-            id="number"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -55,7 +53,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Picture"
             name="picture"
-            id="picture"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -70,7 +67,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Type1"
             name="type1"
-            id="type1"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -85,7 +81,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Type2"
             name="type2"
-            id="type2"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -100,7 +95,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Description"
             name="description"
-            id="description"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
