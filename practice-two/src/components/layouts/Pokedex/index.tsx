@@ -3,6 +3,7 @@ import PokemonCard from '@components/common/PokmonCard';
 import Popup from '@components/common/Popup';
 import PokemonForm from '@components/PokemonForm';
 import PokemonDetails from '@components/PokemonDetails';
+import Button from '@components/common/Button';
 
 // Type
 import { CHIP_COLOR } from '@components/common/Chip';
@@ -12,7 +13,6 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Hook
 import { useState } from 'react';
-import Button from '@components/common/Button';
 
 export interface IPokemonData {
   id: string;
