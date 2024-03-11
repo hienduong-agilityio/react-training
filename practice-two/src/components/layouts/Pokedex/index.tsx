@@ -46,17 +46,21 @@ const Pokedex = (): JSX.Element => {
     return <span>Error: {error}</span>;
   }
 
-  const handleClickPopup = () => {
+  const handleClickPokemonPopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const handleForm = () => {
+  const handleClickPokemonForm = () => {
     setIsFormOpen(!isFormOpen);
   };
 
   return (
     <section className="pt-5">
-      <Button onClick={handleForm} customClasses="border-4 border-gray-400 rounded-3xl w-25" variant="outline">
+      <Button
+        onClick={handleClickPokemonForm}
+        customClasses="border-4 border-gray-400 rounded-3xl w-25"
+        variant="outline"
+      >
         Create Pokemon
       </Button>
 
@@ -65,7 +69,7 @@ const Pokedex = (): JSX.Element => {
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
-            onTogglePokemonDetail={handleClickPopup}
+            onTogglePokemonDetail={handleClickPokemonPopup}
             pokemonName={pokemon.name}
             pokemonImg={pokemon.image}
             pokemonType={pokemon.type}
@@ -74,11 +78,11 @@ const Pokedex = (): JSX.Element => {
       </div>
       <div>
         {/* PokemonDetails Popup */}
-        <Popup isOpen={isPopupOpen} onClosePopup={handleClickPopup}>
+        <Popup isOpen={isPopupOpen} onClosePopup={handleClickPokemonPopup}>
           {data && <PokemonDetails pokemonData={data[Number(pokemonID) - 1]} />}
         </Popup>
         {/* PokemonForm Popup*/}
-        <Popup isOpen={isFormOpen} onClosePopup={handleForm}>
+        <Popup isOpen={isFormOpen} onClosePopup={handleClickPokemonForm}>
           <PokemonForm />
         </Popup>
       </div>

@@ -5,7 +5,7 @@ exports[`PokemonCard component renders correctly with given props 1`] = `
   <div
     class="w-full h-full flex flex-col items-center rounded-lg pt-16 relative"
     role="button"
-    tabindex="1"
+    tabindex="0"
   >
     <div
       class="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden"
