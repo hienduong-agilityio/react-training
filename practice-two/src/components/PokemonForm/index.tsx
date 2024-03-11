@@ -14,8 +14,9 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
       <span className="mb-4 text-3xl font-bold">Create pokemon</span>
+      {/* Form input*/}
       <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
-        {/* Form input*/}
+        {/* Input for name */}
         <div>
           <label className="text-sm text-primary" htmlFor="name">
             Pokemon Name
@@ -30,6 +31,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Input for number */}
         <div>
           <label className="text-sm text-primary" htmlFor="number">
             Pokemon Number
@@ -44,6 +46,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Input for picture */}
         <div>
           <label className="text-sm text-primary" htmlFor="picture">
             Picture
@@ -58,6 +61,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Input for type1 */}
         <div>
           <label className="text-sm text-primary" htmlFor="type1">
             Type1
@@ -72,6 +76,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Input for type2 */}
         <div>
           <label className="text-sm text-primary" htmlFor="type2">
             Type2
@@ -86,6 +91,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Input for description*/}
         <div>
           <label className="text-sm text-primary" htmlFor="description">
             Description
@@ -99,6 +105,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
+
         {/* Group button */}
         <div className="flex gap-5 p-6">
           <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold">
