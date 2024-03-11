@@ -31,8 +31,8 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isPokemonPopupOpen, setIsPokemonPopupOpen] = useState<boolean>(false);
+  const [isPokemonFormOpen, setIsPokemonFormOpen] = useState<boolean>(false);
 
   const { data, loading, error, pokemonID } = usePokemonContext();
 
@@ -47,11 +47,11 @@ const Pokedex = (): JSX.Element => {
   }
 
   const handleClickPokemonPopup = () => {
-    setIsPopupOpen(!isPopupOpen);
+    setIsPokemonPopupOpen(!isPokemonPopupOpen);
   };
 
   const handleClickPokemonForm = () => {
-    setIsFormOpen(!isFormOpen);
+    setIsPokemonFormOpen(!isPokemonFormOpen);
   };
 
   return (
@@ -76,13 +76,14 @@ const Pokedex = (): JSX.Element => {
           />
         ))}
       </div>
+
       <div>
         {/* PokemonDetails Popup */}
-        <Popup isOpen={isPopupOpen} onClosePopup={handleClickPokemonPopup}>
+        <Popup isOpen={isPokemonPopupOpen} onClosePopup={handleClickPokemonPopup}>
           {data && <PokemonDetails pokemonData={data[Number(pokemonID) - 1]} />}
         </Popup>
         {/* PokemonForm Popup*/}
-        <Popup isOpen={isFormOpen} onClosePopup={handleClickPokemonForm}>
+        <Popup isOpen={isPokemonFormOpen} onClosePopup={handleClickPokemonForm}>
           <PokemonForm />
         </Popup>
       </div>
