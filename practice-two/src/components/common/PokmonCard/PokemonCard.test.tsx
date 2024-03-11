@@ -14,7 +14,7 @@ describe('PokemonCard component', () => {
   it('renders correctly with given props', () => {
     const { asFragment, getByText, getByAltText } = render(
       <PokemonCard
-        onPokemonDetails={function (): void {
+        onTogglePokemonDetail={function (): void {
           throw new Error('Function not implemented.');
         }}
         {...mockProps}

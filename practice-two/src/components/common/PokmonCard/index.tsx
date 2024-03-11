@@ -16,7 +16,7 @@ export interface IPokemonCardProps {
   pokemonName: string;
   pokemonImg: string;
   pokemonType?: CHIP_COLOR[];
-  onPokemonDetails: () => void;
+  onTogglePokemonDetail: () => void;
 }
 
 const pokemonCardClasses: string = 'w-full h-full flex flex-col items-center rounded-lg pt-16 relative';
@@ -59,16 +59,18 @@ const PokemonCard = ({
   pokemonName = '',
   pokemonType = [CHIP_COLOR.NORMAL],
   pokemonImg,
-  onPokemonDetails = () => {}
+  onTogglePokemonDetail = () => {}
 }: IPokemonCardProps): JSX.Element => {
   const { dispatch } = usePokemonContext();
+
   const type = pokemonType.length > 0 ? pokemonType[0] : undefined;
+
   // Default background if type is undefined
   const defaultBackground = CHIP_COLOR.NORMAL;
   const cardClasses: string = classNames([overlayClasses, cardBackground[type || defaultBackground]]);
 
-  const handlePokemonDetails = (value: string) => {
-    onPokemonDetails();
+  const handleClickCard = (value: string) => {
+    onTogglePokemonDetail();
 
     dispatch({
       type: 'POKEMON_DETAILS',
@@ -77,7 +79,12 @@ const PokemonCard = ({
   };
 
   return (
-    <div className={pokemonCardClasses} onClick={() => handlePokemonDetails(pokemonID)}>
+    <div
+      className={pokemonCardClasses}
+      tabIndex={Number(pokemonID)}
+      role="button"
+      onClick={() => handleClickCard(pokemonID)}
+    >
       <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
         <div className={cardClasses}></div>
       </div>
