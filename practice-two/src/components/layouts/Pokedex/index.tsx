@@ -42,7 +42,7 @@ const Pokedex = (): JSX.Element => {
     return <span>Error: {state.error}</span>;
   }
 
-  const handleClickPopup = () => {
+  const handleClickPokemonPopup = () => {
     setIsOpen(!isOpen);
   };
 
@@ -53,7 +53,7 @@ const Pokedex = (): JSX.Element => {
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
-            onTogglePokemonDetail={handleClickPopup}
+            onTogglePokemonDetail={handleClickPokemonPopup}
             pokemonName={pokemon.name}
             pokemonImg={pokemon.image}
             pokemonType={pokemon.type}
@@ -61,7 +61,7 @@ const Pokedex = (): JSX.Element => {
         ))}
       </div>
       <div>
-        <Popup isOpen={isOpen} onClosePopup={handleClickPopup}>
+        <Popup isOpen={isOpen} onClosePopup={handleClickPokemonPopup}>
           {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
         </Popup>
       </div>

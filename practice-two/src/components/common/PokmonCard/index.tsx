@@ -69,7 +69,7 @@ const PokemonCard = ({
   const defaultBackground = CHIP_COLOR.NORMAL;
   const cardClasses: string = classNames([overlayClasses, cardBackground[type || defaultBackground]]);
 
-  const handleClickCard = (value: string) => {
+  const handleClickPokemonCard = (value: string) => {
     onTogglePokemonDetail();
 
     dispatch({
@@ -79,12 +79,7 @@ const PokemonCard = ({
   };
 
   return (
-    <div
-      className={pokemonCardClasses}
-      tabIndex={Number(pokemonID)}
-      role="button"
-      onClick={() => handleClickCard(pokemonID)}
-    >
+    <div className={pokemonCardClasses} tabIndex={0} role="button" onClick={() => handleClickPokemonCard(pokemonID)}>
       <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
         <div className={cardClasses}></div>
       </div>
