@@ -29,7 +29,7 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPokemonPopupOpen, setIsPokemonPopupOpen] = useState<boolean>(false);
   const { state } = usePokemonContext();
 
   // Display state.loading indicator if data is still being fetched
@@ -43,7 +43,7 @@ const Pokedex = (): JSX.Element => {
   }
 
   const handleClickPokemonPopup = () => {
-    setIsOpen(!isOpen);
+    setIsPokemonPopupOpen(!isPokemonPopupOpen);
   };
 
   return (
@@ -61,7 +61,7 @@ const Pokedex = (): JSX.Element => {
         ))}
       </div>
       <div>
-        <Popup isOpen={isOpen} onClosePopup={handleClickPokemonPopup}>
+        <Popup isOpen={isPokemonPopupOpen} onClosePopup={handleClickPokemonPopup}>
           {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
         </Popup>
       </div>
