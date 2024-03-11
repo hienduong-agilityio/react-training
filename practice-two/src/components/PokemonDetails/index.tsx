@@ -1,10 +1,8 @@
-// Types
+// Components && Types
 import Chip, { CHIP_COLOR } from '@components/common/Chip';
 import { cardBackground } from '@components/common/PokmonCard';
-import Typography from '@components/common/Typography';
 import { IPokemonData } from '@components/layouts/Pokedex';
-
-// Components
+import Typography from '@components/common/Typography';
 
 // Library
 import classNames from 'classnames';

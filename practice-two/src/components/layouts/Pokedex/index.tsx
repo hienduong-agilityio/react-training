@@ -1,14 +1,16 @@
 // Component
 import PokemonCard from '@components/common/PokmonCard';
+import Popup from '@components/common/Popup';
+import PokemonDetails from '@components/PokemonDetails';
 
 // Type
 import { CHIP_COLOR } from '@components/common/Chip';
 
 // Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
+
+// Hook
 import { useState } from 'react';
-import Popup from '@components/common/Popup';
-import PokemonDetails from '@components/PokemonDetails';
 
 export interface IPokemonData {
   id: string;

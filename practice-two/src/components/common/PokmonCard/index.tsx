@@ -7,6 +7,8 @@ import Typography from '../Typography';
 
 // Library
 import classNames from 'classnames';
+
+// Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonCardProps {
