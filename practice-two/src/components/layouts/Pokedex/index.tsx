@@ -1,11 +1,16 @@
 // Component
 import PokemonCard from '@components/common/PokmonCard';
+import Popup from '@components/common/Popup';
+import PokemonDetails from '@components/PokemonDetails';
 
 // Type
 import { CHIP_COLOR } from '@components/common/Chip';
 
 // Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
+
+// Hook
+import { useState } from 'react';
 
 export interface IPokemonData {
   id: string;
@@ -24,8 +29,10 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
+  const [isPokemonPopupOpen, setIsPokemonPopupOpen] = useState<boolean>(false);
   const { state } = usePokemonContext();
-  // Display loading indicator if data is still being fetched
+
+  // Display state.loading indicator if data is still being fetched
   if (state.loading) {
     return <span>Loading...</span>;
   }
@@ -35,6 +42,10 @@ const Pokedex = (): JSX.Element => {
     return <span>Error: {state.error}</span>;
   }
 
+  const handleClickPokemonPopup = () => {
+    setIsPokemonPopupOpen(!isPokemonPopupOpen);
+  };
+
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
@@ -42,11 +53,17 @@ const Pokedex = (): JSX.Element => {
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
+            onTogglePokemonDetail={handleClickPokemonPopup}
             pokemonName={pokemon.name}
             pokemonImg={pokemon.image}
             pokemonType={pokemon.type}
           />
         ))}
+      </div>
+      <div>
+        <Popup isOpen={isPokemonPopupOpen} onClosePopup={handleClickPokemonPopup}>
+          {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
+        </Popup>
       </div>
     </section>
   );

@@ -12,7 +12,14 @@ describe('PokemonCard component', () => {
   };
 
   it('renders correctly with given props', () => {
-    const { asFragment, getByText, getByAltText } = render(<PokemonCard {...mockProps} />);
+    const { asFragment, getByText, getByAltText } = render(
+      <PokemonCard
+        onTogglePokemonDetail={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        {...mockProps}
+      />
+    );
 
     // Check if the name is rendered
     expect(getByText('Bulbasaur')).toBeInTheDocument();
