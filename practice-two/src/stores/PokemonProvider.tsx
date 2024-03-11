@@ -5,12 +5,14 @@ import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } f
 import { IPokemonData } from '@components/layouts/Pokedex';
 
 interface IPokemonContextProps {
-  searchTerm?: string;
-  filterTerm?: string[];
-  pokemonID?: string;
-  data?: IPokemonData[];
-  loading?: boolean;
-  error?: string | null;
+  state: {
+    searchTerm?: string;
+    filterTerm?: string[];
+    pokemonID?: string;
+    data?: IPokemonData[];
+    loading?: boolean;
+    error?: string | null;
+  };
   dispatch: Dispatch<Action>;
 }
 
@@ -27,12 +29,14 @@ type Action =
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
 const initialState: IPokemonContextProps = {
-  searchTerm: '',
-  filterTerm: [],
-  pokemonID: '',
-  data: [],
-  loading: false,
-  error: null,
+  state: {
+    searchTerm: '',
+    filterTerm: [],
+    pokemonID: '',
+    data: [],
+    loading: false,
+    error: null
+  },
   dispatch: () => {}
 };
 
@@ -49,24 +53,24 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
     case 'SEARCH_INPUT':
       return {
         ...state,
-        searchTerm: action.inputValue
+        state: { searchTerm: action.inputValue }
       };
     case 'FILTER_TYPE':
       return {
         ...state,
-        filterTerm: action.checkedValue
+        state: { filterTerm: action.checkedValue }
       };
     case 'POKEMON_DETAILS':
       return {
         ...state,
-        pokemonID: action.getPokemonID
+        state: { pokemonID: action.getPokemonID }
       };
     case 'FETCH_POKEMON_REQUEST':
-      return { ...state, loading: true, error: null };
+      return { ...state, state: { loading: true, error: null } };
     case 'FETCH_POKEMON_SUCCESS':
-      return { ...state, loading: false, data: action.payload };
+      return { ...state, state: { loading: false, data: action.payload } };
     case 'FETCH_POKEMON_ERROR':
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, state: { loading: false, error: action.payload } };
 
     default:
       return state;
@@ -89,19 +93,12 @@ export const usePokemonContext = () => {
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  const { pokemonID, filterTerm, searchTerm, data, loading, error } = state;
-
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
-      pokemonID,
-      searchTerm,
-      filterTerm,
-      data,
-      loading,
-      error,
+      ...state,
       dispatch
     }),
-    [pokemonID, filterTerm, searchTerm, data, loading, error, dispatch]
+    [state, dispatch]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;
