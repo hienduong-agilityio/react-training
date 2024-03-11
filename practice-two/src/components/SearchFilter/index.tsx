@@ -57,11 +57,11 @@ const SearchFilter = (): JSX.Element => {
   };
 
   return (
-    <section className="pt-10 flex justify-end">
+    <section className="pt-10">
       <div className="relative">
         <img src={iconFilter} alt="icon-filter" className="pl-4 p-2 top-1 left-0 absolute" />
 
-        <Button onClick={handleClick} customClasses="border-4 border-gray-500 rounded-3xl w-25 pl-10" variant="outline">
+        <Button onClick={handleClick} customClasses="border-4 border-gray-400 rounded-3xl w-25 pl-10" variant="outline">
           Filter
         </Button>
       </div>

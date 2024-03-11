@@ -1,6 +1,7 @@
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 import Popup from '@components/common/Popup';
+import PokemonForm from '@components/PokemonForm';
 import PokemonDetails from '@components/PokemonDetails';
 
 // Type
@@ -11,6 +12,7 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Hook
 import { useState } from 'react';
+import Button from '@components/common/Button';
 
 export interface IPokemonData {
   id: string;
@@ -29,27 +31,37 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { state } = usePokemonContext();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  // Display state.loading indicator if data is still being fetched
-  if (state.loading) {
+  const { data, loading, error, pokemonID } = usePokemonContext();
+
+  // Display loading indicator if data is still being fetched
+  if (loading) {
     return <span>Loading...</span>;
   }
 
   // Display error message if there was an issue fetching data
-  if (state.error) {
-    return <span>Error: {state.error}</span>;
+  if (error) {
+    return <span>Error: {error}</span>;
   }
 
   const handleClickPopup = () => {
-    setIsOpen(!isOpen);
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  const handleForm = () => {
+    setIsFormOpen(!isFormOpen);
   };
 
   return (
-    <section className="pt-24">
-      <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
-        {state.data?.map((pokemon: IPokemonData) => (
+    <section className="pt-5">
+      <Button onClick={handleForm} customClasses="border-4 border-gray-400 rounded-3xl w-25" variant="outline">
+        Create Pokemon
+      </Button>
+
+      <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20 pt-24">
+        {data?.map((pokemon: IPokemonData) => (
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
@@ -61,8 +73,13 @@ const Pokedex = (): JSX.Element => {
         ))}
       </div>
       <div>
-        <Popup isOpen={isOpen} onClosePopup={handleClickPopup}>
-          {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
+        {/* PokemonDetails Popup */}
+        <Popup isOpen={isPopupOpen} onClosePopup={handleClickPopup}>
+          {data && <PokemonDetails pokemonData={data[Number(pokemonID) - 1]} />}
+        </Popup>
+        {/* PokemonForm Popup*/}
+        <Popup isOpen={isFormOpen} onClosePopup={handleForm}>
+          <PokemonForm />
         </Popup>
       </div>
     </section>
