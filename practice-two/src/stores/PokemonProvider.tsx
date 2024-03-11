@@ -101,7 +101,7 @@ export const PokemonProvider = ({ children }: ContextProviderProps) => {
       error,
       dispatch
     }),
-    [pokemonID,filterTerm, searchTerm, data, loading, error, dispatch]
+    [pokemonID, filterTerm, searchTerm, data, loading, error, dispatch]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;

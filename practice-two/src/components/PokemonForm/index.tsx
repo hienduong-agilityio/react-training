@@ -1,110 +1,53 @@
-import styles from './index.module.css';
+// Components
+import Button from '@components/common/Button';
+import InputField from '@components/common/InputField';
 
-export interface IFormValue {
-  name: string;
-  price: number;
-  description: string;
-  category: string;
+// Constant
+import { LIST_INPUTS } from '@constants/index';
+
+interface IPokemonForm {
+  onClosePokemonForm?: () => void;
 }
 
-export interface IValidationMessages extends Omit<IFormValue, 'price'> {
-  price: string;
-}
-
-interface IForm {
-  title?: string;
-  formValue?: IFormValue;
-  onSubmit?: (data: IFormValue) => void;
-  validationMessages?: IValidationMessages;
-}
-
-interface IFormElement extends HTMLFormControlsCollection {
-  name: HTMLInputElement;
-  price: HTMLInputElement;
-  description: HTMLInputElement;
-  confirmPassword: HTMLInputElement;
-  category: HTMLInputElement;
-}
-
-interface IFormData extends HTMLFormElement {
-  readonly elements: IFormElement;
-}
-
-const PokemonForm = ({ title, formValue = { name: '', price: 0, description: '', category: '' } }: IForm) => {
-  const handleSubmit = (event: React.FormEvent<IFormData>) => {
+const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   };
 
   return (
-    <section className={styles.card}>
-      <span className={styles.title}>{title}</span>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        {/* ... Existing code ... */}
-
-        <div className={styles.group}>
-          <input
-            className={styles.input}
-            defaultValue={formValue.name}
-            placeholder=""
-            type="text"
-            id="name"
-            name="name"
-          />
-          <label className={styles.label} htmlFor="name">
-            Name
-          </label>
-          <span className={styles.messInvalid}></span>
+    <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
+      <span className="mb-4 text-3xl font-bold">Create pokemon</span>
+      <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
+        {/* Form input*/}
+        {LIST_INPUTS.map((input) => (
+          <div key={input.label} className="">
+            <label className="text-sm text-primary" htmlFor="name">
+              {input.label}
+            </label>
+            <InputField
+              className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+              defaultValue=""
+              placeholder={input.label}
+              type={input.type}
+              id="name"
+              name="name"
+            />
+            <span className="block pb-2 -mt-3 text-danger"></span>
+          </div>
+        ))}
+        {/* Group button */}
+        <div className="flex gap-5 p-6">
+          <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold">
+            Create
+          </Button>
+          <Button
+            onClick={onClosePokemonForm}
+            variant="text"
+            customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200"
+          >
+            Cancel
+          </Button>
         </div>
-
-        <div className={styles.group}>
-          <input
-            className={styles.input}
-            defaultValue={formValue.price}
-            placeholder=""
-            type="number"
-            id="price"
-            name="price"
-          />
-          <label className={styles.label} htmlFor="price">
-            Price
-          </label>
-          <span className={styles.messInvalid}></span>
-        </div>
-
-        <div className={styles.group}>
-          {/* ... Existing code ... */}
-
-          <textarea
-            defaultValue={formValue.description}
-            className={styles.textarea}
-            placeholder=""
-            id="description"
-            name="description"
-          ></textarea>
-          <label className={styles.label} htmlFor="description">
-            Description
-          </label>
-          <span className={styles.messInvalid}></span>
-        </div>
-
-        <div className={styles.group}>
-          <input
-            className={styles.input}
-            defaultValue={formValue.category}
-            placeholder=""
-            type="text"
-            id="category"
-            name="category"
-          />
-          <label className={styles.label} htmlFor="category">
-            Category
-          </label>
-          <span className={styles.messInvalid}></span>
-        </div>
-
-        <button className={styles.button} type="submit">
-          Submit
-        </button>
       </form>
     </section>
   );

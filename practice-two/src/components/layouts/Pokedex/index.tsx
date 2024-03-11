@@ -84,7 +84,7 @@ const Pokedex = (): JSX.Element => {
         </Popup>
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormOpen} onClosePopup={handleClickPokemonForm}>
-          <PokemonForm />
+          <PokemonForm onClosePokemonForm={handleClickPokemonForm} />
         </Popup>
       </div>
     </section>
