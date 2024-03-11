@@ -2,9 +2,6 @@
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
 
-// Constant
-import { LIST_INPUTS } from '@constants/index';
-
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
 }
@@ -19,20 +16,89 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       <span className="mb-4 text-3xl font-bold">Create pokemon</span>
       <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
         {/* Form input*/}
-        {LIST_INPUTS.map((input) => (
-          <div key={input.label} className="">
-            <label className="text-sm text-primary" htmlFor="name">
-              {input.label}
-            </label>
-            <InputField
-              className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
-              defaultValue=""
-              placeholder={input.label}
-              type={input.type}
-            />
-            <span className="block pb-2 -mt-3 text-danger"></span>
-          </div>
-        ))}
+        <div>
+          <label className="text-sm text-primary" htmlFor="name">
+            Pokemon Name
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Pokemon Name"
+            name="name"
+            id="name"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
+
+        <div>
+          <label className="text-sm text-primary" htmlFor="number">
+            Pokemon Number
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Pokemon Number"
+            name="number"
+            id="number"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
+
+        <div>
+          <label className="text-sm text-primary" htmlFor="picture">
+            Picture
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Picture"
+            name="picture"
+            id="picture"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
+
+        <div>
+          <label className="text-sm text-primary" htmlFor="type1">
+            Type1
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Type1"
+            name="type1"
+            id="type1"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
+
+        <div>
+          <label className="text-sm text-primary" htmlFor="type2">
+            Type2
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Type2"
+            name="type2"
+            id="type2"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
+
+        <div>
+          <label className="text-sm text-primary" htmlFor="description">
+            Description
+          </label>
+          <InputField
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            placeholder="Description"
+            name="description"
+            id="description"
+            type="text"
+          />
+          <span className="block pb-2 -mt-3 text-danger"></span>
+        </div>
         {/* Group button */}
         <div className="flex gap-5 p-6">
           <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold">
