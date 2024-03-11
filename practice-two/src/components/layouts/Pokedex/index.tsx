@@ -6,6 +6,9 @@ import { CHIP_COLOR } from '@components/common/Chip';
 
 // Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
+import { useState } from 'react';
+import Popup from '@components/common/Popup';
+import PokemonDetails from '@components/PokemonDetails';
 
 export interface IPokemonData {
   id: string;
@@ -24,57 +27,41 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  // const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const { state, dispatch } = usePokemonContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const { data, loading, error, pokemonID } = usePokemonContext();
   // Display loading indicator if data is still being fetched
-  if (state.loading) {
+  if (loading) {
     return <span>Loading...</span>;
   }
 
   // Display error message if there was an issue fetching data
-  if (state.error) {
-    return <span>Error: {state.error}</span>;
+  if (error) {
+    return <span>Error: {error}</span>;
   }
 
-  const handlePopup = (value: string) => {
-    // setIsPopupOpen(!isPopupOpen);
-
-    dispatch({
-      type: 'POKEMON_DETAILS',
-      getPokemonID: value
-    });
+  const handlePopup = () => {
+    setIsOpen(!isOpen);
   };
-
-  console.log(state.pokemonID);
 
   return (
     <section className="pt-24">
       <div className="grid justify-items-center sm:items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-20">
-        {state.data?.map((pokemon: IPokemonData) => (
+        {data?.map((pokemon: IPokemonData) => (
           <PokemonCard
             key={pokemon.id}
             pokemonID={pokemon.id}
-            onPokemonDetails={() => handlePopup(pokemon.id)}
+            onPokemonDetails={handlePopup}
             pokemonName={pokemon.name}
             pokemonImg={pokemon.image}
             pokemonType={pokemon.type}
           />
         ))}
       </div>
-      {/* {isPopupOpen && (
-        <div>
-          <Popup key={state.data[1].id} isOpen onClosePopup={handlePopup}>
-            <PokemonDetails
-              pokemonID={state.data[1].id}
-              onPokemonDetails={handlePopup}
-              pokemonName={state.data[1].name}
-              pokemonImg={state.data[1].image}
-              pokemonType={state.data[1].type}
-            />
-          </Popup>
-        </div>
-      )} */}
+      <div>
+        <Popup isOpen={isOpen} onClosePopup={handlePopup}>
+          {data && <PokemonDetails pokemonData={data[Number(pokemonID) - 1]} />}
+        </Popup>
+      </div>
     </section>
   );
 };

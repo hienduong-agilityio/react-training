@@ -2,24 +2,20 @@
 import Chip, { CHIP_COLOR } from '@components/common/Chip';
 import { cardBackground } from '@components/common/PokmonCard';
 import Typography from '@components/common/Typography';
+import { IPokemonData } from '@components/layouts/Pokedex';
 
 // Components
 
 // Library
 import classNames from 'classnames';
 
-export interface IPokemonCardProps {
-  pokemonID: string;
-  pokemonName: string;
-  pokemonImg: string;
-  pokemonType?: CHIP_COLOR[];
-  onPokemonDetails: () => void;
+export interface IPokemonDetailsProps {
+  pokemonData: IPokemonData;
 }
 
-const pokemonCardClasses: string = 'w-full h-full flex flex-col items-center rounded-lg pt-16 relative';
+const pokemonCardClasses: string = 'w-[725px] h-[698px] flex flex-col items-center rounded-3xl';
 
-const overlayClasses: string =
-  'w-full h-full absolute top-0 left-1/2 transform -translate-x-1/2 transition duration-500 bg-no-repeat bg-right-top	bg-pokemon-card';
+const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat bg-right-top bg-pokemon-card';
 
 /**
  * @param pokemonID - ID of the Pokemon
@@ -27,38 +23,41 @@ const overlayClasses: string =
  * @param pokemonType - Array of types of the Pokemon
  * @param pokemonImg - URL of the Pokemon image
  *
- * @returns {JSX.Element} - The PokemonCard element.
+ * @returns {JSX.Element} - The PokemonDetails element.
  */
 
-const PokemonDetails = ({
-  pokemonID = '',
-  pokemonName = '',
-  pokemonType = [CHIP_COLOR.NORMAL],
-  pokemonImg,
-  onPokemonDetails = () => {}
-}: IPokemonCardProps): JSX.Element => {
-  const type = pokemonType.length > 0 ? pokemonType[0] : undefined;
+const PokemonDetails = ({ pokemonData }: IPokemonDetailsProps): JSX.Element => {
+  if (!pokemonData || !pokemonData.image || !pokemonData.type || !pokemonData.name || !pokemonData.id) {
+    return <div>Error: Pokemon data is missing or incomplete.</div>;
+  }
+
+  const type = pokemonData.type.length > 0 ? pokemonData.type[0] : undefined;
+
   // Default background if type is undefined
   const defaultBackground = CHIP_COLOR.NORMAL;
   const cardClasses: string = classNames([overlayClasses, cardBackground[type || defaultBackground]]);
 
   return (
-    <div className={pokemonCardClasses} onClick={onPokemonDetails}>
-      <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
-        <div className={cardClasses}></div>
-      </div>
-
-      <div className="absolute -top-12 transform -translate-y-10">
-        <img src={pokemonImg} alt={pokemonName} className="w-40 h-40" />
-      </div>
-
-      <div className="z-10 w-full p-5 px-5">
-        <span className="text-2xl font-bold capitalize block my-2">{pokemonName}</span>
-
-        <Typography>{`#${pokemonID}`}</Typography>
-        {pokemonType.map((type) => {
-          return <Chip customClasses="mr-2" key={type} label={type} color={type} />;
-        })}
+    <div className={pokemonCardClasses}>
+      <div className="w-full h-full">
+        {/* Pokemon Details */}
+        <div className={cardClasses}>
+          <div className="pl-20">
+            <img src={pokemonData.image} alt={pokemonData.name} className="w-[215px] h-[215px]" />
+          </div>
+          <div className="z-10 w-full p-5 pr-16">
+            <Typography color="white">{`#${pokemonData.id}`}</Typography>
+            <span className="text-4xl text-white font-bold capitalize block my-2">{pokemonData.name}</span>
+            {pokemonData.type.map((type) => {
+              return <Chip customClasses="mr-2" key={type} label={type} color={type} />;
+            })}
+            <Typography>Description</Typography>
+          </div>
+        </div>
+        {/* Location */}
+        <div>
+          <Typography customClasses="text-3xl p-6">Spotted Locations</Typography>
+        </div>
       </div>
     </div>
   );

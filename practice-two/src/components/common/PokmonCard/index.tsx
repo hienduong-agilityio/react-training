@@ -7,6 +7,7 @@ import Typography from '../Typography';
 
 // Library
 import classNames from 'classnames';
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonCardProps {
   pokemonID: string;
@@ -58,13 +59,23 @@ const PokemonCard = ({
   pokemonImg,
   onPokemonDetails = () => {}
 }: IPokemonCardProps): JSX.Element => {
+  const { dispatch } = usePokemonContext();
   const type = pokemonType.length > 0 ? pokemonType[0] : undefined;
   // Default background if type is undefined
   const defaultBackground = CHIP_COLOR.NORMAL;
   const cardClasses: string = classNames([overlayClasses, cardBackground[type || defaultBackground]]);
 
+  const handlePokemonDetails = (value: string) => {
+    onPokemonDetails();
+
+    dispatch({
+      type: 'POKEMON_DETAILS',
+      getPokemonID: value
+    });
+  };
+
   return (
-    <div className={pokemonCardClasses} onClick={onPokemonDetails}>
+    <div className={pokemonCardClasses} onClick={() => handlePokemonDetails(pokemonID)}>
       <div className="w-full h-full rounded-xl absolute top-0 left-0 overflow-hidden z-0 backface-visibility-hidden">
         <div className={cardClasses}></div>
       </div>
