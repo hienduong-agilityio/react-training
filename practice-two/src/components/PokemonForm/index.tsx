@@ -29,8 +29,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
               defaultValue=""
               placeholder={input.label}
               type={input.type}
-              id="name"
-              name="name"
             />
             <span className="block pb-2 -mt-3 text-danger"></span>
           </div>
