@@ -58,7 +58,8 @@ const Pokedex = (): JSX.Element => {
     <section className="pt-5">
       <Button
         onClick={handleClickPokemonForm}
-        customClasses="border-4 border-gray-400 rounded-3xl w-25"
+        customClasses="border-4 border-gray-400 w-25"
+        rounded="medium"
         variant="outline"
       >
         Create Pokemon

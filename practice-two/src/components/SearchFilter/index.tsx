@@ -63,7 +63,8 @@ const SearchFilter = (): JSX.Element => {
 
         <Button
           onClick={handleClickSideBar}
-          customClasses="border-4 border-gray-400 rounded-3xl w-25 pl-10"
+          customClasses="border-4 border-gray-400 w-25 pl-10"
+          rounded="medium"
           variant="outline"
         >
           Filter
