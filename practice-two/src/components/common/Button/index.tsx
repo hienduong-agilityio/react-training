@@ -36,9 +36,9 @@ const roundedClasses: { [key in 'default' | 'normal' | 'medium' | 'large']: stri
   large: 'rounded-4xl'
 };
 
-const alignClasses: { [key in 'default'|'center']: string } = {
+const alignClasses: { [key in 'default' | 'center']: string } = {
   default: '',
-  center: 'justify-center',
+  center: 'justify-center'
 };
 
 const sizeClasses: { [key in 'small' | 'medium' | 'large']: string } = {
@@ -70,7 +70,7 @@ const Button = ({
   size = 'medium',
   color = 'default',
   rounded = 'normal',
-  align= 'center',
+  align = 'center',
   customClasses = '',
   ...restProps
 }: IButtonProps): JSX.Element => {
