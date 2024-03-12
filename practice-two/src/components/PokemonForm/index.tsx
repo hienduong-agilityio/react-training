@@ -6,9 +6,25 @@ interface IPokemonForm {
   onClosePokemonForm?: () => void;
 }
 
+interface IFormElement extends HTMLFormControlsCollection {
+  name: HTMLInputElement;
+  number: HTMLInputElement;
+  picture: HTMLInputElement;
+  type1: HTMLInputElement;
+  type2: HTMLInputElement;
+  description: HTMLInputElement;
+}
+
+interface IFormData extends HTMLFormElement {
+  readonly elements: IFormElement;
+}
+
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
+
+    const formEvent = event.currentTarget.elements;
+    console.log(formEvent);
   };
 
   return (
@@ -22,7 +38,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Pokemon Name
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
             name="name"
             type="text"
