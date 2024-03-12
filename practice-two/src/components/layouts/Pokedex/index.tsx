@@ -31,8 +31,8 @@ export interface IPokemonData {
  */
 
 const Pokedex = (): JSX.Element => {
-  const [isPokemonDetailsOpen, setIsPokemonPopupOpen] = useState<boolean>(false);
-  const [isPokemonFormOpen, setIsPokemonFormOpen] = useState<boolean>(false);
+  const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
+  const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
 
   const { state } = usePokemonContext();
 
@@ -47,11 +47,11 @@ const Pokedex = (): JSX.Element => {
   }
 
   const handleClickPokemonPopup = () => {
-    setIsPokemonPopupOpen(!isPokemonDetailsOpen);
+    setIsPokemonDetailsPopupOpen(!isPokemonDetailsPopupOpen);
   };
 
   const handleClickPokemonForm = () => {
-    setIsPokemonFormOpen(!isPokemonFormOpen);
+    setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
   };
 
   return (
@@ -79,11 +79,11 @@ const Pokedex = (): JSX.Element => {
 
       <div>
         {/* PokemonDetails Popup */}
-        <Popup isOpen={isPokemonDetailsOpen} onClosePopup={handleClickPokemonPopup}>
+        <Popup isOpen={isPokemonDetailsPopupOpen} onClosePopup={handleClickPokemonPopup}>
           {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
         </Popup>
         {/* PokemonForm Popup*/}
-        <Popup isOpen={isPokemonFormOpen} onClosePopup={handleClickPokemonForm}>
+        <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
           <PokemonForm onClosePokemonForm={handleClickPokemonForm} />
         </Popup>
       </div>
