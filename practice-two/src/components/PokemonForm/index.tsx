@@ -3,6 +3,9 @@ import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
 import { usePokemonContext } from '@stores/PokemonProvider';
 
+// Hooks
+import useFormValidation from '@hooks/useFormValidation';
+
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
 }
@@ -30,7 +33,10 @@ interface IFormData extends HTMLFormElement {
 }
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
-  const { dispatch } = usePokemonContext();
+  const { state, dispatch } = usePokemonContext();
+  const { validationMessages } = useFormValidation();
+
+  const errorMessage = state.formSubmitErrorMessages;
 
   const handleSubmit = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
@@ -46,6 +52,8 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     };
 
     dispatch({ type: 'FORM_SUBMIT_VALUES', submitFormValue: formData });
+
+    dispatch({ type: 'FORM_SUBMIT_ERROR_MESSAGES', submitFormError: validationMessages });
   };
 
   return (
@@ -65,7 +73,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonName"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger"></span>
+          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.name}</span>
         </div>
 
         {/* Input for number */}
@@ -80,7 +88,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonNumber"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger"></span>
+          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.number}</span>
         </div>
 
         {/* Input for picture */}
@@ -110,7 +118,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonType1"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger"></span>
+          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.type1}</span>
         </div>
 
         {/* Input for type2 */}
@@ -140,7 +148,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonDescription"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger"></span>
+          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.description}</span>
         </div>
 
         {/* Group button */}
