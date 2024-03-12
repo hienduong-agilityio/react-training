@@ -129,8 +129,6 @@ export const usePokemonContext = () => {
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
-  console.log(state.state.formSubmitValue);
-
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
       ...state,

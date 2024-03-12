@@ -1,9 +1,9 @@
 // Components
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
-import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Hooks
+import { usePokemonContext } from '@stores/PokemonProvider';
 import useFormValidation from '@hooks/useFormValidation';
 
 interface IPokemonForm {

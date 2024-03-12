@@ -25,6 +25,7 @@ const useFormValidation = () => {
         errors.name = 'Name should be filled and contain only letters and spaces.';
       }
 
+      // Number validation: Should not contain numbers and must be filled
       if (
         !state.formSubmitValue.number ||
         isNaN(Number(state.formSubmitValue.number)) ||
