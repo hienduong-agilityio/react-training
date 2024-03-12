@@ -55,14 +55,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
         {/* Input for name */}
         <div>
-          <label className="text-sm text-primary" htmlFor="name">
+          <label className="text-sm text-primary" htmlFor="pokemonName">
             Pokemon Name
           </label>
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
-            name="name"
-            id="name"
+            name="pokemonName"
+            id="pokemonName"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -70,14 +70,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Input for number */}
         <div>
-          <label className="text-sm text-primary" htmlFor="number">
+          <label className="text-sm text-primary" htmlFor="pokemonNumber">
             Pokemon Number
           </label>
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Pokemon Number"
-            name="number"
-            id="num"
+            name="pokemonNumber"
+            id="pokemonNumber"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -85,14 +85,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Input for picture */}
         <div>
-          <label className="text-sm text-primary" htmlFor="picture">
+          <label className="text-sm text-primary" htmlFor="pokemonPicture">
             Picture
           </label>
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Picture"
-            name="picture"
-            id="pic"
+            name="pokemonPicture"
+            id="pokemonPicture"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -100,14 +100,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Input for type1 */}
         <div>
-          <label className="text-sm text-primary" htmlFor="type1">
+          <label className="text-sm text-primary" htmlFor="pokemonType1">
             Type1
           </label>
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Type1"
-            name="type1"
-            id="type1"
+            name="pokemonType1"
+            id="pokemonType1"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -115,14 +115,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Input for type2 */}
         <div>
-          <label className="text-sm text-primary" htmlFor="type2">
+          <label className="text-sm text-primary" htmlFor="pokemonType2">
             Type2
           </label>
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Type2"
-            name="type2"
-            id="type2"
+            name="pokemonType2"
+            id="pokemonType2"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -137,7 +137,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
             placeholder="Description"
             name="description"
-            id="desc"
+            id="description"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
