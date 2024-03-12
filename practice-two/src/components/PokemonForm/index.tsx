@@ -8,11 +8,11 @@ interface IPokemonForm {
 }
 
 interface IFormElement extends HTMLFormControlsCollection {
-  name: HTMLInputElement;
-  number: HTMLInputElement;
-  picture: HTMLInputElement;
-  type1: HTMLInputElement;
-  type2: HTMLInputElement;
+  pokemonName: HTMLInputElement;
+  pokemonNumber: HTMLInputElement;
+  pokemonPicture: HTMLInputElement;
+  pokemonType1: HTMLInputElement;
+  pokemonType2: HTMLInputElement;
   description: HTMLInputElement;
 }
 
@@ -37,11 +37,11 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
     const formEvent = event.currentTarget.elements;
     const formData: IFormValue = {
-      name: formEvent.name.value,
-      number: formEvent.number.value,
-      picture: formEvent.picture.value,
-      type1: formEvent.type1.value,
-      type2: formEvent.type2.value,
+      name: formEvent.pokemonName.value,
+      number: formEvent.pokemonNumber.value,
+      picture: formEvent.pokemonPicture.value,
+      type1: formEvent.pokemonType1.value,
+      type2: formEvent.pokemonType2.value,
       description: formEvent.description.value
     };
 
