@@ -18,7 +18,7 @@ export enum BUTTON_VARIANT {
 }
 
 const buttonDefault: string =
-  'flex gap-2 items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
+  'rounded-2xl justify-center font-semibold flex gap-2 items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
 
 const variantClasses: { [key in BUTTON_VARIANT]: string } = {
   text: 'hover:bg-gray-200',

@@ -74,7 +74,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Pokemon Number
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Number"
             name="pokemonNumber"
             id="pokemonNumber"
@@ -89,7 +89,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Picture
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Picture"
             name="pokemonPicture"
             id="pokemonPicture"
@@ -104,7 +104,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Type1
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Type1"
             name="pokemonType1"
             id="pokemonType1"
@@ -119,7 +119,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Type2
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Type2"
             name="pokemonType2"
             id="pokemonType2"
@@ -130,14 +130,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Input for description*/}
         <div>
-          <label className="text-sm text-primary" htmlFor="description">
+          <label className="text-sm text-primary" htmlFor="pokemonDescription">
             Description
           </label>
           <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px] "
+            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Description"
-            name="description"
-            id="description"
+            name="pokemonDescription"
+            id="pokemonDescription"
             type="text"
           />
           <span className="block pb-2 -mt-3 text-danger"></span>
@@ -145,14 +145,10 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
         {/* Group button */}
         <div className="flex gap-5 p-6">
-          <Button variant="outline" customClasses="rounded-xl w-1/2 justify-center font-semibold">
+          <Button variant="outline" customClasses="w-1/2">
             Create
           </Button>
-          <Button
-            onClick={onClosePokemonForm}
-            variant="text"
-            customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200"
-          >
+          <Button onClick={onClosePokemonForm} variant="text" customClasses="w-1/2 bg-gray-200">
             Cancel
           </Button>
         </div>
