@@ -13,7 +13,7 @@ interface IFormElement extends HTMLFormControlsCollection {
   pokemonPicture: HTMLInputElement;
   pokemonType1: HTMLInputElement;
   pokemonType2: HTMLInputElement;
-  description: HTMLInputElement;
+  pokemonDescription: HTMLInputElement;
 }
 
 export interface IFormValue {
@@ -42,7 +42,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       picture: formEvent.pokemonPicture.value,
       type1: formEvent.pokemonType1.value,
       type2: formEvent.pokemonType2.value,
-      description: formEvent.description.value
+      description: formEvent.pokemonDescription.value
     };
 
     dispatch({ type: 'FORM_SUBMIT_VALUES', submitFormValue: formData });
