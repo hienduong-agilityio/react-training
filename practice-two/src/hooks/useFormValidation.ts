@@ -1,8 +1,7 @@
-import { usePokemonContext } from '@stores/PokemonProvider';
+import { IFormValue } from '@components/PokemonForm';
 import { useEffect, useState } from 'react';
 
-const useFormValidation = () => {
-  const { state } = usePokemonContext();
+const useFormValidation = (formData: IFormValue) => {
   const [validationMessages, setValidationMessages] = useState({
     name: '',
     number: '',
@@ -16,31 +15,27 @@ const useFormValidation = () => {
     const validateForm = () => {
       const errors = { name: '', number: '', description: '', type1: '' };
 
-      if (!state.formSubmitValue) {
+      if (!formData) {
         return;
       }
 
       // Name validation: Should not contain numbers and must be filled
-      if (!state.formSubmitValue.name.trim() || !/^[A-Za-z\s]+$/.test(state.formSubmitValue.name)) {
+      if (!formData.name.trim() || !/^[A-Za-z\s]+$/.test(formData.name)) {
         errors.name = 'Name should be filled and contain only letters and spaces.';
       }
 
       // Number validation: Should not contain numbers and must be filled
-      if (
-        !state.formSubmitValue.number ||
-        isNaN(Number(state.formSubmitValue.number)) ||
-        Number(state.formSubmitValue.number) <= 0
-      ) {
-        errors.number = 'Price should be filled and be a valid number greater than 0.';
+      if (!formData.number.trim() || !/^[A-Za-z\s]+$/.test(formData.number)) {
+        errors.number = 'Number should be filled and contain only letters and spaces.';
       }
 
       // Type validation: Should not contain numbers and must be filled
-      if (!state.formSubmitValue.type1.trim() || !/^[A-Za-z\s]+$/.test(state.formSubmitValue.type1)) {
+      if (!formData.type1.trim() || !/^[A-Za-z\s]+$/.test(formData.type1)) {
         errors.type1 = 'Type should be filled and contain only letters and spaces.';
       }
 
       // Description validation: Should be at least 50 characters long
-      if (state.formSubmitValue.description.length < 30) {
+      if (formData.description.length < 30) {
         errors.description = 'Description should be at least 50 characters long.';
       }
 
@@ -50,7 +45,7 @@ const useFormValidation = () => {
     };
 
     validateForm();
-  }, [state.formSubmitValue]);
+  }, [formData]);
 
   return { validationMessages, isValid };
 };

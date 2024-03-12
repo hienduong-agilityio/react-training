@@ -5,6 +5,7 @@ import InputField from '@components/common/InputField';
 // Hooks
 import { usePokemonContext } from '@stores/PokemonProvider';
 import useFormValidation from '@hooks/useFormValidation';
+import { useEffect, useState } from 'react';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -34,14 +35,22 @@ interface IFormData extends HTMLFormElement {
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
   const { state, dispatch } = usePokemonContext();
-  const { validationMessages } = useFormValidation();
+  const [formValue, setFormValue] = useState<IFormValue>({
+    name: '',
+    number: '',
+    picture: '',
+    type1: '',
+    type2: '',
+    description: ''
+  });
 
-  const errorMessage = state.formSubmitErrorMessages;
+  const { validationMessages } = useFormValidation(formValue);
 
-  const handleSubmit = (event: React.FormEvent<IFormData>) => {
+  const handleSubmitForm = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
 
     const formEvent = event.currentTarget.elements;
+
     const formData: IFormValue = {
       name: formEvent.pokemonName.value,
       number: formEvent.pokemonNumber.value,
@@ -51,16 +60,18 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       description: formEvent.pokemonDescription.value
     };
 
-    dispatch({ type: 'FORM_SUBMIT_VALUES', submitFormValue: formData });
-
-    dispatch({ type: 'FORM_SUBMIT_ERROR_MESSAGES', submitFormError: validationMessages });
+    setFormValue(formData);
   };
+
+  useEffect(() => {
+    dispatch({ type: 'FORM_SUBMIT_ERROR_MESSAGES', submitFormError: validationMessages });
+  }, [dispatch, validationMessages]);
 
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
       <span className="mb-4 text-3xl font-bold">Create pokemon</span>
       {/* Form input*/}
-      <form className="mt-5 flex flex-col" onSubmit={handleSubmit}>
+      <form className="mt-5 flex flex-col" onSubmit={handleSubmitForm}>
         {/* Input for name */}
         <div>
           <label className="text-sm text-primary" htmlFor="pokemonName">
@@ -73,7 +84,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonName"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.name}</span>
+          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.name}</span>
         </div>
 
         {/* Input for number */}
@@ -88,7 +99,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonNumber"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.number}</span>
+          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.number}</span>
         </div>
 
         {/* Input for picture */}
@@ -118,7 +129,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonType1"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.type1}</span>
+          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.type1}</span>
         </div>
 
         {/* Input for type2 */}
@@ -148,7 +159,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonDescription"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{errorMessage?.description}</span>
+          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.description}</span>
         </div>
 
         {/* Group button */}
