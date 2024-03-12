@@ -43,7 +43,8 @@ const SearchField = (): JSX.Element => {
         <Button
           variant="text"
           color="secondary"
-          customClasses="border-none rounded-xl capitalize w-full font-bold text-primary flex-col "
+          customClasses="border-none capitalize w-full font-bold text-primary flex-col "
+          rounded="normal"
           size="medium"
           onClick={handleBtnClick}
         >
