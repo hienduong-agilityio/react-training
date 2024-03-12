@@ -3,6 +3,7 @@ import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } f
 
 // Types
 import { IPokemonData } from '@components/layouts/Pokedex';
+import { IFormValue } from '@components/PokemonForm';
 
 interface IPokemonContextProps {
   state: {
@@ -10,6 +11,7 @@ interface IPokemonContextProps {
     filterTerm?: string[];
     pokemonID?: string;
     data?: IPokemonData[];
+    formSubmitValue?: IFormValue;
     loading?: boolean;
     error?: string | null;
   };
@@ -24,6 +26,7 @@ type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
+  | { type: 'FORM_SUBMIT_VALUES'; submitFormValue: IFormValue }
   | { type: 'FETCH_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
@@ -33,6 +36,14 @@ const initialState: IPokemonContextProps = {
     searchTerm: '',
     filterTerm: [],
     pokemonID: '',
+    formSubmitValue: {
+      name: '',
+      number: '',
+      picture: '',
+      type1: '',
+      type2: '',
+      description: ''
+    },
     data: [],
     loading: false,
     error: null
@@ -65,6 +76,11 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
         ...state,
         state: { pokemonID: action.getPokemonID }
       };
+    case 'FORM_SUBMIT_VALUES':
+      return {
+        ...state,
+        state: { formSubmitValue: action.submitFormValue }
+      };
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, state: { loading: true, error: null } };
     case 'FETCH_POKEMON_SUCCESS':
@@ -92,6 +108,8 @@ export const usePokemonContext = () => {
 
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
   const [state, dispatch] = useReducer(pokemonReducer, initialState);
+
+  console.log(state.state.formSubmitValue);
 
   const contextValue: IPokemonContextProps = useMemo(
     () => ({

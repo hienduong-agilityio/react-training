@@ -1,6 +1,7 @@
 // Components
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -15,16 +16,36 @@ interface IFormElement extends HTMLFormControlsCollection {
   description: HTMLInputElement;
 }
 
+export interface IFormValue {
+  name: string;
+  number: string;
+  picture: string;
+  type1: string;
+  type2: string;
+  description: string;
+}
+
 interface IFormData extends HTMLFormElement {
   readonly elements: IFormElement;
 }
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
+  const { dispatch } = usePokemonContext();
+
   const handleSubmit = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
 
     const formEvent = event.currentTarget.elements;
-    console.log(formEvent);
+    const formData: IFormValue = {
+      name: formEvent.name.value,
+      number: formEvent.number.value,
+      picture: formEvent.picture.value,
+      type1: formEvent.type1.value,
+      type2: formEvent.type2.value,
+      description: formEvent.description.value
+    };
+
+    dispatch({ type: 'FORM_SUBMIT_VALUES', submitFormValue: formData });
   };
 
   return (
