@@ -105,16 +105,12 @@ const SearchFilter = (): JSX.Element => {
           </div>
 
           {/* Button */}
-          <div className="flex gap-5 p-6">
-            <Button
-              onClick={handleResetFilters}
-              variant="outline"
-              customClasses="rounded-xl w-1/2 justify-center font-semibold"
-            >
+          <div className="flex gap-5 p-6 font-bold">
+            <Button onClick={handleResetFilters} variant="outline" customClasses="w-1/2">
               Reset filters
             </Button>
 
-            <Button variant="text" customClasses="rounded-2xl w-1/2 justify-center font-semibold bg-gray-200">
+            <Button variant="text" customClasses="w-1/2 bg-gray-200">
               Apply filters
             </Button>
           </div>

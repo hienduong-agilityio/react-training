@@ -7,6 +7,8 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   btnType?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'default' | 'danger';
+  rounded?: 'default' | 'normal' | 'medium' | 'large';
+  align?: 'default' | 'center';
   customClasses?: string;
 }
 
@@ -18,13 +20,25 @@ export enum BUTTON_VARIANT {
 }
 
 const buttonDefault: string =
-  'rounded-2xl justify-center font-semibold flex gap-2 items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
+  'flex gap-2 items-center hover:opacity-80 active:shadow-buttonActive cursor-pointer disabled:opacity-60';
 
 const variantClasses: { [key in BUTTON_VARIANT]: string } = {
   text: 'hover:bg-gray-200',
   outline: 'bg-white border',
   filled: 'text-white',
   filledTonal: 'text-white shadow-mg hover:shadow-lg'
+};
+
+const roundedClasses: { [key in 'default' | 'normal' | 'medium' | 'large']: string } = {
+  default: 'rounded-xl',
+  normal: 'rounded-2xl',
+  medium: 'rounded-3xl',
+  large: 'rounded-4xl'
+};
+
+const alignClasses: { [key in 'default'|'center']: string } = {
+  default: '',
+  center: 'justify-center',
 };
 
 const sizeClasses: { [key in 'small' | 'medium' | 'large']: string } = {
@@ -55,6 +69,8 @@ const Button = ({
   variant = 'text',
   size = 'medium',
   color = 'default',
+  rounded = 'normal',
+  align= 'center',
   customClasses = '',
   ...restProps
 }: IButtonProps): JSX.Element => {
@@ -63,6 +79,8 @@ const Button = ({
     variantClasses[variant],
     sizeClasses[size],
     colorClasses[color],
+    roundedClasses[rounded],
+    alignClasses[align],
     customClasses
   ]);
 

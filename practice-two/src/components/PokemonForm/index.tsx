@@ -107,7 +107,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
         </div>
 
         {/* Group button */}
-        <div className="flex gap-5 p-6">
+        <div className="flex gap-5 p-6 font-bold">
           <Button variant="outline" customClasses="w-1/2">
             Create
           </Button>
