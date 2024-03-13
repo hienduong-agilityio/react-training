@@ -6,6 +6,7 @@ import InputField from '@components/common/InputField';
 import { usePokemonContext } from '@stores/PokemonProvider';
 import useFormValidation from '@hooks/useFormValidation';
 import { useEffect, useState } from 'react';
+import { postData } from '@services/api';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -44,7 +45,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     description: ''
   });
 
-  const { validationMessages } = useFormValidation(formValue);
+  const { isValid, validationMessages } = useFormValidation(formValue);
 
   const handleSubmitForm = (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
@@ -59,6 +60,15 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       type2: formEvent.pokemonType2.value,
       description: formEvent.pokemonDescription.value
     };
+
+    if (isValid) {
+      const pokemonData = {
+        name: formData.name,
+        type: [formData.type1.toLowerCase(), formData.type2.toLowerCase()]
+      };
+
+      postData('https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon', pokemonData);
+    }
 
     setFormValue(formData);
   };
