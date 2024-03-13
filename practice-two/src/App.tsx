@@ -22,6 +22,9 @@ const App = () => {
   const { data, error } = usePokemonData();
 
   useEffect(() => {
+    dispatch({
+      type: 'FETCH_POKEMON_REQUEST'
+    });
     if (data) {
       dispatch({ type: 'FETCH_POKEMON_SUCCESS', payload: data });
     }
