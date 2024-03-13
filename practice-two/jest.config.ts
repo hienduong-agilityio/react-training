@@ -18,6 +18,7 @@ export default {
     '@constants': '<rootDir>/src/constants',
     '@stores/(.*)': '<rootDir>/src/stores/$1',
     '@mocks': '<rootDir>/src/mocks',
+    '@services/(.*)': '<rootDir>/src/services/$1',
     '@hooks/(.*)': '<rootDir>/src/hooks/$1'
   },
   roots: ['<rootDir>/src'],

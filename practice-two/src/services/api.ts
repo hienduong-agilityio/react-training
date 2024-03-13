@@ -6,7 +6,7 @@ import { METHOD } from '@constants/api';
  * @param url - The API
  * @param dataField - The value input
  */
-export const postData = async <T>(url: string, dataField: T) => {
+const postData = async <T>(url: string, dataField: T) => {
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await fetch(url, {
@@ -25,3 +25,5 @@ export const postData = async <T>(url: string, dataField: T) => {
     throw error;
   }
 };
+
+export { postData };
