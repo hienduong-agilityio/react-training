@@ -4,8 +4,6 @@ import InputField from '@components/common/InputField';
 
 // Hooks
 import { usePokemonContext } from '@stores/PokemonProvider';
-import useFormValidation from '@hooks/useFormValidation';
-import { useEffect, useState } from 'react';
 import { postData } from '@services/api';
 
 interface IPokemonForm {
@@ -35,23 +33,14 @@ interface IFormData extends HTMLFormElement {
 }
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
-  const { state, dispatch } = usePokemonContext();
-  const [formValue, setFormValue] = useState<IFormValue>({
-    name: '',
-    number: '',
-    picture: '',
-    type1: '',
-    type2: '',
-    description: ''
-  });
+  const { dispatch } = usePokemonContext();
 
-  const { isValid, validationMessages } = useFormValidation(formValue);
-
-  const handleSubmitForm = (event: React.FormEvent<IFormData>) => {
+  const handleSubmitForm = async (event: React.FormEvent<IFormData>) => {
     event.preventDefault();
 
     const formEvent = event.currentTarget.elements;
 
+    // Get form value
     const formData: IFormValue = {
       name: formEvent.pokemonName.value,
       number: formEvent.pokemonNumber.value,
@@ -61,21 +50,19 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       description: formEvent.pokemonDescription.value
     };
 
-    if (isValid) {
-      const pokemonData = {
-        name: formData.name,
-        type: [formData.type1.toLowerCase(), formData.type2.toLowerCase()]
-      };
+    const pokemonData = {
+      name: formData.name,
+      type: [formData.type1.toLowerCase(), formData.type2.toLowerCase()]
+    };
 
-      postData('https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon', pokemonData);
-    }
+    // Update to fetch api
+    dispatch({
+      type: 'ADD_POKEMON',
+      payload: await postData('https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon', pokemonData)
+    });
 
-    setFormValue(formData);
+    onClosePokemonForm();
   };
-
-  useEffect(() => {
-    dispatch({ type: 'FORM_SUBMIT_ERROR_MESSAGES', submitFormError: validationMessages });
-  }, [dispatch, validationMessages]);
 
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
@@ -94,7 +81,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonName"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.name}</span>
+          <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
         {/* Input for number */}
@@ -109,7 +96,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonNumber"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.number}</span>
+          <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
         {/* Input for picture */}
@@ -139,7 +126,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonType1"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.type1}</span>
+          <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
         {/* Input for type2 */}
@@ -169,7 +156,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             id="pokemonDescription"
             type="text"
           />
-          <span className="block pb-2 -mt-3 text-danger">{state.formSubmitErrorMessages?.description}</span>
+          <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
         {/* Group button */}

@@ -17,6 +17,7 @@ interface IPokemonContextProps {
     filterTerm?: string[];
     pokemonID?: string;
     data?: IPokemonData[];
+    pokemonData?: [];
     formSubmitErrorMessages?: IFormErrorMessages;
     loading?: boolean;
     error?: string | null;
@@ -33,6 +34,7 @@ type Action =
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
   | { type: 'FORM_SUBMIT_ERROR_MESSAGES'; submitFormError: IFormErrorMessages }
+  | { type: 'ADD_POKEMON'; payload: [] }
   | { type: 'FETCH_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
@@ -48,6 +50,7 @@ const initialState: IPokemonContextProps = {
       description: '',
       type1: ''
     },
+    pokemonData: [],
     data: [],
     loading: false,
     error: null
@@ -84,6 +87,11 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
       return {
         ...state,
         state: { formSubmitErrorMessages: action.submitFormError }
+      };
+    case 'ADD_POKEMON':
+      return {
+        ...state,
+        state: { pokemonData: action.payload }
       };
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, state: { loading: true, error: null } };
