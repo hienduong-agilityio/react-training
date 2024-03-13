@@ -7,6 +7,7 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Service
 import { postData } from '@services/api';
+import { POKEMON_URL } from '@constants/api';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -60,7 +61,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     // Update to fetch api
     dispatch({
       type: 'ADD_POKEMON',
-      payload: await postData('https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon', pokemonData)
+      payload: await postData(POKEMON_URL, pokemonData)
     });
 
     onClosePokemonForm();

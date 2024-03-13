@@ -7,13 +7,16 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 // Hooks
 import { useEffect, useMemo, useState } from 'react';
 
+// URL
+import { POKEMON_URL } from '@constants/api';
+
 const usePokemonData = () => {
   const { state } = usePokemonContext();
 
   const [data, setData] = useState<IPokemonData[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const baseURL: string = 'https://6540762545bedb25bfc1f578.mockapi.io/api/v1/pokemon';
+  const baseURL: string = POKEMON_URL;
 
   const urlWithSearchParams = useMemo(() => {
     const url = new URL(baseURL);
@@ -31,7 +34,7 @@ const usePokemonData = () => {
     }
 
     return url.toString();
-  }, [state.searchTerm, state.filterTerm]);
+  }, [baseURL, state.searchTerm, state.filterTerm]);
 
   useEffect(() => {
     const fetchData = async () => {
