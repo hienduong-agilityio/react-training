@@ -1,3 +1,6 @@
+// Library
+import { FormEvent } from 'react';
+
 // Components
 import Button from '@components/common/Button';
 import InputField from '@components/common/InputField';
@@ -10,6 +13,7 @@ import { postData } from '@services/api';
 
 // Constants
 import { POKEMON_URL } from '@constants/api';
+import { POKEMON_SELECT_TYPES } from '@constants/pokemonTypes';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -19,17 +23,9 @@ interface IFormElement extends HTMLFormControlsCollection {
   pokemonName: HTMLInputElement;
   pokemonNumber: HTMLInputElement;
   pokemonPicture: HTMLInputElement;
-  pokemonType1: HTMLInputElement;
-  pokemonType2: HTMLInputElement;
+  pokemonType1: HTMLSelectElement;
+  pokemonType2: HTMLSelectElement;
   pokemonDescription: HTMLInputElement;
-}
-
-export interface IFormValue {
-  name: string;
-  number: string;
-  picture: string;
-  types: string[];
-  description: string;
 }
 
 interface IFormData extends HTMLFormElement {
@@ -44,25 +40,34 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
   const { dispatch } = usePokemonContext();
 
-  const handleSubmitForm = async (event: React.FormEvent<IFormData>) => {
+  const handleSubmitForm = async (event: FormEvent<IFormData>) => {
     event.preventDefault();
 
-    const formEvent = event.currentTarget.elements;
+    const formData = new FormData(event.currentTarget);
+
+    //  Transforms a list of key-value pairs into an object
+    const formPokemonObject = Object.fromEntries(formData);
+
+    const { pokemonName, pokemonNumber, pokemonPicture, pokemonType1, pokemonType2, pokemonDescription } =
+      formPokemonObject;
+
+    const pokemonTypes = [pokemonType1, pokemonType2].filter((type) => type !== '---choose---');
 
     // Get form value
-    const formData: IFormValue = {
-      name: formEvent.pokemonName.value,
-      number: formEvent.pokemonNumber.value,
-      picture: formEvent.pokemonPicture.value,
-      types: [formEvent.pokemonType1.value.toLowerCase(), formEvent.pokemonType2.value.toLowerCase()],
-      description: formEvent.pokemonDescription.value
+    const formPokemonData = {
+      name: pokemonName,
+      number: pokemonNumber,
+      picture: pokemonPicture,
+      types: pokemonTypes,
+      description: pokemonDescription
     };
 
     const pokemonData = {
-      name: formData.name,
-      type: formData.types
+      name: formPokemonData.name,
+      type: formPokemonData.types
     };
 
+    // Add new Pokemon data
     dispatch({
       type: 'ADD_POKEMON_REQUEST'
     });
@@ -134,18 +139,24 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
+        {/* Select for types*/}
         {typeInputs.map((type) => (
           <div key={type.label}>
             <label className="text-sm text-primary" htmlFor={type.name}>
               {type.label}
             </label>
-            <InputField
+            <select
               className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
-              placeholder={type.label}
               name={type.name}
               id={type.name}
-              type="text"
-            />
+            >
+              <option>---choose---</option>
+              {POKEMON_SELECT_TYPES.map(([value, text]) => (
+                <option key={value} value={value}>
+                  {text}
+                </option>
+              ))}
+            </select>
             <span className="block pb-2 -mt-3 text-danger"></span>
           </div>
         ))}

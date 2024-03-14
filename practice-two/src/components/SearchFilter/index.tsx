@@ -12,7 +12,7 @@ import SideBar from '@components/SlideBar';
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 // Types
-import { POKEMON_TYPES } from '@constants/index';
+import { POKEMON_CHECKBOX_TYPES } from '@constants/index';
 
 // Hook
 import { usePokemonContext } from '@stores/PokemonProvider';
@@ -89,7 +89,7 @@ const SearchFilter = (): JSX.Element => {
               <Typography customClasses="text-gray-500">Type</Typography>
 
               <ul className="grid grid-cols-2 py-4">
-                {POKEMON_TYPES.map((pokemonType) => (
+                {POKEMON_CHECKBOX_TYPES.map((pokemonType) => (
                   <li className="flex gap-4" key={pokemonType.type}>
                     <InputField
                       type="checkbox"

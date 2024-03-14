@@ -1,4 +1,4 @@
-const POKEMON_TYPES = [
+const POKEMON_CHECKBOX_TYPES = [
   { type: 'fire', checked: false },
   { type: 'bug', checked: false },
   { type: 'water', checked: false },
@@ -19,4 +19,25 @@ const POKEMON_TYPES = [
   { type: 'grass', checked: false }
 ];
 
-export { POKEMON_TYPES };
+const POKEMON_SELECT_TYPES = [
+  ['fire', 'Fire'],
+  ['bug', 'Bug'],
+  ['water', 'Water'],
+  ['flying', 'Flying'],
+  ['poison', 'Poison'],
+  ['normal', 'Normal'],
+  ['rock', 'Rock'],
+  ['ground', 'Ground'],
+  ['fighting', 'Fighting'],
+  ['ghost', 'Ghost'],
+  ['psychic', 'Psychic'],
+  ['ice', 'Ice'],
+  ['dragon', 'Dragon'],
+  ['dark', 'Dark'],
+  ['fairy', 'Fairy'],
+  ['electric', 'Electric'],
+  ['steel', 'Steel'],
+  ['grass', 'Grass']
+];
+
+export { POKEMON_CHECKBOX_TYPES, POKEMON_SELECT_TYPES };

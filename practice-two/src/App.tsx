@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 const containerClasses: string = 'p-5 pt-10 m-auto w-full max-w-screen-xl';
 
 const App = () => {
-  const { state, dispatch } = usePokemonContext();
+  const { dispatch } = usePokemonContext();
   const { data, error } = usePokemonData();
 
   useEffect(() => {
@@ -29,8 +29,6 @@ const App = () => {
       dispatch({ type: 'FETCH_POKEMON_ERROR', payload: error });
     }
   }, [data, error, dispatch]);
-
-  console.log(state.data);
 
   return (
     <>
