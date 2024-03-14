@@ -68,11 +68,7 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         pokemonID: action.getPokemonID
       };
     case 'ADD_POKEMON_SUCCESS': {
-      if (!state.data) {
-        return { ...state, loading: false };
-      }
-
-      const newData = state.data.concat(action.payload);
+      const newData = state.data?.concat(action.payload);
 
       return {
         ...state,
