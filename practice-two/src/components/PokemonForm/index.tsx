@@ -1,5 +1,5 @@
 // Library
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 
 // Components
 import Button from '@components/common/Button';
@@ -14,6 +14,7 @@ import { postData } from '@services/api';
 // Constants
 import { POKEMON_URL } from '@constants/api';
 import { POKEMON_SELECT_TYPES } from '@constants/pokemonTypes';
+import { Select, SelectOption } from '@components/Select';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -23,7 +24,6 @@ interface IFormElement extends HTMLFormControlsCollection {
   pokemonName: HTMLInputElement;
   pokemonNumber: HTMLInputElement;
   pokemonPicture: HTMLInputElement;
-  pokemonTypes: HTMLSelectElement;
   pokemonDescription: HTMLInputElement;
 }
 
@@ -32,12 +32,18 @@ interface IFormData extends HTMLFormElement {
 }
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
-  const typeInputs = [
-    { label: 'Type1', name: 'pokemonType1' },
-    { label: 'Type2', name: 'pokemonType2' }
+  const { dispatch } = usePokemonContext();
+
+  const options = [
+    { label: 'First', value: 1 },
+    { label: 'Second', value: 2 },
+    { label: 'Third', value: 3 },
+    { label: 'Fourth', value: 4 },
+    { label: 'Fifth', value: 5 }
   ];
 
-  const { dispatch } = usePokemonContext();
+  const [value1, setValue1] = useState<SelectOption[]>([options[0]]);
+  const [value2, setValue2] = useState<SelectOption | undefined>(options[0]);
 
   const handleSubmitForm = async (event: FormEvent<IFormData>) => {
     event.preventDefault();
@@ -139,26 +145,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
         </div>
 
         {/* Select for types*/}
-        {typeInputs.map((type) => (
-          <div key={type.label}>
-            <label className="text-sm text-primary" htmlFor={type.name}>
-              {type.label}
-            </label>
-            <select
-              className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
-              name={type.name}
-              id={type.name}
-            >
-              <option>---choose---</option>
-              {POKEMON_SELECT_TYPES.map(([value, text]) => (
-                <option key={value} value={value}>
-                  {text}
-                </option>
-              ))}
-            </select>
-            <span className="block pb-2 -mt-3 text-danger"></span>
-          </div>
-        ))}
+        <div>
+          <label className="text-sm text-primary" htmlFor="pokemonTypes">
+            Types
+          </label>
+          <Select multiple options={options} value={value1} onChange={(o) => setValue1(o)} />
+          <br />
+          <Select options={options} value={value2} onChange={(o) => setValue2(o)} />
+        </div>
 
         {/* Input for description*/}
         <div>
