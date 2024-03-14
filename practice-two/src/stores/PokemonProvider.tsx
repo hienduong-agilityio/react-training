@@ -8,7 +8,7 @@ export type PokemonType = {
   searchTerm?: string;
   filterTerm?: string[];
   pokemonID?: string;
-  data?: IPokemonData[];
+  data: IPokemonData[];
   loading?: boolean;
   error?: string | null;
 };
@@ -67,15 +67,12 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
-    case 'ADD_POKEMON_SUCCESS': {
-      const newData = state.data?.concat(action.payload);
-
+    case 'ADD_POKEMON_SUCCESS':
       return {
         ...state,
         loading: false,
-        data: newData
+        data: [...state.data, action.payload]
       };
-    }
     case 'ADD_POKEMON_REQUEST':
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, loading: true, error: null };

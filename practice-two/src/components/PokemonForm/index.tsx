@@ -23,8 +23,7 @@ interface IFormElement extends HTMLFormControlsCollection {
   pokemonName: HTMLInputElement;
   pokemonNumber: HTMLInputElement;
   pokemonPicture: HTMLInputElement;
-  pokemonType1: HTMLSelectElement;
-  pokemonType2: HTMLSelectElement;
+  pokemonTypes: HTMLSelectElement;
   pokemonDescription: HTMLInputElement;
 }
 
