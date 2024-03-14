@@ -7,6 +7,8 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Service
 import { postData } from '@services/api';
+
+// Constants
 import { POKEMON_URL } from '@constants/api';
 
 interface IPokemonForm {
@@ -60,10 +62,6 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       name: formData.name,
       type: formData.type
     };
-
-    dispatch({
-      type: 'FETCH_POKEMON_REQUEST'
-    });
 
     try {
       const res = await postData(POKEMON_URL, pokemonData);
