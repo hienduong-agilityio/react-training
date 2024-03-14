@@ -9,7 +9,6 @@ export type PokemonType = {
   filterTerm?: string[];
   pokemonID?: string;
   data?: IPokemonData[];
-  pokemonData?: [];
   loading?: boolean;
   error?: string | null;
 };
@@ -38,7 +37,6 @@ const initialState: PokemonType = {
   searchTerm: '',
   filterTerm: [],
   pokemonID: '',
-  pokemonData: [],
   data: [],
   loading: false,
   error: null

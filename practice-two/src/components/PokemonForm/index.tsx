@@ -28,7 +28,7 @@ export interface IFormValue {
   name: string;
   number: string;
   picture: string;
-  type: string[];
+  types: string[];
   description: string;
 }
 
@@ -54,13 +54,13 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       name: formEvent.pokemonName.value,
       number: formEvent.pokemonNumber.value,
       picture: formEvent.pokemonPicture.value,
-      type: [formEvent.pokemonType1.value.toLowerCase(), formEvent.pokemonType2.value.toLowerCase()],
+      types: [formEvent.pokemonType1.value.toLowerCase(), formEvent.pokemonType2.value.toLowerCase()],
       description: formEvent.pokemonDescription.value
     };
 
     const pokemonData = {
       name: formData.name,
-      type: formData.type
+      type: formData.types
     };
 
     dispatch({
