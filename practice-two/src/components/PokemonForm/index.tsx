@@ -48,8 +48,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     //  Transforms a list of key-value pairs into an object
     const formPokemonObject = Object.fromEntries(formData);
 
-    const { pokemonName, pokemonNumber, pokemonPicture, pokemonType1, pokemonType2, pokemonDescription } =
-      formPokemonObject;
+    const { pokemonName, pokemonNumber, pokemonPicture, pokemonType1, pokemonType2, pokemonDescription } = formPokemonObject;
 
     const pokemonTypes = [pokemonType1, pokemonType2].filter((type) => type !== '---choose---');
 
