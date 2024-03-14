@@ -26,8 +26,7 @@ export interface IFormValue {
   name: string;
   number: string;
   picture: string;
-  type1: string;
-  type2: string;
+  type: string[];
   description: string;
 }
 
@@ -36,6 +35,11 @@ interface IFormData extends HTMLFormElement {
 }
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
+  const typeInputs = [
+    { label: 'Type1', name: 'pokemonType1', placeholder: 'pokemonType1' },
+    { label: 'Type2', name: 'pokemonType2', placeholder: 'pokemonType1' }
+  ];
+
   const { dispatch } = usePokemonContext();
 
   const handleSubmitForm = async (event: React.FormEvent<IFormData>) => {
@@ -48,14 +52,13 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       name: formEvent.pokemonName.value,
       number: formEvent.pokemonNumber.value,
       picture: formEvent.pokemonPicture.value,
-      type1: formEvent.pokemonType1.value,
-      type2: formEvent.pokemonType2.value,
+      type: [formEvent.pokemonType1.value.toLowerCase(), formEvent.pokemonType2.value.toLowerCase()],
       description: formEvent.pokemonDescription.value
     };
 
     const pokemonData = {
       name: formData.name,
-      type: [formData.type1.toLowerCase(), formData.type2.toLowerCase()]
+      type: formData.type
     };
 
     dispatch({
@@ -129,35 +132,21 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
-        {/* Input for type1 */}
-        <div>
-          <label className="text-sm text-primary" htmlFor="pokemonType1">
-            Type1
-          </label>
-          <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
-            placeholder="Type1"
-            name="pokemonType1"
-            id="pokemonType1"
-            type="text"
-          />
-          <span className="block pb-2 -mt-3 text-danger"></span>
-        </div>
-
-        {/* Input for type2 */}
-        <div>
-          <label className="text-sm text-primary" htmlFor="pokemonType2">
-            Type2
-          </label>
-          <InputField
-            className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
-            placeholder="Type2"
-            name="pokemonType2"
-            id="pokemonType2"
-            type="text"
-          />
-          <span className="block pb-2 -mt-3 text-danger"></span>
-        </div>
+        {typeInputs.map((type) => (
+          <div key={type.label}>
+            <label className="text-sm text-primary" htmlFor={type.name}>
+              {type.label}
+            </label>
+            <InputField
+              className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
+              placeholder={type.placeholder}
+              name={type.name}
+              id={type.name}
+              type="text"
+            />
+            <span className="block pb-2 -mt-3 text-danger"></span>
+          </div>
+        ))}
 
         {/* Input for description*/}
         <div>

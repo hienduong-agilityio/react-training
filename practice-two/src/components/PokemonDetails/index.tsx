@@ -11,9 +11,9 @@ export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
 }
 
-const pokemonCardClasses: string = 'w-[725px] h-[698px] flex flex-col items-center rounded-3xl';
+const pokemonCardClasses: string = 'w-[725px] h-[698px] flex flex-col items-center';
 
-const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat bg-right-top bg-pokemon-card';
+const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat rounded-3xl bg-right-top bg-pokemon-card';
 
 /**
  * @param pokemonID - ID of the Pokemon
