@@ -63,16 +63,20 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       type: formData.type
     };
 
+    dispatch({
+      type: 'ADD_POKEMON_REQUEST'
+    });
+
     try {
       const res = await postData(POKEMON_URL, pokemonData);
 
       dispatch({
-        type: 'ADD_POKEMON',
+        type: 'ADD_POKEMON_SUCCESS',
         payload: res
       });
     } catch (error) {
       dispatch({
-        type: 'FETCH_POKEMON_ERROR',
+        type: 'ADD_POKEMON_ERROR',
         payload: (error as Error).message
       });
     }

@@ -27,9 +27,11 @@ type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
-  | { type: 'ADD_POKEMON'; payload: IPokemonData }
+  | { type: 'ADD_POKEMON_SUCCESS'; payload: IPokemonData }
   | { type: 'FETCH_POKEMON_REQUEST' }
+  | { type: 'ADD_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'ADD_POKEMON_ERROR'; payload: string }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
 const initialState: PokemonType = {
@@ -67,7 +69,7 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
-    case 'ADD_POKEMON': {
+    case 'ADD_POKEMON_SUCCESS': {
       if (!state.data) {
         return { ...state, loading: false };
       }
@@ -80,10 +82,12 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         data: newData
       };
     }
+    case 'ADD_POKEMON_REQUEST':
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, loading: true, error: null };
     case 'FETCH_POKEMON_SUCCESS':
       return { ...state, loading: false, data: action.payload };
+    case 'ADD_POKEMON_ERROR':
     case 'FETCH_POKEMON_ERROR':
       return { ...state, loading: false, error: action.payload };
 
