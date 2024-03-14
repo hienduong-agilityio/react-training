@@ -1,5 +1,5 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, Reducer } from 'react';
 
 // Types
 import { IPokemonData } from '@components/layouts/Pokedex';
@@ -27,7 +27,7 @@ type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
-  | { type: 'ADD_POKEMON'; payload: [] }
+  | { type: 'ADD_POKEMON'; payload: IPokemonData }
   | { type: 'FETCH_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
@@ -67,11 +67,19 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
-    case 'ADD_POKEMON':
+    case 'ADD_POKEMON': {
+      if (!state.data) {
+        return { ...state, loading: false };
+      }
+
+      const newData = state.data.concat(action.payload);
+
       return {
         ...state,
-        pokemonData: action.payload
+        loading: false,
+        data: newData
       };
+    }
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, loading: true, error: null };
     case 'FETCH_POKEMON_SUCCESS':
@@ -98,7 +106,7 @@ export const usePokemonContext = () => {
 };
 
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
-  const [state, dispatch] = useReducer(pokemonReducer, initialState);
+  const [state, dispatch] = useReducer<Reducer<PokemonType, Action>>(pokemonReducer, initialState);
 
   const contextValue: IPokemonContextProps = useMemo(
     () => ({

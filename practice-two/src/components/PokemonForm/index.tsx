@@ -58,11 +58,23 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       type: [formData.type1.toLowerCase(), formData.type2.toLowerCase()]
     };
 
-    // Update to fetch api
     dispatch({
-      type: 'ADD_POKEMON',
-      payload: await postData(POKEMON_URL, pokemonData)
+      type: 'FETCH_POKEMON_REQUEST'
     });
+
+    try {
+      const res = await postData(POKEMON_URL, pokemonData);
+
+      dispatch({
+        type: 'ADD_POKEMON',
+        payload: res
+      });
+    } catch (error) {
+      dispatch({
+        type: 'FETCH_POKEMON_ERROR',
+        payload: (error as Error).message
+      });
+    }
 
     onClosePokemonForm();
   };

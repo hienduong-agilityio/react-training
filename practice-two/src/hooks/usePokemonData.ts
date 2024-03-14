@@ -52,7 +52,7 @@ const usePokemonData = () => {
     };
 
     fetchData();
-  }, [state.searchTerm, state.pokemonData, urlWithSearchParams]);
+  }, [state.searchTerm, urlWithSearchParams]);
 
   return { data, error };
 };
