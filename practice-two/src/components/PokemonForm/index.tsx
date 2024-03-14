@@ -38,8 +38,8 @@ interface IFormData extends HTMLFormElement {
 
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
   const typeInputs = [
-    { label: 'Type1', name: 'pokemonType1', placeholder: 'pokemonType1' },
-    { label: 'Type2', name: 'pokemonType2', placeholder: 'pokemonType1' }
+    { label: 'Type1', name: 'pokemonType1' },
+    { label: 'Type2', name: 'pokemonType2' }
   ];
 
   const { dispatch } = usePokemonContext();
@@ -141,7 +141,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             </label>
             <InputField
               className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
-              placeholder={type.placeholder}
+              placeholder={type.label}
               name={type.name}
               id={type.name}
               type="text"
