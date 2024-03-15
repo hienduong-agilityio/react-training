@@ -14,6 +14,9 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 // Hook
 import { useState } from 'react';
 
+// Constant
+import { FORM_TITLE } from '@constants/formTitle';
+
 export interface IPokemonData {
   id: string;
   name: string;
@@ -33,7 +36,7 @@ export interface IPokemonData {
 const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
-  const [formTitle, setFormTitle] = useState('Create');
+  const [formTitle, setFormTitle] = useState(FORM_TITLE.CREATE);
 
   const { state } = usePokemonContext();
 
@@ -55,12 +58,12 @@ const Pokedex = (): JSX.Element => {
     setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
 
     if (isPokemonFormPopupOpen === false) {
-      setFormTitle('Create');
+      setFormTitle(FORM_TITLE.CREATE);
     }
   };
 
   const handleClickPokemonSubmitForm = () => {
-    setFormTitle('');
+    setFormTitle(FORM_TITLE.NONE);
   };
 
   return (
@@ -108,7 +111,7 @@ const Pokedex = (): JSX.Element => {
           />
         </Popup>
         {/* PokemonSubmitForm Popup*/}
-        {formTitle === 'Delete' && (
+        {formTitle === FORM_TITLE.DELETE && (
           <Popup isOpen onClosePopup={handleClickPokemonSubmitForm}>
             <PokemonSubmitForm updateFormTitle={setFormTitle}></PokemonSubmitForm>
           </Popup>

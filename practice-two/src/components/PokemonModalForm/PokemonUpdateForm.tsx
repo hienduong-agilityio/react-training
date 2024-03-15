@@ -43,8 +43,8 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
   );
 
   useEffect(() => {
-    // Set selected types based on form edit value when title is 'Edit'
-    if (isFormTitle === 'Edit') {
+    // Set selected types based on form edit value when title is FORM_TITLE.EDIT
+    if (isFormTitle === FORM_TITLE.EDIT) {
       setSelectedTypes(formEditValue[0].type);
     } else {
       setSelectedTypes([]);
@@ -96,7 +96,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
       type: formPokemonData.types
     };
 
-    if (isFormTitle === 'Create') {
+    if (isFormTitle === FORM_TITLE.CREATE) {
       dispatch({
         type: 'ADD_POKEMON_REQUEST'
       });
@@ -116,7 +116,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
       }
     }
 
-    if (isFormTitle === 'Edit') {
+    if (isFormTitle === FORM_TITLE.EDIT) {
       dispatch({
         type: 'EDIT_POKEMON_REQUEST'
       });
@@ -150,7 +150,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
-            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].name : ''}
+            defaultValue={isFormTitle === FORM_TITLE.EDIT ? formEditValue[0].name : FORM_TITLE.NONE}
             name="pokemonName"
             id="pokemonName"
             type="text"
@@ -166,7 +166,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Number"
-            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].id : ''}
+            defaultValue={isFormTitle === FORM_TITLE.EDIT ? formEditValue[0].id : FORM_TITLE.NONE}
             name="pokemonNumber"
             id="pokemonNumber"
             type="text"
@@ -182,7 +182,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Picture"
-            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].image : ''}
+            defaultValue={isFormTitle === FORM_TITLE.EDIT ? formEditValue[0].image : FORM_TITLE.NONE}
             name="pokemonPicture"
             id="pokemonPicture"
             type="text"
