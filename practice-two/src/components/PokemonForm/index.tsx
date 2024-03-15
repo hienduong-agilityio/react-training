@@ -1,5 +1,5 @@
 // Library
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
 // Components
 import Button from '@components/common/Button';
@@ -13,8 +13,7 @@ import { postData } from '@services/api';
 
 // Constants
 import { POKEMON_URL } from '@constants/api';
-import { POKEMON_SELECT_TYPES } from '@constants/pokemonTypes';
-import { Select, SelectOption } from '@components/Select';
+import { POKEMON_CHECKBOX_TYPES } from '@constants/pokemonTypes';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -34,17 +33,20 @@ interface IFormData extends HTMLFormElement {
 const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
   const { dispatch } = usePokemonContext();
 
-  const options = [
-    { label: 'First', value: 1 },
-    { label: 'Second', value: 2 },
-    { label: 'Third', value: 3 },
-    { label: 'Fourth', value: 4 },
-    { label: 'Fifth', value: 5 }
-  ];
+  let selectedTypes: string[] = [];
 
-  const [value1, setValue1] = useState<SelectOption[]>([options[0]]);
-  const [value2, setValue2] = useState<SelectOption | undefined>(options[0]);
+  // TODO: Update comment for function handle value check box
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
+    if (event.target.checked) {
+      // Add type to the array
+      selectedTypes = [...selectedTypes, type];
+    } else {
+      // Remove type from the array
+      selectedTypes = selectedTypes.filter((selectedType) => selectedType !== type);
+    }
+  };
 
+  // TODO: UPdate comments for function handle submit form
   const handleSubmitForm = async (event: FormEvent<IFormData>) => {
     event.preventDefault();
 
@@ -53,10 +55,9 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     //  Transforms a list of key-value pairs into an object
     const formPokemonObject = Object.fromEntries(formData);
 
-    const { pokemonName, pokemonNumber, pokemonPicture, pokemonType1, pokemonType2, pokemonDescription } =
-      formPokemonObject;
+    const { pokemonName, pokemonNumber, pokemonPicture, pokemonDescription } = formPokemonObject;
 
-    const pokemonTypes = [pokemonType1, pokemonType2].filter((type) => type !== '---choose---');
+    const pokemonTypes = selectedTypes;
 
     // Get form value
     const formPokemonData = {
@@ -145,13 +146,25 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
         </div>
 
         {/* Select for types*/}
-        <div>
+        <div className='py-3'>
           <label className="text-sm text-primary" htmlFor="pokemonTypes">
             Types
           </label>
-          <Select multiple options={options} value={value1} onChange={(o) => setValue1(o)} />
-          <br />
-          <Select options={options} value={value2} onChange={(o) => setValue2(o)} />
+          <ul className="py-4 overflow-auto max-h-24">
+            {POKEMON_CHECKBOX_TYPES.map((pokemonType) => (
+              <li className="flex gap-4" key={pokemonType.type}>
+                <InputField
+                  type="checkbox"
+                  id={pokemonType.type}
+                  onChange={(event) => handleCheckboxChange(event, pokemonType.type)}
+                />
+                <label className="capitalize" htmlFor={pokemonType.type}>
+                  {pokemonType.type}
+                </label>
+              </li>
+            ))}
+          </ul>
+          <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
         {/* Input for description*/}
@@ -174,7 +187,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <Button variant="outline" customClasses="w-1/2">
             Create
           </Button>
-          <Button onClick={onClosePokemonForm} variant="text" customClasses="w-1/2 bg-gray-200">
+          <Button type="button" onClick={onClosePokemonForm} variant="text" customClasses="w-1/2 bg-gray-200">
             Cancel
           </Button>
         </div>
