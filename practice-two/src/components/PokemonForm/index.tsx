@@ -9,7 +9,7 @@ import InputField from '@components/common/InputField';
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Service
-import { postData } from '@services/api';
+import { postData, putData } from '@services/api';
 
 // Constants
 import { POKEMON_URL } from '@constants/api';
@@ -17,6 +17,8 @@ import { POKEMON_CHECKBOX_TYPES } from '@constants/pokemonTypes';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
+  updateFormTitle: (value: string) => void;
+  title: string;
 }
 
 interface IFormElement extends HTMLFormControlsCollection {
@@ -30,8 +32,8 @@ interface IFormData extends HTMLFormElement {
   readonly elements: IFormElement;
 }
 
-const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
-  const { dispatch } = usePokemonContext();
+const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: IPokemonForm): JSX.Element => {
+  const { state, dispatch } = usePokemonContext();
 
   let selectedTypes: string[] = [];
 
@@ -80,31 +82,51 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       type: formPokemonData.types
     };
 
-    // Add new Pokemon data
-    dispatch({
-      type: 'ADD_POKEMON_REQUEST'
-    });
-
-    try {
-      const res = await postData(POKEMON_URL, pokemonData);
-
+    if (title === 'Create') {
       dispatch({
-        type: 'ADD_POKEMON_SUCCESS',
-        payload: res
+        type: 'ADD_POKEMON_REQUEST'
       });
-    } catch (error) {
-      dispatch({
-        type: 'ADD_POKEMON_ERROR',
-        payload: (error as Error).message
-      });
+
+      try {
+        const res = await postData(POKEMON_URL, pokemonData);
+
+        dispatch({
+          type: 'ADD_POKEMON_SUCCESS',
+          payload: res
+        });
+      } catch (error) {
+        dispatch({
+          type: 'ADD_POKEMON_ERROR',
+          payload: (error as Error).message
+        });
+      }
     }
+
+    if (title === 'Edit') {
+      dispatch({
+        type: 'EDIT_POKEMON_REQUEST'
+      });
+
+      try {
+        const res = await putData(`${POKEMON_URL}${state.pokemonID}`, pokemonData);
+
+        dispatch({ type: 'EDIT_POKEMON_SUCCESS', payload: res });
+      } catch (error) {
+        dispatch({
+          type: 'EDIT_POKEMON_ERROR',
+          payload: (error as Error).message
+        });
+      }
+    }
+
+    updateFormTitle('Create');
 
     onClosePokemonForm();
   };
 
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
-      <span className="mb-4 text-3xl font-bold">Create pokemon</span>
+      <span className="mb-4 text-3xl font-bold">{`${title} Pokemon`}</span>
       {/* Form input*/}
       <form className="mt-5 flex flex-col" onSubmit={handleSubmitForm}>
         {/* Input for name */}
@@ -115,6 +137,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
+            defaultValue={title === 'Edit' ? state.formEditValue[0].name : ''}
             name="pokemonName"
             id="pokemonName"
             type="text"
@@ -130,6 +153,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Number"
+            defaultValue={title === 'Edit' ? state.formEditValue[0].id : ''}
             name="pokemonNumber"
             id="pokemonNumber"
             type="text"
@@ -145,6 +169,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Picture"
+            defaultValue={title === 'Edit' ? state.formEditValue[0].image : ''}
             name="pokemonPicture"
             id="pokemonPicture"
             type="text"
@@ -158,18 +183,23 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
             Types
           </label>
           <ul className="py-4 overflow-auto max-h-24">
-            {POKEMON_CHECKBOX_TYPES.map((pokemonType) => (
-              <li className="flex gap-4" key={pokemonType.type}>
-                <InputField
-                  type="checkbox"
-                  id={pokemonType.type}
-                  onChange={(event) => handleCheckboxChange(event, pokemonType.type)}
-                />
-                <label className="capitalize" htmlFor={pokemonType.type}>
-                  {pokemonType.type}
-                </label>
-              </li>
-            ))}
+            {POKEMON_CHECKBOX_TYPES.map((pokemonType) => {
+              const isChecked = title === 'Edit' && state.formEditValue[0].type.includes(pokemonType.type);
+
+              return (
+                <li className="flex gap-4" key={pokemonType.type}>
+                  <InputField
+                    type="checkbox"
+                    id={pokemonType.type}
+                    onChange={(event) => handleCheckboxChange(event, pokemonType.type)}
+                    checked={isChecked}
+                  />
+                  <label className="capitalize" htmlFor={pokemonType.type}>
+                    {pokemonType.type}
+                  </label>
+                </li>
+              );
+            })}
           </ul>
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
@@ -194,7 +224,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <Button variant="outline" customClasses="w-1/2">
             Create
           </Button>
-          <Button type="button" onClick={onClosePokemonForm} variant="text" customClasses="w-1/2 bg-gray-200">
+          <Button onClick={onClosePokemonForm} type="button" variant="text" customClasses="w-1/2 bg-gray-200">
             Cancel
           </Button>
         </div>

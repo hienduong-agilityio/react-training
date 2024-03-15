@@ -18,7 +18,7 @@ export interface IPokemonData {
   id: string;
   name: string;
   image: string;
-  type: CHIP_COLOR[];
+  type: CHIP_COLOR[] ;
 }
 
 /**
@@ -33,8 +33,11 @@ export interface IPokemonData {
 const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
+  const [formTitle, setFormTitle] = useState('Create');
 
   const { state } = usePokemonContext();
+
+  // const formValue = state.data[Number(state.pokemonID) - 1];
 
   // Display loading indicator if data is still being fetched
   if (state.loading) {
@@ -52,6 +55,14 @@ const Pokedex = (): JSX.Element => {
 
   const handleClickPokemonForm = () => {
     setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
+
+    if (isPokemonFormPopupOpen === false) {
+      setFormTitle('Create');
+    }
+  };
+
+  const handleUpdateFormTitle = (value: string) => {
+    setFormTitle(value);
   };
 
   return (
@@ -81,11 +92,22 @@ const Pokedex = (): JSX.Element => {
       <div>
         {/* PokemonDetails Popup */}
         <Popup isOpen={isPokemonDetailsPopupOpen} onClosePopup={handleClickPokemonPopup}>
-          {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
+          {state.data && (
+            <PokemonDetails
+              isOpenForm={isPokemonFormPopupOpen}
+              openFormPokemon={setIsPokemonFormPopupOpen}
+              updateFormTitle={handleUpdateFormTitle}
+              pokemonData={state.data[Number(state.pokemonID) - 1]}
+            />
+          )}
         </Popup>
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
-          <PokemonForm onClosePokemonForm={handleClickPokemonForm} />
+          <PokemonForm
+            title={formTitle}
+            updateFormTitle={handleUpdateFormTitle}
+            onClosePokemonForm={handleClickPokemonForm}
+          />
         </Popup>
       </div>
     </section>
