@@ -146,7 +146,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
         </div>
 
         {/* Select for types*/}
-        <div className='py-3'>
+        <div className="py-3">
           <label className="text-sm text-primary" htmlFor="pokemonTypes">
             Types
           </label>
