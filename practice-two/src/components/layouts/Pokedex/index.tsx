@@ -59,10 +59,6 @@ const Pokedex = (): JSX.Element => {
     }
   };
 
-  const handleUpdateFormTitle = (value: string) => {
-    setFormTitle(value);
-  };
-
   return (
     <section className="pt-5">
       <Button
@@ -94,7 +90,6 @@ const Pokedex = (): JSX.Element => {
             <PokemonDetails
               isOpenForm={isPokemonFormPopupOpen}
               openFormPokemon={setIsPokemonFormPopupOpen}
-              updateFormTitle={handleUpdateFormTitle}
               pokemonData={state.data[Number(state.pokemonID) - 1]}
             />
           )}
@@ -102,8 +97,6 @@ const Pokedex = (): JSX.Element => {
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
           <PokemonForm
-            title={formTitle}
-            updateFormTitle={handleUpdateFormTitle}
             onClosePokemonForm={handleClickPokemonForm}
           />
         </Popup>

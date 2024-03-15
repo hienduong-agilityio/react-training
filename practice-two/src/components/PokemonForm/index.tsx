@@ -17,8 +17,6 @@ import { POKEMON_CHECKBOX_TYPES } from '@constants/pokemonTypes';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
-  updateFormTitle: (value: string) => void;
-  title: string;
 }
 
 interface IFormElement extends HTMLFormControlsCollection {
@@ -32,18 +30,18 @@ interface IFormData extends HTMLFormElement {
   readonly elements: IFormElement;
 }
 
-const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: IPokemonForm): JSX.Element => {
+const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
   const { state, dispatch } = usePokemonContext();
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   useEffect(() => {
     // Set selected types based on form edit value when title is 'Edit'
-    if (title === 'Edit') {
+    if (state.formTitle === 'Edit') {
       setSelectedTypes(state.formEditValue[0].type);
     } else {
       setSelectedTypes([]);
     }
-  }, [state.formEditValue, title]);
+  }, [state.formEditValue, state.formTitle]);
 
   /**
    * Function to handle checkbox change
@@ -90,7 +88,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
       type: formPokemonData.types
     };
 
-    if (title === 'Create') {
+    if (state.formTitle === 'Create') {
       dispatch({
         type: 'ADD_POKEMON_REQUEST'
       });
@@ -110,7 +108,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
       }
     }
 
-    if (title === 'Edit') {
+    if (state.formTitle === 'Edit') {
       dispatch({
         type: 'EDIT_POKEMON_REQUEST'
       });
@@ -127,14 +125,17 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
       }
     }
 
-    updateFormTitle('Create');
+    dispatch({
+      type: 'UPDATE_POKEMON_FORM_TITLE',
+      payload: 'Create'
+    });
 
     onClosePokemonForm();
   };
 
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
-      <span className="mb-4 text-3xl font-bold">{`${title} Pokemon`}</span>
+      <span className="mb-4 text-3xl font-bold">{`${state.formTitle} Pokemon`}</span>
       {/* Form input*/}
       <form className="mt-5 flex flex-col" onSubmit={handleSubmitForm}>
         {/* Input for name */}
@@ -145,7 +146,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
-            defaultValue={title === 'Edit' ? state.formEditValue[0].name : ''}
+            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].name : ''}
             name="pokemonName"
             id="pokemonName"
             type="text"
@@ -161,7 +162,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Number"
-            defaultValue={title === 'Edit' ? state.formEditValue[0].id : ''}
+            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].id : ''}
             name="pokemonNumber"
             id="pokemonNumber"
             type="text"
@@ -177,7 +178,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Picture"
-            defaultValue={title === 'Edit' ? state.formEditValue[0].image : ''}
+            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].image : ''}
             name="pokemonPicture"
             id="pokemonPicture"
             type="text"

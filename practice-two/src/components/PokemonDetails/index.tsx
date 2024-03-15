@@ -16,7 +16,6 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
-  updateFormTitle: (value: string) => void;
   openFormPokemon: Dispatch<SetStateAction<boolean>>;
   isOpenForm: boolean;
 }
@@ -34,12 +33,7 @@ const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat rounded-3xl b
  * @returns {JSX.Element} - The PokemonDetails element.
  */
 
-const PokemonDetails = ({
-  pokemonData,
-  isOpenForm,
-  updateFormTitle,
-  openFormPokemon = () => {}
-}: IPokemonDetailsProps): JSX.Element => {
+const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }: IPokemonDetailsProps): JSX.Element => {
   const { dispatch } = usePokemonContext();
 
   if (!pokemonData || !pokemonData.image || !pokemonData.type || !pokemonData.name || !pokemonData.id) {
@@ -55,7 +49,10 @@ const PokemonDetails = ({
   const handleButtonEditPokemon = () => {
     openFormPokemon(!isOpenForm);
 
-    updateFormTitle('Edit');
+    dispatch({
+      type: 'UPDATE_POKEMON_FORM_TITLE',
+      payload: 'Edit'
+    });
 
     dispatch({
       type: 'POKEMON_FORM_EDIT'
