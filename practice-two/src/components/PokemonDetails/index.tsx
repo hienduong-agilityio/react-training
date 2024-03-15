@@ -5,11 +5,14 @@ import Chip, { CHIP_COLOR } from '@components/common/Chip';
 import { cardBackground } from '@components/common/PokmonCard';
 import { IPokemonData } from '@components/layouts/Pokedex';
 import Typography from '@components/common/Typography';
+import Button from '@components/common/Button';
+
 
 // Library
 import classNames from 'classnames';
-import Button from '@components/common/Button';
 import { Dispatch, SetStateAction } from 'react';
+
+// Stores
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonDetailsProps {
