@@ -1,4 +1,4 @@
-const POKEMON_TYPES = [
+const POKEMON_CHECKBOX_TYPES = [
   { type: 'fire', checked: false },
   { type: 'bug', checked: false },
   { type: 'water', checked: false },
@@ -19,4 +19,4 @@ const POKEMON_TYPES = [
   { type: 'grass', checked: false }
 ];
 
-export { POKEMON_TYPES };
+export { POKEMON_CHECKBOX_TYPES };

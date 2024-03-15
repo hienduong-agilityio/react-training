@@ -1,18 +1,20 @@
 // Hook
-import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch } from 'react';
+import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, Reducer } from 'react';
 
 // Types
 import { IPokemonData } from '@components/layouts/Pokedex';
 
+export type PokemonType = {
+  searchTerm?: string;
+  filterTerm?: string[];
+  pokemonID?: string;
+  data: IPokemonData[];
+  loading?: boolean;
+  error?: string | null;
+};
+
 interface IPokemonContextProps {
-  state: {
-    searchTerm?: string;
-    filterTerm?: string[];
-    pokemonID?: string;
-    data?: IPokemonData[];
-    loading?: boolean;
-    error?: string | null;
-  };
+  state: PokemonType;
   dispatch: Dispatch<Action>;
 }
 
@@ -24,20 +26,20 @@ type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
+  | { type: 'ADD_POKEMON_SUCCESS'; payload: IPokemonData }
   | { type: 'FETCH_POKEMON_REQUEST' }
+  | { type: 'ADD_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'ADD_POKEMON_ERROR'; payload: string }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
-const initialState: IPokemonContextProps = {
-  state: {
-    searchTerm: '',
-    filterTerm: [],
-    pokemonID: '',
-    data: [],
-    loading: false,
-    error: null
-  },
-  dispatch: () => {}
+const initialState: PokemonType = {
+  searchTerm: '',
+  filterTerm: [],
+  pokemonID: '',
+  data: [],
+  loading: false,
+  error: null
 };
 
 /**
@@ -48,29 +50,37 @@ const initialState: IPokemonContextProps = {
  * @returns Updated state based on the dispatched action
  */
 
-const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonContextProps => {
+const pokemonReducer = (state: PokemonType, action: Action) => {
   switch (action.type) {
     case 'SEARCH_INPUT':
       return {
         ...state,
-        state: { searchTerm: action.inputValue }
+        searchTerm: action.inputValue
       };
     case 'FILTER_TYPE':
       return {
         ...state,
-        state: { filterTerm: action.checkedValue }
+        filterTerm: action.checkedValue
       };
     case 'POKEMON_DETAILS':
       return {
         ...state,
-        state: { pokemonID: action.getPokemonID }
+        pokemonID: action.getPokemonID
       };
+    case 'ADD_POKEMON_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        data: [...state.data, action.payload]
+      };
+    case 'ADD_POKEMON_REQUEST':
     case 'FETCH_POKEMON_REQUEST':
-      return { ...state, state: { loading: true, error: null } };
+      return { ...state, loading: true, error: null };
     case 'FETCH_POKEMON_SUCCESS':
-      return { ...state, state: { loading: false, data: action.payload } };
+      return { ...state, loading: false, data: action.payload };
+    case 'ADD_POKEMON_ERROR':
     case 'FETCH_POKEMON_ERROR':
-      return { ...state, state: { loading: false, error: action.payload } };
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return state;
@@ -78,7 +88,7 @@ const pokemonReducer = (state: IPokemonContextProps, action: Action): IPokemonCo
 };
 
 // Create context
-export const PokemonContext = createContext<IPokemonContextProps>(initialState);
+export const PokemonContext = createContext<IPokemonContextProps>({ state: initialState, dispatch: () => {} });
 
 export const usePokemonContext = () => {
   const context = useContext(PokemonContext);
@@ -91,14 +101,14 @@ export const usePokemonContext = () => {
 };
 
 export const PokemonProvider = ({ children }: ContextProviderProps) => {
-  const [state, dispatch] = useReducer(pokemonReducer, initialState);
+  const [state, dispatch] = useReducer<Reducer<PokemonType, Action>>(pokemonReducer, initialState);
 
   const contextValue: IPokemonContextProps = useMemo(
     () => ({
-      ...state,
+      state,
       dispatch
     }),
-    [state, dispatch]
+    [state]
   );
 
   return <PokemonContext.Provider value={contextValue}>{children}</PokemonContext.Provider>;
