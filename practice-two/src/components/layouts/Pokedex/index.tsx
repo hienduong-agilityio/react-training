@@ -18,7 +18,7 @@ export interface IPokemonData {
   id: string;
   name: string;
   image: string;
-  type: CHIP_COLOR[] ;
+  type: CHIP_COLOR[];
 }
 
 /**
