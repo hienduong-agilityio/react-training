@@ -152,7 +152,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <span className="block pb-2 -mt-3 text-danger"></span>
         </div>
 
-        {/* Select for types*/}
+        {/* Select for types */}
         <div className="py-3">
           <label className="text-sm text-primary" htmlFor="pokemonTypes">
             Types
