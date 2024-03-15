@@ -11,12 +11,10 @@ import Button from '@components/common/Button';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 
-// Stores
-import { usePokemonContext } from '@stores/PokemonProvider';
-
 export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
   openFormPokemon: Dispatch<SetStateAction<boolean>>;
+  updateFormTitle: (value: string) => void;
   isOpenForm: boolean;
 }
 
@@ -33,9 +31,12 @@ const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat rounded-3xl b
  * @returns {JSX.Element} - The PokemonDetails element.
  */
 
-const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }: IPokemonDetailsProps): JSX.Element => {
-  const { dispatch } = usePokemonContext();
-
+const PokemonDetails = ({
+  pokemonData,
+  isOpenForm,
+  updateFormTitle,
+  openFormPokemon = () => {}
+}: IPokemonDetailsProps): JSX.Element => {
   if (!pokemonData || !pokemonData.image || !pokemonData.type || !pokemonData.name || !pokemonData.id) {
     return <div>Error: Pokemon data is missing or incomplete.</div>;
   }
@@ -49,21 +50,11 @@ const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }:
   const handleButtonEditPokemon = () => {
     openFormPokemon(!isOpenForm);
 
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: 'Edit'
-    });
-
-    dispatch({
-      type: 'POKEMON_FORM_EDIT'
-    });
+    updateFormTitle('Edit');
   };
 
   const handleButtonDeletePokemon = () => {
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: 'Delete'
-    });
+    updateFormTitle('Delete');
   };
 
   return (

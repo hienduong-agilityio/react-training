@@ -9,8 +9,6 @@ export type PokemonType = {
   filterTerm?: string[];
   pokemonID?: string;
   data: IPokemonData[];
-  formTitle?: string;
-  formEditValue: IPokemonData[];
   loading?: boolean;
   error?: string | null;
 };
@@ -46,18 +44,12 @@ type Action =
   // Action to Delete Pokemon
   | { type: 'DELETE_POKEMON_REQUEST' }
   | { type: 'DELETE_POKEMON_SUCCESS' }
-  | { type: 'DELETE_POKEMON_ERROR'; payload: string }
-
-  // Action to update Form
-  | { type: 'UPDATE_POKEMON_FORM_TITLE'; payload: string }
-  | { type: 'POKEMON_FORM_EDIT' };
+  | { type: 'DELETE_POKEMON_ERROR'; payload: string };
 
 const initialState: PokemonType = {
   searchTerm: '',
   filterTerm: [],
   pokemonID: '',
-  formEditValue: [],
-  formTitle: 'Create',
   data: [],
   loading: false,
   error: null
@@ -88,18 +80,6 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
-    case 'UPDATE_POKEMON_FORM_TITLE':
-      return {
-        ...state,
-        formTitle: action.payload
-      };
-    case 'POKEMON_FORM_EDIT': {
-      return {
-        ...state,
-        loading: false,
-        formEditValue: state.pokemonID ? [state.data[Number(state.pokemonID) - 1] || null] : []
-      };
-    }
     // REQUEST
     case 'FETCH_POKEMON_REQUEST':
     case 'ADD_POKEMON_REQUEST':

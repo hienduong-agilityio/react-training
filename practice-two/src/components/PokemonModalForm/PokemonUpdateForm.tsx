@@ -1,5 +1,5 @@
 // Library
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 
 // Components
 import Button from '@components/common/Button';
@@ -17,6 +17,8 @@ import { POKEMON_CHECKBOX_TYPES } from '@constants/pokemonTypes';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
+  isFormTitle: string;
+  updateFormTitle: (value: string) => void;
 }
 
 interface IFormElement extends HTMLFormControlsCollection {
@@ -30,18 +32,23 @@ interface IFormData extends HTMLFormElement {
   readonly elements: IFormElement;
 }
 
-const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Element => {
+const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTitle }: IPokemonForm): JSX.Element => {
   const { state, dispatch } = usePokemonContext();
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
+  const formEditValue = useMemo(
+    () => (state.pokemonID ? [state.data[Number(state.pokemonID) - 1] || null] : []),
+    [state.data, state.pokemonID]
+  );
+
   useEffect(() => {
     // Set selected types based on form edit value when title is 'Edit'
-    if (state.formTitle === 'Edit') {
-      setSelectedTypes(state.formEditValue[0].type);
+    if (isFormTitle === 'Edit') {
+      setSelectedTypes(formEditValue[0].type);
     } else {
       setSelectedTypes([]);
     }
-  }, [state.formEditValue, state.formTitle]);
+  }, [formEditValue, isFormTitle]);
 
   /**
    * Function to handle checkbox change
@@ -88,7 +95,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       type: formPokemonData.types
     };
 
-    if (state.formTitle === 'Create') {
+    if (isFormTitle === 'Create') {
       dispatch({
         type: 'ADD_POKEMON_REQUEST'
       });
@@ -108,7 +115,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
       }
     }
 
-    if (state.formTitle === 'Edit') {
+    if (isFormTitle === 'Edit') {
       dispatch({
         type: 'EDIT_POKEMON_REQUEST'
       });
@@ -124,18 +131,14 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
         });
       }
     }
-
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: 'Create'
-    });
+    updateFormTitle('Create');
 
     onClosePokemonForm();
   };
 
   return (
     <section className="bg-white rounded-lg p-5 w-[500px] flex flex-col">
-      <span className="mb-4 text-3xl font-bold">{`${state.formTitle} Pokemon`}</span>
+      <span className="mb-4 text-3xl font-bold">{`${isFormTitle} Pokemon`}</span>
       {/* Form input*/}
       <form className="mt-5 flex flex-col" onSubmit={handleSubmitForm}>
         {/* Input for name */}
@@ -146,7 +149,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Name"
-            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].name : ''}
+            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].name : ''}
             name="pokemonName"
             id="pokemonName"
             type="text"
@@ -162,7 +165,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Pokemon Number"
-            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].id : ''}
+            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].id : ''}
             name="pokemonNumber"
             id="pokemonNumber"
             type="text"
@@ -178,7 +181,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
           <InputField
             className="p-[10px] rounded-[5px] border-[1px] border-[rgba(0,0,0,0.2)] mb-[20px] outline-[0] w-[93%] bg-transparent focus:border-primary font-semibold text-[14px]"
             placeholder="Picture"
-            defaultValue={state.formTitle === 'Edit' ? state.formEditValue[0].image : ''}
+            defaultValue={isFormTitle === 'Edit' ? formEditValue[0].image : ''}
             name="pokemonPicture"
             id="pokemonPicture"
             type="text"

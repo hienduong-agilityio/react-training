@@ -34,8 +34,9 @@ export interface IPokemonData {
 const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
+  const [formTitle, setFormTitle] = useState('Create');
 
-  const { state, dispatch } = usePokemonContext();
+  const { state } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched
   if (state.loading) {
@@ -55,18 +56,12 @@ const Pokedex = (): JSX.Element => {
     setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
 
     if (isPokemonFormPopupOpen === false) {
-      dispatch({
-        type: 'UPDATE_POKEMON_FORM_TITLE',
-        payload: 'Create'
-      });
+      setFormTitle('Create');
     }
   };
 
   const handleClickPokemonSubmitForm = () => {
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: ''
-    });
+    setFormTitle('');
   };
 
   return (
@@ -99,6 +94,7 @@ const Pokedex = (): JSX.Element => {
           {state.data && (
             <PokemonDetails
               isOpenForm={isPokemonFormPopupOpen}
+              updateFormTitle={setFormTitle}
               openFormPokemon={setIsPokemonFormPopupOpen}
               pokemonData={state.data[Number(state.pokemonID) - 1]}
             />
@@ -106,12 +102,16 @@ const Pokedex = (): JSX.Element => {
         </Popup>
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
-          <PokemonForm onClosePokemonForm={handleClickPokemonForm} />
+          <PokemonForm
+            isFormTitle={formTitle}
+            updateFormTitle={setFormTitle}
+            onClosePokemonForm={handleClickPokemonForm}
+          />
         </Popup>
         {/* PokemonSubmitForm Popup*/}
-        {state.formTitle === 'Delete' && (
+        {formTitle === 'Delete' && (
           <Popup isOpen onClosePopup={handleClickPokemonSubmitForm}>
-            <PokemonSubmitForm></PokemonSubmitForm>
+            <PokemonSubmitForm updateFormTitle={setFormTitle}></PokemonSubmitForm>
           </Popup>
         )}
       </div>

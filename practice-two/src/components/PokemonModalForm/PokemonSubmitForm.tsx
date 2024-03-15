@@ -1,9 +1,20 @@
+// Button
 import Button from '@components/common/Button';
+
+// Constant
 import { POKEMON_URL } from '@constants/api';
+
+// Service
 import { deleteData } from '@services/api';
+
+// Store
 import { usePokemonContext } from '@stores/PokemonProvider';
 
-const PokemonSubmitForm = () => {
+interface IPokemonSubmitForm {
+  updateFormTitle: (value: string) => void;
+}
+
+const PokemonSubmitForm = ({ updateFormTitle }: IPokemonSubmitForm) => {
   const { state, dispatch } = usePokemonContext();
 
   const handleButtonConfirmDelete = async () => {
@@ -22,17 +33,11 @@ const PokemonSubmitForm = () => {
       });
     }
 
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: 'Create'
-    });
+    updateFormTitle('Create');
   };
 
   const handleButtonClosePopup = () => {
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: ''
-    });
+    updateFormTitle('');
   };
 
   return (
