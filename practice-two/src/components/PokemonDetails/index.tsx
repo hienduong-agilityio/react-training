@@ -1,14 +1,23 @@
 // Components && Types
 import Chip, { CHIP_COLOR } from '@components/common/Chip';
+
+// Components
 import { cardBackground } from '@components/common/PokmonCard';
 import { IPokemonData } from '@components/layouts/Pokedex';
 import Typography from '@components/common/Typography';
+import Button from '@components/common/Button';
 
 // Library
 import classNames from 'classnames';
+import { Dispatch, SetStateAction } from 'react';
+
+// Stores
+import { usePokemonContext } from '@stores/PokemonProvider';
 
 export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
+  openFormPokemon: Dispatch<SetStateAction<boolean>>;
+  isOpenForm: boolean;
 }
 
 const pokemonCardClasses: string = 'w-[725px] h-[698px] flex flex-col items-center';
@@ -24,7 +33,9 @@ const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat rounded-3xl b
  * @returns {JSX.Element} - The PokemonDetails element.
  */
 
-const PokemonDetails = ({ pokemonData }: IPokemonDetailsProps): JSX.Element => {
+const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }: IPokemonDetailsProps): JSX.Element => {
+  const { dispatch } = usePokemonContext();
+
   if (!pokemonData || !pokemonData.image || !pokemonData.type || !pokemonData.name || !pokemonData.id) {
     return <div>Error: Pokemon data is missing or incomplete.</div>;
   }
@@ -34,6 +45,19 @@ const PokemonDetails = ({ pokemonData }: IPokemonDetailsProps): JSX.Element => {
   // Default background if type is undefined
   const defaultBackground = CHIP_COLOR.NORMAL;
   const cardClasses: string = classNames([overlayClasses, cardBackground[type || defaultBackground]]);
+
+  const handleButtonEditPokemon = () => {
+    openFormPokemon(!isOpenForm);
+
+    dispatch({
+      type: 'UPDATE_POKEMON_FORM_TITLE',
+      payload: 'Edit'
+    });
+
+    dispatch({
+      type: 'POKEMON_FORM_EDIT'
+    });
+  };
 
   return (
     <div className={pokemonCardClasses}>
@@ -50,6 +74,16 @@ const PokemonDetails = ({ pokemonData }: IPokemonDetailsProps): JSX.Element => {
               return <Chip customClasses="mr-2" key={type} label={type} color={type} />;
             })}
             <Typography>Description</Typography>
+          </div>
+          <div className="absolute top-8 right-16 z-[100]">
+            <Button
+              onClick={handleButtonEditPokemon}
+              customClasses="border-4 border-gray-400 w-25"
+              rounded="medium"
+              variant="outline"
+            >
+              Edit Pokemon
+            </Button>
           </div>
         </div>
         {/* Location */}

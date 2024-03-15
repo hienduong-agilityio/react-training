@@ -34,7 +34,7 @@ const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
 
-  const { state } = usePokemonContext();
+  const { state, dispatch } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched
   if (state.loading) {
@@ -52,6 +52,13 @@ const Pokedex = (): JSX.Element => {
 
   const handleClickPokemonForm = () => {
     setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
+
+    if (isPokemonFormPopupOpen === false) {
+      dispatch({
+        type: 'UPDATE_POKEMON_FORM_TITLE',
+        payload: 'Create'
+      });
+    }
   };
 
   return (
@@ -81,7 +88,13 @@ const Pokedex = (): JSX.Element => {
       <div>
         {/* PokemonDetails Popup */}
         <Popup isOpen={isPokemonDetailsPopupOpen} onClosePopup={handleClickPokemonPopup}>
-          {state.data && <PokemonDetails pokemonData={state.data[Number(state.pokemonID) - 1]} />}
+          {state.data && (
+            <PokemonDetails
+              isOpenForm={isPokemonFormPopupOpen}
+              openFormPokemon={setIsPokemonFormPopupOpen}
+              pokemonData={state.data[Number(state.pokemonID) - 1]}
+            />
+          )}
         </Popup>
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>

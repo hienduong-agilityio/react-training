@@ -9,6 +9,8 @@ export type PokemonType = {
   filterTerm?: string[];
   pokemonID?: string;
   data: IPokemonData[];
+  formTitle?: string;
+  formEditValue: IPokemonData[];
   loading?: boolean;
   error?: string | null;
 };
@@ -27,9 +29,14 @@ type Action =
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
   | { type: 'ADD_POKEMON_SUCCESS'; payload: IPokemonData }
+  | { type: 'EDIT_POKEMON_SUCCESS'; payload: IPokemonData }
+  | { type: 'UPDATE_POKEMON_FORM_TITLE'; payload: string }
+  | { type: 'POKEMON_FORM_EDIT' }
+  | { type: 'EDIT_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_REQUEST' }
   | { type: 'ADD_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
+  | { type: 'EDIT_POKEMON_ERROR'; payload: string }
   | { type: 'ADD_POKEMON_ERROR'; payload: string }
   | { type: 'FETCH_POKEMON_ERROR'; payload: string };
 
@@ -37,6 +44,8 @@ const initialState: PokemonType = {
   searchTerm: '',
   filterTerm: [],
   pokemonID: '',
+  formEditValue: [],
+  formTitle: 'Create',
   data: [],
   loading: false,
   error: null
@@ -67,17 +76,42 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
+    case 'UPDATE_POKEMON_FORM_TITLE':
+      return {
+        ...state,
+        formTitle: action.payload
+      };
     case 'ADD_POKEMON_SUCCESS':
       return {
         ...state,
         loading: false,
         data: [...state.data, action.payload]
       };
+    case 'EDIT_POKEMON_SUCCESS': {
+      const newData = [...state.data];
+
+      newData[Number(state.pokemonID) - 1] = action.payload;
+
+      return {
+        ...state,
+        loading: false,
+        data: state.pokemonID ? newData : state.data
+      };
+    }
+    case 'POKEMON_FORM_EDIT': {
+      return {
+        ...state,
+        loading: false,
+        formEditValue: state.pokemonID ? [state.data[Number(state.pokemonID) - 1] || null] : []
+      };
+    }
+    case 'EDIT_POKEMON_REQUEST':
     case 'ADD_POKEMON_REQUEST':
     case 'FETCH_POKEMON_REQUEST':
       return { ...state, loading: true, error: null };
     case 'FETCH_POKEMON_SUCCESS':
       return { ...state, loading: false, data: action.payload };
+    case 'EDIT_POKEMON_ERROR':
     case 'ADD_POKEMON_ERROR':
     case 'FETCH_POKEMON_ERROR':
       return { ...state, loading: false, error: action.payload };
