@@ -1,7 +1,7 @@
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 import Popup from '@components/common/Popup';
-import { PokemonForm } from '@components/PokemonModalForm';
+import { PokemonForm, PokemonSubmitForm } from '@components/PokemonModalForm';
 import PokemonDetails from '@components/PokemonDetails';
 import Button from '@components/common/Button';
 
@@ -13,7 +13,6 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Hook
 import { useState } from 'react';
-import PokemonSubmitForm from '@components/PokemonModalForm/PokemonSubmitForm';
 
 export interface IPokemonData {
   id: string;

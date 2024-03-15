@@ -14,6 +14,7 @@ import { postData, putData } from '@services/api';
 // Constants
 import { POKEMON_URL } from '@constants/api';
 import { POKEMON_CHECKBOX_TYPES } from '@constants/pokemonTypes';
+import { FORM_TITLE } from '@constants/formTitle';
 
 interface IPokemonForm {
   onClosePokemonForm?: () => void;
@@ -131,7 +132,7 @@ const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTit
         });
       }
     }
-    updateFormTitle('Create');
+    updateFormTitle(FORM_TITLE.CREATE);
 
     onClosePokemonForm();
   };

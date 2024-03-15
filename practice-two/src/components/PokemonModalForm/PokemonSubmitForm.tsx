@@ -3,6 +3,7 @@ import Button from '@components/common/Button';
 
 // Constant
 import { POKEMON_URL } from '@constants/api';
+import { FORM_TITLE } from '@constants/formTitle';
 
 // Service
 import { deleteData } from '@services/api';
@@ -33,11 +34,11 @@ const PokemonSubmitForm = ({ updateFormTitle }: IPokemonSubmitForm) => {
       });
     }
 
-    updateFormTitle('Create');
+    updateFormTitle(FORM_TITLE.CREATE);
   };
 
   const handleButtonClosePopup = () => {
-    updateFormTitle('');
+    updateFormTitle(FORM_TITLE.NONE);
   };
 
   return (
@@ -58,4 +59,4 @@ const PokemonSubmitForm = ({ updateFormTitle }: IPokemonSubmitForm) => {
   );
 };
 
-export default PokemonSubmitForm;
+export { PokemonSubmitForm };

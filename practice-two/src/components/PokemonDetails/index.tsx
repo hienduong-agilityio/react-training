@@ -11,6 +11,9 @@ import Button from '@components/common/Button';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 
+// Constant
+import { FORM_TITLE } from '@constants/formTitle';
+
 export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
   openFormPokemon: Dispatch<SetStateAction<boolean>>;
@@ -50,11 +53,11 @@ const PokemonDetails = ({
   const handleButtonEditPokemon = () => {
     openFormPokemon(!isOpenForm);
 
-    updateFormTitle('Edit');
+    updateFormTitle(FORM_TITLE.EDIT);
   };
 
   const handleButtonDeletePokemon = () => {
-    updateFormTitle('Delete');
+    updateFormTitle(FORM_TITLE.DELETE);
   };
 
   return (

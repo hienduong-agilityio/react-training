@@ -1,2 +1,2 @@
 export * from './PokemonUpdateForm';
-// export * from './PokemonSubmitForm';
+export * from './PokemonSubmitForm';
