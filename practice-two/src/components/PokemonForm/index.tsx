@@ -35,7 +35,11 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
 
   let selectedTypes: string[] = [];
 
-  // TODO: Update comment for function handle value check box
+  /**
+   * Function to handle checkbox change
+   * @param event - ChangeEvent
+   * @param type - string
+   */
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
     if (event.target.checked) {
       // Add type to the array
@@ -46,7 +50,10 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
     }
   };
 
-  // TODO: UPdate comments for function handle submit form
+  /**
+   * Function to handle form submission
+   * @param event - FormEvent
+   */
   const handleSubmitForm = async (event: FormEvent<IFormData>) => {
     event.preventDefault();
 
