@@ -33,9 +33,8 @@ export interface IPokemonData {
 const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
-  const [formTitle, setFormTitle] = useState('Create');
 
-  const { state } = usePokemonContext();
+  const { state, dispatch } = usePokemonContext();
 
   // Display loading indicator if data is still being fetched
   if (state.loading) {
@@ -55,7 +54,10 @@ const Pokedex = (): JSX.Element => {
     setIsPokemonFormPopupOpen(!isPokemonFormPopupOpen);
 
     if (isPokemonFormPopupOpen === false) {
-      setFormTitle('Create');
+      dispatch({
+        type: 'UPDATE_POKEMON_FORM_TITLE',
+        payload: 'Create'
+      });
     }
   };
 

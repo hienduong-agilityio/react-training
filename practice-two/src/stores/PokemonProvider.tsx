@@ -45,7 +45,7 @@ const initialState: PokemonType = {
   filterTerm: [],
   pokemonID: '',
   formEditValue: [],
-  formTitle: '',
+  formTitle: 'Create',
   data: [],
   loading: false,
   error: null
