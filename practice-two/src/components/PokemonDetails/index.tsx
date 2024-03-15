@@ -7,7 +7,6 @@ import { IPokemonData } from '@components/layouts/Pokedex';
 import Typography from '@components/common/Typography';
 import Button from '@components/common/Button';
 
-
 // Library
 import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
