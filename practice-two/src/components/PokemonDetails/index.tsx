@@ -59,6 +59,13 @@ const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }:
     });
   };
 
+  const handleButtonDeletePokemon = () => {
+    dispatch({
+      type: 'UPDATE_POKEMON_FORM_TITLE',
+      payload: 'Delete'
+    });
+  };
+
   return (
     <div className={pokemonCardClasses}>
       <div className="w-full h-full">
@@ -83,6 +90,15 @@ const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }:
               variant="outline"
             >
               Edit Pokemon
+            </Button>
+            <Button
+              onClick={handleButtonDeletePokemon}
+              customClasses="border-4 mt-5 w-25"
+              color="danger"
+              rounded="medium"
+              variant="outline"
+            >
+              Delete Pokemon
             </Button>
           </div>
         </div>

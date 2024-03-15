@@ -52,4 +52,28 @@ const putData = async <T>(url: string, dataField: T) => {
   }
 };
 
-export { postData, putData };
+/**
+ * The function delete data
+ *
+ * @param url - The API
+ */
+const deleteData = async (url: string) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await fetch(url, {
+      method: METHOD.DELETE,
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (!response.ok) {
+      const message: string = await response.text();
+      throw message;
+    }
+
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { postData, putData, deleteData };

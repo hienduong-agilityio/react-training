@@ -242,4 +242,4 @@ const PokemonForm = ({ onClosePokemonForm = () => {} }: IPokemonForm): JSX.Eleme
   );
 };
 
-export default PokemonForm;
+export { PokemonForm };

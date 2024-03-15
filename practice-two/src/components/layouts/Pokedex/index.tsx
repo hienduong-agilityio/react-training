@@ -1,7 +1,7 @@
 // Component
 import PokemonCard from '@components/common/PokmonCard';
 import Popup from '@components/common/Popup';
-import PokemonForm from '@components/PokemonForm';
+import { PokemonForm } from '@components/PokemonModalForm';
 import PokemonDetails from '@components/PokemonDetails';
 import Button from '@components/common/Button';
 
@@ -13,6 +13,7 @@ import { usePokemonContext } from '@stores/PokemonProvider';
 
 // Hook
 import { useState } from 'react';
+import PokemonSubmitForm from '@components/PokemonModalForm/PokemonSubmitForm';
 
 export interface IPokemonData {
   id: string;
@@ -61,6 +62,13 @@ const Pokedex = (): JSX.Element => {
     }
   };
 
+  const handleClickPokemonSubmitForm = () => {
+    dispatch({
+      type: 'UPDATE_POKEMON_FORM_TITLE',
+      payload: ''
+    });
+  };
+
   return (
     <section className="pt-5">
       <Button
@@ -100,6 +108,12 @@ const Pokedex = (): JSX.Element => {
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
           <PokemonForm onClosePokemonForm={handleClickPokemonForm} />
         </Popup>
+        {/* PokemonSubmitForm Popup*/}
+        {state.formTitle === 'Delete' && (
+          <Popup isOpen onClosePopup={handleClickPokemonSubmitForm}>
+            <PokemonSubmitForm></PokemonSubmitForm>
+          </Popup>
+        )}
       </div>
     </section>
   );
