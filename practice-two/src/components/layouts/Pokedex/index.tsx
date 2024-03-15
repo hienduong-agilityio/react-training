@@ -37,8 +37,6 @@ const Pokedex = (): JSX.Element => {
 
   const { state } = usePokemonContext();
 
-  // const formValue = state.data[Number(state.pokemonID) - 1];
-
   // Display loading indicator if data is still being fetched
   if (state.loading) {
     return <span>Loading...</span>;
