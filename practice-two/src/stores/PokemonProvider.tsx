@@ -82,25 +82,19 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
     case 'EDIT_POKEMON_SUCCESS': {
       const newData = [...state.data];
 
-      if (!state.pokemonID) {
-        return { ...state, loading: false, data: newData };
-      }
-
       newData[Number(state.pokemonID) - 1] = action.payload;
 
       return {
         ...state,
         loading: false,
-        data: newData
+        data: state.pokemonID ? newData : state.data
       };
     }
     case 'POKEMON_FORM_EDIT': {
-      const pokemonIndex = Number(state.pokemonID) - 1;
-      const formEditValue = state.data[pokemonIndex] || null;
       return {
         ...state,
         loading: false,
-        formEditValue: formEditValue ? [formEditValue] : []
+        formEditValue: state.pokemonID ? [state.data[Number(state.pokemonID) - 1] || null] : []
       };
     }
     case 'EDIT_POKEMON_REQUEST':

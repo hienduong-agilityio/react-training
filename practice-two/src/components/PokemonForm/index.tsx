@@ -1,5 +1,5 @@
 // Library
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 // Components
 import Button from '@components/common/Button';
@@ -34,8 +34,16 @@ interface IFormData extends HTMLFormElement {
 
 const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: IPokemonForm): JSX.Element => {
   const { state, dispatch } = usePokemonContext();
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-  let selectedTypes: string[] = [];
+  useEffect(() => {
+    // Set selected types based on form edit value when title is 'Edit'
+    if (title === 'Edit') {
+      setSelectedTypes(state.formEditValue[0].type);
+    } else {
+      setSelectedTypes([]);
+    }
+  }, [state.formEditValue, title]);
 
   /**
    * Function to handle checkbox change
@@ -43,12 +51,12 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
    * @param type - string
    */
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>, type: string) => {
-    if (event.target.checked) {
-      // Add type to the array
-      selectedTypes = [...selectedTypes, type];
+    const isChecked = event.target.checked;
+    // Update selected types based on checkbox change
+    if (isChecked) {
+      setSelectedTypes((prevSelectedTypes) => [...prevSelectedTypes, type]);
     } else {
-      // Remove type from the array
-      selectedTypes = selectedTypes.filter((selectedType) => selectedType !== type);
+      setSelectedTypes((prevSelectedTypes) => prevSelectedTypes.filter((selectedType) => selectedType !== type));
     }
   };
 
@@ -184,7 +192,7 @@ const PokemonForm = ({ onClosePokemonForm = () => {}, title, updateFormTitle }: 
           </label>
           <ul className="py-4 overflow-auto max-h-24">
             {POKEMON_CHECKBOX_TYPES.map((pokemonType) => {
-              const isChecked = title === 'Edit' && state.formEditValue[0].type.includes(pokemonType.type);
+              const isChecked = selectedTypes.includes(pokemonType.type);
 
               return (
                 <li className="flex gap-4" key={pokemonType.type}>

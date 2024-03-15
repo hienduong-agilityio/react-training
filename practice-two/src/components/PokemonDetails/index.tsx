@@ -1,5 +1,7 @@
 // Components && Types
 import Chip, { CHIP_COLOR } from '@components/common/Chip';
+
+// Components
 import { cardBackground } from '@components/common/PokmonCard';
 import { IPokemonData } from '@components/layouts/Pokedex';
 import Typography from '@components/common/Typography';
