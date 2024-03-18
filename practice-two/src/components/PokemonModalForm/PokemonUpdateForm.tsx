@@ -33,6 +33,7 @@ interface IFormData extends HTMLFormElement {
   readonly elements: IFormElement;
 }
 
+// TODO: Update comments
 const PokemonForm = ({ isFormTitle, onClosePokemonForm = () => {}, updateFormTitle }: IPokemonForm): JSX.Element => {
   const { state, dispatch } = usePokemonContext();
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);

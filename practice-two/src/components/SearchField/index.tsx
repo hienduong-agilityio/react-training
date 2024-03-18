@@ -37,7 +37,7 @@ const SearchField = (): JSX.Element => {
   };
 
   return (
-    <section className="relative h-14 ">
+    <section className="relative h-14">
       <img src={iconSearch} alt="search-icon" className="pl-4 p-2 top-2 left-0 absolute" />
       <div className="right-5 top-2 absolute text-center w-32">
         <Button
@@ -54,7 +54,7 @@ const SearchField = (): JSX.Element => {
       <InputField
         inputRef={inputRef}
         placeholder="Pokemon name, number or type"
-        customClasses="text-primary font-bold placeholder-primary h-full w-full pl-12 border-white focus:border-primary focus:outline-none rounded-2xl shadow-2xl "
+        customClasses="text-primary font-bold placeholder-primary h-full w-full pl-11 border-white focus:border-primary focus:outline-none rounded-2xl shadow-2xl "
       />
     </section>
   );

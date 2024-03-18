@@ -3,7 +3,6 @@ import Button from '@components/common/Button';
 
 // Constant
 import { POKEMON_URL } from '@constants/api';
-import { FORM_TITLE } from '@constants/formTitle';
 
 // Service
 import { deleteData } from '@services/api';
@@ -12,10 +11,11 @@ import { deleteData } from '@services/api';
 import { usePokemonContext } from '@stores/PokemonProvider';
 
 interface IPokemonSubmitForm {
-  updateFormTitle: (value: string) => void;
+  onClosePokemonSubmitForm: () => void;
 }
 
-const PokemonSubmitForm = ({ updateFormTitle }: IPokemonSubmitForm) => {
+// TODO: Update comments
+const PokemonSubmitForm = ({ onClosePokemonSubmitForm }: IPokemonSubmitForm) => {
   const { state, dispatch } = usePokemonContext();
 
   const handleButtonConfirmDelete = async () => {
@@ -34,11 +34,11 @@ const PokemonSubmitForm = ({ updateFormTitle }: IPokemonSubmitForm) => {
       });
     }
 
-    updateFormTitle(FORM_TITLE.CREATE);
+    onClosePokemonSubmitForm();
   };
 
   const handleButtonClosePopup = () => {
-    updateFormTitle(FORM_TITLE.NONE);
+    onClosePokemonSubmitForm();
   };
 
   return (

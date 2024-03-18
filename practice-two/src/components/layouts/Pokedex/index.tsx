@@ -36,6 +36,8 @@ export interface IPokemonData {
 const Pokedex = (): JSX.Element => {
   const [isPokemonDetailsPopupOpen, setIsPokemonDetailsPopupOpen] = useState<boolean>(false);
   const [isPokemonFormPopupOpen, setIsPokemonFormPopupOpen] = useState<boolean>(false);
+  const [isPokemonSubmitPopupOpen, setIsPokemonSubmitPopupOpen] = useState<boolean>(false);
+
   const [formTitle, setFormTitle] = useState(FORM_TITLE.CREATE);
 
   const { state } = usePokemonContext();
@@ -63,6 +65,8 @@ const Pokedex = (): JSX.Element => {
   };
 
   const handleClickPokemonSubmitForm = () => {
+    setIsPokemonSubmitPopupOpen(!isPokemonSubmitPopupOpen);
+
     setFormTitle(FORM_TITLE.NONE);
   };
 
@@ -70,7 +74,7 @@ const Pokedex = (): JSX.Element => {
     <section className="pt-5">
       <Button
         onClick={handleClickPokemonForm}
-        customClasses="border-4 border-gray-400 w-25"
+        customClasses="border-4 border-gray-300 w-25"
         rounded="medium"
         variant="outline"
       >
@@ -93,14 +97,14 @@ const Pokedex = (): JSX.Element => {
       <div>
         {/* PokemonDetails Popup */}
         <Popup isOpen={isPokemonDetailsPopupOpen} onClosePopup={handleClickPokemonPopup}>
-          {state.data && (
-            <PokemonDetails
-              isOpenForm={isPokemonFormPopupOpen}
-              updateFormTitle={setFormTitle}
-              openFormPokemon={setIsPokemonFormPopupOpen}
-              pokemonData={state.data[Number(state.pokemonID) - 1]}
-            />
-          )}
+          <PokemonDetails
+            isOpenForm={isPokemonFormPopupOpen}
+            isOpenSubmitForm={isPokemonSubmitPopupOpen}
+            openFormPokemon={setIsPokemonFormPopupOpen}
+            openSubmitFormPokemon={setIsPokemonSubmitPopupOpen}
+            updateFormTitle={setFormTitle}
+            pokemonData={state.data[Number(state.pokemonID) - 1]}
+          />
         </Popup>
         {/* PokemonForm Popup*/}
         <Popup isOpen={isPokemonFormPopupOpen} onClosePopup={handleClickPokemonForm}>
@@ -111,11 +115,9 @@ const Pokedex = (): JSX.Element => {
           />
         </Popup>
         {/* PokemonSubmitForm Popup*/}
-        {formTitle === FORM_TITLE.DELETE && (
-          <Popup isOpen onClosePopup={handleClickPokemonSubmitForm}>
-            <PokemonSubmitForm updateFormTitle={setFormTitle}></PokemonSubmitForm>
-          </Popup>
-        )}
+        <Popup isOpen={isPokemonSubmitPopupOpen} onClosePopup={handleClickPokemonSubmitForm}>
+          <PokemonSubmitForm onClosePokemonSubmitForm={handleClickPokemonSubmitForm}></PokemonSubmitForm>
+        </Popup>
       </div>
     </section>
   );
