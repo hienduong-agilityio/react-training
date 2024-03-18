@@ -11,31 +11,31 @@ import Button from '@components/common/Button';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 
-// Stores
-import { usePokemonContext } from '@stores/PokemonProvider';
+// Constant
+import { FORM_TITLE } from '@constants/formTitle';
 
 export interface IPokemonDetailsProps {
   pokemonData: IPokemonData;
   openFormPokemon: Dispatch<SetStateAction<boolean>>;
+  openSubmitFormPokemon: Dispatch<SetStateAction<boolean>>;
+  updateFormTitle: (value: string) => void;
   isOpenForm: boolean;
+  isOpenSubmitForm: boolean;
 }
 
 const pokemonCardClasses: string = 'w-[725px] h-[698px] flex flex-col items-center';
 
 const overlayClasses: string = 'w-full h-[278px] flex bg-no-repeat rounded-3xl bg-right-top bg-pokemon-card';
 
-/**
- * @param pokemonID - ID of the Pokemon
- * @param pokemonName - Name of the Pokemon
- * @param pokemonType - Array of types of the Pokemon
- * @param pokemonImg - URL of the Pokemon image
- *
- * @returns {JSX.Element} - The PokemonDetails element.
- */
-
-const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }: IPokemonDetailsProps): JSX.Element => {
-  const { dispatch } = usePokemonContext();
-
+// TODO: Update comments
+const PokemonDetails = ({
+  pokemonData,
+  isOpenForm,
+  isOpenSubmitForm,
+  updateFormTitle,
+  openFormPokemon = () => {},
+  openSubmitFormPokemon = () => {}
+}: IPokemonDetailsProps): JSX.Element => {
   if (!pokemonData || !pokemonData.image || !pokemonData.type || !pokemonData.name || !pokemonData.id) {
     return <div>Error: Pokemon data is missing or incomplete.</div>;
   }
@@ -49,14 +49,11 @@ const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }:
   const handleButtonEditPokemon = () => {
     openFormPokemon(!isOpenForm);
 
-    dispatch({
-      type: 'UPDATE_POKEMON_FORM_TITLE',
-      payload: 'Edit'
-    });
+    updateFormTitle(FORM_TITLE.EDIT);
+  };
 
-    dispatch({
-      type: 'POKEMON_FORM_EDIT'
-    });
+  const handleButtonDeletePokemon = () => {
+    openSubmitFormPokemon(!isOpenSubmitForm);
   };
 
   return (
@@ -83,6 +80,15 @@ const PokemonDetails = ({ pokemonData, isOpenForm, openFormPokemon = () => {} }:
               variant="outline"
             >
               Edit Pokemon
+            </Button>
+            <Button
+              onClick={handleButtonDeletePokemon}
+              customClasses="border-4 mt-5 w-25"
+              color="danger"
+              rounded="medium"
+              variant="outline"
+            >
+              Delete Pokemon
             </Button>
           </div>
         </div>

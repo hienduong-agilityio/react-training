@@ -9,8 +9,6 @@ export type PokemonType = {
   filterTerm?: string[];
   pokemonID?: string;
   data: IPokemonData[];
-  formTitle?: string;
-  formEditValue: IPokemonData[];
   loading?: boolean;
   error?: string | null;
 };
@@ -28,24 +26,30 @@ type Action =
   | { type: 'SEARCH_INPUT'; inputValue: string }
   | { type: 'FILTER_TYPE'; checkedValue: string[] }
   | { type: 'POKEMON_DETAILS'; getPokemonID: string }
-  | { type: 'ADD_POKEMON_SUCCESS'; payload: IPokemonData }
-  | { type: 'EDIT_POKEMON_SUCCESS'; payload: IPokemonData }
-  | { type: 'UPDATE_POKEMON_FORM_TITLE'; payload: string }
-  | { type: 'POKEMON_FORM_EDIT' }
-  | { type: 'EDIT_POKEMON_REQUEST' }
+  // Action to Fetch pokemon Data
   | { type: 'FETCH_POKEMON_REQUEST' }
-  | { type: 'ADD_POKEMON_REQUEST' }
   | { type: 'FETCH_POKEMON_SUCCESS'; payload: IPokemonData[] }
-  | { type: 'EDIT_POKEMON_ERROR'; payload: string }
+  | { type: 'FETCH_POKEMON_ERROR'; payload: string }
+
+  // Action to Add pokemon
+  | { type: 'ADD_POKEMON_REQUEST' }
+  | { type: 'ADD_POKEMON_SUCCESS'; payload: IPokemonData }
   | { type: 'ADD_POKEMON_ERROR'; payload: string }
-  | { type: 'FETCH_POKEMON_ERROR'; payload: string };
+
+  // Action to Edit Pokemon
+  | { type: 'EDIT_POKEMON_REQUEST' }
+  | { type: 'EDIT_POKEMON_SUCCESS'; payload: IPokemonData }
+  | { type: 'EDIT_POKEMON_ERROR'; payload: string }
+
+  // Action to Delete Pokemon
+  | { type: 'DELETE_POKEMON_REQUEST' }
+  | { type: 'DELETE_POKEMON_SUCCESS' }
+  | { type: 'DELETE_POKEMON_ERROR'; payload: string };
 
 const initialState: PokemonType = {
   searchTerm: '',
   filterTerm: [],
   pokemonID: '',
-  formEditValue: [],
-  formTitle: 'Create',
   data: [],
   loading: false,
   error: null
@@ -76,11 +80,16 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         ...state,
         pokemonID: action.getPokemonID
       };
-    case 'UPDATE_POKEMON_FORM_TITLE':
-      return {
-        ...state,
-        formTitle: action.payload
-      };
+    // REQUEST
+    case 'FETCH_POKEMON_REQUEST':
+    case 'ADD_POKEMON_REQUEST':
+    case 'EDIT_POKEMON_REQUEST':
+    case 'DELETE_POKEMON_REQUEST':
+      return { ...state, loading: true, error: null };
+
+    // SUCCESS
+    case 'FETCH_POKEMON_SUCCESS':
+      return { ...state, loading: false, data: action.payload };
     case 'ADD_POKEMON_SUCCESS':
       return {
         ...state,
@@ -98,22 +107,21 @@ const pokemonReducer = (state: PokemonType, action: Action) => {
         data: state.pokemonID ? newData : state.data
       };
     }
-    case 'POKEMON_FORM_EDIT': {
+    case 'DELETE_POKEMON_SUCCESS': {
+      const newData = state.data.filter((pokemon) => pokemon.id !== state.pokemonID);
+
       return {
         ...state,
         loading: false,
-        formEditValue: state.pokemonID ? [state.data[Number(state.pokemonID) - 1] || null] : []
+        data: newData
       };
     }
-    case 'EDIT_POKEMON_REQUEST':
-    case 'ADD_POKEMON_REQUEST':
-    case 'FETCH_POKEMON_REQUEST':
-      return { ...state, loading: true, error: null };
-    case 'FETCH_POKEMON_SUCCESS':
-      return { ...state, loading: false, data: action.payload };
-    case 'EDIT_POKEMON_ERROR':
-    case 'ADD_POKEMON_ERROR':
+
+    // ERROR
     case 'FETCH_POKEMON_ERROR':
+    case 'ADD_POKEMON_ERROR':
+    case 'EDIT_POKEMON_ERROR':
+    case 'DELETE_POKEMON_ERROR':
       return { ...state, loading: false, error: action.payload };
 
     default:
