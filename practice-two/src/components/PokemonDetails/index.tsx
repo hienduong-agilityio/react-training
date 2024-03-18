@@ -54,8 +54,6 @@ const PokemonDetails = ({
 
   const handleButtonDeletePokemon = () => {
     openSubmitFormPokemon(!isOpenSubmitForm);
-
-    updateFormTitle(FORM_TITLE.DELETE);
   };
 
   return (
