@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography Component matches snapshot with custom props 1`] = `
+<DocumentFragment>
+  <h1
+    class="text-white text-5xl custom-class"
+  >
+    Hello World
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`Typography Component matches snapshot with default props 1`] = `
+<DocumentFragment>
+  <p
+    class="text-black text-base"
+  >
+    Hello World
+  </p>
+</DocumentFragment>
+`;
