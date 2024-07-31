@@ -3,8 +3,7 @@ export enum COLORS {
   PRIMARY = 'primary',
   SUCCESS = 'success',
   WARNING = 'waring',
-  DANGER = 'danger',
-  INACTIVE = 'inactive'
+  DANGER = 'danger'
 }
 
 export enum SIZES {
