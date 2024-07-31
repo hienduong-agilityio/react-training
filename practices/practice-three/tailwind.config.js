@@ -3,6 +3,13 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fill: {
+        primary: '#5E5ADB',
+        success: '#3AA03A',
+        warning: '#AA5B00',
+        danger: '#D1293D',
+        default: '#5A6376'
+      },
       colors: {
         primary: {
           100: '#BEBCED',
