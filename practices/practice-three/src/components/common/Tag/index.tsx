@@ -33,10 +33,10 @@ const colorClasses: { [key in COLORS]: string } = {
  */
 
 const Tag = ({ children, color = COLORS.DEFAULT, customClasses = '', onClick }: ITagProps): JSX.Element => {
-  const TagClasses: string = classNames(defaultClasses, colorClasses[color], customClasses);
+  const tagClasses: string = classNames(defaultClasses, colorClasses[color], customClasses);
 
   return (
-    <span className={TagClasses} onClick={onClick}>
+    <span className={tagClasses} onClick={onClick}>
       {children}
     </span>
   );
