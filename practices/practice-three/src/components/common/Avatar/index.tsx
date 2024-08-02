@@ -6,8 +6,11 @@ import { memo } from 'react';
 import { getNamePlaceholder } from '@/helper/util';
 
 export interface IAvatarProps {
+  // name: The name of the person.
   name: string;
+  // src: The avatar URL.
   src?: string;
+  // customClass: Custom variant class for the Avatar.
   customClass?: string;
 }
 
@@ -16,9 +19,6 @@ const defaultClasses: string =
 
 /**
  * Avatar component
- * @param name The name of the person.
- * @param src The avatar URL.
- * @param customClass Custom variant class for the Avatar.
  *
  * @returns {JSX.Element} - Avatar element.
  */

@@ -11,6 +11,7 @@ import type { ITagProps } from '@/components/common/Tag';
 import { COLORS } from '@/enums/theme';
 
 interface IStatusLabelProps extends ITagProps {
+  // showDot: Show dot for the StatusLabel.
   showDot?: boolean;
 }
 
@@ -31,11 +32,6 @@ const getIconFillColorClass = (color: COLORS): string => {
 
 /**
  * StatusLabel component
- * @param children The children of the StatusLabel.
- * @param color Color of the StatusLabel. Can be one of COLORS enums.
- * @param showDot Show dot for the StatusLabel.
- * @param customClasses Custom variant class for the StatusLabel.
- * @param onClick The function to call when the StatusLabel is clicked.
  *
  * @returns {JSX.Element} - StatusLabel element.
  */

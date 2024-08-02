@@ -9,9 +9,13 @@ import classNames from 'classnames';
 import { BUTTON_VARIANTS, BUTTON_SIZES, BUTTON_COLORS } from '@/enums/theme';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  // variant: Variant of the button. Can be one of 'text', 'outline', 'contained'.
   variant?: BUTTON_VARIANTS;
+  // size: Size of the button. Can be one of 'small', 'medium', or 'large'.
   size?: BUTTON_SIZES;
+  // color: Color of the button. Can be one of 'primary', 'default'.
   color?: BUTTON_COLORS;
+  // customClasses: Custom variant class for the button.
   customClasses?: string;
 }
 
@@ -38,10 +42,6 @@ const colorClasses: { [key in BUTTON_COLORS]: string } = {
 
 /**
  * Button component
- * @param variant Variant of the button. Can be one of 'text', 'outline', 'contained'.
- * @param size Size of the button. Can be one of 'small', 'medium', or 'large'.
- * @param color Color of the button. Can be one of 'primary', 'default'.
- * @param customClasses Custom variant class for the button.
  *
  * @returns {JSX.Element} - Button element.
  */
