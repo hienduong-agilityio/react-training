@@ -6,14 +6,18 @@ import classNames from 'classnames';
 import { COLORS } from '@/enums/theme';
 
 export interface ITagProps {
+  // children: The children of the Tag.
   children: React.ReactNode;
+  // color: Color of the Tag. Can be one of COLORS enums.
   color?: COLORS;
+  // customClasses: Custom variant class for the Tag.
   customClasses?: string;
+  // onClick: The function to call when the Tag is clicked.
   onClick?: () => void;
 }
 
 const defaultClasses: string =
-  'py-[1px] px-2 inline-flex gap-[6px] rounded font-medium text-xs leading-[18px] tracking-[0.36px]';
+  'py-[1px] px-2 inline-flex gap-[6px] rounded font-medium text-xs leading-[18px] tracking-[0.36px] flex items-center justify-center';
 const colorClasses: { [key in COLORS]: string } = {
   [COLORS.DEFAULT]: 'bg-gray-100 text-gray-700',
   [COLORS.PRIMARY]: 'bg-primary-100 text-primary-500',
@@ -24,14 +28,9 @@ const colorClasses: { [key in COLORS]: string } = {
 
 /**
  * Tag component
- * @param children The children of the Tag.
- * @param color Color of the Tag. Can be one of COLORS enums.
- * @param onClick The function to call when the Tag is clicked.
- * @param customClasses Custom variant class for the Tag.
  *
  * @returns {JSX.Element} - Tag element.
  */
-
 const Tag = ({ children, color = COLORS.DEFAULT, customClasses = '', onClick }: ITagProps): JSX.Element => {
   const tagClasses: string = classNames(defaultClasses, colorClasses[color], customClasses);
 

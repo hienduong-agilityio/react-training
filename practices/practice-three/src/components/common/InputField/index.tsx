@@ -6,7 +6,9 @@ import classNames from 'classnames';
 import type { InputHTMLAttributes } from 'react';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  // customClasses: Custom class for the input.
   customClasses?: string;
+  // errorMessage: Error messages for input.
   errorMessage?: string;
 }
 
@@ -17,8 +19,6 @@ const errorMessagesClasses: string = 'mt-1 text-sm text-red-600';
 
 /**
  * InputField component
- * @param customClasses Custom class for the input.
- * @param errorMessage Error messages for input.
  *
  * @returns {JSX.Element} - InputField element.
  */
