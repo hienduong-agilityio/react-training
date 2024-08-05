@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { memo } from 'react';
 
 // Utils
-import { getNamePlaceholder } from '@/helper/util';
+import { getNamePlaceholder } from '@/helper/nameAbbreviation';
 
 export interface IAvatarProps {
   // name: The name of the person.

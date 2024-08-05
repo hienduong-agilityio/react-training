@@ -4,6 +4,7 @@
  * @param {string} name - The full name from which to generate the abbreviation.
  * @return {string} - The abbreviation of name or 'N/A' if the name is null or undefined.
  */
+
 const getNamePlaceholder = (name = '') => {
   if (!name || !name.trim()) {
     return 'N/A';
@@ -28,6 +29,7 @@ const getNamePlaceholder = (name = '') => {
  * @param {boolean} isUpperCase - Whether to convert the character to uppercase.
  * @return {string} - The first character of the string
  */
+
 const getFirstChar = (str = '', isUpperCase = true) => {
   if (!str || !str.trim()) return '';
 

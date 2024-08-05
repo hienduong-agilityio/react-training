@@ -1,5 +1,11 @@
-function App() {
-  return <h1 className='text-3xl font-bold underline text-red-600'>Hello world!</h1>;
-}
+// Components
+import ProjectTable from '@/components/ProjectTable';
+
+// Data
+import PROJECT_ITEMS from '../database/data.json';
+
+const App = () => {
+  return <ProjectTable dataTable={PROJECT_ITEMS}></ProjectTable>;
+};
 
 export default App;

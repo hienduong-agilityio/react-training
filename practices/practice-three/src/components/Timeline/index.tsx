@@ -14,9 +14,12 @@ export interface ITimelineProps {
  * @returns {JSX.Element} - Timeline element.
  */
 const Timeline = ({ timeStart = '', timeEnd = '' }: ITimelineProps): JSX.Element => {
+  const displayTimeStart = timeStart.trim() === '' ? '-' : timeStart;
+  const displayTimeEnd = timeEnd.trim() === '' ? '-' : timeEnd;
+
   return (
     <div className='flex gap-2 items-center'>
-      <Tag customClasses='w-[98px]'>{timeStart}</Tag>
+      <Tag customClasses='w-[98px]'>{displayTimeStart}</Tag>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='16'
@@ -26,15 +29,9 @@ const Timeline = ({ timeStart = '', timeEnd = '' }: ITimelineProps): JSX.Element
         role='img'
         aria-label='Next'
       >
-        <path
-          d='M6.5 11L9.5 8L6.5 5'
-          stroke='#868FA0'
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-        />
+        <path d='M6.5 11L9.5 8L6.5 5' stroke='#868FA0' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
       </svg>
-      <Tag customClasses='w-[98px]'>{timeEnd}</Tag>
+      <Tag customClasses='w-[98px]'>{displayTimeEnd}</Tag>
     </div>
   );
 };
