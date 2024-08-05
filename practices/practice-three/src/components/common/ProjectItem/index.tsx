@@ -6,7 +6,7 @@ import Avatar from '@/components/common/Avatar';
 import StatusLabel from '@/components/common/StatusLabel';
 import Timeline from '@/components/Timeline';
 import ResourceTag from '@/components/ResourcesTag';
-import EstimationItem from '@/components/EstimationItem';
+import CurrencyText from '@/components/CurrencyText';
 
 // Types
 import { ITimelineProps } from '@/components/Timeline';
@@ -15,13 +15,13 @@ import { ITimelineProps } from '@/components/Timeline';
 import { STATUS } from '@/enums/status';
 import { COLORS } from '@/enums/theme';
 
-interface IProjectItemProps {
+export interface IProjectItemProps {
   // id: The unique identifier for the project.
   id: number;
   // projectName: The name of the project.
   projectName: string;
-  // status: The current status of the project, indicating progress or risk level.
-  status: STATUS;
+  // status: The current status of the project or string, indicating progress or risk level.
+  status: STATUS | string;
   // managerName: The name of the project manager responsible for overseeing the project.
   managerName: string;
   // managerImage: Optional URL for the project manager's avatar image.
@@ -36,7 +36,7 @@ interface IProjectItemProps {
   estimation?: string;
 }
 
-const getColorFromStatus = (status: STATUS): COLORS => {
+const getColorFromStatus = (status: STATUS | string): COLORS => {
   switch (status) {
     case STATUS.ON_TRACK:
       return COLORS.SUCCESS;
@@ -69,30 +69,30 @@ const ProjectItem = ({
   const color = getColorFromStatus(status);
 
   return (
-    <tr className='border-b flex items-center justify-between'>
-      <td className='p-4 font-medium'>
+    <tr className='border bottom-1'>
+      <td className='py-5 font-medium'>
         <p>{id}</p>
       </td>
-      <td className='p-4'>
+      <td>
         <p className='text-primary-500 font-semibold hover:underline cursor-pointer'>{projectName}</p>
       </td>
-      <td className='p-4'>
+      <td>
         <Avatar name={managerName} src={managerImage} />
       </td>
-      <td className='p-4'>
+      <td>
         <StatusLabel color={color}>{status}</StatusLabel>
       </td>
-      <td className='p-4'>
-        <p>{lastUpdate}</p>
+      <td>
+        <p className='text-gray-600'>{lastUpdate}</p>
       </td>
-      <td className='p-4'>
+      <td>
         <ResourceTag resources={resources} />
       </td>
-      <td className='p-4'>
+      <td>
         <Timeline timeStart={timeline.timeStart} timeEnd={timeline.timeEnd} />
       </td>
-      <td className='p-4'>
-        <EstimationItem estimation={estimation} />
+      <td>
+        <CurrencyText currency={estimation} />
       </td>
     </tr>
   );
