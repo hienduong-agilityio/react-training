@@ -9,7 +9,7 @@ import { SIDEBAR_MENU_ITEM } from '@/constants/sidebarItem';
 const Sidebar = () => {
   return (
     <div className='flex'>
-      <div className={'w-[74px] bg-primary-700 h-screen p-4 relative duration-300'}>
+      <div className={'w-[74px] bg-primary-700 h-full p-4 relative duration-300'}>
         <div className='flex items-center'>
           <img src='/src/assets/images/Logo.svg' className={'cursor-pointer duration-500'} alt='Logo' />
         </div>

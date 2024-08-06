@@ -1,6 +1,7 @@
 // Components
 import ProjectTable from '@/components/ProjectTable';
 import Sidebar from '@/components/layout/SideBar';
+import Navbar from '@/components/layout/NavBar';
 
 // Data
 import PROJECT_ITEMS from '../database/data.json';
@@ -14,7 +15,10 @@ const App = (): JSX.Element => {
   return (
     <main className='flex'>
       <Sidebar />
-      <ProjectTable dataTable={PROJECT_ITEMS} />
+      <div className='flex flex-col w-full'>
+        <Navbar />
+        <ProjectTable dataTable={PROJECT_ITEMS} />
+      </div>
     </main>
   );
 };
