@@ -1,19 +1,19 @@
 import type { Meta } from '@storybook/react';
-import Sidebar from './index';
+import Navbar from './index';
 
 const meta = {
-  title: 'Components/layouts/Sidebar',
-  component: Sidebar,
+  title: 'Components/layouts/NavBar',
+  component: Navbar,
   parameters: {
     layout: 'centered'
   },
   tags: ['autodocs']
-} satisfies Meta<typeof Sidebar>;
+} satisfies Meta<typeof Navbar>;
 
 export default meta;
 
 export const Defaults = () => (
   <>
-    <Sidebar />
+    <Navbar />
   </>
 );
