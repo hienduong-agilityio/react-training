@@ -70,7 +70,7 @@ const ProjectItem = ({
 
   return (
     <tr className='border bottom-1'>
-      <td className='py-5 font-medium'>
+      <td className='px-3 py-5 font-medium'>
         <p>{id}</p>
       </td>
       <td>

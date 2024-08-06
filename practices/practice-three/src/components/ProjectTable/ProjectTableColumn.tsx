@@ -11,7 +11,7 @@ const ProjectTableColumn = (): JSX.Element => {
     <thead className='bg-gray-50'>
       <tr>
         {PROJECT_TABLE_COLUMN.map((column) => (
-          <th key={column.id} scope='col' className='py-2 text-left'>
+          <th key={column.id} scope='col' className='py-2 px-3 text-left'>
             <p className='uppercase font-medium text-gray-500'> {column.title}</p>
           </th>
         ))}
