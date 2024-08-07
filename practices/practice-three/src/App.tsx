@@ -2,6 +2,7 @@
 import ProjectTable from '@/components/ProjectTable';
 import Sidebar from '@/components/layout/SideBar';
 import Navbar from '@/components/layout/NavBar';
+import SearchBox from '@/components/SearchBox';
 
 // Data
 import PROJECT_ITEMS from '../database/data.json';
@@ -17,6 +18,9 @@ const App = (): JSX.Element => {
       <Sidebar />
       <div className='flex flex-col w-full'>
         <Navbar />
+        <div className='pt-5 pb-7 pl-3'>
+          <SearchBox />
+        </div>
         <ProjectTable dataTable={PROJECT_ITEMS} />
       </div>
     </main>
