@@ -11,6 +11,12 @@ import type { IInputProps } from '@/components/common/InputField';
 // Constants
 import { SEARCH_OPTION } from '@/constants/filerSearchOption';
 
+// Hooks
+import { useProjectContext } from '@/stores/ProjectProvider';
+
+// Constants
+import { DISPATCH_ACTION } from '@/constants/store';
+
 export interface ISearchBox extends IInputProps {
   // onChange event handler for the input field
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,7 +27,20 @@ export interface ISearchBox extends IInputProps {
  *
  * @returns {JSX.Element} - SearchBox element.
  */
-const SearchBox = ({ disabled, onChange }: ISearchBox): JSX.Element => {
+const SearchBox = ({ disabled }: ISearchBox): JSX.Element => {
+  const { dispatch } = useProjectContext();
+
+  // Handle input change and dispatch the input value to the context
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = event.target.value;
+
+    dispatch({
+      // TODO: Continue search by other criteria
+      type: DISPATCH_ACTION.SEARCH_PROJECT_BY_NAME,
+      inputValue: searchValue
+    });
+  };
+
   return (
     <div className='flex h-auto'>
       <Dropdown options={SEARCH_OPTION} onChange={() => {}} />
@@ -30,7 +49,7 @@ const SearchBox = ({ disabled, onChange }: ISearchBox): JSX.Element => {
         <InputField
           placeholder='Search'
           disabled={disabled}
-          onChange={onChange}
+          onChange={handleInputChange}
           customClasses='h-full w-full pl-9 rounded-none rounded-e-lg'
         />
       </div>
