@@ -17,11 +17,11 @@ const useClickOutside = (ref: RefObject<HTMLElement>, callback: () => void) => {
     };
 
     // Add an event listener to detect clicks outside the referenced element.
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     // Clean up the event listener when the component unmounts.
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [callback, ref]);
 };
