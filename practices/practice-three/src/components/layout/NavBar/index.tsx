@@ -14,8 +14,8 @@ const Navbar = (): JSX.Element => {
           Projects
         </a>
         <div className='flex items-center gap-6'>
-          <img src='/src/assets/images/NotificationIcon.svg' className='cursor-not-allowed' alt='Notification' />
-          <img src='/src/assets/images/HelpIcon.svg' className='cursor-not-allowed' alt='Help' />
+          <img src='/images/notificationIcon.svg' className='cursor-not-allowed' alt='Notification' />
+          <img src='/images/helpIcon.svg' className='cursor-not-allowed' alt='Help' />
           <Avatar customClass='rounded-full cursor-not-allowed' name='HienDuong' />
         </div>
       </div>

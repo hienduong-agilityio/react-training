@@ -3,7 +3,7 @@ import InputField from '@/components/common/InputField';
 import Dropdown from '@/components/common/Dropdown';
 
 // SVG
-import iconSearch from '@/assets/images/search-line.svg';
+import iconSearch from '/images/searchIcon.svg';
 
 // Types
 import type { IInputProps } from '@/components/common/InputField';
