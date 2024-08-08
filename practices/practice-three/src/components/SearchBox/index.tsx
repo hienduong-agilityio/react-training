@@ -32,7 +32,7 @@ const SearchBox = ({ disabled }: ISearchBox): JSX.Element => {
 
   // Handle input change and dispatch the input value to the context
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = event.target.value;
+    const searchValue: string = event.target.value;
 
     dispatch({
       // TODO: Continue search by other criteria
