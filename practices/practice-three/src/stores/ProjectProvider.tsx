@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
 // Types
-import type { IProjectItemProps } from '@/components/common/ProjectItem';
+import type { IProjectItemProps } from '@/components/ProjectItem';
 
 // Libraries
 import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, Reducer } from 'react';
@@ -9,11 +9,18 @@ import { createContext, useContext, useMemo, ReactNode, useReducer, Dispatch, Re
 // Constants
 import { DISPATCH_ACTION } from '@/constants/store';
 
+// Helpers
+import { filterProjectsByField } from '@/helper/projectHelpers';
+
 export type ProjectType = {
   // data: This array can be filtered based on search input or other criteria.
   data: IProjectItemProps[];
   // originalData: The unmodified original set of project items.
   originalData: IProjectItemProps[];
+  // filterKeyword: The search input value
+  filterKeyword: string;
+  // searchField: The field used for searching
+  searchField: keyof IProjectItemProps;
 };
 
 interface IProjectContextProps {
@@ -30,15 +37,20 @@ interface IContextProviderProps {
 
 // Action dispatched type
 type Action =
-  // Action to Search Project by name
-  | { type: typeof DISPATCH_ACTION.SEARCH_PROJECT_BY_NAME; inputValue: string }
+  // Action to Search Project by filed
+  | { type: typeof DISPATCH_ACTION.SEARCH_PROJECT_BY_FIELD; inputValue: string; selectField: keyof IProjectItemProps }
 
   // Action to Mocking Project Data
-  | { type: typeof DISPATCH_ACTION.MOCKING_PROJECTS_ITEM; payload: IProjectItemProps[] };
+  | { type: typeof DISPATCH_ACTION.MOCKING_PROJECTS_ITEM; payload: IProjectItemProps[] }
+
+  // Action to Add Project Item
+  | { type: typeof DISPATCH_ACTION.ADD_PROJECT_ITEM; payload: IProjectItemProps };
 
 const initialState: ProjectType = {
   data: [],
-  originalData: []
+  originalData: [],
+  filterKeyword: '',
+  searchField: 'projectName'
 };
 
 /**
@@ -51,23 +63,13 @@ const initialState: ProjectType = {
  */
 const projectReducer = (state: ProjectType, action: Action) => {
   switch (action.type) {
-    // Search project by input value
-    case DISPATCH_ACTION.SEARCH_PROJECT_BY_NAME: {
-      if (action.inputValue === '') {
-        return {
-          ...state,
-          data: state.originalData
-        };
-      }
-
-      // Func to filter original data with input value
-      const filteredData = state.originalData.filter((project) =>
-        project.projectName.toLowerCase().includes(action.inputValue.toLowerCase())
-      );
-
+    // Search project by field
+    case DISPATCH_ACTION.SEARCH_PROJECT_BY_FIELD: {
       return {
         ...state,
-        data: filteredData
+        data: filterProjectsByField(state.originalData, action.inputValue, action.selectField),
+        filterKeyword: action.inputValue,
+        searchField: action.selectField
       };
     }
 
@@ -78,6 +80,17 @@ const projectReducer = (state: ProjectType, action: Action) => {
         data: action.payload,
         originalData: action.payload
       };
+
+    // Add new project item
+    case DISPATCH_ACTION.ADD_PROJECT_ITEM: {
+      const updatedOriginalData = [action.payload, ...state.originalData];
+
+      return {
+        ...state,
+        originalData: updatedOriginalData,
+        data: filterProjectsByField(updatedOriginalData, state.filterKeyword, state.searchField)
+      };
+    }
 
     default:
       return state;

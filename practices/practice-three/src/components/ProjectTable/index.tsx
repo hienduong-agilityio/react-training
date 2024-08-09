@@ -3,7 +3,7 @@ import ProjectTableColumn from './ProjectTableColumn';
 import ProjectTableBody from './ProjectTableBody';
 
 // Types
-import { IProjectItemProps } from '@/components/common/ProjectItem';
+import { IProjectItemProps } from '@/components/ProjectItem';
 
 export interface IProjectTableProps {
   // dataTable: Optional array of project data to populate the table body.

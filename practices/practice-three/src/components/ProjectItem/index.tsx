@@ -17,7 +17,7 @@ import { COLORS } from '@/enums/theme';
 
 export interface IProjectItemProps {
   // id: The unique identifier for the project.
-  id: number;
+  id: string;
   // projectName: The name of the project.
   projectName: string;
   // status: The current status of the project or string, indicating progress or risk level.
@@ -34,6 +34,8 @@ export interface IProjectItemProps {
   timeline?: ITimelineProps;
   // estimation: Optional estimated cost of the project, displayed as a financial estimate.
   estimation?: string;
+  // index: The index of the project in the list.
+  index?: number;
 }
 
 const getColorFromStatus = (status: STATUS | string): COLORS => {
@@ -56,7 +58,7 @@ const getColorFromStatus = (status: STATUS | string): COLORS => {
  * @returns {JSX.Element} The rendered project item as a table row.
  */
 const ProjectItem = ({
-  id,
+  index,
   projectName,
   status,
   managerName,
@@ -71,7 +73,7 @@ const ProjectItem = ({
   return (
     <tr className='border bottom-1'>
       <td className='px-3 py-5 font-medium'>
-        <p>{id}</p>
+        <p>{index}</p>
       </td>
       <td>
         <p className='text-primary-500 font-semibold hover:underline cursor-pointer'>{projectName}</p>
