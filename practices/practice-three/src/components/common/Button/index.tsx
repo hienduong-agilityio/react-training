@@ -36,8 +36,9 @@ const sizeClasses: { [key in BUTTON_SIZES]: string } = {
 
 const colorClasses: { [key in BUTTON_COLORS]: string } = {
   [BUTTON_COLORS.DEFAULT]: 'text-black',
-  [BUTTON_COLORS.PRIMARY]: 'bg-primary-500 hover:bg-primary-600 focus:bg-primary-500 ',
-  [BUTTON_COLORS.DANGER]: 'bg-danger-400 border hover:bg-danger-500 focus:bg-danger-400'
+  [BUTTON_COLORS.PRIMARY]: 'bg-primary-500 hover:bg-primary-600 focus:bg-primary-500',
+  [BUTTON_COLORS.DANGER]:
+    'bg-danger-400 border hover:bg-danger-500 focus:bg-danger-400 hover:text-light focus:text-light'
 };
 
 /**

@@ -36,8 +36,9 @@ const SearchBox = ({ disabled }: ISearchBox): JSX.Element => {
 
     dispatch({
       // TODO: Continue search by other criteria
-      type: DISPATCH_ACTION.SEARCH_PROJECT_BY_NAME,
-      inputValue: searchValue
+      type: DISPATCH_ACTION.SEARCH_PROJECT_BY_FIELD,
+      inputValue: searchValue,
+      selectField: 'projectName'
     });
   };
 

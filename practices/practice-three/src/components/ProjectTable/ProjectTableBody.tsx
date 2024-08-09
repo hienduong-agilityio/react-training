@@ -1,8 +1,8 @@
 // Component
-import ProjectItem from '@/components/common/ProjectItem';
+import ProjectItem from '@/components/ProjectItem';
 
 // Type
-import { IProjectItemProps } from '@/components/common/ProjectItem';
+import { IProjectItemProps } from '@/components/ProjectItem';
 
 export interface IProjectTableBodyProps {
   // tableData: The data for each project to be rendered.
@@ -17,8 +17,8 @@ export interface IProjectTableBodyProps {
 const ProjectTableBody = ({ tableData }: IProjectTableBodyProps) => {
   return (
     <tbody>
-      {tableData.map((project: IProjectItemProps) => (
-        <ProjectItem key={project.id} {...project} />
+      {tableData.map((project: IProjectItemProps, index: number) => (
+        <ProjectItem key={project.id} {...project} index={index + 1} />
       ))}
     </tbody>
   );
