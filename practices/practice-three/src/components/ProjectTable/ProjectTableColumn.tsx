@@ -1,20 +1,22 @@
-// Constants
-import { PROJECT_TABLE_COLUMN } from '@/constants/projectTableTitle';
-
 /**
  * ProjectTableColumn Component
  *
  * @returns {JSX.Element} The table header containing the column titles.
  */
 const ProjectTableColumn = (): JSX.Element => {
+  const commonColClass = 'font-medium text-gray-500';
+
   return (
     <thead className='bg-gray-50'>
-      <tr>
-        {PROJECT_TABLE_COLUMN.map((column) => (
-          <th key={column.id} scope='col' className='py-2 px-3 text-left'>
-            <p className='uppercase font-medium text-gray-500'> {column.title}</p>
-          </th>
-        ))}
+      <tr className='h-9 uppercase'>
+        <th className={`pl-3 ${commonColClass}`}>#</th>
+        <th className={`${commonColClass}`}>Project Name</th>
+        <th className={`text-center ${commonColClass}`}>PM</th>
+        <th className={`${commonColClass}`}>Status</th>
+        <th className={`w-1/12 ${commonColClass}`}>Last update</th>
+        <th className={`text-center ${commonColClass}`}>Resources</th>
+        <th className={`${commonColClass}`}>Project timeline</th>
+        <th className={`${commonColClass}`}>Estimation</th>
       </tr>
     </thead>
   );

@@ -19,7 +19,7 @@ export interface ITagProps {
 const defaultClasses: string =
   'py-[1px] px-2 inline-flex gap-[6px] rounded font-medium text-xs leading-[18px] tracking-[0.36px] flex items-center justify-center';
 const colorClasses: { [key in COLORS]: string } = {
-  [COLORS.DEFAULT]: 'bg-gray-100 text-gray-700',
+  [COLORS.DEFAULT]: 'bg-gray-50 text-gray-700',
   [COLORS.PRIMARY]: 'bg-primary-100 text-primary-500',
   [COLORS.SUCCESS]: 'bg-success-100 text-success-500',
   [COLORS.WARNING]: 'bg-warning-0 text-warning-500',

@@ -78,7 +78,7 @@ const ProjectItem = ({
       <td>
         <p className='text-primary-500 font-semibold hover:underline cursor-pointer'>{projectName}</p>
       </td>
-      <td>
+      <td className='text-center px-2'>
         <Avatar name={managerName} src={managerImage} />
       </td>
       <td>
@@ -87,7 +87,7 @@ const ProjectItem = ({
       <td>
         <p className='text-gray-600'>{lastUpdate}</p>
       </td>
-      <td>
+      <td className='text-center px-2'>
         <ResourceTag resources={resources} />
       </td>
       <td>

@@ -24,7 +24,7 @@ export const Default: Story = {
   args: {
     dataTable: [
       {
-        id: 1,
+        id: '1',
         projectName: 'Allosaurus Web App',
         status: STATUS.ON_TRACK,
         managerName: 'Jane Doe',
@@ -38,7 +38,7 @@ export const Default: Story = {
         estimation: '10.5'
       },
       {
-        id: 2,
+        id: '2',
         projectName: 'Stegosaurus Mobile App',
         status: STATUS.POTENTIAL_RISK,
         managerName: 'John Smith',
@@ -52,7 +52,7 @@ export const Default: Story = {
         estimation: '12.0'
       },
       {
-        id: 3,
+        id: '3',
         projectName: 'Triceratops Dashboard',
         status: STATUS.AT_RISK,
         managerName: 'Alice Brown',
@@ -73,7 +73,7 @@ export const MissingData: Story = {
   args: {
     dataTable: [
       {
-        id: 4,
+        id: '4',
         projectName: 'Pterodactyl Analytics Tool',
         status: STATUS.ON_HOLD,
         managerName: 'Carol Williams',

@@ -18,7 +18,7 @@ const Timeline = ({ timeStart = '', timeEnd = '' }: ITimelineProps): JSX.Element
   const displayTimeEnd = timeEnd.trim() === '' ? '-' : timeEnd;
 
   return (
-    <div className='flex gap-2 items-center'>
+    <div className='flex gap-1 items-center'>
       <Tag customClasses='w-[98px]'>{displayTimeStart}</Tag>
       <svg
         xmlns='http://www.w3.org/2000/svg'
