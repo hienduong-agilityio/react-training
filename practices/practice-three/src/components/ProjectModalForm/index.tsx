@@ -24,7 +24,7 @@ import type { IProjectItemProps } from '@/components/ProjectItem';
 import { DISPATCH_ACTION } from '@/constants/store';
 
 // Helper
-import { formatDate } from '@/helper/formatDate';
+import { formatDateTime } from '@/helper/formatDateTime';
 
 interface IProjectModalForm {
   // title: A title for Form modal.
@@ -71,7 +71,7 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
       status: STATUS.ON_HOLD,
       managerName,
       managerImage: '',
-      lastUpdate: formatDate(new Date()),
+      lastUpdate: formatDateTime(new Date()),
       resources,
       timeline: {
         timeStart,

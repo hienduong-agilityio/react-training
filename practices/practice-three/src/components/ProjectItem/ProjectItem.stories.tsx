@@ -22,7 +22,7 @@ type Story = StoryObj<typeof ProjectItem>;
 
 export const ProjectItemDefault: Story = {
   args: {
-    id: 1,
+    id: '1',
     projectName: 'Allosaurus Web App',
     status: STATUS.ON_TRACK,
     managerName: 'Jane Doe',
@@ -38,7 +38,7 @@ export const ProjectItemDefault: Story = {
 
 export const ProjectItemMissingProps: Story = {
   args: {
-    id: 1,
+    id: '1',
     projectName: 'Allosaurus Web App',
     status: STATUS.ON_HOLD,
     managerName: 'Jane Doe Hien',

@@ -15,14 +15,14 @@ export interface IAvatarProps {
 }
 
 const defaultClasses: string =
-  'inline-flex border-2 border-gray-100 items-center justify-center w-10 h-10 overflow-hidden bg-primary-0';
+  'inline-flex border-2 border-gray-100 items-center justify-center w-7 h-7 overflow-hidden bg-primary-0';
 
 /**
  * Avatar component
  *
  * @returns {JSX.Element} - Avatar element.
  */
-const Avatar = ({ name, src, customClass = 'rounded-xl' }: IAvatarProps): JSX.Element => {
+const Avatar = ({ name, src, customClass = 'rounded-lg' }: IAvatarProps): JSX.Element => {
   const avatarClasses: string = classNames(defaultClasses, customClass);
   const placeholderText = getNamePlaceholder(name);
 
@@ -31,7 +31,7 @@ const Avatar = ({ name, src, customClass = 'rounded-xl' }: IAvatarProps): JSX.El
       {src ? (
         <img src={src} alt={`${name} avatar`} />
       ) : (
-        <span className='font-bold text-primary-500'>{placeholderText}</span>
+        <span className='font-bold text-xs text-primary-500'>{placeholderText}</span>
       )}
     </div>
   );
