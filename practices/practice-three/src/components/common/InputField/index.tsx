@@ -15,7 +15,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const inputDefaultClasses: string =
-  'border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-dark disabled:text-light disabled:bg-white shadow';
+  'border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow';
 const inputErrorClasses: string = 'border-red-600';
 const errorMessagesClasses: string = 'mt-1 text-sm text-red-600';
 const labelClasses: string = 'mb-2 capitalize text-sm font-medium text-gray-700';
