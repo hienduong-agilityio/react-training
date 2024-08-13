@@ -9,6 +9,8 @@ export interface IProjectTableBodyProps {
   tableData: IProjectItemProps[];
   // onOpenEdit: The function to open edit modal
   onOpenEdit: (id: string) => void;
+  // onDeleted: The function to open delete modal
+  onDelete: () => void;
 }
 
 /**
@@ -16,11 +18,11 @@ export interface IProjectTableBodyProps {
  *
  * @returns {JSX.Element} The table body containing the project items.
  */
-const ProjectTableBody = ({ tableData, onOpenEdit }: IProjectTableBodyProps) => {
+const ProjectTableBody = ({ tableData, onOpenEdit, onDelete }: IProjectTableBodyProps) => {
   return (
     <tbody>
       {tableData.map((project: IProjectItemProps, index: number) => (
-        <ProjectItem key={project.id} {...project} index={index + 1} onOpenEdit={onOpenEdit} />
+        <ProjectItem key={project.id} {...project} index={index + 1} onOpenEdit={onOpenEdit} onDelete={onDelete} />
       ))}
     </tbody>
   );

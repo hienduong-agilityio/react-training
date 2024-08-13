@@ -1,6 +1,10 @@
 // Components
 import Avatar from '@/components/common/Avatar';
 
+// Svg
+import notifyIcon from '@public/images/notificationIcon.svg';
+import helpIcon from '@public/images/helpIcon.svg';
+
 /**
  * Navbar components
  *
@@ -14,8 +18,8 @@ const Navbar = (): JSX.Element => {
           Projects
         </a>
         <div className='flex items-center gap-6'>
-          <img src='/images/notificationIcon.svg' className='cursor-not-allowed' alt='Notification' />
-          <img src='/images/helpIcon.svg' className='cursor-not-allowed' alt='Help' />
+          <img src={notifyIcon} className='cursor-not-allowed' alt='Notification' />
+          <img src={helpIcon} className='cursor-not-allowed' alt='Help' />
           <Avatar customClass='rounded-full cursor-not-allowed' name='HienDuong' />
         </div>
       </div>

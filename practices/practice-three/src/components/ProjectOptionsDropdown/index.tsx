@@ -9,7 +9,7 @@ import useClickOutside from '@/hooks/useClickOutside';
 import { useProjectContext } from '@/stores/ProjectProvider';
 
 // SVG
-import addIcon from '/images/menuIcon.svg';
+import addIcon from '@public/images/menuIcon.svg';
 
 // Contacts
 import { DISPATCH_ACTION } from '@/constants/store';
@@ -19,6 +19,8 @@ interface IProjectOptionsDropdown {
   projectId: string;
   // onOpenEdit: The function to open edit modal
   onOpenEdit: (id: string) => void;
+  // onDeleted: The function to open delete modal
+  onDelete: () => void;
 }
 
 /**
@@ -26,7 +28,7 @@ interface IProjectOptionsDropdown {
  *
  * @returns {JSX.Element} - The ProjectOptionsDropdown element
  */
-const ProjectOptionsDropdown = ({ projectId, onOpenEdit }: IProjectOptionsDropdown): JSX.Element => {
+const ProjectOptionsDropdown = ({ projectId, onOpenEdit, onDelete }: IProjectOptionsDropdown): JSX.Element => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
   const { dispatch } = useProjectContext();
@@ -46,6 +48,15 @@ const ProjectOptionsDropdown = ({ projectId, onOpenEdit }: IProjectOptionsDropdo
     setIsOptionOpen(false);
   };
 
+  const handleDeleteClick = () => {
+    dispatch({
+      type: DISPATCH_ACTION.SET_SELECTED_PROJECT,
+      payload: projectId
+    });
+    onDelete();
+    setIsOptionOpen(false);
+  };
+
   return (
     <div className='relative inline-block text-left group' ref={dropdownRef}>
       <Button onClick={toggleDropdown} customClasses={'hover:border-none hover:bg-gray-100'}>
@@ -61,7 +72,12 @@ const ProjectOptionsDropdown = ({ projectId, onOpenEdit }: IProjectOptionsDropdo
             <li className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-not-allowed'>Send mail</li>
             <li className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-not-allowed'>Details</li>
             <li className='px-4 py-2 text-sm hover:bg-gray-100 cursor-not-allowed text-warning-400'>Archive</li>
-            <li className='px-4 py-2 text-sm hover:bg-gray-100 cursor-not-allowed text-danger-400'>Delete</li>
+            <li
+              className='px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer text-danger-400'
+              onClick={handleDeleteClick}
+            >
+              Delete
+            </li>
           </ul>
         </div>
       )}

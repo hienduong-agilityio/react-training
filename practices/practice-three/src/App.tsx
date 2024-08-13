@@ -3,8 +3,9 @@ import ProjectTable from '@/components/ProjectTable';
 import Sidebar from '@/components/layout/SideBar';
 import Navbar from '@/components/layout/NavBar';
 import SearchBox from '@/components/SearchBox';
-import ProjectModalForm from '@/components/ProjectModalForm';
+import ProjectModalForm from '@/components/ProjectModalForm/ProjectUpdateForm';
 import Button from '@/components/common/Button';
+import DeleteConfirmationModal from '@/components/ProjectModalForm/ProjectConfirmForm';
 
 // Hooks
 import { useProjectContext } from '@/stores/ProjectProvider';
@@ -20,7 +21,7 @@ import { DISPATCH_ACTION } from '@/constants/store';
 import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from '@/enums/theme';
 
 // SVG
-import addIcon from '/images/addIcon.svg';
+import addIcon from '@public/images/addIcon.svg';
 
 // Types
 import type { IProjectItemProps } from '@/components/ProjectItem';
@@ -32,6 +33,7 @@ import type { IProjectItemProps } from '@/components/ProjectItem';
  */
 const App = (): JSX.Element => {
   const [isProjectModalFormOpen, setIsProjectModalFormOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const { state, dispatch } = useProjectContext();
@@ -66,6 +68,15 @@ const App = (): JSX.Element => {
     dispatch({ type: DISPATCH_ACTION.CLEAR_SELECTED_PROJECT });
   };
 
+  const handleOpenDeleteModalForm = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+    dispatch({ type: DISPATCH_ACTION.CLEAR_SELECTED_PROJECT });
+  };
+
   return (
     <main className='flex'>
       <Sidebar />
@@ -88,7 +99,16 @@ const App = (): JSX.Element => {
             onClose={handleCloseProjectModalForm}
           />
         </div>
-        <ProjectTable dataTable={state.data} onOpenEdit={handleOpenEditProjectModalForm} />
+        <ProjectTable
+          dataTable={state.data}
+          onOpenEdit={handleOpenEditProjectModalForm}
+          onDelete={handleOpenDeleteModalForm}
+        />
+        <DeleteConfirmationModal
+          isOpen={isDeleteModalOpen}
+          onClose={handleDeleteModalClose}
+          projectId={state.selectedProjectId}
+        />
       </div>
     </main>
   );

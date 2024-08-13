@@ -2,11 +2,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 // Component
-import MenuDropdown from './index';
+import ProjectOptionsDropdown from './index';
 
-const meta: Meta<typeof MenuDropdown> = {
-  title: 'Components/MenuDropdown',
-  component: MenuDropdown,
+const meta: Meta<typeof ProjectOptionsDropdown> = {
+  title: 'Components/ProjectOptionsDropdown',
+  component: ProjectOptionsDropdown,
   parameters: {
     layout: 'centered'
   },
@@ -15,8 +15,18 @@ const meta: Meta<typeof MenuDropdown> = {
 
 export default meta;
 
-type Story = StoryObj<typeof MenuDropdown>;
+type Story = StoryObj<typeof ProjectOptionsDropdown>;
 
-export const MenuDropdownDefault: Story = {
-  render: () => <MenuDropdown projectId={''} />
+export const ProjectOptionsDropdownDefault: Story = {
+  render: () => (
+    <ProjectOptionsDropdown
+      projectId={''}
+      onOpenEdit={function (): void {
+        throw new Error('Function not implemented.');
+      }}
+      onDelete={function (): void {
+        throw new Error('Function not implemented.');
+      }}
+    />
+  )
 };

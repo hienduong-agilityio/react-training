@@ -51,6 +51,9 @@ type Action =
   // Action to Update Project Item
   | { type: typeof DISPATCH_ACTION.UPDATE_PROJECT_ITEM; payload: IProjectItemProps }
 
+  // Action to Delete Project Item
+  | { type: typeof DISPATCH_ACTION.DELETE_PROJECT_ITEM; payload: string }
+
   // Action to selected project id
   | { type: typeof DISPATCH_ACTION.SET_SELECTED_PROJECT; payload: string }
 
@@ -108,6 +111,17 @@ const projectReducer = (state: ProjectType, action: Action) => {
     // Add new project item
     case DISPATCH_ACTION.ADD_PROJECT_ITEM: {
       const updatedOriginalData = [action.payload, ...state.originalData];
+
+      return {
+        ...state,
+        originalData: updatedOriginalData,
+        data: filterProjectsByField(updatedOriginalData, state.filterKeyword, state.searchField)
+      };
+    }
+
+    // Delete project item
+    case DISPATCH_ACTION.DELETE_PROJECT_ITEM: {
+      const updatedOriginalData = state.originalData.filter((project) => project.id !== action.payload);
 
       return {
         ...state,
