@@ -5,7 +5,7 @@ import { useState, useRef, ReactNode } from 'react';
 import useClickOutside from '@/hooks/useClickOutside';
 
 // SVG
-import arrowDown from '/images/arrowDownIcon.svg';
+import arrowDown from '@public/images/arrowDownIcon.svg';
 
 export interface IDropdownProps {
   // options: Array of option strings to display in the dropdown menu.

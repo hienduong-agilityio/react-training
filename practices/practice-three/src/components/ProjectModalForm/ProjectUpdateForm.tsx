@@ -12,7 +12,7 @@ import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from '@/enums/theme';
 import { STATUS } from '@/enums/status';
 
 // SVG
-import arrowRight from '/images/arrowRightIcon.svg';
+import arrowRight from '@public/images/arrowRightIcon.svg';
 
 // Hooks
 import { useProjectContext } from '@/stores/ProjectProvider';

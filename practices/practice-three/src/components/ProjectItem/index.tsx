@@ -42,6 +42,8 @@ export interface IProjectItemProps {
 interface IProjectItem extends IProjectItemProps {
   // onOpenEdit: The function to open edit modal
   onOpenEdit: (id: string) => void;
+  // onDeleted: The function to open delete modal
+  onDelete: () => void;
 }
 
 const getColorFromStatus = (status: STATUS | string): COLORS => {
@@ -74,7 +76,8 @@ const ProjectItem = ({
   resources,
   timeline = { timeStart: '-', timeEnd: '-' },
   estimation,
-  onOpenEdit
+  onOpenEdit,
+  onDelete
 }: IProjectItem): JSX.Element => {
   const color = getColorFromStatus(status);
 
@@ -105,7 +108,7 @@ const ProjectItem = ({
         <div className='flex items-center w-32 justify-between'>
           <CurrencyText currency={estimation} />
           <div className='group-hover:block hidden'>
-            <ProjectOptionsDropdown projectId={id} onOpenEdit={onOpenEdit} />
+            <ProjectOptionsDropdown projectId={id} onOpenEdit={onOpenEdit} onDelete={onDelete} />
           </div>
         </div>
       </td>

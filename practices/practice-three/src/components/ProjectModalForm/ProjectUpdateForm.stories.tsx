@@ -2,14 +2,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 // Component
-import ProjectModalForm from './index';
+import ProjectUpdateForm from './ProjectUpdateForm';
 
-// Types
-import type { IProjectItemProps } from '@/components/ProjectItem';
-
-const meta: Meta<typeof ProjectModalForm> = {
-  title: 'Components/ProjectModalForm',
-  component: ProjectModalForm,
+const meta: Meta<typeof ProjectUpdateForm> = {
+  title: 'Components/ProjectModalForm/ProjectUpdateForm',
+  component: ProjectUpdateForm,
   parameters: {
     layout: 'fullscreen'
   },
@@ -25,7 +22,7 @@ const meta: Meta<typeof ProjectModalForm> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ProjectModalForm>;
+type Story = StoryObj<typeof ProjectUpdateForm>;
 
 export const CreateProjectForm: Story = {
   args: {
@@ -33,7 +30,7 @@ export const CreateProjectForm: Story = {
     isOpen: true
   },
 
-  render: (args) => <ProjectModalForm {...args} />
+  render: (args) => <ProjectUpdateForm {...args} />
 };
 
 export const EditProjectForm: Story = {
@@ -42,5 +39,5 @@ export const EditProjectForm: Story = {
     isOpen: true
   },
 
-  render: (args) => <ProjectModalForm {...args} />
+  render: (args) => <ProjectUpdateForm {...args} />
 };
