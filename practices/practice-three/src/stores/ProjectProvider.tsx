@@ -21,6 +21,8 @@ export type ProjectType = {
   filterKeyword: string;
   // searchField: The field used for searching
   searchField: keyof IProjectItemProps;
+  // selectedProjectId: Selected project id
+  selectedProjectId: string;
 };
 
 interface IProjectContextProps {
@@ -44,13 +46,23 @@ type Action =
   | { type: typeof DISPATCH_ACTION.MOCKING_PROJECTS_ITEM; payload: IProjectItemProps[] }
 
   // Action to Add Project Item
-  | { type: typeof DISPATCH_ACTION.ADD_PROJECT_ITEM; payload: IProjectItemProps };
+  | { type: typeof DISPATCH_ACTION.ADD_PROJECT_ITEM; payload: IProjectItemProps }
+
+  // Action to Update Project Item
+  | { type: typeof DISPATCH_ACTION.UPDATE_PROJECT_ITEM; payload: IProjectItemProps }
+
+  // Action to selected project id
+  | { type: typeof DISPATCH_ACTION.SET_SELECTED_PROJECT; payload: string }
+
+  // Action to clear init project id
+  | { type: typeof DISPATCH_ACTION.CLEAR_SELECTED_PROJECT };
 
 const initialState: ProjectType = {
   data: [],
   originalData: [],
   filterKeyword: '',
-  searchField: 'projectName'
+  searchField: 'projectName',
+  selectedProjectId: ''
 };
 
 /**
@@ -73,6 +85,18 @@ const projectReducer = (state: ProjectType, action: Action) => {
       };
     }
 
+    case DISPATCH_ACTION.SET_SELECTED_PROJECT:
+      return {
+        ...state,
+        selectedProjectId: action.payload
+      };
+
+    case DISPATCH_ACTION.CLEAR_SELECTED_PROJECT:
+      return {
+        ...state,
+        selectedProjectId: ''
+      };
+
     // Mocking data
     case DISPATCH_ACTION.MOCKING_PROJECTS_ITEM:
       return {
@@ -84,6 +108,19 @@ const projectReducer = (state: ProjectType, action: Action) => {
     // Add new project item
     case DISPATCH_ACTION.ADD_PROJECT_ITEM: {
       const updatedOriginalData = [action.payload, ...state.originalData];
+
+      return {
+        ...state,
+        originalData: updatedOriginalData,
+        data: filterProjectsByField(updatedOriginalData, state.filterKeyword, state.searchField)
+      };
+    }
+
+    // Updated project item
+    case DISPATCH_ACTION.UPDATE_PROJECT_ITEM: {
+      const updatedOriginalData = state.originalData.map((project) =>
+        project.id === action.payload.id ? action.payload : project
+      );
 
       return {
         ...state,

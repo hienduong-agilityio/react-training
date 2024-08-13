@@ -24,7 +24,7 @@ import type { IProjectItemProps } from '@/components/ProjectItem';
 import { DISPATCH_ACTION } from '@/constants/store';
 
 // Helper
-import { formatDateTime } from '@/helper/formatDateTime';
+import { formatDate, formatDateForInput, formatDateTime } from '@/helper/formatDateTime';
 
 interface IProjectModalForm {
   // title: A title for Form modal.
@@ -32,21 +32,48 @@ interface IProjectModalForm {
   // isOpen: A boolean indicating whether the modal is open.
   isOpen: boolean;
   // onClose: A function to be called when the modal is requested to be closed.
-  onClose: () => void;
+  onClose?: () => void;
 }
+
+interface IProjectFormData extends IProjectItemProps {}
 
 /**
  * ProjectModalForm component
  *
  * @returns {JSX.Element} - ProjectModalForm element.
  */
-const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.Element => {
-  const { dispatch } = useProjectContext();
+const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalForm): JSX.Element => {
+  const { state, dispatch } = useProjectContext();
   const [formErrorsMessages, setFormErrorsMessages] = useState<string>('');
+
+  // Determine the current project item being edited
+  const projectItem = state.data.find((project: IProjectItemProps) => project.id === state.selectedProjectId);
+
+  const isEditingProject = !!projectItem;
+
+  // Set initial form state with project item values if editing
+  const initialFormValues = {
+    id: projectItem?.id || uuidv4(),
+    projectName: projectItem?.projectName || '',
+    managerName: projectItem?.managerName || '',
+    resources: projectItem?.resources || '',
+    timeStart: formatDateForInput(projectItem?.timeline?.timeStart || '') || '',
+    timeEnd: formatDateForInput(projectItem?.timeline?.timeEnd || '') || '',
+    managerImage: projectItem?.managerImage || '',
+    estimation: projectItem?.estimation || '',
+    status: projectItem?.status || STATUS.ON_HOLD
+  };
+
+  // Handle close action and clear error messages for the modal
+  const handleClose = () => {
+    setFormErrorsMessages('');
+    onClose();
+  };
 
   /**
    * Function to handle form submit
-   * @param e - Form event
+   *
+   * @param event - Form event
    */
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,45 +81,51 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
     // Create a FormData object from the form
     const formData = new FormData(e.currentTarget);
 
-    // Get form values
-    const projectName = formData.get('projectName') as string;
-    const managerName = formData.get('managerName') as string;
-    const resources = formData.get('resources') as string;
-    const timeStart = formData.get('timeStart') as string;
-    const timeEnd = formData.get('timeEnd') as string;
-    const estimation = formData.get('estimation') as string;
-
-    // TODO: Update validation here
-
-    // Convert form data to an object
-    const formItemObject: IProjectItemProps = {
-      id: uuidv4(),
-      projectName,
-      status: STATUS.ON_HOLD,
-      managerName,
-      managerImage: '',
-      lastUpdate: formatDateTime(new Date()),
-      resources,
+    // Create an object for form values
+    const formValues: IProjectFormData = {
+      ...initialFormValues,
+      lastUpdate: formatDateTime(new Date().toISOString()),
+      projectName: formData.get('projectName') as string,
+      managerName: formData.get('managerName') as string,
+      resources: formData.get('resources') as string,
       timeline: {
-        timeStart,
-        timeEnd
+        timeStart: formatDate(formData.get('timeStart') as string),
+        timeEnd: formatDate(formData.get('timeEnd') as string)
       },
-      estimation
+      estimation: formData.get('estimation') as string
     };
 
-    // Dispatch action to add project
-    dispatch({
-      type: DISPATCH_ACTION.ADD_PROJECT_ITEM,
-      payload: formItemObject
-    });
+    if (isEditingProject) {
+      handleEditProject(formValues);
+    } else {
+      handleCreateProject(formValues);
+    }
 
     handleClose();
   };
 
-  // Handle close action and clear error messages for the modal
-  const handleClose = () => {
-    setFormErrorsMessages('');
-    onClose();
+  /**
+   * Function to handle project creation
+   *
+   * @returns Object containing project form values
+   */
+  const handleCreateProject = (formValues: IProjectFormData) => {
+    dispatch({
+      type: DISPATCH_ACTION.ADD_PROJECT_ITEM,
+      payload: formValues
+    });
+  };
+
+  /**
+   * Function to handle project editing
+   *
+   * @returns Object containing project form values
+   */
+  const handleEditProject = (formValues: IProjectFormData) => {
+    dispatch({
+      type: DISPATCH_ACTION.UPDATE_PROJECT_ITEM,
+      payload: formValues
+    });
   };
 
   return (
@@ -105,19 +138,28 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
           <div className='flex flex-col gap-3 px-4'>
             <InputField
               id='projectName'
-              label='Project name *'
+              label='project name *'
               errorMessage={formErrorsMessages}
               name='projectName'
               placeholder='Enter project name'
               required
+              defaultValue={initialFormValues.projectName}
             />
             <InputField
               id='managerName'
               label='project manager (PM)'
               name='managerName'
               placeholder='Enter project manager'
+              defaultValue={initialFormValues.managerName}
             />
-            <InputField id='resources' label='resources' name='resources' type='number' placeholder='Enter resources' />
+            <InputField
+              id='resources'
+              label='resources'
+              name='resources'
+              type='number'
+              placeholder='Enter resources'
+              defaultValue={initialFormValues.resources}
+            />
             <div className='flex flex-col gap-4'>
               <h4 className='text-sm font-medium text-gray-700'>Project timeline</h4>
               <div className='flex justify-between items-center gap-4'>
@@ -125,14 +167,26 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
                   <label htmlFor='timeStart' className='mb-2 text-xs font-medium text-gray-700'>
                     From
                   </label>
-                  <InputField id='timeStart' name='timeStart' type='date' customClasses='text-sm' />
+                  <InputField
+                    id='timeStart'
+                    name='timeStart'
+                    type='date'
+                    customClasses='text-sm'
+                    defaultValue={initialFormValues.timeStart}
+                  />
                 </div>
                 <img src={arrowRight} className='w-5 h-5 mt-6' alt='Arrow Right' />
                 <div className='flex flex-col w-full'>
                   <label htmlFor='timeEnd' className='mb-2 text-xs font-medium text-gray-700'>
                     To
                   </label>
-                  <InputField id='timeEnd' name='timeEnd' type='date' customClasses='text-sm' />
+                  <InputField
+                    id='timeEnd'
+                    name='timeEnd'
+                    type='date'
+                    customClasses='text-sm'
+                    defaultValue={initialFormValues.timeEnd}
+                  />
                 </div>
               </div>
             </div>
@@ -144,6 +198,7 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
               placeholder='US$ 00.00'
               customClasses='text-sm'
               min='0'
+              defaultValue={initialFormValues.estimation}
             />
           </div>
           <div className='flex items-center rounded-b-xl bg-white gap-5 py-5 px-4 justify-end border-t border-gray-200'>
@@ -162,7 +217,7 @@ const ProjectModalForm = ({ title, isOpen, onClose }: IProjectModalForm): JSX.El
               size={BUTTON_SIZES.SMALL}
               color={BUTTON_COLORS.PRIMARY}
             >
-              Add project
+              {isEditingProject ? 'Update Project' : 'Add Project'}
             </Button>
           </div>
         </form>
