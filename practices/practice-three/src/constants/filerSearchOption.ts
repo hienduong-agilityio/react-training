@@ -1,1 +1,2 @@
-export const SEARCH_OPTION = ['Project name', 'Project manager', 'Last update', 'Resource', 'Estimation'];
+// TODO: Add more option to search by other criteria
+export const SEARCH_OPTION = ['Project name'];

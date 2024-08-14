@@ -87,7 +87,7 @@ const ProjectItem = ({
         <p>{index}</p>
       </td>
       <td>
-        <p className='text-primary-500 font-semibold hover:underline cursor-pointer'>{projectName}</p>
+        <p className='text-primary-500 font-semibold hover:underline cursor-pointer w-max'>{projectName}</p>
       </td>
       <td className='text-center px-2'>
         <Avatar name={managerName} src={managerImage} />
@@ -96,7 +96,7 @@ const ProjectItem = ({
         <StatusLabel color={color}>{status}</StatusLabel>
       </td>
       <td>
-        <p className='text-gray-600'>{lastUpdate}</p>
+        <p className='text-gray-600 w-max'>{lastUpdate}</p>
       </td>
       <td className='text-center px-2'>
         <ResourceTag resources={resources} />
