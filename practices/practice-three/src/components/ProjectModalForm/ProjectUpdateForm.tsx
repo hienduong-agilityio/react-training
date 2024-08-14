@@ -25,6 +25,10 @@ import { DISPATCH_ACTION } from '@/constants/store';
 
 // Helper
 import { formatDate, formatDateForInput, formatDateTime } from '@/helper/formatDateTime';
+import { validateFormValues } from '@/helper/validationForm';
+
+// Schemas
+import projectSchema from '@/validations/schemas/projectFormSchemas';
 
 interface IProjectModalForm {
   // title: A title for Form modal.
@@ -44,7 +48,7 @@ interface IProjectFormData extends IProjectItemProps {}
  */
 const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalForm): JSX.Element => {
   const { state, dispatch } = useProjectContext();
-  const [formErrorsMessages, setFormErrorsMessages] = useState<string>('');
+  const [formErrorsMessages, setFormErrorsMessages] = useState<Record<string, string>>({});
 
   // Determine the current project item being edited
   const projectItem = state.data.find((project: IProjectItemProps) => project.id === state.selectedProjectId);
@@ -66,7 +70,7 @@ const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalFo
 
   // Handle close action and clear error messages for the modal
   const handleClose = () => {
-    setFormErrorsMessages('');
+    setFormErrorsMessages({});
     onClose();
   };
 
@@ -87,13 +91,22 @@ const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalFo
       lastUpdate: formatDateTime(new Date().toISOString()),
       projectName: formData.get('projectName') as string,
       managerName: formData.get('managerName') as string,
-      resources: formData.get('resources') as string,
+      resources: (formData.get('resources') as string) || '',
       timeline: {
         timeStart: formatDate(formData.get('timeStart') as string),
         timeEnd: formatDate(formData.get('timeEnd') as string)
       },
       estimation: formData.get('estimation') as string
     };
+
+    // Validate form values using the helper function
+    const errorMessages = validateFormValues(projectSchema, formValues);
+
+    if (Object.keys(errorMessages).length > 0) {
+      setFormErrorsMessages(errorMessages);
+
+      return;
+    }
 
     if (isEditingProject) {
       handleEditProject(formValues);
@@ -139,23 +152,30 @@ const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalFo
             <InputField
               id='projectName'
               label='project name *'
-              errorMessage={formErrorsMessages}
+              errorMessage={formErrorsMessages.projectName}
               name='projectName'
               placeholder='Enter project name'
               required
+              pattern='[a-zA-Z0-9 ]*'
               defaultValue={initialFormValues.projectName}
             />
             <InputField
               id='managerName'
               label='project manager (PM)'
+              errorMessage={formErrorsMessages.managerName}
               name='managerName'
               placeholder='Enter project manager'
+              required
+              pattern='[a-zA-Z]*'
+              title='Name should only contain letters and spaces. e.g. Hien Duong'
               defaultValue={initialFormValues.managerName}
             />
             <InputField
               id='resources'
               label='resources'
+              errorMessage={formErrorsMessages.resources}
               name='resources'
+              max={100}
               type='number'
               placeholder='Enter resources'
               defaultValue={initialFormValues.resources}
@@ -189,14 +209,19 @@ const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalFo
                   />
                 </div>
               </div>
+              {formErrorsMessages['timeline.timeEnd'] && (
+                <span className='mt-1 text-sm text-red-600'>{formErrorsMessages['timeline.timeEnd']}</span>
+              )}
             </div>
             <InputField
               id='estimation'
               label='estimation'
               name='estimation'
+              errorMessage={formErrorsMessages.estimation}
               type='number'
               placeholder='US$ 00.00'
               customClasses='text-sm'
+              required
               min='0'
               defaultValue={initialFormValues.estimation}
             />
