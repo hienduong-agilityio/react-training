@@ -44,7 +44,7 @@ const StatusLabel = ({
   onClick = () => {}
 }: IStatusLabelProps): JSX.Element => {
   return (
-    <div className='w-full'>
+    <div className='w-max'>
       <Tag color={color} customClasses={customClasses} onClick={onClick}>
         {showDot && (
           <svg

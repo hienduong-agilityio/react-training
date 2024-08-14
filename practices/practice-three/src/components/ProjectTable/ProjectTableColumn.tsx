@@ -13,7 +13,7 @@ const ProjectTableColumn = (): JSX.Element => {
         <th className={`${commonColClass}`}>Project Name</th>
         <th className={`text-center ${commonColClass}`}>PM</th>
         <th className={`${commonColClass}`}>Status</th>
-        <th className={`w-1/12 ${commonColClass}`}>Last update</th>
+        <th className={`${commonColClass}`}>Last update</th>
         <th className={`text-center ${commonColClass}`}>Resources</th>
         <th className={`${commonColClass}`}>Project timeline</th>
         <th className={`${commonColClass}`}>Estimation</th>

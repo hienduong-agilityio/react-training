@@ -1,6 +1,6 @@
 // Components
 import InputField from '@/components/common/InputField';
-import Dropdown from '@/components/common/Dropdown';
+import ProjectFilterDropdown from '@/components/ProjectFilterDropdown';
 
 // SVG
 import iconSearch from '@public/images/searchIcon.svg';
@@ -44,7 +44,7 @@ const SearchBox = ({ disabled }: ISearchBox): JSX.Element => {
 
   return (
     <div className='flex h-auto'>
-      <Dropdown options={SEARCH_OPTION} onChange={() => {}} />
+      <ProjectFilterDropdown options={SEARCH_OPTION} onChange={() => {}} />
       <div className='relative'>
         <img src={iconSearch} alt='Search' className='pl-4 p-2 absolute' />
         <InputField

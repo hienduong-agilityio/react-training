@@ -1,5 +1,5 @@
 // Libraries
-import { useState, useRef, ReactNode } from 'react';
+import { useState, useRef } from 'react';
 
 // Hooks
 import useClickOutside from '@/hooks/useClickOutside';
@@ -7,7 +7,7 @@ import useClickOutside from '@/hooks/useClickOutside';
 // SVG
 import arrowDown from '@public/images/arrowDownIcon.svg';
 
-export interface IDropdownProps {
+export interface IProjectFilterDropdownProps {
   // options: Array of option strings to display in the dropdown menu.
   options: string[];
 
@@ -16,18 +16,18 @@ export interface IDropdownProps {
 }
 
 /**
- * Dropdown component
+ * ProjectFilterDropdown component
  *
- * @returns {JSX.Element} - Dropdown element
+ * @returns {JSX.Element} - ProjectFilterDropdown element
  */
-const Dropdown = ({ options, onChange }: IDropdownProps): JSX.Element => {
+const ProjectFilterDropdown = ({ options, onChange }: IProjectFilterDropdownProps): JSX.Element => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | ReactNode | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string>('Project name');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(dropdownRef, () => setIsOptionOpen(false));
 
-  const toggleDropdown = () => setIsOptionOpen(!isOptionOpen);
+  const toggleProjectFilterDropdown = () => setIsOptionOpen(!isOptionOpen);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -38,10 +38,10 @@ const Dropdown = ({ options, onChange }: IDropdownProps): JSX.Element => {
   return (
     <div className='relative inline-block text-left' ref={dropdownRef}>
       <button
-        onClick={toggleDropdown}
+        onClick={toggleProjectFilterDropdown}
         className='inline-flex items-center py-0 h-[33px] px-3 text-sm font-medium text-center border-0 rounded-none rounded-s-lg bg-white hover:border-none focus:ring-4 focus:outline-none focus:ring-primary-100 text-gray-700 shadow'
       >
-        {selectedOption || 'Sort By'}
+        {selectedOption}
         <img src={arrowDown} className='w-2 h-2 ms-2.5' alt='arrow down' />
       </button>
 
@@ -58,4 +58,4 @@ const Dropdown = ({ options, onChange }: IDropdownProps): JSX.Element => {
   );
 };
 
-export default Dropdown;
+export default ProjectFilterDropdown;

@@ -166,7 +166,7 @@ const ProjectModalForm = ({ title, isOpen, onClose = () => {} }: IProjectModalFo
               name='managerName'
               placeholder='Enter project manager'
               required
-              pattern='[a-zA-Z]*'
+              pattern='[a-zA-Z ]*'
               title='Name should only contain letters and spaces. e.g. Hien Duong'
               defaultValue={initialFormValues.managerName}
             />
