@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputField Component should accept user input using fireEvent 1`] = `
+<div>
+  <div
+    class="flex flex-col"
+  >
+    <label
+      class="mb-2 capitalize text-lg font-medium text-gray-700"
+      for="username"
+    >
+      Username
+    </label>
+    <input
+      class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow"
+      id="username"
+    />
+  </div>
+</div>
+`;
+
+exports[`InputField Component should apply custom classes to the input field 1`] = `
+<div>
+  <div
+    class="flex flex-col"
+  >
+    <label
+      class="mb-2 capitalize text-lg font-medium text-gray-700"
+      for="username"
+    >
+      Username
+    </label>
+    <input
+      class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow custom-class"
+      id="username"
+    />
+  </div>
+</div>
+`;
+
+exports[`InputField Component should render an error message if errorMessage is provided 1`] = `
+<div>
+  <div
+    class="flex flex-col"
+  >
+    <label
+      class="mb-2 capitalize text-lg font-medium text-gray-700"
+      for="username"
+    >
+      Username
+    </label>
+    <input
+      class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow border-red-600"
+      id="username"
+    />
+    <span
+      class="mt-1 text-sm text-red-600"
+    >
+      This field is required
+    </span>
+  </div>
+</div>
+`;
+
+exports[`InputField Component should render correctly with a label and input 1`] = `
+<div>
+  <div
+    class="flex flex-col"
+  >
+    <label
+      class="mb-2 capitalize text-lg font-medium text-gray-700"
+      for="username"
+    >
+      Username
+    </label>
+    <input
+      class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow"
+      id="username"
+    />
+  </div>
+</div>
+`;
+
+exports[`InputField Component should render without label if no label is provided 1`] = `
+<div>
+  <div
+    class="flex flex-col"
+  >
+    <input
+      class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow"
+      id="username"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectFilterDropdown Component should render with provided props and match snapshot 1`] = `
+<div>
+  <div
+    class="relative inline-block text-left"
+  >
+    <select
+      class="inline-flex items-center py-0 h-[33px] text-sm font-medium text-center border-0 rounded-none rounded-s-lg bg-white hover:border-none focus:ring-4 focus:outline-none focus:ring-primary-100 text-gray-700 shadow"
+      role="combobox"
+    >
+      <option
+        value="projectName"
+      >
+        Project Name
+      </option>
+      <option
+        value="status"
+      >
+        Status
+      </option>
+    </select>
+  </div>
+</div>
+`;

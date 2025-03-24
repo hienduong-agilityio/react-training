@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination Component should match snapshots pagination states: Initial Render (Page 1 of 5) 1`] = `
+<div>
+  <div
+    class="flex justify-between items-center p-4"
+  >
+    <div
+      class="flex items-center space-x-2"
+    >
+      <button
+        class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+        disabled=""
+      >
+        <img
+          alt="Arrow Left"
+          class="w-5 h-5"
+          src=""
+        />
+      </button>
+      <span
+        class="px-3"
+      >
+        1
+         / 
+        5
+      </span>
+      <button
+        class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+      >
+        <img
+          alt="Arrow Right"
+          class="w-5 h-5"
+          src=""
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Pagination Component should use default onPageChange prop without throwing an error: Render with default onPageChange 1`] = `
+<div>
+  <div
+    class="flex justify-between items-center p-4"
+  >
+    <div
+      class="flex items-center space-x-2"
+    >
+      <button
+        class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+        disabled=""
+      >
+        <img
+          alt="Arrow Left"
+          class="w-5 h-5"
+          src=""
+        />
+      </button>
+      <span
+        class="px-3"
+      >
+        1
+         / 
+        5
+      </span>
+      <button
+        class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+      >
+        <img
+          alt="Arrow Right"
+          class="w-5 h-5"
+          src=""
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

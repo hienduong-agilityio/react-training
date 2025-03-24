@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectItem Component should render with provided props and match snapshot 1`] = `
+<div>
+  <tr
+    class="border-b border-gray-200 hover:bg-light group"
+  >
+    <td
+      class="px-3 py-5 font-medium"
+    >
+      <p>
+        456
+      </p>
+    </td>
+    <td>
+      <a
+        class="text-primary-500 font-semibold hover:underline cursor-pointer w-max"
+        href="/projects/123456"
+      >
+        New Project
+      </a>
+    </td>
+    <td
+      class="text-center px-2"
+    >
+      <div
+        class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg w-7 h-7"
+      >
+        <span
+          class="font-bold text-xs text-primary-500"
+        >
+          N/A
+        </span>
+      </div>
+    </td>
+    <td>
+      <div
+        class="w-max"
+      >
+        <span
+          class="text-xs py-[1px] px-2 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          <svg
+            class="inline-flex color-default"
+            fill="none"
+            height="6"
+            role="img"
+            viewBox="0 0 6 6"
+            width="6"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="6"
+              rx="2"
+              width="6"
+            />
+          </svg>
+          On hold
+        </span>
+      </div>
+    </td>
+    <td>
+      <p
+        class="text-gray-600 w-max"
+      >
+        2024-10-10
+      </p>
+    </td>
+    <td
+      class="text-center px-2"
+    >
+      <div>
+        <span
+          class="py-[3px] px-2 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          5
+        </span>
+      </div>
+    </td>
+    <td>
+      <div
+        class="flex gap-1 items-center"
+      >
+        <span
+          class="w-[98px] h-5 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          -
+        </span>
+        <svg
+          aria-label="Next"
+          fill="none"
+          height="16"
+          role="img"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6.5 11L9.5 8L6.5 5"
+            stroke="#868FA0"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </svg>
+        <span
+          class="w-[98px] h-5 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          -
+        </span>
+      </div>
+    </td>
+    <td>
+      <div
+        class="flex items-center w-44 justify-between"
+      >
+        <p
+          class="text-primary-400 font-bold"
+        >
+          US$ 10000k
+        </p>
+        <div
+          class="group-hover:block hidden"
+        >
+          <div
+            class="relative inline-block text-left group"
+          >
+            <button
+              class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black hover:border-none hover:bg-gray-100"
+            >
+              <img
+                alt="Menu"
+                src=""
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</div>
+`;

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component applies correct color classes 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 focus:bg-primary-500"
+  >
+    Primary Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component applies correct size classes 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-6 py-3 text-lg text-black"
+  >
+    Large Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component applies correct variant classes 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-0 text-white px-4 py-2 text-base text-black"
+  >
+    Contained
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component applies custom classes 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black custom-class"
+  >
+    Custom Class Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component calls onClick when clicked 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+  >
+    Clickable Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component disables the button when disabled is passed 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+    disabled=""
+  >
+    Disabled Button
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component renders the Button with default props 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+  >
+    Click me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button component renders with correct text 1`] = `
+<DocumentFragment>
+  <button
+    class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+  >
+    Submit
+  </button>
+</DocumentFragment>
+`;

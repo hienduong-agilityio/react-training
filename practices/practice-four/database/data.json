@@ -1,0 +1,232 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "projectName": "Machine Learning",
+      "status": "On hold",
+      "managerId": "1",
+      "lastUpdate": "12 May 2002, 10:30 AM",
+      "resources": 3,
+      "timeline": { "timeStart": "12 May 2022", "timeEnd": "14 May 2022" },
+      "budget": 10
+    },
+    {
+      "id": "2",
+      "projectName": "Ecommerce Platform",
+      "status": "At risk",
+      "managerId": "6",
+      "lastUpdate": "18 Mar 2023, 02:15 PM",
+      "resources": 5,
+      "timeline": { "timeStart": "15 Mar 2023", "timeEnd": "30 Mar 2023" }
+    },
+    {
+      "id": "3",
+      "projectName": "Mobile App",
+      "status": "Potential risk",
+      "managerId": "3",
+      "lastUpdate": "05 Jun 2023, 09:45 AM",
+      "budget": 15
+    },
+    {
+      "id": "4",
+      "projectName": "CRM System",
+      "status": "On track",
+      "managerId": "4",
+      "lastUpdate": "20 Feb 2023, 11:00 AM",
+      "resources": 6,
+      "budget": 18
+    },
+    {
+      "id": "5",
+      "projectName": "Social Media App",
+      "status": "On hold",
+      "managerId": "5",
+      "lastUpdate": "10 Jan 2023, 03:20 PM",
+      "resources": 2,
+      "timeline": { "timeStart": "05 Jan 2023", "timeEnd": "20 Jan 2023" }
+    },
+    {
+      "id": "6",
+      "projectName": "Inventory Management",
+      "status": "On track",
+      "managerId": "6",
+      "lastUpdate": "30 Apr 2023, 10:50 AM",
+      "resources": 4,
+      "timeline": { "timeStart": "25 Apr 2023", "timeEnd": "10 May 2023" },
+      "budget": 15
+    },
+    {
+      "id": "7",
+      "projectName": "Website Redesign",
+      "status": "Potential risk",
+      "managerId": "7",
+      "lastUpdate": "12 Mar 2023, 01:30 PM",
+      "resources": 3,
+      "budget": 10
+    },
+    {
+      "id": "8",
+      "projectName": "Data Analytics Tool",
+      "status": "On track",
+      "managerId": "8",
+      "lastUpdate": "02 Jul 2023, 08:40 AM",
+      "resources": 7,
+      "timeline": { "timeStart": "28 Jun 2023", "timeEnd": "15 Jul 2023" }
+    },
+    {
+      "id": "9",
+      "projectName": "Chatbot Development",
+      "status": "At risk",
+      "managerId": "9",
+      "lastUpdate": "15 Aug 2023, 05:15 PM",
+      "resources": 2,
+      "budget": 8
+    },
+    {
+      "id": "10",
+      "projectName": "SEO Optimization",
+      "status": "Potential risk",
+      "managerId": "4",
+      "lastUpdate": "22 Sep 2023, 10:05 AM",
+      "timeline": { "timeStart": "20 Sep 2023", "timeEnd": "30 Sep 2023" },
+      "budget": 12
+    },
+    {
+      "id": "11",
+      "projectName": "Payment Gateway Integration",
+      "status": "On track",
+      "managerId": "2",
+      "lastUpdate": "18 Oct 2023, 12:30 PM",
+      "resources": 4
+    },
+    {
+      "id": "12",
+      "projectName": "Cloud Migration",
+      "status": "At risk",
+      "managerId": "1",
+      "lastUpdate": "12 Nov 2023, 03:50 PM",
+      "timeline": { "timeStart": "10 Nov 2023", "timeEnd": "20 Nov 2023" },
+      "budget": 22
+    },
+    {
+      "id": "13",
+      "projectName": "AI Model Training",
+      "status": "On track",
+      "managerId": "10",
+      "lastUpdate": "05 Dec 2023, 09:10 AM",
+      "resources": 8
+    },
+    {
+      "id": "14",
+      "projectName": "Blockchain Platform",
+      "status": "Potential risk",
+      "managerId": "7",
+      "lastUpdate": "20 Jan 2024, 04:20 PM",
+      "timeline": { "timeStart": "15 Jan 2024", "timeEnd": "30 Jan 2024" }
+    },
+    {
+      "id": "15",
+      "projectName": "Machine Learning API",
+      "status": "On track",
+      "managerId": "8",
+      "lastUpdate": "12 Feb 2024, 10:40 AM",
+      "resources": 7,
+      "timeline": { "timeStart": "10 Feb 2024", "timeEnd": "25 Feb 2024" },
+      "budget": 28
+    },
+    {
+      "id": "16",
+      "projectName": "Video Streaming Service",
+      "status": "On hold",
+      "managerId": "10",
+      "lastUpdate": "15 Mar 2024, 02:10 PM",
+      "timeline": { "timeStart": "12 Mar 2024", "timeEnd": "22 Mar 2024" }
+    },
+    {
+      "id": "17",
+      "projectName": "Voice Recognition System",
+      "status": "On track",
+      "managerId": "4",
+      "lastUpdate": "05 Apr 2024, 08:30 AM",
+      "resources": 6,
+      "timeline": { "timeStart": "01 Apr 2024", "timeEnd": "15 Apr 2024" }
+    },
+    {
+      "id": "18",
+      "projectName": "AR Shopping Experience",
+      "status": "Potential risk",
+      "managerId": "3",
+      "lastUpdate": "25 May 2024, 01:20 PM",
+      "budget": 16
+    },
+    {
+      "id": "19",
+      "projectName": "Cybersecurity Audit",
+      "status": "On track",
+      "managerId": "2",
+      "lastUpdate": "10 Jun 2024, 03:40 PM",
+      "timeline": { "timeStart": "05 Jun 2024", "timeEnd": "20 Jun 2024" }
+    },
+    {
+      "id": "20",
+      "projectName": "IoT Device Integration",
+      "status": "At risk",
+      "managerId": "9",
+      "lastUpdate": "15 Jul 2024, 11:25 AM",
+      "resources": 3,
+      "timeline": { "timeStart": "10 Jul 2024", "timeEnd": "20 Jul 2024" }
+    }
+  ],
+  "managers": [
+    {
+      "id": "1",
+      "managerName": "HienDuong",
+      "managerImage": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": "2",
+      "managerName": "John Smith",
+      "managerImage": ""
+    },
+    {
+      "id": "3",
+      "managerName": "Emily Davis",
+      "managerImage": "https://randomuser.me/api/portraits/women/3.jpg"
+    },
+    {
+      "id": "4",
+      "managerName": "Michael Johnson",
+      "managerImage": "https://randomuser.me/api/portraits/men/4.jpg"
+    },
+    {
+      "id": "5",
+      "managerName": "Sarah Lee",
+      "managerImage": "https://randomuser.me/api/portraits/women/5.jpg"
+    },
+    {
+      "id": "6",
+      "managerName": "David Wilson",
+      "managerImage": ""
+    },
+    {
+      "id": "7",
+      "managerName": "Anna Brown",
+      "managerImage": "https://randomuser.me/api/portraits/women/7.jpg"
+    },
+    {
+      "id": "8",
+      "managerName": "James Garcia",
+      "managerImage": ""
+    },
+    {
+      "id": "9",
+      "managerName": "Laura Martinez",
+      "managerImage": ""
+    },
+    {
+      "id": "10",
+      "managerName": "Mark Thompson",
+      "managerImage": "https://randomuser.me/api/portraits/men/10.jpg"
+    }
+  ]
+}

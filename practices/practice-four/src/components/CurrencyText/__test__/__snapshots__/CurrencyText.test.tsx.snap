@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyText Component should ender with provided currency value and apply custom className 1`] = `
+<div>
+  <p
+    class="custom-class"
+  >
+    US$ 1000k
+  </p>
+</div>
+`;
+
+exports[`CurrencyText Component should render with default props and make snapshot 1`] = `
+<div>
+  <p
+    class=""
+  >
+    -
+  </p>
+</div>
+`;
