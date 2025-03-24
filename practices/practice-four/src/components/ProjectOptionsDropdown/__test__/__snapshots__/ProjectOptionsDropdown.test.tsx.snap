@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectOptionsDropdown Component should match snapshot 1`] = `
+<div>
+  <div
+    class="relative inline-block text-left group"
+  >
+    <button
+      class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black hover:border-none hover:bg-gray-100"
+    >
+      <img
+        alt="Menu"
+        src=""
+      />
+    </button>
+  </div>
+</div>
+`;

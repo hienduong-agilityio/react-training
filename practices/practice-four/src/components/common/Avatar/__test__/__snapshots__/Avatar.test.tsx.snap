@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar Component should apply default and custom class names 1`] = `
+<div>
+  <div
+    class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg custom-class"
+  >
+    <span
+      class="font-bold text-xs text-primary-500"
+    >
+      JD
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar Component should handle an empty name prop and render N/A as the placeholder 1`] = `
+<div>
+  <div
+    class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg"
+  >
+    <span
+      class="font-bold text-xs text-primary-500"
+    >
+      N/A
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar Component should render a placeholder text when no src is provided 1`] = `
+<div>
+  <div
+    class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg"
+  >
+    <span
+      class="font-bold text-xs text-primary-500"
+    >
+      JD
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar Component should render correctly with a name and without an image 1`] = `
+<div>
+  <div
+    class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg"
+  >
+    <span
+      class="font-bold text-xs text-primary-500"
+    >
+      JS
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Avatar Component should render with an image if src is provided 1`] = `
+<div>
+  <div
+    class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg"
+  >
+    <img
+      alt="John Doe avatar"
+      class="h-full w-full object-cover"
+      src="https://example.com/avatar.jpg"
+    />
+  </div>
+</div>
+`;

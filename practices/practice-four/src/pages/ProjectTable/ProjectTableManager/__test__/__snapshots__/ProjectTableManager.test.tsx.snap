@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectTableManager renders the component and matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="flex justify-between pt-5 pb-7 px-3"
+    >
+      <div
+        class="flex h-auto"
+      >
+        <div
+          class="relative inline-block text-left"
+        >
+          <select
+            class="inline-flex items-center py-0 h-[33px] text-sm font-medium text-center border-0 rounded-none rounded-s-lg bg-white hover:border-none focus:ring-4 focus:outline-none focus:ring-primary-100 text-gray-700 shadow"
+            role="combobox"
+          >
+            <option
+              value="projectName"
+            >
+              Project name
+            </option>
+            <option
+              value="status"
+            >
+              Project status
+            </option>
+          </select>
+        </div>
+        <div
+          class="flex gap-2"
+        >
+          <div
+            class="relative"
+          >
+            <img
+              alt="Search"
+              class="pl-4 p-2 absolute"
+              src=""
+            />
+            <div
+              class="flex flex-col"
+            >
+              <input
+                class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow h-full w-full pl-9 rounded-none rounded-e-lg"
+                id="searchInput"
+                placeholder="Search"
+                value=""
+              />
+            </div>
+          </div>
+          <button
+            class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 bg-white border-2 text-black px-3 py-1 text-sm text-black"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+      <button
+        class="border-0 px-3 py-1 text-sm bg-primary-500 hover:bg-primary-600 focus:bg-primary-500 text-white flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer"
+      >
+        New Project
+      </button>
+    </div>
+    <div>
+      <div
+        class="w-full shadow-md sm:rounded-lg"
+      >
+        <div
+          class="overflow-y-auto h-[900px]"
+        >
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="bg-gray-50"
+            >
+              <tr
+                class="h-9 uppercase"
+              >
+                <th
+                  class="pl-3 font-medium text-gray-500"
+                >
+                  Id
+                </th>
+                <th
+                  class="font-medium text-gray-500"
+                >
+                  Project Name
+                </th>
+                <th
+                  class="text-center font-medium text-gray-500"
+                >
+                  PM
+                </th>
+                <th
+                  class="font-medium text-gray-500"
+                >
+                  Status
+                </th>
+                <th
+                  class="font-medium text-gray-500"
+                >
+                  Last update
+                </th>
+                <th
+                  class="text-center font-medium text-gray-500"
+                >
+                  Resources
+                </th>
+                <th
+                  class="font-medium text-gray-500"
+                >
+                  Project timeline
+                </th>
+                <th
+                  class="font-medium text-gray-500"
+                >
+                  Estimation
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  class="text-center py-4"
+                  colspan="8"
+                >
+                  No results found
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="mt-4 flex items-center justify-between px-5"
+      >
+        <span
+          class="text-sm text-gray-600"
+        >
+          <strong>
+            0 - 0
+          </strong>
+           of
+          <strong>
+             0
+          </strong>
+        </span>
+        <div
+          class="flex items-center justify-end"
+        >
+          <label
+            class="mr-2"
+            for="rowsPerPageSelect"
+          >
+            Rows per page:
+          </label>
+          <div
+            class="flex flex-col"
+          >
+            <select
+              class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow rounded-md"
+              id="row-per-page-selection"
+              name="rowsPerPageSelect"
+            >
+              <option
+                value="10"
+              >
+                10
+              </option>
+              <option
+                value="20"
+              >
+                20
+              </option>
+            </select>
+          </div>
+          <div
+            class="flex justify-between items-center p-4"
+          >
+            <div
+              class="flex items-center space-x-2"
+            >
+              <button
+                class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+                disabled=""
+              >
+                <img
+                  alt="Arrow Left"
+                  class="w-5 h-5"
+                  src=""
+                />
+              </button>
+              <span
+                class="px-3"
+              >
+                1 / 1
+              </span>
+              <button
+                class="px-2 py-2 rounded-xl bg-gray-200 disabled:opacity-50"
+                disabled=""
+              >
+                <img
+                  alt="Arrow Right"
+                  class="w-5 h-5"
+                  src=""
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusLabel Component should match snapshot 1`] = `
+<div>
+  <div
+    class="w-max"
+  >
+    <span
+      class="inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-success"
+    >
+      <svg
+        class="inline-flex color-success"
+        fill="none"
+        height="6"
+        role="img"
+        viewBox="0 0 6 6"
+        width="6"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          height="6"
+          rx="2"
+          width="6"
+        />
+      </svg>
+      Status label
+    </span>
+  </div>
+</div>
+`;

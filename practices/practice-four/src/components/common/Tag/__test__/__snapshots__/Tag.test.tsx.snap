@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag Component should match the snapshot 1`] = `
+<div>
+  <span
+    class="inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-success"
+  >
+    Tag Content
+  </span>
+</div>
+`;

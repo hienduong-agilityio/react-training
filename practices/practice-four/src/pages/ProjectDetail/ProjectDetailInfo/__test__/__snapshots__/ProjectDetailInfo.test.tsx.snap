@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectDetailInfo matches the snapshot for ProjectDetailInfo 1`] = `
+<DocumentFragment>
+  <div
+    class="flex items-center p-8 h-full gap-36 space-y-6 flex-row"
+  >
+    <div
+      class="flex-shrink-0 w-5/12 h-full flex flex-col items-center"
+    >
+      <div
+        class="inline-flex border-2 border-gray-100 items-center justify-center overflow-hidden bg-primary-0 rounded-lg w-3/4 h-full"
+      >
+        <span
+          class="font-bold text-xs text-primary-500"
+        >
+          JD
+        </span>
+      </div>
+      <p
+        class="text-primary-400 text-lg mt-4 text-center"
+      >
+        John Doe
+      </p>
+    </div>
+    <div
+      class="flex-grow lg:w-7/12 h-full space-y-6"
+    >
+      <h2
+        class="text-4xl font-bold text-primary-600"
+      >
+        Project Alpha
+      </h2>
+      <div
+        class="flex items-center space-x-3 mb-4"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Status: 
+        </span>
+        <div
+          class="w-max"
+        >
+          <span
+            class="text-lg py-[2px] px-3 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+          >
+            <svg
+              class="inline-flex color-default"
+              fill="none"
+              height="6"
+              role="img"
+              viewBox="0 0 6 6"
+              width="6"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="6"
+                rx="2"
+                width="6"
+              />
+            </svg>
+            In Progress
+          </span>
+        </div>
+      </div>
+      <div
+        class="flex-col"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Project Manager
+        </span>
+        <p
+          class="text-lg mt-2 text-primary-400"
+        >
+          John Doe
+        </p>
+      </div>
+      <div
+        class="flex flex-col gap-2"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Last Update
+        </span>
+        <p
+          class="text-lg text-primary-400"
+        >
+          2024-10-10
+        </p>
+      </div>
+      <div
+        class="flex flex-col gap-2"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Resources
+        </span>
+        <div>
+          <span
+            class="py-[3px] px-2 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+          >
+            5
+          </span>
+        </div>
+      </div>
+      <div
+        class="flex flex-col gap-2"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Time Start
+        </span>
+        <span
+          class="w-32 p-2 h-6 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          2024-01-01
+        </span>
+      </div>
+      <div
+        class="flex flex-col gap-2"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Time End
+        </span>
+        <span
+          class="w-32 p-2 h-6 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+        >
+          2024-12-31
+        </span>
+      </div>
+      <div
+        class="flex flex-col gap-2"
+      >
+        <span
+          class="text-2xl font-medium"
+        >
+          Estimated Cost
+        </span>
+        <p
+          class="text-lg text-primary-400 font-bold"
+        >
+          US$ 100000k
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

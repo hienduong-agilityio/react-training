@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar should match the snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="bg-light w-full border"
+  >
+    <div
+      class="flex flex-wrap items-center justify-between p-4"
+    >
+      <a
+        class="text-2xl font-semibold text-gray-900"
+        href="/projects"
+      >
+        Projects
+      </a>
+      <div
+        class="flex items-center gap-6"
+      >
+        <img
+          alt="Notification"
+          class="cursor-not-allowed"
+          src="mock-notify-icon"
+        />
+        <img
+          alt="Help"
+          class="cursor-not-allowed"
+          src="mock-help-icon"
+        />
+        <div
+          class="rounded-full cursor-not-allowed"
+        >
+          Mocked Avatar - HienDuong
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

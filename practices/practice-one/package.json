@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --fix src --ext ts,tsx",
     "preview": "vite preview",
-    "prepare": "cd .. && husky install",
+    "prepare": "cd ../.. && husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -56,16 +56,5 @@
     "storybook": "7.6.7",
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,json}": [
-      "eslint . --fix",
-      "prettier --write ."
-    ]
   }
 }

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectTableColumn Component should render and match snapshot 1`] = `
+<div>
+  <thead
+    class="bg-gray-50"
+  >
+    <tr
+      class="h-9 uppercase"
+    >
+      <th
+        class="pl-3 font-medium text-gray-500"
+      >
+        Id
+      </th>
+      <th
+        class="font-medium text-gray-500"
+      >
+        Project Name
+      </th>
+      <th
+        class="text-center font-medium text-gray-500"
+      >
+        PM
+      </th>
+      <th
+        class="font-medium text-gray-500"
+      >
+        Status
+      </th>
+      <th
+        class="font-medium text-gray-500"
+      >
+        Last update
+      </th>
+      <th
+        class="text-center font-medium text-gray-500"
+      >
+        Resources
+      </th>
+      <th
+        class="font-medium text-gray-500"
+      >
+        Project timeline
+      </th>
+      <th
+        class="font-medium text-gray-500"
+      >
+        Estimation
+      </th>
+    </tr>
+  </thead>
+</div>
+`;

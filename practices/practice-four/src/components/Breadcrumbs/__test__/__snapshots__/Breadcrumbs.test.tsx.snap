@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Component matches snapshot for breadcrumbs 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="breadcrumb"
+  >
+    <ul
+      class="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
+    >
+      <li
+        class="inline-flex items-center"
+      >
+        <a
+          class="flex items-center text-sm font-medium text-gray-400 hover:text-primary-500"
+          href="/"
+        >
+          <img
+            alt="home"
+            class="w-4 h-4 me-2.5 p-0"
+            src="homeIcon.svg"
+          />
+        </a>
+      </li>
+      <li
+        class="inline-flex items-center"
+      >
+        <img
+          alt="Arrow Right"
+          class="rtl:rotate-180 w-6 h-6 text-gray-400 mx-1"
+          src="arrowRightIcon.svg"
+        />
+        <a
+          class="ms-1 text-sm font-medium text-gray-400 hover:text-primary-500 md:ms-2"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        class="inline-flex items-center"
+      >
+        <img
+          alt="Arrow Right"
+          class="rtl:rotate-180 w-6 h-6 text-gray-400 mx-1"
+          src="arrowRightIcon.svg"
+        />
+        <a
+          class="ms-1 text-sm font-medium text-gray-400 hover:text-primary-500 md:ms-2"
+          href="/projects"
+        >
+          Projects
+        </a>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;

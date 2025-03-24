@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex bg-primary-700"
+  >
+    <div
+      class="w-[74px] bg-primary-700 h-screen p-4 relative duration-300"
+    >
+      <div
+        class="flex items-center"
+      >
+        <a
+          href="/projects"
+        >
+          <img
+            alt="Logo"
+            class="cursor-pointer duration-500"
+            src="mock-logo"
+          />
+        </a>
+      </div>
+      <ul
+        class="pt-10 flex flex-col items-center justify-center gap-5"
+      >
+        <li
+          class="rounded-md items-center mt-2 focus:bg-primary-900 cursor-pointer hover:border-primary-100 hover:bg-primary-600"
+        >
+          <a
+            href="/projects"
+          >
+            <img
+              alt="Projects"
+              class="p-2"
+              src="mock-projects-icon"
+            />
+          </a>
+        </li>
+        <li
+          class="rounded-md items-center mt-2 focus:bg-primary-900 cursor-pointer hover:border-primary-100 hover:bg-primary-600"
+        >
+          <a
+            href="/settings"
+          >
+            <img
+              alt="Setting"
+              class="p-2"
+              src="mock-setting-icon"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;
