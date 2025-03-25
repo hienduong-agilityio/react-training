@@ -1,28 +1,63 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+import reactPlugin from 'eslint-plugin-react';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import prettierPlugin from 'eslint-plugin-prettier';
 
-export default tseslint.config(
-  { ignores: ['dist'] },
+/** @type {import("eslint").FlatConfig[]} */
+export default [
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      parser: typescriptParser,
+      parserOptions: {
+        project: './tsconfig.eslint.json',
+        tsconfigRootDir: process.cwd(),
+        ecmaFeatures: {
+          jsx: true
+        }
+      }
     },
     plugins: {
-      'react-hooks': reactHooks,
+      '@typescript-eslint': typescriptEslint,
+      react: reactPlugin,
       'react-refresh': reactRefresh,
+      prettier: prettierPlugin
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
+      // TypeScript Rules
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/default-param-last': 'warn',
+
+      // React Rules
+      'react/prop-types': 'off',
+
+      // React Refresh (Vite HMR Support)
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
+      // Prettier Rules
+      'prettier/prettier': [
         'warn',
-        { allowConstantExport: true },
+        {
+          arrowParens: 'always',
+          semi: true,
+          trailingComma: 'none',
+          tabWidth: 2,
+          endOfLine: 'auto',
+          useTabs: false,
+          singleQuote: true,
+          printWidth: 120,
+          jsxSingleQuote: true
+        }
       ],
-    },
-  },
-)
+
+      // Console Rules (allow `console.warn` & `console.error`)
+      'no-console': ['warn', { allow: ['warn', 'error'] }]
+    }
+  }
+];
