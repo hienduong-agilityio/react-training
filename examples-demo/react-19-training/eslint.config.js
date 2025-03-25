@@ -18,6 +18,7 @@ export default [
         }
       }
     },
+    node: true,
     plugins: {
       '@typescript-eslint': typescriptEslint,
       react: reactPlugin,
