@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .color-default {
+    @apply bg-gray-50 text-gray-700 fill-default;
+  }
+
+  .color-primary {
+    @apply bg-primary-100 text-primary-500 fill-primary;
+  }
+
+  .color-success {
+    @apply bg-success-100 text-success-500 fill-success;
+  }
+
+  .color-warning {
+    @apply bg-warning-0 text-warning-500 fill-warning;
+  }
+
+  .color-danger {
+    @apply bg-danger-0 text-danger-500 fill-danger;
+  }
+}

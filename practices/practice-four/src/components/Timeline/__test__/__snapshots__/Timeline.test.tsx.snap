@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline Component matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex gap-1 items-center"
+  >
+    <span
+      class="w-[98px] h-5 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+    >
+      10:00 AM
+    </span>
+    <svg
+      aria-label="Next"
+      fill="none"
+      height="16"
+      role="img"
+      viewBox="0 0 16 16"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.5 11L9.5 8L6.5 5"
+        stroke="#868FA0"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.5"
+      />
+    </svg>
+    <span
+      class="w-[98px] h-5 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+    >
+      12:00 PM
+    </span>
+  </div>
+</DocumentFragment>
+`;

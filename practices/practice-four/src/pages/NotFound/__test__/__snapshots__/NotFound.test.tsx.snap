@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col h-screen justify-center items-center bg-gray-300"
+  >
+    <p
+      class="text-[120px] font-extrabold text-gray-700"
+    >
+      404
+    </p>
+    <p
+      class="text-2xl font-medium text-gray-600 mb-6"
+    >
+      Not Found
+    </p>
+    <a
+      class="px-4 py-2 font-medium text-white bg-primary-500 rounded-md hover:bg-primary-600 transition-all duration-200 ease-in-out"
+      href="/"
+    >
+      Go Home
+    </a>
+  </div>
+</DocumentFragment>
+`;

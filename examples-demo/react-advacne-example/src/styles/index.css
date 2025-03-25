@@ -1,0 +1,4 @@
+@import "./abstracts/variable.css";
+
+@import "./bases/reset.css";
+@import "./bases/typography.css";

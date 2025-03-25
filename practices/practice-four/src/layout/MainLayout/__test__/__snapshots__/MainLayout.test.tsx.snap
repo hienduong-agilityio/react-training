@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainLayout should render the sidebar, navbar and tabLayout 1`] = `
+<DocumentFragment>
+  <main
+    class="flex"
+  >
+    <div>
+      Mock Sidebar
+    </div>
+    <div
+      class="flex flex-col w-full"
+    >
+      <div>
+        Mock Navbar
+      </div>
+      <div>
+        Mock TabLayout
+      </div>
+    </div>
+  </main>
+</DocumentFragment>
+`;

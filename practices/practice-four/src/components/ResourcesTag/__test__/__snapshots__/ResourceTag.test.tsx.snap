@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourceTag Component should match snapshot with resources 1`] = `
+<div>
+  <div>
+    <span
+      class="py-[3px] px-2 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+    >
+      5
+    </span>
+  </div>
+</div>
+`;
+
+exports[`ResourceTag Component should match snapshot without resources 1`] = `
+<div>
+  <div>
+    <span
+      class="cursor-pointer border-dashed border-2 border-primary-400 rounded-md py-[3px] px-[4px] hover:bg-gray-200 inline-flex gap-[6px] rounded font-medium leading-[18px] tracking-[0.36px] flex items-center justify-center color-default"
+    >
+      <svg
+        class="w-4 h-4 fill-current text-gray-500"
+        role="img"
+        viewBox="0 0 22 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 5v5H5v2h5v5h2v-5h5v-2h-5V5h-2z"
+        />
+      </svg>
+    </span>
+  </div>
+</div>
+`;

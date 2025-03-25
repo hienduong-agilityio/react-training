@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectFormFields matches the snapshot for ProjectFormFields 1`] = `
+<DocumentFragment>
+  <form
+    class="relative space-y-4"
+  >
+    <div
+      class="flex rounded-t-xl items-center bg-white justify-between p-4"
+    >
+      <p
+        class="text-xl font-semibold text-gray-900"
+      >
+        Add Project
+      </p>
+    </div>
+    <div
+      class="flex flex-col gap-7 px-4"
+    >
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="projectName"
+        >
+          Project Name *
+        </label>
+        <input
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow h-12"
+          id="projectName"
+          name="projectName"
+          pattern="[a-zA-Z0-9 ]*"
+          placeholder="Enter project name"
+          required=""
+          value="Project A"
+        />
+      </div>
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="managerName"
+        >
+          Project Manager (PM)
+        </label>
+        <input
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow h-12"
+          id="managerName"
+          name="managerName"
+          pattern="[a-zA-Z ]*"
+          placeholder="Enter project manager"
+          required=""
+          value="John Doe"
+        />
+      </div>
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="managerImage"
+        >
+          Manager Image URL
+        </label>
+        <input
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow text-sm h-12"
+          id="managerImage"
+          name="managerImage"
+          pattern="^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+          placeholder="Enter image URL"
+          type="url"
+          value="https://example.jpg"
+        />
+      </div>
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="status"
+        >
+          Status
+        </label>
+        <select
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow text-sm h-12"
+          id="status"
+          name="status"
+        >
+          <option
+            value="On track"
+          >
+            On track
+          </option>
+          <option
+            value="Potential risk"
+          >
+            Potential risk
+          </option>
+          <option
+            value="At risk"
+          >
+            At risk
+          </option>
+          <option
+            value="On hold"
+          >
+            On hold
+          </option>
+        </select>
+      </div>
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="resources"
+        >
+          Resources
+        </label>
+        <input
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow h-12"
+          id="resources"
+          name="resources"
+          placeholder="Enter resources"
+          type="number"
+          value="10"
+        />
+      </div>
+      <div
+        class="flex flex-col gap-4 w-1/2"
+      >
+        <h4
+          class="text-lg font-medium text-gray-700"
+        >
+          Project Timeline
+        </h4>
+        <div
+          class="flex justify-between items-center gap-4"
+        >
+          <div
+            class="flex flex-col w-full"
+          >
+            <label
+              class="mb-2 text-font-medium text-gray-700"
+              for="timeStart"
+            >
+              From
+            </label>
+            <div
+              class="flex flex-col"
+            >
+              <input
+                class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow text-sm h-12"
+                id="timeStart"
+                name="timeStart"
+                type="date"
+                value="2024-01-01"
+              />
+            </div>
+          </div>
+          <img
+            alt="Arrow Right"
+            class="w-5 h-5 mt-6"
+            src=""
+          />
+          <div
+            class="flex flex-col w-full"
+          >
+            <label
+              class="mb-2 text-font-medium text-gray-700"
+              for="timeEnd"
+            >
+              To
+            </label>
+            <div
+              class="flex flex-col"
+            >
+              <input
+                class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow text-sm h-12"
+                id="timeEnd"
+                name="timeEnd"
+                type="date"
+                value="2024-12-31"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-col"
+      >
+        <label
+          class="mb-2 capitalize text-lg font-medium text-gray-700"
+          for="budget"
+        >
+          Budget
+        </label>
+        <input
+          class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow text-sm h-12"
+          id="budget"
+          max="1000000"
+          min="0"
+          name="budget"
+          placeholder="US$ 00.00"
+          required=""
+          type="number"
+          value="100000"
+        />
+      </div>
+    </div>
+    <div
+      class="flex items-center rounded-b-xl bg-white gap-5 py-5 px-4 justify-end border-gray-200"
+    >
+      <button
+        class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 bg-white border-2 text-black px-6 py-3 text-lg bg-danger-400 border hover:bg-danger-500 focus:bg-danger-400 hover:text-light focus:text-light"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-0 text-white px-6 py-3 text-lg bg-primary-500 hover:bg-primary-600 focus:bg-primary-500"
+        type="submit"
+      >
+        Add Project
+      </button>
+    </div>
+  </form>
+</DocumentFragment>
+`;
