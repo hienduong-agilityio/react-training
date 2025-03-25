@@ -45,7 +45,7 @@ export const schema = {
 import { IFormState } from '../interfaces';
 
 import { ZodSchema } from 'zod';
-import { ROUTE, STATUS_TYPES, TOAST_MESSAGES } from '../constants';
+import { STATUS_TYPES, TOAST_MESSAGES } from '../constants';
 import { ToastStore } from '../stores';
 
 const validateFormValues = <T, Y>(schema: ZodSchema<T>, formValues: Y) => {
@@ -65,7 +65,6 @@ const validateFormValues = <T, Y>(schema: ZodSchema<T>, formValues: Y) => {
 };
 
 export { validateFormValues };
-import { useRoutes } from 'react-router-dom';
 
 export const initialState: IFormState = {
   errors: {}

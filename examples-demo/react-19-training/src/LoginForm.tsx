@@ -9,7 +9,7 @@ import { Button, CommonFormField, SubmitButton } from './components';
 // UI
 
 // Constants
-import { AUTH_PROVIDERS, LOGIN_FIELDS, ROUTE } from './constants';
+import { AUTH_PROVIDERS, LOGIN_FIELDS } from './constants';
 import { handleFormSubmit, initialState } from './helpers';
 import { IFormState } from './interfaces';
 import FormLayout from './components/FormLayout';
