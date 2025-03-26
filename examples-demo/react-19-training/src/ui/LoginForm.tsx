@@ -1,19 +1,20 @@
 'use client';
 
 // Hooks
-import { useInputStatus } from './hooks';
+import { useInputStatus } from '../hooks';
 
 // Components
-import { Button, CommonFormField, SubmitButton } from './components';
+import { Button, CommonFormField, SubmitButton } from '../components';
 
 // UI
 
 // Constants
-import { AUTH_PROVIDERS, LOGIN_FIELDS } from './constants';
-import { handleFormSubmit, initialState } from './helpers';
-import { IFormState } from './interfaces';
-import FormLayout from './components/FormLayout';
+import { AUTH_PROVIDERS, LOGIN_FIELDS, ROUTE } from '../constants';
+import { handleFormSubmit, initialState } from '../helpers';
+import { IFormState } from '../interfaces';
+import FormLayout from '../components/FormLayout';
 import { useActionState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Helpers
 
@@ -76,9 +77,9 @@ const LoginForm = () => {
         </a>
         <p>
           Don’t have an account?
-          <a href='#' className='text-primary-200 ml-1 font-bold no-underline'>
+          <Link to={ROUTE.REGISTER} className='text-primary-200 ml-1 font-bold no-underline'>
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </FormLayout>

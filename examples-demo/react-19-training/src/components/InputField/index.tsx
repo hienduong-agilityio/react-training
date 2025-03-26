@@ -1,9 +1,15 @@
 // Libraries
-import { JSX, memo } from 'react';
+import { JSX, memo, ReactNode, RefObject } from 'react';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { IInputProps } from '../../interfaces';
+import { IBaseComponentProps } from '../../interfaces';
 
+export interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement>, IBaseComponentProps {
+  errorMessage?: string;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  inputRef?: RefObject<HTMLInputElement>;
+}
 const baseInputClass: string =
   'flex-1 outline-none px-3 py-2 bg-transparent disabled:cursor-not-allowed [&::-webkit-search-cancel-button]:cursor-pointer';
 const baseContainerClass: string = 'flex items-center gap-1 px-3 border rounded-md focus-within:ring-2';
@@ -23,6 +29,7 @@ const InputField = ({
   endIcon = null,
   type = 'search',
   value,
+  inputRef,
   onChange,
   ...restProps
 }: IInputProps): JSX.Element => {

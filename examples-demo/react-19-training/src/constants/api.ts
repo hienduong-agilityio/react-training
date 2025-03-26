@@ -8,6 +8,7 @@ export const HTTP_METHODS = {
 export const ROOT_API = process.env.NEXT_PUBLIC_SERVER_URL ?? '';
 
 export const API_URL = {
+  PROJECT: `${ROOT_API}/projects`,
   PRODUCT: `${ROOT_API}/product`,
   CART: `${ROOT_API}/carts`
 };

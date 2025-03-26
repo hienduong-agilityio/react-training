@@ -159,3 +159,166 @@ export const handleFormSubmit = async (
     return prevState;
   }
 };
+
+// Enums
+import { STATUS, COLORS } from '../enums';
+
+/**
+ * Returns a color associated with the given project status.
+ *
+ * @returns {COLORS} The color representing the status.
+ */
+const getColorFromStatus = (status: STATUS | string): COLORS => {
+  const statusColorMap: Record<string, COLORS> = {
+    [STATUS.ON_TRACK]: COLORS.SUCCESS,
+    [STATUS.POTENTIAL_RISK]: COLORS.WARNING,
+    [STATUS.AT_RISK]: COLORS.DANGER
+  };
+
+  return statusColorMap[status] || COLORS.DEFAULT;
+};
+
+/**
+ * Create an abbreviation from the given name.
+ *
+ * @param {string} name - The full name from which to generate the abbreviation.
+ * @return {string} - The abbreviation of name or 'N/A' if the name is null or undefined.
+ */
+
+const getNamePlaceholder = (name = '') => {
+  if (!name || !name.trim()) {
+    return 'N/A';
+  }
+
+  const arr = name.trim().split(' ');
+  const lastChar = getFirstChar(arr.pop());
+
+  if (arr.length > 0) {
+    const secondChar = getFirstChar(arr.pop());
+
+    return `${secondChar}${lastChar}`;
+  }
+
+  return lastChar;
+};
+
+/**
+ * Get the first character of a string.
+ *
+ * @param {string} str - The string from which to extract the first character.
+ * @param {boolean} isUpperCase - Whether to convert the character to uppercase.
+ * @return {string} - The first character of the string
+ */
+
+const getFirstChar = (str = '', isUpperCase = true) => {
+  if (!str || !str.trim()) return '';
+
+  const character = str.trim()[0];
+
+  return isUpperCase ? character.toUpperCase() : character;
+};
+
+export { getNamePlaceholder, getColorFromStatus, getFirstChar };
+
+// Constants
+import { COLORS_CLASS } from '../constants';
+
+/**
+ * Returns the class names associated with the given color.
+ *
+ * @param {COLORS} color - The color enum to get the associated class names.
+ * @returns {string} The CSS class names.
+ */
+export const getColorClasses = (color: COLORS = COLORS.DEFAULT): string => {
+  const colorClassesMap: Partial<{ [key in COLORS]: string }> = {
+    [COLORS.PRIMARY]: COLORS_CLASS.PRIMARY,
+    [COLORS.SUCCESS]: COLORS_CLASS.SUCCESS,
+    [COLORS.WARNING]: COLORS_CLASS.WARNING,
+    [COLORS.DANGER]: COLORS_CLASS.DANGER
+  };
+
+  return colorClassesMap[color] || COLORS_CLASS.DEFAULT;
+};
+
+/**
+ * Formats a date to 'DD MMM YYYY' format.
+ *
+ * @param date The date to format, either as a Date object or a string.
+ * @returns The formatted date string or an empty string if the date is invalid.
+ */
+const formatDate = (date: Date | string): string => {
+  if (!date) return '';
+
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+
+  if (isNaN(dateObj.getTime())) {
+    return '';
+  }
+
+  const day = dateObj.toLocaleDateString('en-US', { day: '2-digit' });
+  const month = dateObj.toLocaleDateString('en-US', { month: 'short' });
+  const year = dateObj.toLocaleDateString('en-US', { year: 'numeric' });
+
+  return `${day} ${month} ${year}`;
+};
+
+/**
+ * Formats a date to 'HH:MM AM/PM' format.
+ *
+ * @param date The date to format, either as a Date object or a string.
+ * @returns The formatted time string or an empty string if the date is invalid.
+ */
+const formatTime = (date: Date | string): string => {
+  if (!date) return '';
+
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+
+  if (isNaN(dateObj.getTime())) {
+    return '';
+  }
+
+  return dateObj.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+};
+
+/**
+ * Formats a date to 'DD MMM YYYY, HH:MM AM/PM' format.
+ *
+ * @param date The date to format, either as a Date object or a string.
+ * @returns The formatted date and time string or an empty string if the date is invalid.
+ */
+const formatDateTime = (date: Date | string): string => {
+  if (!date) return '';
+
+  const formattedDate = formatDate(date);
+  const formattedTime = formatTime(date);
+
+  if (!formattedDate || !formattedTime) {
+    return '';
+  }
+
+  return `${formattedDate}, ${formattedTime}`;
+};
+
+/**
+ * Formats a date input value to 'YYYY-MM-DD' format suitable for HTML date input fields.
+ *
+ * @param dateInput The date input value to be formatted.
+ * @returns A date input in 'YYYY-MM-DD' format, adjusted for the local timezone.
+ */
+const formatDateForInput = (dateInput: string): string => {
+  if (!dateInput) return '';
+
+  const date = new Date(dateInput);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+};
+
+export { formatDate, formatTime, formatDateTime, formatDateForInput };
