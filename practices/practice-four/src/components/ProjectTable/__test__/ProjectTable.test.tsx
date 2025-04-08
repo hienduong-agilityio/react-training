@@ -4,11 +4,25 @@ import { MemoryRouter } from 'react-router-dom';
 
 // Components
 import { ProjectTable } from '@/components';
-import ProjectTableColumn from '@/components/ProjectTable/ProjectTableColumn';
-import ProjectTableBody from '@/components/ProjectTable/ProjectTableBody';
 
-jest.mock('@/components/ProjectTable/ProjectTableColumn', () => jest.fn(() => <div>ProjectTableColumn</div>));
-jest.mock('@/components/ProjectTable/ProjectTableBody', () => jest.fn(() => <div>ProjectTableBody</div>));
+const mockProjectTableColumn = jest.fn();
+const mockProjectTableBody = jest.fn();
+
+jest.mock('@/components/ProjectTable/ProjectTableColumn', () => ({
+  __esModule: true,
+  default: (props: { [key: string]: unknown }) => {
+    mockProjectTableColumn(props);
+    return <div>ProjectTableColumn</div>;
+  }
+}));
+
+jest.mock('@/components/ProjectTable/ProjectTableBody', () => ({
+  __esModule: true,
+  default: (props: { tableData: unknown[]; onDeleteProject: (id: string) => void }) => {
+    mockProjectTableBody(props);
+    return <div>ProjectTableBody</div>;
+  }
+}));
 
 describe('ProjectTable Component', () => {
   const mockOnDeleteProject = jest.fn();
@@ -23,6 +37,7 @@ describe('ProjectTable Component', () => {
         </MemoryRouter>
       );
     };
+    jest.clearAllMocks(); // reset lại giữa các test
   });
 
   it('renders ProjectTable correctly and matches snapshot', () => {
@@ -33,13 +48,11 @@ describe('ProjectTable Component', () => {
   it('renders ProjectTableColumn and ProjectTableBody', () => {
     renderComponent();
 
-    expect(ProjectTableColumn).toHaveBeenCalled();
-    expect(ProjectTableBody).toHaveBeenCalledWith(
-      {
-        tableData: [],
-        onDeleteProject: expect.any(Function)
-      },
-      {}
-    );
+    expect(mockProjectTableColumn).toHaveBeenCalled(); // Chỉ cần gọi là đủ, không có props
+
+    expect(mockProjectTableBody).toHaveBeenCalledWith({
+      tableData: [],
+      onDeleteProject: mockOnDeleteProject
+    });
   });
 });

@@ -28,7 +28,7 @@ export interface IProjectTableManagerProps {
   //searchKeyword: The current search keyword typed by the user
   searchKeyword: string;
   //searchBoxRef: Reference to the search input field
-  searchBoxRef: RefObject<HTMLInputElement>;
+  searchBoxRef: RefObject<HTMLInputElement | null>;
   //isPending: Indicates whether the project data is loading
   isPending: boolean;
   //allProjectsQuery: Contains the result of the project data query

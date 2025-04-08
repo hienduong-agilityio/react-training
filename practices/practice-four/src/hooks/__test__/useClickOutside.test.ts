@@ -43,15 +43,19 @@ describe('useClickOutside', () => {
 
   it('should clean up the event listener when the hook is unmounted', () => {
     const callback = jest.fn();
-    const ref = { current: null } as RefObject<HTMLElement>;
+    const ref = { current: null } as RefObject<HTMLElement | null>;
+
+    const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
     const removeEventListenerSpy = jest.spyOn(document, 'removeEventListener');
 
     const { unmount } = renderHook(() => useClickOutside(ref, callback));
 
     unmount();
 
+    expect(addEventListenerSpy).toHaveBeenCalledWith('mousedown', expect.any(Function));
     expect(removeEventListenerSpy).toHaveBeenCalledWith('mousedown', expect.any(Function));
 
+    addEventListenerSpy.mockRestore();
     removeEventListenerSpy.mockRestore();
   });
 });

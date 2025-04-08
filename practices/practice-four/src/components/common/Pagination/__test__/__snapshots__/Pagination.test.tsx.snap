@@ -15,7 +15,6 @@ exports[`Pagination Component should match snapshots pagination states: Initial 
         <img
           alt="Arrow Left"
           class="w-5 h-5"
-          src=""
         />
       </button>
       <span
@@ -31,7 +30,6 @@ exports[`Pagination Component should match snapshots pagination states: Initial 
         <img
           alt="Arrow Right"
           class="w-5 h-5"
-          src=""
         />
       </button>
     </div>
@@ -54,7 +52,6 @@ exports[`Pagination Component should use default onPageChange prop without throw
         <img
           alt="Arrow Left"
           class="w-5 h-5"
-          src=""
         />
       </button>
       <span
@@ -70,7 +67,6 @@ exports[`Pagination Component should use default onPageChange prop without throw
         <img
           alt="Arrow Right"
           class="w-5 h-5"
-          src=""
         />
       </button>
     </div>

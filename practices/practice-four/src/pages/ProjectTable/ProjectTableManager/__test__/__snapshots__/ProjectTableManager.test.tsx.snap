@@ -37,7 +37,6 @@ exports[`ProjectTableManager renders the component and matches snapshot 1`] = `
             <img
               alt="Search"
               class="pl-4 p-2 absolute"
-              src=""
             />
             <div
               class="flex flex-col"
@@ -190,7 +189,6 @@ exports[`ProjectTableManager renders the component and matches snapshot 1`] = `
                 <img
                   alt="Arrow Left"
                   class="w-5 h-5"
-                  src=""
                 />
               </button>
               <span
@@ -205,7 +203,6 @@ exports[`ProjectTableManager renders the component and matches snapshot 1`] = `
                 <img
                   alt="Arrow Right"
                   class="w-5 h-5"
-                  src=""
                 />
               </button>
             </div>

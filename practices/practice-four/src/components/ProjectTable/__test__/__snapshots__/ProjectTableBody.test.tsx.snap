@@ -131,7 +131,6 @@ exports[`ProjectTableBody Component matches the snapshot when data is provided 1
               >
                 <img
                   alt="Menu"
-                  src=""
                 />
               </button>
             </div>

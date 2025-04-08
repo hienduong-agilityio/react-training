@@ -8,7 +8,6 @@ exports[`SearchBox Component matches the snapshot 1`] = `
     <img
       alt="Search"
       class="pl-4 p-2 absolute"
-      src=""
     />
     <div
       class="flex flex-col"
