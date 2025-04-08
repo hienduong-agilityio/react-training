@@ -163,7 +163,6 @@ exports[`ProjectFormFields matches the snapshot for ProjectFormFields 1`] = `
           <img
             alt="Arrow Right"
             class="w-5 h-5 mt-6"
-            src=""
           />
           <div
             class="flex flex-col w-full"

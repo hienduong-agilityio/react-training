@@ -10,7 +10,6 @@ exports[`ProjectOptionsDropdown Component should match snapshot 1`] = `
     >
       <img
         alt="Menu"
-        src=""
       />
     </button>
   </div>

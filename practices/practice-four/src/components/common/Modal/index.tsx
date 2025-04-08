@@ -19,7 +19,7 @@ export interface IModalProps {
  * @returns Modal element.
  */
 const Modal = ({ isOpen = false, onClose = () => {}, children }: IModalProps) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(modalRef, onClose);
 
