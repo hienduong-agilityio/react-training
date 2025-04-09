@@ -1,7 +1,7 @@
 // Libraries
-import { FormEvent, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import { useActionState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 // Components
 import { ProjectFormFields } from './ProjectFormFields';
@@ -27,32 +27,24 @@ import { ROUTE } from '@/constants';
 // Store
 import { ToastStore } from '@/stores';
 
-interface IProjectForm {
-  // title: The title for project form page
-  title: string;
+const initialState = {
+  errors: {},
+  message: ''
+};
+export interface IFormState {
+  errors: Record<string, string>;
+  message: string;
 }
 
-interface IProjectFormData extends IProjectItemProps {}
-
-/**
- * ProjectFormPage component
- *
- * @returns {JSX.Element} - ProjectFormPage element.
- */
-const ProjectFormPage = ({ title = '' }: IProjectForm): JSX.Element => {
-  const { id } = useParams<{ id: string }>();
-
+const ProjectFormPage = ({ title = '' }: { title: string }) => {
+  const { id } = useParams();
   const navigate = useNavigate();
-
-  const [formErrorsMessages, setFormErrorsMessages] = useState<Record<string, string>>({});
-
-  const project = useProject({ id: id });
   const { showToast } = ToastStore();
 
+  const project = useProject({ id });
   const {
     data: projectDetail,
     isQueryProjectDetailPending,
-    isMutating,
     error: projectDetailsError,
     mutate: { addProject, editProject }
   } = project;
@@ -84,41 +76,20 @@ const ProjectFormPage = ({ title = '' }: IProjectForm): JSX.Element => {
     status
   };
 
-  const handleAddProjectSuccess = () => {
-    showToast('Project added successfully', 'success');
-    navigate(ROUTE.PROJECT);
-  };
+  // Define action handler for form
+  const formAction = async (prevState: IFormState, formData: FormData): Promise<IFormState> => {
+    console.log('prevState:', prevState);
 
-  const handleAddProjectError = () => {
-    showToast('Failed to add project', 'error');
-  };
-
-  const handleEditProjectSuccess = () => {
-    showToast('Project updated successfully', 'success');
-    navigate(ROUTE.PROJECT);
-  };
-
-  const handleEditProjectError = () => {
-    showToast('Failed to update project', 'error');
-  };
-
-  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Create a FormData object from the form
-    const formData = new FormData(e.currentTarget);
-
-    // Create an object for form values
-    const formValues: IProjectFormData = {
+    const formValues: IProjectItemProps = {
       ...initialFormValues,
-      id: uuidv4(),
+      id: title === 'Add Project' ? uuidv4() : id || '',
       lastUpdate: formatDateTime(new Date().toISOString()),
       projectName: formData.get('projectName') as string,
       manager: {
         managerName: formData.get('managerName') as string,
         managerImage: formData.get('managerImage') as string
       },
-      resources: (formData.get('resources') as string) || '',
+      resources: formData.get('resources') as string,
       timeline: {
         timeStart: formatDate(formData.get('timeStart') as string),
         timeEnd: formatDate(formData.get('timeEnd') as string)
@@ -130,25 +101,28 @@ const ProjectFormPage = ({ title = '' }: IProjectForm): JSX.Element => {
     const errorMessages = validateFormValues(projectSchema, formValues);
 
     if (Object.keys(errorMessages).length > 0) {
-      setFormErrorsMessages(errorMessages);
-      return;
+      return { errors: errorMessages, message: 'Validation failed' };
     }
 
-    if (title === 'Add Project') {
-      addProject(formValues, {
-        onSuccess: handleAddProjectSuccess,
-        onError: handleAddProjectError
-      });
-    } else {
-      editProject(
-        { projectId: id || '', updatedProject: formValues },
-        {
-          onSuccess: handleEditProjectSuccess,
-          onError: handleEditProjectError
-        }
-      );
+    try {
+      if (title === 'Add Project') {
+        await addProject(formValues);
+        showToast('Project added successfully', 'success');
+      } else {
+        await editProject({ projectId: id!, updatedProject: formValues });
+        showToast('Project updated successfully', 'success');
+      }
+      navigate(ROUTE.PROJECT);
+      return { errors: {}, message: 'Success' };
+    } catch (error) {
+      return {
+        errors: {},
+        message: title === 'Add Project' ? 'Failed to add project' : 'Failed to update project'
+      };
     }
   };
+
+  const [formState, actionDispatch] = useActionState(formAction, initialState);
 
   const handleCancelForm = () => {
     if (window.history.length > 1) {
@@ -164,12 +138,11 @@ const ProjectFormPage = ({ title = '' }: IProjectForm): JSX.Element => {
   return (
     <ProjectFormFields
       initialFormValues={initialFormValues}
-      formErrorsMessages={formErrorsMessages}
-      isMutating={isMutating}
+      formErrorsMessages={formState.errors}
       isQueryProjectDetailPending={isQueryProjectDetailPending}
       title={title}
       handleCancelForm={handleCancelForm}
-      handleSubmitForm={handleSubmitForm}
+      formAction={actionDispatch}
     />
   );
 };

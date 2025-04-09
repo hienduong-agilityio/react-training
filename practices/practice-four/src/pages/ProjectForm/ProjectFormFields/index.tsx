@@ -1,5 +1,5 @@
 // Libraries
-import { FormEvent, useEffect, useState } from 'react';
+import { useOptimistic } from 'react';
 
 // Components
 import { InputField, SelectField, Button, Spinner } from '@/components';
@@ -12,6 +12,7 @@ import arrowRight from '@public/images/arrowRightIcon.svg';
 
 // Types
 import type { IProjectItemProps } from '@/interfaces';
+import { SubmitButton } from '../SubmitForm';
 
 /**
 * TODO:
@@ -22,20 +23,12 @@ import type { IProjectItemProps } from '@/interfaces';
  */
 
 export interface IProjectFormFieldsProps {
-  // initialFormValues: The object for form value
   initialFormValues: IProjectItemProps;
-  // formErrorsMessages: Error message for form input
   formErrorsMessages: Record<string, string>;
-  // isMutating: Mutation pending when edit and add project
-  isMutating: boolean;
-  // isQueryProjectDetailPending: The pending when get project details
   isQueryProjectDetailPending: boolean;
-  // title: The form title
   title: string;
-  // handleCancelForm: Handle cancel form button
   handleCancelForm: () => void;
-  // handleSubmitForm: Handle submit form button
-  handleSubmitForm: (e: FormEvent<HTMLFormElement>) => void;
+  formAction: (formData: FormData) => void;
 }
 
 /**
@@ -46,36 +39,26 @@ export interface IProjectFormFieldsProps {
 export const ProjectFormFields = ({
   initialFormValues,
   formErrorsMessages,
-  isMutating,
   isQueryProjectDetailPending,
   title,
   handleCancelForm,
-  handleSubmitForm
+  formAction
 }: IProjectFormFieldsProps): JSX.Element => {
-  const [status, setStatus] = useState<string | undefined>(undefined); // Initialize as undefined
-
-  // Set the status when the component mounts or when initialFormValues changes
-  useEffect(() => {
-    if (initialFormValues.status) {
-      setStatus(initialFormValues.status); // Set status from initialFormValues
-    }
-  }, [initialFormValues.status]);
-
-  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setStatus(event.target.value); // Update the local state
-  };
+  const [status, setOptimisticStatus] = useOptimistic(initialFormValues.status);
 
   return (
-    <form className='relative space-y-4' onSubmit={handleSubmitForm}>
+    <form className='relative space-y-4' action={formAction}>
       {isQueryProjectDetailPending && title !== 'Add Project' && (
         <div className='absolute inset-0 flex flex-col gap-5 justify-center items-center bg-opacity-30 bg-white z-10'>
           <Spinner size='large' />
-          <p>Please waiting ...</p>
+          <p>Loading project details...</p>
         </div>
       )}
+
       <div className='flex rounded-t-xl items-center bg-white justify-between p-4'>
         <p className='text-xl font-semibold text-gray-900'>{title}</p>
       </div>
+
       <div className='flex flex-col gap-7 px-4'>
         <InputField
           id='projectName'
@@ -88,6 +71,7 @@ export const ProjectFormFields = ({
           pattern='[a-zA-Z0-9 ]*'
           defaultValue={initialFormValues.projectName}
         />
+
         <InputField
           id='managerName'
           label='Project Manager (PM)'
@@ -99,6 +83,7 @@ export const ProjectFormFields = ({
           pattern='[a-zA-Z ]*'
           defaultValue={initialFormValues.manager?.managerName}
         />
+
         <InputField
           id='managerImage'
           label='Manager Image URL'
@@ -110,20 +95,23 @@ export const ProjectFormFields = ({
           type='url'
           defaultValue={initialFormValues.manager?.managerImage}
         />
+
         <SelectField
           id='status'
           label='Status'
-          errorMessage={formErrorsMessages.status}
           customClasses='text-sm h-12'
           name='status'
           value={status}
-          onChange={handleStatusChange}
+          onChange={(e) => setOptimisticStatus(e.target.value)}
+          errorMessage={formErrorsMessages.status}
         >
-          <option value={STATUS.ON_TRACK}>{STATUS.ON_TRACK}</option>
-          <option value={STATUS.POTENTIAL_RISK}>{STATUS.POTENTIAL_RISK}</option>
-          <option value={STATUS.AT_RISK}>{STATUS.AT_RISK}</option>
-          <option value={STATUS.ON_HOLD}>{STATUS.ON_HOLD}</option>
+          {Object.values(STATUS).map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
         </SelectField>
+
         <InputField
           id='resources'
           label='Resources'
@@ -134,6 +122,7 @@ export const ProjectFormFields = ({
           placeholder='Enter resources'
           defaultValue={initialFormValues.resources}
         />
+
         <div className='flex flex-col gap-4 w-1/2'>
           <h4 className='text-lg font-medium text-gray-700'>Project Timeline</h4>
           <div className='flex justify-between items-center gap-4'>
@@ -167,6 +156,7 @@ export const ProjectFormFields = ({
             <span className='mt-1 text-sm text-red-600'>{formErrorsMessages['timeline.timeEnd']}</span>
           )}
         </div>
+
         <InputField
           id='budget'
           label='Budget'
@@ -181,7 +171,8 @@ export const ProjectFormFields = ({
           defaultValue={initialFormValues.budget}
         />
       </div>
-      <div className='flex items-center rounded-b-xl bg-white gap-5 py-5 px-4 justify-end border-gray-200'>
+
+      <div className='flex items-center gap-5 justify-end rounded-b-xl bg-white py-5 px-4 border-gray-200'>
         <Button
           type='button'
           onClick={handleCancelForm}
@@ -191,15 +182,7 @@ export const ProjectFormFields = ({
         >
           Cancel
         </Button>
-        <Button
-          type='submit'
-          disabled={isMutating}
-          variant={BUTTON_VARIANTS.CONTAINED}
-          size={BUTTON_SIZES.LARGE}
-          color={BUTTON_COLORS.PRIMARY}
-        >
-          {isMutating ? <Spinner /> : title}
-        </Button>
+        <SubmitButton>{title}</SubmitButton>
       </div>
     </form>
   );

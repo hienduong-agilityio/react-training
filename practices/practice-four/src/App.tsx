@@ -7,8 +7,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AppRoutes } from '@/routes';
 import { ToastContainer } from '@/components';
 
-// Stores
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
