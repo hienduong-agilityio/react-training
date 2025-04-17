@@ -17,7 +17,7 @@ export { default as Timeline } from './Timeline';
 export * from './ToastContainer';
 export * from './FormLayout';
 export * from './ProjectFormFields';
-export * from './SubmitForm';
+export * from './FormActionButton';
 
 // Common
 export * from './common';

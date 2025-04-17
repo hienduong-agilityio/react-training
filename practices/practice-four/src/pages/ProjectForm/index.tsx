@@ -1,7 +1,7 @@
 'use client';
 
 // Libraries
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 // Hooks
@@ -18,7 +18,7 @@ const ProjectFormPage = ({ title = '' }: { title: string }) => {
   /**
    * useFormState is a hook that allows you to manage the state of a form.
    */
-  const [formState, formActionDispatcher] = useFormState(formAction, initialProjectFormState);
+  const [formState, formActionDispatcher] = useActionState(formAction, initialProjectFormState);
 
   if (projectDetailsError) return <Navigate to='/404' replace />;
 

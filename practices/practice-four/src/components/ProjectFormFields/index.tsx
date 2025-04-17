@@ -1,18 +1,16 @@
 'use client';
 
-// Libraries
-import { InputField, SelectField, Button, Spinner } from '@/components';
-import { useFormStatus } from 'react-dom';
-
 // Enums
-import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS, STATUS } from '@/enums';
+import { BUTTON_COLORS, BUTTON_VARIANTS, STATUS } from '@/enums';
 
 // Interfaces
 import type { IProjectItemProps } from '@/interfaces';
 
+// Components
+import { InputField, SelectField, Spinner, FormActionButton } from '@/components';
+
 // Svg
 import arrowRight from '@public/images/arrowRightIcon.svg';
-import { SubmitButton } from '../SubmitForm';
 
 export interface IProjectFormFieldsProps {
   initialFormValues: IProjectItemProps;
@@ -31,8 +29,6 @@ export const ProjectFormFields = ({
   handleCancelForm,
   formAction
 }: IProjectFormFieldsProps): JSX.Element => {
-  const { pending } = useFormStatus();
-
   return (
     <form key={initialFormValues.id} className='relative space-y-4' action={formAction}>
       {isQueryProjectDetailPending && title !== 'Add Project' && (
@@ -146,17 +142,16 @@ export const ProjectFormFields = ({
       </div>
 
       <div className='flex justify-end gap-4 bg-white py-5 px-4 rounded-b-xl border-t'>
-        <Button
+        <FormActionButton
           type='button'
-          onClick={handleCancelForm}
-          variant={BUTTON_VARIANTS.OUTLINED}
-          size={BUTTON_SIZES.LARGE}
           color={BUTTON_COLORS.DANGER}
-          disabled={pending}
+          variant={BUTTON_VARIANTS.OUTLINED}
+          onClick={handleCancelForm}
+          showSpinner={false}
         >
           Cancel
-        </Button>
-        <SubmitButton>{title}</SubmitButton>
+        </FormActionButton>
+        <FormActionButton>{title}</FormActionButton>
       </div>
     </form>
   );
