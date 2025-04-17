@@ -60,12 +60,12 @@ export const ProjectOptionsDropdown = ({
             <li className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-not-allowed'>Send mail</li>
             <li className='px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-not-allowed'>Details</li>
             <li className='px-4 py-2 text-sm hover:bg-gray-100 cursor-not-allowed text-warning-400'>Archive</li>
-            <li
-              className='px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer text-danger-400'
+            <button
+              className='px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer text-danger-400 text-left w-full'
               onClick={handleDeleteClick}
             >
               Delete
-            </li>
+            </button>
           </ul>
         </div>
       )}
