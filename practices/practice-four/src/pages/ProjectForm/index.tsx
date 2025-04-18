@@ -27,6 +27,7 @@ const ProjectFormPage = ({ title = '' }: { title: string }) => {
       navigate(-1);
     }
   };
+
   return (
     <FormLayout title={title}>
       <ProjectFormFields

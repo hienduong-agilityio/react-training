@@ -79,6 +79,7 @@ export const ProjectFormFields = ({
           customClasses='text-sm h-12'
           defaultValue={initialFormValues.status}
           errorMessage={formErrorsMessages.status}
+          required
         >
           {Object.values(STATUS).map((s) => (
             <option key={s} value={s}>

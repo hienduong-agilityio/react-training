@@ -29,11 +29,10 @@ const SelectField = ({
   label = '',
   name = '',
   errorMessage = '',
-  value = '',
   defaultValue = '',
   customClasses = '',
   children,
-  onChange = () => {}
+  ...rest
 }: ISelectFieldProps): JSX.Element => {
   const selectFieldClasses: string = classNames(selectDefaultClasses, customClasses, {
     [selectErrorClasses]: errorMessage
@@ -46,14 +45,7 @@ const SelectField = ({
           {label}
         </label>
       )}
-      <select
-        onChange={onChange}
-        value={value}
-        id={id}
-        name={name}
-        defaultValue={defaultValue}
-        className={selectFieldClasses}
-      >
+      <select id={id} name={name} defaultValue={defaultValue} className={selectFieldClasses} {...rest}>
         {children}
       </select>
       {errorMessage && <span className={errorMessagesClasses}>{errorMessage}</span>}
