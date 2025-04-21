@@ -1,5 +1,3 @@
-'use client';
-
 // Libraries
 import { useActionState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';

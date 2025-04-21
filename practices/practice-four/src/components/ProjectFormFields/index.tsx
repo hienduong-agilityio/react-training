@@ -1,5 +1,3 @@
-'use client';
-
 // Enums
 import { BUTTON_COLORS, BUTTON_VARIANTS, STATUS } from '@/enums';
 

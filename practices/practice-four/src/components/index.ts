@@ -18,6 +18,8 @@ export * from './ToastContainer';
 export * from './FormLayout';
 export * from './ProjectFormFields';
 export * from './FormActionButton';
+export * from './ProjectSearch';
+export { default as ProjectTableManager } from './ProjectTableManager';
 
 // Common
 export * from './common';

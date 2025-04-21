@@ -1,5 +1,10 @@
+// Libraries
 import { useFormStatus } from 'react-dom';
+
+// Components
 import { Button, Spinner } from '@/components';
+
+// Enums
 import { BUTTON_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from '@/enums';
 
 interface IFormActionButtonProps {
@@ -26,8 +31,6 @@ export const FormActionButton = ({
   onClick
 }: IFormActionButtonProps) => {
   const { pending } = useFormStatus();
-
-  console.log(pending);
 
   return (
     <Button
