@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "scan": "next dev & npx react-scan@latest localhost:3000",
     "start": "concurrently \"pnpm run dev\" \"pnpm run json-server\"",
     "json-server": "json-server --watch database/data.json --port 5000",
     "test": "jest",
