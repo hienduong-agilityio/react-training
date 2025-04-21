@@ -1,6 +1,6 @@
-import { useCallback, Suspense, useDeferredValue, useState } from 'react';
+import { Suspense, useDeferredValue, useOptimistic, startTransition, useActionState, useState } from 'react';
 import { useNavigate, useLocation, useSearchParams, Outlet } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
 // Components
 import { ProjectSearch, Button, Spinner, ProjectTableManager } from '@/components';
@@ -24,16 +24,36 @@ const ProjectPage = () => {
 
   const isChildRoute = location.state?.from;
 
+  // Get values from URL
   const currentPage = parseInt(searchParams.get('page') ?? '1');
   const rowsPerPage = parseInt(searchParams.get('rowsPerPage') ?? '10');
-
   const initialField = searchParams.get('searchField') ?? 'projectName';
   const initialKeyword = searchParams.get(initialField) ?? '';
 
+  // Search state hook
   const { searchField, searchKeyword, updateSearchTerm, updateSearchField } = useSearchProject(
     initialField,
     initialKeyword
   );
+
+  const searchAction = async (_prevState: { searchValue: string }, formData: FormData) => {
+    const keyword = formData.get('search') as string;
+
+    updateSearchTerm(keyword);
+
+    return { searchValue: keyword };
+  };
+
+  const searchFormStateTuple = useActionState(searchAction, {
+    searchValue: initialKeyword
+  });
+
+  const formActionDispatcher = searchFormStateTuple[1];
+
+  const [optimisticState, updateOptimistic] = useOptimistic({ currentPage, rowsPerPage }, (prev, next) => ({
+    ...(prev ?? {}),
+    ...(next ?? {})
+  }));
 
   const deferredKeyword = useDeferredValue(searchKeyword);
 
@@ -42,67 +62,77 @@ const ProjectPage = () => {
     isQueryProjectsPending,
     error
   } = useProject({
-    page: currentPage,
-    rowsPerPage,
+    page: optimisticState.currentPage,
+    rowsPerPage: optimisticState.rowsPerPage,
     filter: { [searchField]: deferredKeyword }
   });
 
   const allProjectsQuery: IProjectsQueryResult = useQuery({
     queryKey: ['projects', searchField, deferredKeyword],
-    queryFn: () => getProjects({ filter: { [searchField]: deferredKeyword } })
+    queryFn: () => getProjects({ filter: { [searchField]: deferredKeyword } }),
+    placeholderData: keepPreviousData
   });
 
-  const totalPages = Math.ceil((allProjectsQuery.data?.length ?? 1) / rowsPerPage);
+  const totalPages = Math.ceil((allProjectsQuery.data?.length ?? 1) / optimisticState.rowsPerPage);
 
-  const handleRowsPerPageChange = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const newRowsPerPage = parseInt(event.target.value, 10);
-      const newParams = new URLSearchParams(searchParams.toString());
+  // Pagination handlers
+  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newRowsPerPage = parseInt(event.target.value, 10);
 
-      newParams.set('rowsPerPage', newRowsPerPage.toString());
-      newParams.set('page', '1');
+    startTransition(() => {
+      updateOptimistic({ rowsPerPage: newRowsPerPage, currentPage: 1 });
+    });
 
-      navigate(`?${newParams.toString()}`);
-    },
-    [navigate, searchParams]
-  );
+    const newParams = new URLSearchParams(searchParams.toString());
 
-  const handlePageChange = useCallback(
-    (newPage: number) => {
-      const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('rowsPerPage', newRowsPerPage.toString());
+    newParams.set('page', '1');
 
-      newParams.set('page', newPage.toString());
-      navigate(`?${newParams.toString()}`);
-    },
-    [navigate, searchParams]
-  );
+    navigate(`?${newParams.toString()}`);
+  };
 
-  const handleOpenDeleteProjectModal = useCallback((id: string) => {
-    setSelectedProjectId(id);
-    setIsDeleteModalOpen(true);
-  }, []);
+  const handlePageChange = (newPage: number) => {
+    startTransition(() => {
+      updateOptimistic({ currentPage: newPage });
+    });
 
-  const handleDeleteModalClose = useCallback(() => {
-    setIsDeleteModalOpen(false);
-  }, []);
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('page', newPage.toString());
 
+    navigate(`?${newParams.toString()}`);
+  };
+
+  // Delete modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState('');
 
+  const handleOpenDeleteProjectModal = (id: string) => {
+    startTransition(() => {
+      setSelectedProjectId(id);
+      setIsDeleteModalOpen(true);
+    });
+  };
+
+  const handleDeleteModalClose = () => {
+    startTransition(() => {
+      setIsDeleteModalOpen(false);
+    });
+  };
+
+  // Option builder
   const rowPerPageOption = ROWS_PER_PAGE_OPTIONS.map((option) => (
     <option key={option.value} value={option.value}>
       {option.label}
     </option>
   ));
 
-  // Handle navigation to create project form
-  const handleNewProjectClick = useCallback(() => {
+  const handleNewProjectClick = () => {
     navigate(ROUTE.ADD_PROJECT, { state: { from: location.pathname + location.search } });
-  }, [navigate, location]);
+  };
+
+  const isPending = isQueryProjectsPending || allProjectsQuery.isFetching;
 
   if (error ?? allProjectsQuery.error) return <div>Error loading projects</div>;
-
-  const isPending = isQueryProjectsPending ?? allProjectsQuery.isFetching;
 
   return (
     <div className='h-full'>
@@ -112,24 +142,20 @@ const ProjectPage = () => {
             <ProjectSearch
               searchField={searchField}
               updateSearchField={updateSearchField}
-              updateSearchTerm={updateSearchTerm}
               initialKeyword={initialKeyword}
+              formAction={formActionDispatcher}
             />
-            <Button
-              onClick={handleNewProjectClick}
-              className='border-0 px-3 py-1 text-sm bg-primary-500 hover:bg-primary-600 focus:bg-primary-500 text-white flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer'
-            >
-              New Project
-            </Button>
+            <Button onClick={handleNewProjectClick}>New Project</Button>
           </div>
+
           <Suspense fallback={<Spinner />}>
             <ProjectTableManager
               isPending={isPending}
               allProjectsQuery={allProjectsQuery}
               projectData={Array.isArray(projectData) ? projectData : []}
-              rowsPerPage={rowsPerPage}
+              rowsPerPage={optimisticState.rowsPerPage}
               totalPages={totalPages}
-              currentPage={currentPage}
+              currentPage={optimisticState.currentPage}
               selectedProjectId={selectedProjectId}
               isDeleteModalOpen={isDeleteModalOpen}
               rowPerPageOption={rowPerPageOption}

@@ -7,10 +7,9 @@ import iconSearch from '@public/images/searchIcon.svg';
 interface SearchBoxProps {
   name: string;
   defaultValue?: string;
-  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
-const SearchBox = ({ name, defaultValue = '', inputRef }: SearchBoxProps): JSX.Element => {
+const SearchBox = ({ name, defaultValue = '' }: SearchBoxProps): JSX.Element => {
   return (
     <div className='relative'>
       <img src={iconSearch} alt='Search' className='pl-4 p-2 absolute' />
@@ -20,7 +19,6 @@ const SearchBox = ({ name, defaultValue = '', inputRef }: SearchBoxProps): JSX.E
         type='search'
         defaultValue={defaultValue}
         placeholder='Search'
-        ref={inputRef}
         customClasses='h-full w-full pl-9 rounded-none rounded-e-lg'
       />
     </div>
