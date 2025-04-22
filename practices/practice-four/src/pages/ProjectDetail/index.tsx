@@ -6,36 +6,44 @@ import { ProjectDetailSkeleton } from '@/components';
 import { ProjectDetailInfo } from '@/pages/ProjectDetail/ProjectDetailInfo';
 
 // Hooks
-import { useProject } from '@/hooks';
+import { usePageSeo, useProject } from '@/hooks';
 
 // Interfaces
 import { IProjectItemProps } from '@/interfaces';
 
-/**
- * Component to render detailed information for a single project.
- *
- * @returns {JSX.Element} The rendered project details.
- */
 const ProjectDetail = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
-
-  // Get project detail by useProject hook
-  const project = useProject({ id: id || '' });
+  const project = useProject({ id: id ?? '' });
   const { data: projectDetail, isQueryProjectDetailPending, error: projectDetailsError } = project;
 
-  // Render loading spinner if data is being fetched
-  if (isQueryProjectDetailPending) {
-    return <ProjectDetailSkeleton />;
-  }
+  // Extract SEO data if projectDetail is valid
+  const seoData =
+    !isQueryProjectDetailPending && projectDetail && !Array.isArray(projectDetail)
+      ? {
+          title: `${projectDetail.projectName}`,
+          description: projectDetail.projectName || `Details about project ${projectDetail.projectName}`,
+          ogTitle: `${projectDetail.projectName}`,
+          ogDescription: projectDetail.projectName || ''
+        }
+      : null;
 
-  // If the project is not found, redirect to a 404 page
-  if (!projectDetail) {
-    return <Navigate to='/404' replace />;
-  }
+  // Always call usePageSeo
+  usePageSeo(
+    seoData || {
+      title: 'Project Details',
+      description: 'A powerful tool for managing and tracking projects efficiently.'
+    }
+  );
 
-  // Render error message if there is an error in data fetching
+  // Handle loading
+  if (isQueryProjectDetailPending) return <ProjectDetailSkeleton />;
+
+  // Handle not found
+  if (!projectDetail) return <Navigate to='/404' replace />;
+
+  // Handle error
   if (projectDetailsError) {
-    return <div>Error loading projects: {projectDetailsError.message}</div>;
+    return <div>Error loading project: {projectDetailsError.message}</div>;
   }
 
   const { manager: { managerName = 'Unknown', managerImage = '' } = {} } = projectDetail as IProjectItemProps;

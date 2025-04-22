@@ -1,6 +1,7 @@
 import { ProjectFilterDropdown, SearchBox, FormActionButton } from '@/components';
 import { BUTTON_VARIANTS, BUTTON_SIZES, BUTTON_COLORS } from '@/enums';
 import { SEARCH_OPTION } from '@/constants';
+import { Options, useScan } from 'react-scan';
 
 interface ProjectSearchProps {
   searchField: string;
@@ -10,6 +11,11 @@ interface ProjectSearchProps {
 }
 
 export const ProjectSearch = ({ searchField, initialKeyword, updateSearchField, formAction }: ProjectSearchProps) => {
+  useScan({
+    name: 'ProjectTableManager',
+    enabled: import.meta.env.DEV,
+    logProps: true
+  } as Options);
   return (
     <form key={searchField + initialKeyword} className='flex h-auto' action={formAction}>
       <ProjectFilterDropdown options={SEARCH_OPTION} onChange={updateSearchField} searchField={searchField} />

@@ -1,6 +1,7 @@
 import { Suspense, useDeferredValue, useOptimistic, startTransition, useActionState, useState } from 'react';
 import { useNavigate, useLocation, useSearchParams, Outlet } from 'react-router-dom';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
+import { useScan, Options } from 'react-scan';
 
 // Components
 import { ProjectSearch, Button, Spinner, ProjectTableManager } from '@/components';
@@ -9,7 +10,7 @@ import { ProjectSearch, Button, Spinner, ProjectTableManager } from '@/component
 import { ROUTE, ROWS_PER_PAGE_OPTIONS } from '@/constants';
 
 // Hooks
-import { useProject, useSearchProject } from '@/hooks';
+import { usePageSeo, useProject, useSearchProject } from '@/hooks';
 
 // Services
 import { getProjects } from '@/services';
@@ -21,6 +22,16 @@ const ProjectPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();
+
+  usePageSeo({
+    title: 'Project Management',
+    description: '"A powerful tool for managing and tracking projects efficiently.',
+    keywords: 'project, management, tool',
+    ogTitle: 'Project Management',
+    ogDescription: '"A powerful tool for managing and tracking projects efficiently.',
+    ogImage: 'https://example.com/og-image.jpg',
+    ogUrl: 'https://project-managerment-table.netlify.app/'
+  });
 
   const isChildRoute = location.state?.from;
 
@@ -74,6 +85,14 @@ const ProjectPage = () => {
   });
 
   const totalPages = Math.ceil((allProjectsQuery.data?.length ?? 1) / optimisticState.rowsPerPage);
+
+  useScan({
+    enabled: import.meta.env.DEV,
+    name: 'ProjectPage',
+    logProps: true,
+    includeComponents: ['ProjectSearch', 'ProjectTableManager', 'Button'],
+    rowsPerPage: optimisticState.rowsPerPage
+  } as Options & { rowsPerPage: number });
 
   // Pagination handlers
   const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

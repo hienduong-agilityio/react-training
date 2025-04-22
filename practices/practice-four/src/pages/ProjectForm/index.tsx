@@ -3,13 +3,18 @@ import { useActionState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 // Hooks
-import { initialProjectFormState, useProjectForm } from '@/hooks';
+import { initialProjectFormState, usePageSeo, useProjectForm } from '@/hooks';
 
 // Components
 import { FormLayout, ProjectFormFields } from '@/components';
 
 const ProjectFormPage = ({ title = '' }: { title: string }) => {
   const navigate = useNavigate();
+
+  usePageSeo({
+    title: title,
+    description: 'A powerful tool for managing and tracking projects efficiently.'
+  });
 
   const { formAction, initialFormValues, isQueryProjectDetailPending, projectDetailsError } = useProjectForm(title);
 
