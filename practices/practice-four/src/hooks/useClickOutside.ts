@@ -1,27 +1,29 @@
 // Libraries
-import { useEffect, RefObject } from 'react';
+import { useCallback } from 'react';
 
 /**
- * Custom hook to detect clicks outside a specified element and trigger a callback.
- *
- * @param ref - A React ref object pointing to the element to detect outside clicks on.
- * @param callback - A callback function to be called when a click outside the referenced element is detected.
+ * React 19 ref-style useClickOutside
+ * Returns a ref callback that handles click outside behavior and cleans up.
  */
-export const useClickOutside = (ref: RefObject<HTMLElement | null>, callback: () => void) => {
-  useEffect(() => {
-    // Handle clicks outside the popover to close it
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback();
-      }
-    };
+export const useClickOutside = (callback: () => void) => {
+  return useCallback(
+    (node: HTMLElement | null) => {
+      if (!node) return;
 
-    // Add an event listener to detect clicks outside the referenced element.
-    document.addEventListener('mousedown', handleClickOutside);
+      const handleClick = (event: MouseEvent) => {
+        if (!node.contains(event.target as Node)) {
+          callback();
+        }
+      };
 
-    // Clean up the event listener when the component unmounts.
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [callback, ref]);
+      document.addEventListener('mousedown', handleClick);
+
+      // Cleanup function for ref
+      return () => {
+        document.removeEventListener('mousedown', handleClick);
+      };
+    },
+
+    [callback]
+  );
 };

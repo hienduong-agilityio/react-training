@@ -22,6 +22,7 @@ export interface IProjectTableManagerProps {
   handleOpenDeleteProjectModal: (projectId: string) => void;
   handleDeleteModalClose: () => void;
 }
+
 const ProjectTableManager = ({
   isPending,
   allProjectsQuery,
@@ -76,4 +77,5 @@ const ProjectTableManager = ({
     </div>
   );
 };
+
 export default memo(ProjectTableManager);

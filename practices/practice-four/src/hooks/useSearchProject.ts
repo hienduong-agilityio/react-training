@@ -13,16 +13,16 @@ import { useSearchParams } from 'react-router-dom';
 export const useSearchProject = (searchFiled: string, filterKeyword: string) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [searchField, setSearchField] = useState<string>(searchFiled || 'projectName');
-  const [searchKeyword, setSearchKeyword] = useState<string>(filterKeyword || '');
+  const [searchField, setSearchField] = useState<string>(searchFiled ?? 'projectName');
+  const [searchKeyword, setSearchKeyword] = useState<string>(filterKeyword ?? '');
 
   // Sync search field and search filterKeyword with URL params
   useEffect(() => {
-    const fieldParam = searchParams.get('searchField') || searchFiled;
-    const searchValue = searchParams.get(fieldParam) || filterKeyword;
+    const fieldParam = searchParams.get('searchField') ?? searchFiled;
+    const searchValue = searchParams.get(fieldParam) ?? filterKeyword;
 
-    setSearchField(fieldParam || 'projectName');
-    setSearchKeyword(searchValue || '');
+    setSearchField(fieldParam ?? 'projectName');
+    setSearchKeyword(searchValue ?? '');
   }, [searchParams, searchFiled, filterKeyword]);
 
   const updateSearchParams = useCallback(

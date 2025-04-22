@@ -1,5 +1,5 @@
 // Libraries
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // Components
@@ -34,9 +34,8 @@ export const ProjectOptionsDropdown = ({
 
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useClickOutside(dropdownRef, () => setIsOptionOpen(false));
+  const handleClose = () => setIsOptionOpen(false);
+  const attachRef = useClickOutside(handleClose);
 
   const toggleDropdown = () => setIsOptionOpen(!isOptionOpen);
 
@@ -46,7 +45,7 @@ export const ProjectOptionsDropdown = ({
   };
 
   return (
-    <div className='relative inline-block text-left group' ref={dropdownRef}>
+    <div className='relative inline-block text-left group' ref={attachRef}>
       <Button onClick={toggleDropdown} customClasses={'hover:border-none hover:bg-gray-100'}>
         <img src={addIcon} alt='Menu' />
       </Button>
