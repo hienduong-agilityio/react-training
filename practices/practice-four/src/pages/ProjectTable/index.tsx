@@ -1,4 +1,13 @@
-import { Suspense, useDeferredValue, useOptimistic, startTransition, useActionState, useState } from 'react';
+import {
+  Suspense,
+  useDeferredValue,
+  useOptimistic,
+  startTransition,
+  useActionState,
+  useState,
+  useCallback,
+  useMemo
+} from 'react';
 import { useNavigate, useLocation, useSearchParams, Outlet } from 'react-router-dom';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
@@ -36,13 +45,16 @@ const ProjectPage = () => {
     initialKeyword
   );
 
-  const searchAction = async (_prevState: { searchValue: string }, formData: FormData) => {
-    const keyword = formData.get('search') as string;
+  const searchAction = useCallback(
+    async (_prevState: { searchValue: string }, formData: FormData) => {
+      const keyword = formData.get('search') as string;
 
-    updateSearchTerm(keyword);
+      updateSearchTerm(keyword);
 
-    return { searchValue: keyword };
-  };
+      return { searchValue: keyword };
+    },
+    [updateSearchTerm]
+  );
 
   const searchFormStateTuple = useActionState(searchAction, {
     searchValue: initialKeyword
@@ -57,80 +69,120 @@ const ProjectPage = () => {
 
   const deferredKeyword = useDeferredValue(searchKeyword);
 
-  const {
-    data: projectData,
-    isQueryProjectsPending,
-    error
-  } = useProject({
-    page: optimisticState.currentPage,
-    rowsPerPage: optimisticState.rowsPerPage,
-    filter: { [searchField]: deferredKeyword }
-  });
+  // Memoize the filter object for useProject
+  const projectFilter = useMemo(
+    () => ({
+      page: optimisticState.currentPage,
+      rowsPerPage: optimisticState.rowsPerPage,
+      filter: { [searchField]: deferredKeyword }
+    }),
+    [optimisticState.currentPage, optimisticState.rowsPerPage, searchField, deferredKeyword]
+  );
+
+  const { data: projectData, isQueryProjectsPending, error } = useProject(projectFilter);
+
+  // Memoize the filter object for useQuery
+  const queryFilter = useMemo(
+    () => ({
+      [searchField]: deferredKeyword
+    }),
+    [searchField, deferredKeyword]
+  );
 
   const allProjectsQuery: IProjectsQueryResult = useQuery({
     queryKey: ['projects', searchField, deferredKeyword],
-    queryFn: () => getProjects({ filter: { [searchField]: deferredKeyword } }),
+    queryFn: () => getProjects({ filter: queryFilter }),
     placeholderData: keepPreviousData
   });
 
-  const totalPages = Math.ceil((allProjectsQuery.data?.length ?? 1) / optimisticState.rowsPerPage);
+  // Memoize allProjectsQuery to ensure stability
+  const memoizedAllProjectsQuery = useMemo(
+    () => ({
+      data: allProjectsQuery.data,
+      isFetching: allProjectsQuery.isFetching,
+      error: allProjectsQuery.error,
+      isFetched: allProjectsQuery.isFetched
+    }),
+    [allProjectsQuery.data, allProjectsQuery.isFetching, allProjectsQuery.error, allProjectsQuery.isFetched]
+  );
+
+  // Memoize projectData to ensure stability
+  const stableProjectData = useMemo(() => (Array.isArray(projectData) ? projectData : []), [projectData]);
+
+  const totalPages = useMemo(
+    () => Math.ceil((allProjectsQuery.data?.length ?? 1) / optimisticState.rowsPerPage),
+    [allProjectsQuery.data?.length, optimisticState.rowsPerPage]
+  );
 
   // Pagination handlers
-  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
+  const handleRowsPerPageChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const newRowsPerPage = parseInt(event.target.value, 10);
 
-    startTransition(() => {
-      updateOptimistic({ rowsPerPage: newRowsPerPage, currentPage: 1 });
-    });
+      startTransition(() => {
+        updateOptimistic({ rowsPerPage: newRowsPerPage, currentPage: 1 });
+      });
 
-    const newParams = new URLSearchParams(searchParams.toString());
+      const newParams = new URLSearchParams(searchParams.toString());
 
-    newParams.set('rowsPerPage', newRowsPerPage.toString());
-    newParams.set('page', '1');
+      newParams.set('rowsPerPage', newRowsPerPage.toString());
+      newParams.set('page', '1');
 
-    navigate(`?${newParams.toString()}`);
-  };
+      navigate(`?${newParams.toString()}`);
+    },
+    [updateOptimistic, searchParams, navigate]
+  );
 
-  const handlePageChange = (newPage: number) => {
-    startTransition(() => {
-      updateOptimistic({ currentPage: newPage });
-    });
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      startTransition(() => {
+        updateOptimistic({ currentPage: newPage });
+      });
 
-    const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set('page', newPage.toString());
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set('page', newPage.toString());
 
-    navigate(`?${newParams.toString()}`);
-  };
+      navigate(`?${newParams.toString()}`);
+    },
+    [updateOptimistic, searchParams, navigate]
+  );
 
   // Delete modal state
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState('');
 
-  const handleOpenDeleteProjectModal = (id: string) => {
+  const handleOpenDeleteProjectModal = useCallback((id: string) => {
     startTransition(() => {
       setSelectedProjectId(id);
       setIsDeleteModalOpen(true);
     });
-  };
+  }, []);
 
-  const handleDeleteModalClose = () => {
+  const handleDeleteModalClose = useCallback(() => {
     startTransition(() => {
       setIsDeleteModalOpen(false);
     });
-  };
+  }, []);
 
   // Option builder
-  const rowPerPageOption = ROWS_PER_PAGE_OPTIONS.map((option) => (
-    <option key={option.value} value={option.value}>
-      {option.label}
-    </option>
-  ));
+  const rowPerPageOption = useMemo(
+    () =>
+      ROWS_PER_PAGE_OPTIONS.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      )),
+    []
+  );
 
-  const handleNewProjectClick = () => {
+  const handleNewProjectClick = useCallback(() => {
     navigate(ROUTE.ADD_PROJECT, { state: { from: location.pathname + location.search } });
-  };
+  }, [navigate, location.pathname, location.search]);
 
-  const isPending = isQueryProjectsPending || allProjectsQuery.isFetching;
+  const isPending = useMemo(
+    () => isQueryProjectsPending || allProjectsQuery.isFetching,
+    [isQueryProjectsPending, allProjectsQuery.isFetching]
+  );
 
   if (error ?? allProjectsQuery.error) return <div>Error loading projects</div>;
 
@@ -151,8 +203,8 @@ const ProjectPage = () => {
           <Suspense fallback={<Spinner />}>
             <ProjectTableManager
               isPending={isPending}
-              allProjectsQuery={allProjectsQuery}
-              projectData={Array.isArray(projectData) ? projectData : []}
+              allProjectsQuery={memoizedAllProjectsQuery}
+              projectData={stableProjectData}
               rowsPerPage={optimisticState.rowsPerPage}
               totalPages={totalPages}
               currentPage={optimisticState.currentPage}
