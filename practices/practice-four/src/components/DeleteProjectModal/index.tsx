@@ -1,3 +1,5 @@
+import { memo, useCallback } from 'react';
+
 // Components
 import Modal from '@/components/common/Modal';
 import Button from '@/components/common/Button';
@@ -29,63 +31,61 @@ export interface IDeleteProjectModalProps {
  *
  * @returns {JSX.Element} - The DeleteProjectModal element
  */
-export const DeleteProjectModal = ({
-  projectId,
-  isModalOpen = false,
-  onCloseModal = () => {}
-}: IDeleteProjectModalProps): JSX.Element => {
-  const project = useProject({ id: projectId || '' });
-  const { showToast } = ToastStore();
+export const DeleteProjectModal = memo(
+  ({ projectId, isModalOpen = false, onCloseModal = () => {} }: IDeleteProjectModalProps): JSX.Element => {
+    const project = useProject({ id: projectId || '' });
+    const { showToast } = ToastStore();
 
-  const {
-    mutate: { deleteProject },
-    data: projectDetail,
-    isMutating
-  } = project;
+    const {
+      mutate: { deleteProject },
+      data: projectDetail,
+      isMutating
+    } = project;
 
-  const projectName = (projectDetail as IProjectItemProps)?.projectName || 'this project';
+    const projectName = (projectDetail as IProjectItemProps)?.projectName || 'this project';
 
-  const handleDeleteProjectSuccess = () => {
-    showToast('Project Deleted successfully', 'success');
-    onCloseModal();
-  };
+    const handleDeleteProjectSuccess = useCallback(() => {
+      showToast('Project Deleted successfully', 'success');
+      onCloseModal();
+    }, [showToast, onCloseModal]);
 
-  const handleDeleteProjectError = () => {
-    showToast('Failed to deleted project', 'error');
-    onCloseModal();
-  };
+    const handleDeleteProjectError = useCallback(() => {
+      showToast('Failed to delete project', 'error');
+      onCloseModal();
+    }, [showToast, onCloseModal]);
 
-  const handleDelete = () => {
-    if (projectId) {
-      deleteProject(projectId, {
-        onSuccess: handleDeleteProjectSuccess,
-        onError: handleDeleteProjectError
-      });
-    }
-  };
+    const handleDelete = useCallback(() => {
+      if (projectId) {
+        deleteProject(projectId, {
+          onSuccess: handleDeleteProjectSuccess,
+          onError: handleDeleteProjectError
+        });
+      }
+    }, [deleteProject, projectId, handleDeleteProjectSuccess, handleDeleteProjectError]);
 
-  return (
-    <Modal isOpen={isModalOpen} onClose={onCloseModal}>
-      <div className='bg-light rounded-t-xl p-4 w-[440px]'>
-        <p className='text-lg font-semibold text-gray-900 mb-3'>Delete Project</p>
-        <p className='leading-6 text-gray-600'>
-          Are you sure you want to delete <strong>{projectName}</strong>? If you delete, it will be permanently lost.
-        </p>
-      </div>
-      <div className='bg-light rounded-b-xl flex justify-end gap-4 border-t-2 py-3'>
-        <Button onClick={onCloseModal} variant={BUTTON_VARIANTS.OUTLINED}>
-          Cancel
-        </Button>
-        <Button
-          onClick={handleDelete}
-          disabled={isMutating}
-          variant={BUTTON_VARIANTS.CONTAINED}
-          color={BUTTON_COLORS.DANGER}
-          customClasses='mr-5'
-        >
-          {isMutating ? <Spinner /> : 'Delete'}
-        </Button>
-      </div>
-    </Modal>
-  );
-};
+    return (
+      <Modal isOpen={isModalOpen} onClose={onCloseModal}>
+        <div className='bg-light rounded-t-xl p-4 w-[440px]'>
+          <p className='text-lg font-semibold text-gray-900 mb-3'>Delete Project</p>
+          <p className='leading-6 text-gray-600'>
+            Are you sure you want to delete <strong>{projectName}</strong>? If you delete, it will be permanently lost.
+          </p>
+        </div>
+        <div className='bg-light rounded-b-xl flex justify-end gap-4 border-t-2 py-3'>
+          <Button onClick={onCloseModal} variant={BUTTON_VARIANTS.OUTLINED}>
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDelete}
+            disabled={isMutating}
+            variant={BUTTON_VARIANTS.CONTAINED}
+            color={BUTTON_COLORS.DANGER}
+            customClasses='mr-5'
+          >
+            {isMutating ? <Spinner /> : 'Delete'}
+          </Button>
+        </div>
+      </Modal>
+    );
+  }
+);

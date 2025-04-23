@@ -1,5 +1,5 @@
 // Libraries
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 // Components
 import { Button } from '@/components';
@@ -23,17 +23,17 @@ interface IPaginationProps {
  * @returns {JSX.Element} - Pagination element
  */
 const Pagination = ({ currentPage = 1, totalPages = 1, onPageChange = () => {} }: IPaginationProps): JSX.Element => {
-  const handlePrevClick = () => {
+  const handlePrevClick = useCallback(() => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
-  };
+  }, [currentPage, onPageChange]);
 
-  const handleNextClick = () => {
+  const handleNextClick = useCallback(() => {
     if (totalPages && currentPage < totalPages) {
       onPageChange(currentPage + 1);
     }
-  };
+  }, [currentPage, totalPages, onPageChange]);
 
   return (
     <div className='flex justify-between items-center p-4'>
