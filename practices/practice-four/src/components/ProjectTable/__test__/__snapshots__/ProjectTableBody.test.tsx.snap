@@ -2,7 +2,9 @@
 
 exports[`ProjectTableBody Component matches the snapshot when data is provided 1`] = `
 <div>
-  <tbody>
+  <tbody
+    class=""
+  >
     <tr
       class="border-b border-gray-200 hover:bg-light group"
     >
@@ -144,7 +146,9 @@ exports[`ProjectTableBody Component matches the snapshot when data is provided 1
 
 exports[`ProjectTableBody Component matches the snapshot when no data is provided 1`] = `
 <div>
-  <tbody>
+  <tbody
+    class=""
+  >
     <tr>
       <td
         class="text-center py-4"

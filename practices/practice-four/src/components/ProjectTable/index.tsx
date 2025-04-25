@@ -10,6 +10,7 @@ export interface IProjectTableProps {
   dataTable?: IProjectItemProps[];
   // onDeleteProject: The function to open delete modal
   onDeleteProject: (projectId: string) => void;
+  isPending?: boolean;
 }
 
 /**
@@ -17,13 +18,17 @@ export interface IProjectTableProps {
  *
  * @returns {JSX.Element} The project table element.
  */
-export const ProjectTable = ({ dataTable = [], onDeleteProject = () => {} }: IProjectTableProps): JSX.Element => {
+export const ProjectTable = ({
+  dataTable = [],
+  onDeleteProject = () => {},
+  isPending = false
+}: IProjectTableProps): JSX.Element => {
   return (
     <div className='w-full shadow-md sm:rounded-lg'>
       <div className='overflow-y-auto h-[900px]'>
         <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
           <ProjectTableColumn />
-          <ProjectTableBody tableData={dataTable} onDeleteProject={onDeleteProject} />
+          <ProjectTableBody tableData={dataTable} onDeleteProject={onDeleteProject} isPending={isPending} />
         </table>
       </div>
     </div>

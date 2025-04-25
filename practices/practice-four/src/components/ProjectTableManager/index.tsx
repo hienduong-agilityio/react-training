@@ -2,7 +2,7 @@
 import { ChangeEvent, memo } from 'react';
 
 // Components
-import { ProjectTable, SelectField, Pagination, DeleteProjectModal, Spinner } from '@/components';
+import { ProjectTable, SelectField, Pagination, DeleteProjectModal } from '@/components';
 
 // Interfaces
 import { IProjectItemProps, IProjectsQueryResult } from '@/interfaces';
@@ -40,19 +40,13 @@ const ProjectTableManager = ({
 }: IProjectTableManagerProps) => {
   return (
     <div className='relative'>
-      {isPending && (
-        <div className='absolute inset-0 z-10 flex justify-center items-center bg-white/20 backdrop-blur-[1px] pointer-events-auto'>
-          <Spinner />
-        </div>
-      )}
-
-      <div className={isPending ? 'pointer-events-none select-none' : ''}>
-        <ProjectTable dataTable={projectData} onDeleteProject={handleOpenDeleteProjectModal} />
+      <div>
+        <ProjectTable dataTable={projectData} onDeleteProject={handleOpenDeleteProjectModal} isPending={isPending} />
 
         <div className='mt-4 flex items-center justify-between px-5'>
           <span className='text-sm text-gray-600'>
             <strong>{projectData.length ? `1 - ${projectData.length}` : '0'}</strong> of{' '}
-            <strong>{allProjectsQuery.data?.length || 0}</strong>
+            <strong>{allProjectsQuery.data?.length ?? 0}</strong>
           </span>
 
           <div className='flex items-center gap-3'>

@@ -59,7 +59,7 @@ exports[`ProjectPage should match snapshot 1`] = `
         </button>
       </form>
       <button
-        class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+        class="border-0 px-3 py-1 text-sm bg-primary-500 hover:bg-primary-600 focus:bg-primary-500 text-white flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer"
       >
         New Project
       </button>

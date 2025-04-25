@@ -207,7 +207,12 @@ const ProjectPage = () => {
               initialKeyword={initialKeyword}
               formAction={formActionDispatcher}
             />
-            <Button onClick={handleNewProjectClick}>New Project</Button>
+            <Button
+              className='border-0 px-3 py-1 text-sm bg-primary-500 hover:bg-primary-600 focus:bg-primary-500 text-white flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer'
+              onClick={handleNewProjectClick}
+            >
+              New Project
+            </Button>
           </div>
 
           <Suspense fallback={<Spinner />}>

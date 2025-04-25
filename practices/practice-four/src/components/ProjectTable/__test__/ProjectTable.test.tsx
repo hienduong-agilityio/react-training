@@ -52,7 +52,8 @@ describe('ProjectTable Component', () => {
 
     expect(mockProjectTableBody).toHaveBeenCalledWith({
       tableData: [],
-      onDeleteProject: mockOnDeleteProject
+      onDeleteProject: mockOnDeleteProject,
+      isPending: false
     });
   });
 });
