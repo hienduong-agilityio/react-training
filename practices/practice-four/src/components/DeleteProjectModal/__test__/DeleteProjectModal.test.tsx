@@ -138,7 +138,7 @@ describe('DeleteProjectModal', () => {
     renderDeleteModal();
 
     fireEvent.click(screen.getByText('Delete'));
-    expect(showToastMock).toHaveBeenCalledWith('Failed to deleted project', 'error');
+    expect(showToastMock).toHaveBeenCalledWith('Failed to delete project', 'error');
   });
 
   it('shows a spinner while deleting', () => {

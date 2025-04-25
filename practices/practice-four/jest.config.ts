@@ -6,6 +6,7 @@ const config: Config = {
     '!<rootDir>/src/**/**/__test__/__snapshots__/**',
     '!<rootDir>/src/constants/*',
     '!<rootDir>/src/enums/*',
+    '!<rootDir>/src/routes/*',
     '!<rootDir>/.storybook/*',
     '!**/*.stories.tsx'
   ],

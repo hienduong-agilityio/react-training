@@ -90,11 +90,10 @@ describe('SelectField Component', () => {
     const selectElement = screen.getByRole('combobox') as HTMLSelectElement;
     expect(selectElement).toHaveClass(customClass);
   });
-
   it('should render with the default value', () => {
     renderComponent({ defaultValue: '2' });
 
     const selectElement = screen.getByRole('combobox') as HTMLSelectElement;
-    expect(selectElement.value).toBe('1');
+    expect(selectElement.value).toBe('2');
   });
 });

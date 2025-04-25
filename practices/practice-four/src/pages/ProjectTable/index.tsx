@@ -10,7 +10,6 @@ import {
 } from 'react';
 import { useNavigate, useLocation, useSearchParams, Outlet } from 'react-router-dom';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { useScan, Options } from 'react-scan';
 
 // Components
 import { ProjectSearch, Button, Spinner, ProjectTableManager } from '@/components';
@@ -124,14 +123,6 @@ const ProjectPage = () => {
     () => Math.ceil((allProjectsQuery.data?.length ?? 1) / optimisticState.rowsPerPage),
     [allProjectsQuery.data?.length, optimisticState.rowsPerPage]
   );
-
-  useScan({
-    enabled: import.meta.env.DEV,
-    name: 'ProjectPage',
-    logProps: true,
-    includeComponents: ['ProjectSearch', 'ProjectTableManager', 'Button'],
-    rowsPerPage: optimisticState.rowsPerPage
-  } as Options & { rowsPerPage: number });
 
   // Pagination handlers
   const handleRowsPerPageChange = useCallback(

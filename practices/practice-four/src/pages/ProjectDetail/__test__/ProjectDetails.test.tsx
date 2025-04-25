@@ -17,7 +17,8 @@ jest.mock('react-router-dom', () => ({
 
 // Mocking useProject hook
 jest.mock('@/hooks', () => ({
-  useProject: jest.fn()
+  useProject: jest.fn(),
+  usePageSeo: jest.fn()
 }));
 
 jest.mock('@/components', () => ({

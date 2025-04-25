@@ -17,6 +17,7 @@ exports[`SelectField Component should match the snapshot when rendered 1`] = `
       name="test-select"
     >
       <option
+        selected=""
         value="1"
       >
         Option 1

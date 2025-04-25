@@ -6,7 +6,6 @@ import { ProjectTable, SelectField, Pagination, DeleteProjectModal, Spinner } fr
 
 // Interfaces
 import { IProjectItemProps, IProjectsQueryResult } from '@/interfaces';
-import { Options, useScan } from 'react-scan';
 
 export interface IProjectTableManagerProps {
   isPending: boolean;
@@ -39,12 +38,6 @@ const ProjectTableManager = ({
   handleOpenDeleteProjectModal,
   handleDeleteModalClose
 }: IProjectTableManagerProps) => {
-  useScan({
-    name: 'ProjectTableManager',
-    enabled: import.meta.env.DEV,
-    logProps: true
-  } as Options);
-
   return (
     <div className='relative'>
       {isPending && (

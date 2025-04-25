@@ -1,4 +1,3 @@
-// Libraries
 import { useCallback } from 'react';
 
 /**
@@ -6,7 +5,7 @@ import { useCallback } from 'react';
  * Returns a ref callback that handles click outside behavior and cleans up.
  */
 export const useClickOutside = (callback: () => void) => {
-  return useCallback(
+  const refCallback = useCallback(
     (node: HTMLElement | null) => {
       if (!node) return;
 
@@ -26,4 +25,6 @@ export const useClickOutside = (callback: () => void) => {
 
     [callback]
   );
+
+  return refCallback;
 };

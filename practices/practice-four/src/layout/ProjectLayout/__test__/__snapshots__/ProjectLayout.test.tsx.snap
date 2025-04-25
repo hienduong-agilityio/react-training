@@ -7,14 +7,13 @@ exports[`ProjectLayout should match the snapshot 1`] = `
   >
     <button
       class="mb-6 w-24 p-2 bg-white border-2 text-black flex gap-2 items-center justify-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer"
-      role="button"
     >
       <img
         alt="Back Arrow"
         class="w-5 h-5 pr-2"
         src="mock-back-arrow"
       />
-      Back
+       Back
     </button>
     <div
       class="bg-white p-6 rounded-lg shadow-md w-full max-w h-auto"

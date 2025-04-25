@@ -1,32 +1,35 @@
-// Libraries
 import { render, screen } from '@testing-library/react';
-import { createRef } from 'react';
+import userEvent from '@testing-library/user-event';
 
 // Components
 import { SearchBox } from '@/components';
 
-describe('SearchBox Component', () => {
-  const mockValue = 'Test Search';
-  let ref: React.RefObject<HTMLInputElement | null>;
-  let asFragment: () => DocumentFragment;
-
-  beforeEach(() => {
-    ref = createRef<HTMLInputElement>();
-    const result = render(<SearchBox value={mockValue} ref={ref} />);
-    asFragment = result.asFragment;
+describe('SearchBox component', () => {
+  it('renders correctly with default props', () => {
+    render(<SearchBox name='search' />);
+    const input = screen.getByRole('searchbox');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('name', 'search');
+    expect(input).toHaveAttribute('placeholder', 'Search');
   });
 
-  it('matches the snapshot', () => {
-    expect(asFragment()).toMatchSnapshot();
+  it('renders with a defaultValue', () => {
+    render(<SearchBox name='search' defaultValue='initial' />);
+    const input = screen.getByRole('searchbox') as HTMLInputElement;
+    expect(input.value).toBe('initial');
   });
 
-  it('renders SearchBox correctly', () => {
-    const inputField = screen.getByPlaceholderText('Search');
-    expect(inputField).toBeInTheDocument();
+  it('updates input value when typed in', async () => {
+    const user = userEvent.setup();
+    render(<SearchBox name='search' />);
+    const input = screen.getByRole('searchbox') as HTMLInputElement;
+    await user.type(input, 'test input');
+    expect(input.value).toBe('test input');
   });
 
-  it('should forward the ref to the input field', () => {
-    expect(ref.current).not.toBeNull();
-    expect(ref.current?.tagName).toBe('INPUT');
+  it('renders search icon', () => {
+    render(<SearchBox name='search' />);
+    const img = screen.getByAltText('Search');
+    expect(img).toBeInTheDocument();
   });
 });

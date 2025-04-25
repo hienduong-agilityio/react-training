@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
   Outlet: () => <div>Mock Outlet</div>
 }));
 
-jest.mock('@/pages/ProjectTable/ProjectTableManager', () => jest.fn(() => <div>ProjectTableManager</div>));
+jest.mock('@/components/ProjectTableManager', () => jest.fn(() => <div>ProjectTableManager</div>));
 
 const renderWithQueryClient = (ui: JSX.Element) => {
   const queryClient = new QueryClient();

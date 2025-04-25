@@ -5,6 +5,65 @@ exports[`ProjectPage should match snapshot 1`] = `
   <div
     class="h-full"
   >
+    <div
+      class="flex justify-between pt-5 pb-7 px-3"
+    >
+      <form
+        action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
+        class="flex h-auto"
+      >
+        <div
+          class="relative inline-block text-left"
+        >
+          <select
+            class="inline-flex items-center py-0 h-[33px] text-sm font-medium text-center border-0 rounded-none rounded-s-lg bg-white hover:border-none focus:ring-4 focus:outline-none focus:ring-primary-100 text-gray-700 shadow"
+            role="combobox"
+          >
+            <option
+              value="projectName"
+            >
+              Project name
+            </option>
+            <option
+              value="status"
+            >
+              Project status
+            </option>
+          </select>
+        </div>
+        <div
+          class="relative"
+        >
+          <img
+            alt="Search"
+            class="pl-4 p-2 absolute"
+          />
+          <div
+            class="flex flex-col"
+          >
+            <input
+              class="border gap-2 block outline-none focus:ring-4 focus:ring-primary-100 rounded-md py-[6px] px-3 text-gray-900 disabled:text-light disabled:bg-white shadow h-full w-full pl-9 rounded-none rounded-e-lg"
+              id="searchInput"
+              name="search"
+              placeholder="Search"
+              type="search"
+              value=""
+            />
+          </div>
+        </div>
+        <button
+          class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 bg-white border-2 text-black px-3 py-1 text-sm text-black ml-2 focus:bg-gray-200 hover:bg-gray-200 focus:outline-none"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+      <button
+        class="flex gap-2 items-center focus:ring-4 focus:ring-primary-100 rounded-md cursor-pointer disabled:opacity-45 border-white text-primary-400 hover:border-2 hover:border-primary-100 px-4 py-2 text-base text-black"
+      >
+        New Project
+      </button>
+    </div>
     <div>
       ProjectTableManager
     </div>

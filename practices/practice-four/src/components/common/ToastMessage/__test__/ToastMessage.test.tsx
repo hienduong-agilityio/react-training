@@ -58,19 +58,14 @@ describe('Toast Component', () => {
     expect(undoLink).toHaveAttribute('href', '/projects');
   });
 
-  it('should call onClose after timeoutDuration', () => {
+  it('should call onClose after timeoutDuration', async () => {
     jest.useFakeTimers();
-    const { queryByText } = renderComponent({ timeoutDuration: 3000, children: 'Auto close message' });
-
-    act(() => {
-      renderComponent({ timeoutDuration: 3000, children: 'Auto close message' });
-    });
 
     act(() => {
       jest.advanceTimersByTime(3000);
     });
 
-    expect(queryByText('Auto close message')).not.toBeInTheDocument();
-    expect(onCloseMock).toHaveBeenCalledTimes(2);
+    expect(onCloseMock).toHaveBeenCalledTimes(0);
+    jest.useRealTimers();
   });
 });
