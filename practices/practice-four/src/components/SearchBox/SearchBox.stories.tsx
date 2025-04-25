@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 // Component
-import { SearchBox } from '@/components';
+import SearchBox from '@/components/SearchBox';
 
 const meta: Meta<typeof SearchBox> = {
   title: 'Components/SearchBox',
@@ -12,9 +12,13 @@ const meta: Meta<typeof SearchBox> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    value: {
+    name: {
       control: { type: 'text' },
-      description: 'The value for the search box.'
+      description: 'The name attribute for the search input.'
+    },
+    defaultValue: {
+      control: { type: 'text' },
+      description: 'The default value for the search input.'
     }
   }
 };
@@ -25,7 +29,8 @@ type Story = StoryObj<typeof SearchBox>;
 
 export const Default: Story = {
   args: {
-    value: ''
+    name: 'search',
+    defaultValue: ''
   },
   parameters: {
     docs: {
@@ -38,7 +43,8 @@ export const Default: Story = {
 
 export const WithValue: Story = {
   args: {
-    value: 'Hello world'
+    name: 'search',
+    defaultValue: 'Hello world'
   },
   parameters: {
     docs: {
