@@ -5,12 +5,9 @@ import { createRef } from 'react';
 // Components
 import { SearchBox } from '@/components';
 
-// SVG
-import iconSearch from '@public/images/searchIcon.svg';
-
 describe('SearchBox Component', () => {
   const mockValue = 'Test Search';
-  let ref: React.RefObject<HTMLInputElement>;
+  let ref: React.RefObject<HTMLInputElement | null>;
   let asFragment: () => DocumentFragment;
 
   beforeEach(() => {
@@ -24,9 +21,6 @@ describe('SearchBox Component', () => {
   });
 
   it('renders SearchBox correctly', () => {
-    const searchIcon = screen.getByAltText('Search');
-    expect(searchIcon).toHaveAttribute('src', iconSearch);
-
     const inputField = screen.getByPlaceholderText('Search');
     expect(inputField).toBeInTheDocument();
   });

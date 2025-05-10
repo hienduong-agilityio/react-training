@@ -7,7 +7,7 @@ import { useEffect, RefObject } from 'react';
  * @param ref - A React ref object pointing to the element to detect outside clicks on.
  * @param callback - A callback function to be called when a click outside the referenced element is detected.
  */
-export const useClickOutside = (ref: RefObject<HTMLElement>, callback: () => void) => {
+export const useClickOutside = (ref: RefObject<HTMLElement | null>, callback: () => void) => {
   useEffect(() => {
     // Handle clicks outside the popover to close it
     const handleClickOutside = (event: MouseEvent) => {

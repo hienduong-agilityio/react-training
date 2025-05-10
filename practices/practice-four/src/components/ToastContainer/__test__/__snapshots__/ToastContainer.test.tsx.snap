@@ -13,7 +13,6 @@ exports[`ToastContainer Component should match the snapshot when toast is visibl
       >
         <img
           alt="success"
-          src=""
         />
         Test Toast Message
       </div>

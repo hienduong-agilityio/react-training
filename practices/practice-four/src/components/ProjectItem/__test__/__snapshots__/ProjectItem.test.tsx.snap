@@ -130,7 +130,6 @@ exports[`ProjectItem Component should render with provided props and match snaps
             >
               <img
                 alt="Menu"
-                src=""
               />
             </button>
           </div>

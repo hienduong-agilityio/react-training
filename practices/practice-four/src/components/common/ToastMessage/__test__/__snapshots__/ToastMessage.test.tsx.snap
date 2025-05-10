@@ -10,7 +10,6 @@ exports[`Toast Component should match snapshot 1`] = `
     >
       <img
         alt="success"
-        src=""
       />
       Snapshot test
     </div>
